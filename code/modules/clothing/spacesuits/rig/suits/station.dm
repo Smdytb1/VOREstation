@@ -97,7 +97,7 @@
 	suit_type = "hazard hardsuit"
 	desc = "A Nanotrasen security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
+	armor = list(melee = 60, bullet = 30, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
 	slowdown = 1
 	offline_vision_restriction = 1
 
@@ -105,6 +105,9 @@
 
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 
-	req_access = null
-	req_one_access = null
+	req_access = list(access_hos)
 
+	initial_modules = list(
+		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/maneuvering_jets
+		)
