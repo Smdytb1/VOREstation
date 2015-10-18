@@ -25,13 +25,16 @@ datum/track/New(var/title_name, var/audio)
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
 		new/datum/track("A Song About Hares", 'sound/music/SongAboutHares.ogg'), // 	AND WE DO NOT CARE~! AND WE DO NOT CARE~!
+		new/datum/track("Below The Asteroids", 'sound/music/jukebox/BelowTheAsteroids.ogg'),
 		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
 		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
 		new/datum/track("D`Bert", 'sound/music/title2.ogg'),
 		new/datum/track("D`Fort", 'sound/ambience/song_game.ogg'),
+		new/datum/track("Duck Tales - Moon", 'sound/music/jukebox/DuckTalesMoon.mid'),
+		new/datum/track("Endless Space", 'sound/music/space.ogg'),
 		new/datum/track("Floating", 'sound/music/main.ogg'),
 		new/datum/track("Fly Me To The Moon", 'sound/music/Fly_Me_To_The_Moon.ogg'),
-		new/datum/track("Endless Space", 'sound/music/space.ogg'),
+		new/datum/track("Ghost Fight (Toby Fox)", 'sound/music/jukebox/TobyFoxGhostFight.mid'),
 		new/datum/track("Mad About Me", 'sound/music/jukebox/Cantina.ogg'),
 		new/datum/track("Minor Turbulence", 'sound/music/jukebox/MinorTurbulenceFull.ogg'),
 		new/datum/track("Ode to Greed", 'sound/music/jukebox/OdeToGreed.ogg'),
@@ -41,6 +44,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
+		new/datum/track("Welcome To Jurassic Park", 'sound/music/jukebox/WelcomeToJurassicPark.mid'),
 	)
 
 
@@ -228,4 +232,4 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/clowntemple
 	idle_power_usage = 0
 	active_power_usage = 0
-	tracks = new/datum/track("Mad Jack", 'sound/music/jukebox/madjack.ogg')
+	tracks = list(new/datum/track("Mad Jack", 'sound/music/jukebox/madjack.ogg'))
