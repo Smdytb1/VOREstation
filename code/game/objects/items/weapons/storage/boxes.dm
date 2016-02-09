@@ -347,6 +347,22 @@
 		for(var/i = 1; i <= 5; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube(src)
 
+/obj/item/weapon/storage/box/monkeycubes/sobakacubes
+	name = "sobaka cube box"
+	desc = "Drymate brand sobaka cubes, shipped from Supesu. Just add water!"
+	New()
+		..()
+		for(var/i = 1; i <= 5; i++)
+			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/sobakacube(src)
+
+/obj/item/weapon/storage/box/monkeycubes/sergalingcubes
+	name = "sergaling cube box"
+	desc = "Drymate brand sergaling cubes, shipped from Tal. Just add water!"
+	New()
+		..()
+		for(var/i = 1; i <= 5; i++)
+			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/sergalingcube(src)
+
 /obj/item/weapon/storage/box/ids
 	name = "box of spare IDs"
 	desc = "Has so many empty IDs."

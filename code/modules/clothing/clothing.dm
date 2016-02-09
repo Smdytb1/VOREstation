@@ -584,9 +584,11 @@ BLIND     // can't see anything
 		A = accessories[1]
 	src.remove_accessory(usr,A)
 
+/* // MUH PRIVACY RIGHTS!
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
 	..()
+*/
 
 /obj/item/clothing/under/emp_act(severity)
 	if(accessories.len)

@@ -1580,9 +1580,11 @@
 			Unwrap(user)
 
 	On_Consume(var/mob/M)
-		M << "<span class = 'warning'>Something inside of you suddently expands!</span>"
+		M << "<span class = 'warning'>That tasted fucking terrible!</span>"
 
-		if (istype(M, /mob/living/carbon/human))
+	/*	M << "<span class = 'warning'>Something inside of you suddently expands!</span>" // HOW ABOUT NO -Ace
+
+		if (istype(M, /mob/living/carbon/human)) // How about we not. It's a vore server.
 			//Do not try to understand.
 			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
 			var/mob/ook = monkey_type
@@ -1610,7 +1612,7 @@
 			ook.name = "malformed [ook.name]"
 			ook.transform *= 0.6
 			ook.add_blood(M)
-			M.gib()
+			M.gib()*/
 		..()
 
 	proc/Expand()
@@ -1630,24 +1632,46 @@
 	desc = "Still wrapped in some paper."
 	icon_state = "monkeycubewrap"
 	wrapped = 1
+
+// Farwa (Tajaran)
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube
 	name = "farwa cube"
 	monkey_type = /mob/living/carbon/monkey/tajara
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube
 	name = "farwa cube"
-	monkey_type =/mob/living/carbon/monkey/tajara
+	monkey_type = /mob/living/carbon/monkey/tajara
+
+// Stok (Unathi)
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
 	name = "stok cube"
 	monkey_type = /mob/living/carbon/monkey/unathi
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
 	name = "stok cube"
-	monkey_type =/mob/living/carbon/monkey/unathi
+	monkey_type = /mob/living/carbon/monkey/unathi
+
+// Neaera (Skrell)
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
 	monkey_type = /mob/living/carbon/monkey/skrell
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type =/mob/living/carbon/monkey/skrell
+	monkey_type = /mob/living/carbon/monkey/skrell
+
+// Sobaka (Akula)
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/sobakacube
+	name = "sobaka cube"
+	monkey_type = /mob/living/carbon/monkey/shark
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/sobakacube
+	name = "sobaka cube"
+	monkey_type = /mob/living/carbon/monkey/shark
+
+// Sergaling (Sergal)
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/sergalingcube
+	name = "sergaling cube"
+	monkey_type = /mob/living/carbon/monkey/sergal
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/sergalingcube
+	name = "sergaling cube"
+	monkey_type = /mob/living/carbon/monkey/sergal
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger

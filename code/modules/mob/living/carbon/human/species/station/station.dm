@@ -70,7 +70,7 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 	slowdown = -1
-	brute_mod = 1.2
+	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -255,9 +255,9 @@
 	name_plural = "sergals"
 	icobase = 'icons/mob/human_races/r_sergal.dmi'
 	deform = 'icons/mob/human_races/r_def_sergal.dmi'
-	language = "Sâgaru"
+	language = "SÃ¢garu"
 	tail = "sergtail"
-	primitive = /mob/living/carbon/monkey/tajara
+	primitive = /mob/living/carbon/monkey/sergal
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 
@@ -282,12 +282,12 @@
 
 /datum/species/shark
 	name = "Akula"
-	name_plural = "akulas"
+	name_plural = "akuly"
 	icobase = 'icons/mob/human_races/r_shark.dmi'
 	deform = 'icons/mob/human_races/r_def_shark.dmi'
 	language = "Skrellian"
 	tail = "sharktail"
-	primitive = /mob/living/carbon/monkey/skrell
+	primitive = /mob/living/carbon/monkey/shark
 	unarmed_types = list(/datum/unarmed_attack/bite/sharp)
 
 	blurb = "The Akula are a species of amphibious humanoids like the Skrell, but have an appearance very similar to that of a shark. \
@@ -314,3 +314,35 @@
 		"You feel sluggish and cold.",
 		"Your skin bristles against the cold."
 		)
+
+/datum/species/skeleton
+    name = "Skeleton"
+    name_plural = "Skeletons"
+ 
+    icobase = 'icons/mob/human_races/r_skeleton.dmi' //These sprites SHOULD work.
+    deform = 'icons/mob/human_races/r_skeleton.dmi'  //These sprites SHOULD work.
+    language = "Sol Common"
+    unarmed_types = list(/datum/unarmed_attack/punch)
+    rarity_value = 2
+    burn_mod = 1.5
+    brute_mod = 1.5
+    blurb = "(INSERT SKELETON LORE HERE) "
+ 
+    cold_level_1 = 50 //Bones shouldn't freeze
+    cold_level_2 = -1
+    cold_level_3 = -1
+ 
+    heat_level_1 = 600
+    heat_level_2 = 1100
+    heat_level_3 = 2200
+ 
+    flags = CAN_JOIN | NO_BREATHE | NO_SCAN | IS_WHITELISTED | NO_BLOOD | NO_POISON //All of this SHOULD hopefully work. No_scan put in since the skeleton has no actual "DNA" other than the organs inside of them. A big enough nerf that all the other stuff shouldn't matter.
+    blood_color = "#FFFFFF" //White blood
+    flesh_color = "#FFFFFF" //White flesh
+    has_organ = list()
+    heat_discomfort_level = 500
+    heat_discomfort_strings = list(
+        "Your bones feel hard and brittle.",
+        "Your bones ache and burn.",
+        "You feel uncomfortably warm."
+        )

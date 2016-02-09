@@ -127,7 +127,7 @@
 
 	toggle_scope(2.0)
 
-
+/*
 /obj/item/weapon/gun/projectile/automatic/crestrose
 	name = "Crescent Rose"
 	desc = "Can you match my resolve? If so then you will succeed. I believe that the human spirit is indomitable. Keep Moving Forward."
@@ -165,7 +165,7 @@
 			modifystate = crestrose
 	update_icon()
 	update_held_icon()
-
+*/
 
 // Energy Weapons
 // -------------- KIN-H21 -------------
