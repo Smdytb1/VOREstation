@@ -26,6 +26,7 @@ var/list/ai_status_emotions = list(
 	"Flowey" 					= new /datum/ai_emotion("ai_flowey"),
 	"Glitchy Flowey" 			= new /datum/ai_emotion("ai_floweymalf"),
 	"Tribunal" 					= new /datum/ai_emotion("ai_tribunal", "serithi"),
+	"Fish Tank" 					= new /datum/ai_emotion("ai_fishtank"),
 	"Tribunal Malfunctioning"	= new /datum/ai_emotion("ai_tribunal_malf", "serithi")
 	)
 
