@@ -13,7 +13,7 @@
 	return perform_the_nom(user, prey, pred, attempt_msg, success_msg, 'sound/vore/insert.ogg')
 
 /datum/voretype/tail/feed_self_to_grabbed(var/mob/living/carbon/human/user, var/vore/pred_capable/pred)
-	var/attempt_msg = "<span class='danger'>[user] is attempting to stuff theif self into [pred]'stail!</span>"
+	var/attempt_msg = "<span class='danger'>[user] is attempting to stuff theif self into [pred]'s tail!</span>"
 	var/success_msg = "<span class='danger'>[user] stuffs their self fully into [pred]'s tail!</span>"
 
 	return perform_the_nom(user, user, pred, attempt_msg, success_msg, 'sound/vore/insert.ogg')
