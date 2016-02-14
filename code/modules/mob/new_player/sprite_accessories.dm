@@ -606,7 +606,7 @@
 	una_hood
 		name = "Cobra Hood"
 		icon_state = "soghun_hood"
-		species_allowed = list("Unathi")
+//		species_allowed = list("Unathi")
 
 	skr_tentacle_m
 		name = "Skrell Male Tentacles"
