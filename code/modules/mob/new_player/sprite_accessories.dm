@@ -602,6 +602,11 @@
 		name = "Unathi Horns"
 		icon_state = "soghun_horns"
 		species_allowed = list("Unathi")
+		
+	una_hood
+		name = "Cobra Hood"
+		icon_state = "soghun_hood"
+		species_allowed = list("Unathi")
 
 	skr_tentacle_m
 		name = "Skrell Male Tentacles"
