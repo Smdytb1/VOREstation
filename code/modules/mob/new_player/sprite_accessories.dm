@@ -690,6 +690,21 @@
 		icon_state = "serg_plain"
 		species_allowed = list("Sergal")
 
+	serg_medicore_s
+		name = "Sergal Medicore"
+		icon_state = "serg_medicore"
+		species_allowed = list("Sergal")
+
+	serg_tapered_s
+		name = "Sergal Tapered"
+		icon_state = "serg_tapered"
+		species_allowed = list("Sergal")
+
+	serg_fairytail_s
+		name = "Sergal Fairytail"
+		icon_state = "serg_fairytail"
+		species_allowed = list("Sergal")
+
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
