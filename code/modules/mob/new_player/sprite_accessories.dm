@@ -496,7 +496,7 @@
 
 	icon = 'icons/mob/Human_face.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
-	species_allowed = list("Human", "Slime Person")
+	species_allowed = list("Human")
 
 	shaved
 		name = "Shaved"
@@ -1009,6 +1009,12 @@
 	desc = ""
 	icon_state = "wolf-wise"
 
+
+/datum/sprite_accessory/tail/wisewolf
+ 	name = "wolf, black"
+ 	desc = ""
+ 	icon_state = "wolf"
+
 /datum/sprite_accessory/tail/wolf
 	name = "wolf, hair-colored"
 	desc = ""
@@ -1116,6 +1122,31 @@
 	name = "feathered wings"
 	desc = ""
 	icon_state = "feathered"
+
+
+/datum/sprite_accessory/tail/special
+	name = "Blank tail. Do not select."
+	icon = 'icons/effects/species.dmi'
+	
+/datum/sprite_accessory/tail/special/unathi
+	name = "unathi tail"
+	desc = ""
+	icon_state = "sogtail_s"
+	
+/datum/sprite_accessory/tail/special/tajaran
+	name = "tajaran tail"
+	desc = ""
+	icon_state = "tajtail_s"
+	
+/datum/sprite_accessory/tail/special/sergal
+	name = "sergal tail"
+	desc = ""
+	icon_state = "sergtail_s"
+	
+/datum/sprite_accessory/tail/special/akula
+	name = "akula tail"
+	desc = ""
+	icon_state = "sharktail_s"
 
 /*
 ////////////////////////////
