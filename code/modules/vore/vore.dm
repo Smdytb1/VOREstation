@@ -133,6 +133,10 @@
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] releases a few things from their tail!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+			else if (belly.is_full)
+				belly.is_full = 0
+				visible_message("<span class='danger'>[src] releases a few things from their tail!</span>")
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 /////////////////////////////
 ////   OOC Escape Code	 ////
