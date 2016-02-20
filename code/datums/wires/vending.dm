@@ -35,6 +35,8 @@ var/const/VENDING_WIRE_IDSCAN = 8
 		if(VENDING_WIRE_CONTRABAND)
 			V.categories ^= CAT_HIDDEN
 		if(VENDING_WIRE_ELECTRIFY)
+			log_game("\blue [key_name_admin(usr)] electrified a vending machine.")
+			message_admins("[key_name_admin(user)] opened electrified a vending machine at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), ")
 			V.seconds_electrified = 30
 		if(VENDING_WIRE_IDSCAN)
 			V.scan_id = !V.scan_id
