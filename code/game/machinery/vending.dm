@@ -224,8 +224,8 @@
 		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
-		log_game("\blue [usr.key] [key_name(usr)] used wirectuters on a vending machine.")
-		message_admins("[usr.key] [key_name(usr)] used wirecutters on a vending machine.")
+		log_game("\blue [usr.key] [key_name(usr)] used wirectuters/multitool on a vending machine.")
+		message_admins("[usr.key] [key_name(usr)] used wirecutters/multitool on a vending machine.")
 		if(src.panel_open)
 			attack_hand(user)
 		return
