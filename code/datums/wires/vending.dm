@@ -50,12 +50,12 @@ var/const/VENDING_WIRE_IDSCAN = 8
 			V.categories &= ~CAT_HIDDEN  
 		if(VENDING_WIRE_ELECTRIFY)
 			if(mended)
-				log_game("\blue [usr.key] [key_name(usr)] may have electrified a vending machine.")
-				message_admins("[usr.key] [key_name(usr)] may have electrified a vending machine.")
+				log_game("\blue [usr.key] [key_name(usr)] has mended an electrified a vending machine.")
+				message_admins("[usr.key] [key_name(usr)] has mended an electrified a vending machine.")
 				V.seconds_electrified = 0
 			else
-				log_game("\blue [usr.key] [key_name(usr)] may have electrified a vending machine.")
-				message_admins("[usr.key] [key_name(usr)] may have electrified a vending machine.")
+				log_game("\blue [usr.key] [key_name(usr)] has electrified a vending machine.")
+				message_admins("[usr.key] [key_name(usr)] has electrified a vending machine.")
 				V.seconds_electrified = -1
 		if(VENDING_WIRE_IDSCAN)
 			V.scan_id = 1
