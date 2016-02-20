@@ -214,6 +214,8 @@
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		src.panel_open = !src.panel_open
+		log_game("\blue [key_name_admin(usr)] used a screwdriver on a vending machine.")
+		message_admins("[usr.key] [key_name(usr)] used a screwdriver on a vending machine at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), ")
 		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
 		src.overlays.Cut()
 		if(src.panel_open)
@@ -222,6 +224,8 @@
 		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
+		log_game("\blue [usr.key] [key_name(usr)] used wirectuters on a vending machine.")
+		message_admins("[usr.key] [key_name(usr)] used wirecutters on a vending machine at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), ")
 		if(src.panel_open)
 			attack_hand(user)
 		return
