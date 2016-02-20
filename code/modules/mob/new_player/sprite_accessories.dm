@@ -496,7 +496,7 @@
 
 	icon = 'icons/mob/Human_face.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
-	species_allowed = list("Human")
+	species_allowed = list("Human", "Slime Person")
 
 	shaved
 		name = "Shaved"
@@ -602,7 +602,7 @@
 		name = "Unathi Horns"
 		icon_state = "soghun_horns"
 		species_allowed = list("Unathi")
-		
+
 	una_hood
 		name = "Cobra Hood"
 		icon_state = "soghun_hood"

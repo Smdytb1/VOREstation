@@ -396,3 +396,4 @@
 
 	breath_type = null //no breathing?
 //	poison_type = null //no poison?
+	reagent_tag = IS_SLIMEP
