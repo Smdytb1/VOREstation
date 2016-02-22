@@ -518,7 +518,7 @@
 	
 /obj/item/clothing/under/permit
 	name = "public nudity permit"
-	desc = "This permit entitles the bearer to conduct their duties without a uniform. Normally issued to furred crewmembers or those with nothing to hide"
+	desc = "This permit entitles the bearer to conduct their duties without a uniform. Normally issued to furred crewmembers or those with nothing to hide."
 	icon = 'icons/obj/paper.dmi'
 	icon_state = "paper"
 	item_state = "golem"
