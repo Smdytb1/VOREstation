@@ -422,6 +422,12 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/under/permit
 	slot = slot_w_uniform
 	cost = 1
+	
+/datum/gear/mankini
+	display_name = "mankini (jumpsuit)"
+	path = /obj/item/clothing/under/stripper/mankini
+	slot = slot_w_uniform
+	cost = 1
 
 /datum/gear/blazer_blue
 	display_name = "blazer, blue"
