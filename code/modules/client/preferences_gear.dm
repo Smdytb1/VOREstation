@@ -417,6 +417,12 @@ var/global/list/gear_datums = list()
 
 // Uniform slot
 
+/datum/gear/permit
+	display_name = "nudity permit (jumpsuit)"
+	path = /obj/item/clothing/under/permit
+	slot = slot_w_uniform
+	cost = 1
+
 /datum/gear/blazer_blue
 	display_name = "blazer, blue"
 	path = /obj/item/clothing/under/blazer
@@ -1328,3 +1334,4 @@ var/global/list/gear_datums = list()
 	cost = 1
 	sort_category = "ears"
 	whitelisted = "Skrell"
+
