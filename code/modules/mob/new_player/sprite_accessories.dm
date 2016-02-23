@@ -871,6 +871,13 @@
 	icon_state = "oni-h1"
 	do_colouration = 0
 
+/datum/sprite_accessory/ears/demon_horns1
+	name = "demon horns"
+	desc = ""
+	icon_state = "demon-horns1"
+	do_colouration = 0
+
+
 // Special snowflake ears go below here.
 
 /datum/sprite_accessory/ears/molenar_kitsune
