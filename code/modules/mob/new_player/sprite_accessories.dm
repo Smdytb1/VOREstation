@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person") //fingerscrossed
+	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person", "Nevreans") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
