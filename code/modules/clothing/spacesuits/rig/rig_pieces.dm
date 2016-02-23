@@ -10,7 +10,7 @@
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
-	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/helmet.dmi', "Sergal" = 'icons/mob/species/sergal/helmet.dmi',"Skrell" = 'icons/mob/species/skrell/helmet.dmi',"Unathi" = 'icons/mob/species/unathi/helmet.dmi',"Akula" = 'icons/mob/species/Nevrean/helmet.dmi',"Nevrean" = 'icons/mob/species/unathi/helmet.dmi') //Temporary suits. You only need to update the .dmi files in their respective folders.
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/helmet.dmi', "Sergal" = 'icons/mob/species/sergal/helmet.dmi',"Skrell" = 'icons/mob/species/skrell/helmet.dmi',"Unathi" = 'icons/mob/species/unathi/helmet.dmi',"Akula" = 'icons/mob/species/akula/helmet.dmi',"Nevrean" = 'icons/mob/species/nevrean/helmet.dmi') //Temporary suits. You only need to update the .dmi files in their respective folders.
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig
