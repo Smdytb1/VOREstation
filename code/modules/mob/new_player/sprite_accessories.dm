@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human","Unathi", "Akula")
+	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person") //fingerscrossed
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -496,13 +496,13 @@
 
 	icon = 'icons/mob/Human_face.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
-	species_allowed = list("Human")
+	species_allowed = list("Human", "Slime Person")
 
 	shaved
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine", "Sergal", "Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine", "Sergal", "Akula", "Slime Person")
 
 	watson
 		name = "Watson Mustache"
@@ -603,6 +603,11 @@
 		icon_state = "soghun_horns"
 		species_allowed = list("Unathi")
 
+	una_hood
+		name = "Cobra Hood"
+		icon_state = "soghun_hood"
+//		species_allowed = list("Unathi")
+
 	skr_tentacle_m
 		name = "Skrell Male Tentacles"
 		icon_state = "skrell_hair_m"
@@ -683,6 +688,21 @@
 	serg_ears_plain
 		name = "Sergal Ears"
 		icon_state = "serg_plain"
+		species_allowed = list("Sergal")
+
+	serg_medicore_s
+		name = "Sergal Medicore"
+		icon_state = "serg_medicore"
+		species_allowed = list("Sergal")
+
+	serg_tapered_s
+		name = "Sergal Tapered"
+		icon_state = "serg_tapered"
+		species_allowed = list("Sergal")
+
+	serg_fairytail_s
+		name = "Sergal Fairytail"
+		icon_state = "serg_fairytail"
 		species_allowed = list("Sergal")
 
 /datum/sprite_accessory/facial_hair
@@ -1091,6 +1111,11 @@
 	desc = ""
 	icon_state = "aronai"
 	ckeys_allowed = list("arokha")
+
+/datum/sprite_accessory/tail/feathered
+	name = "feathered wings"
+	desc = ""
+	icon_state = "feathered"
 
 /*
 ////////////////////////////

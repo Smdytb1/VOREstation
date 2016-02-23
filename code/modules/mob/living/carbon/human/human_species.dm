@@ -34,3 +34,6 @@
 
 /mob/living/carbon/human/Sergal/New(var/new_loc)
 	..(new_loc, "Sergal")
+
+/mob/living/carbon/human/slimePerson/New(var/new_loc)
+	..(new_loc, "Slime Person")

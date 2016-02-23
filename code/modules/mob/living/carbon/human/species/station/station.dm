@@ -255,7 +255,7 @@
 	name_plural = "sergals"
 	icobase = 'icons/mob/human_races/r_sergal.dmi'
 	deform = 'icons/mob/human_races/r_def_sergal.dmi'
-	language = "Sâgaru"
+	language = "Sagaru"
 	tail = "sergtail"
 	primitive = /mob/living/carbon/monkey/sergal
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
@@ -318,7 +318,7 @@
 /datum/species/skeleton
     name = "Skeleton"
     name_plural = "Skeletons"
- 
+
     icobase = 'icons/mob/human_races/r_skeleton.dmi' //These sprites SHOULD work.
     deform = 'icons/mob/human_races/r_skeleton.dmi'  //These sprites SHOULD work.
     language = "Sol Common"
@@ -327,15 +327,15 @@
     burn_mod = 1.5
     brute_mod = 1.5
     blurb = "(INSERT SKELETON LORE HERE) "
- 
+
     cold_level_1 = 50 //Bones shouldn't freeze
     cold_level_2 = -1
     cold_level_3 = -1
- 
+
     heat_level_1 = 600
     heat_level_2 = 1100
     heat_level_3 = 2200
- 
+
     flags = CAN_JOIN | NO_BREATHE | NO_SCAN | IS_WHITELISTED | NO_BLOOD | NO_POISON //All of this SHOULD hopefully work. No_scan put in since the skeleton has no actual "DNA" other than the organs inside of them. A big enough nerf that all the other stuff shouldn't matter.
     blood_color = "#FFFFFF" //White blood
     flesh_color = "#FFFFFF" //White flesh
@@ -346,3 +346,54 @@
         "Your bones ache and burn.",
         "You feel uncomfortably warm."
         )
+
+/datum/species/slimePerson
+	name = "Slime Person" //Slime People to not interfeer with the xenobio green extract created slimes
+	name_plural = "slime people"
+
+	icobase = 'icons/mob/human_races/r_slime.dmi'
+	deform = 'icons/mob/human_races/r_slime.dmi'
+	language = "Sol Common" //todo?
+	burn_mod = 1.2
+	brute_mod = 1
+	blurb = "Gelatinous beings from who knows where. They take up the shape of humans when convenient."
+
+	cold_level_1 = 260 //Default 260
+	cold_level_2 = 230 //Default 200
+	cold_level_3 = 150 //Default 120
+
+	heat_level_1 = 360 //Default 360
+	heat_level_2 = 400 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+
+
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/slime_glomp)
+	flags = CAN_JOIN | NO_SLIP | NO_BREATHE | HAS_EYE_COLOR | HAS_SKIN_COLOR
+	darksight = 3
+
+	blood_color = "#05FF9B"
+	//flesh_color = "#05FFFB" overwrites custom ones i think...
+
+	heat_discomfort_strings = list(
+		"Your slime feels warm.",
+		"You're feeling irritable from the unpleasant heat.",
+		"You feel dizzy and dehyrdrated."
+		)
+
+	cold_discomfort_strings = list(
+		"Your slime gets chilly.",
+		"You feel very cold and sluggish.",
+		"Your slime unstablizies in the cold."
+		)
+
+	remains_type = /obj/effect/decal/cleanable/ash
+	death_message = "rapidly loses cohesion, splattering across the ground..."
+
+	has_organ = list(
+		"brain" = /datum/organ/internal/brain/slime
+		)
+
+	breath_type = null //no breathing?
+//	poison_type = null //no poison?
+	reagent_tag = IS_SLIMEP

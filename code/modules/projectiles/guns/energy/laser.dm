@@ -99,6 +99,12 @@ obj/item/weapon/gun/energy/retro
 
 	toggle_scope(2.0)
 
+/obj/item/weapon/gun/energy/sniperrifle/practice
+	name = "practice laser sniper"
+	desc = "A modified version of the L.W.A.P. sniepr rifle, complete with a SMART aiming-system scope. This one fires less concentrated energy bolts designed for target practice."
+	fire_sound = 'sound/weapons/lasercannonfire.ogg'
+	projectile_type = /obj/item/projectile/beam/practice
+
 ////////Laser Tag////////////////////
 
 /obj/item/weapon/gun/energy/lasertag

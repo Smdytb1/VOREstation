@@ -34,10 +34,7 @@
 			new /obj/item/ammo_casing/shotgun/beanbag(Barpack)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/shotgun_ammo/beanbag, slot_in_backpack)
 
 		return 1
 
