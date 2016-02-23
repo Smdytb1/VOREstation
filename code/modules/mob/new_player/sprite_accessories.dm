@@ -1147,7 +1147,11 @@
 	name = "akula tail"
 	desc = ""
 	icon_state = "sharktail_s"
-
+	
+/datum/sprite_accessory/tail/special/nevrean
+	name = "nevrean tail"
+	desc = ""
+	icon_state = "nevrean_s"
 /*
 ////////////////////////////
 /  =--------------------=  /
