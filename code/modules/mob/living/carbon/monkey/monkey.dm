@@ -56,11 +56,11 @@
 	greaterform = "Sergal"
 //	uni_append = // Left blank until we know what the fuck this is for. -Spades
 
-/mob/living/carbon/monkey/nevrean
+/mob/living/carbon/monkey/sparra
 	name = "sparra"
 	voice_name = "sparra"
 	speak_emote = list("chirps")
-	icon_state = "nevrean1"
+	icon_state = "sparra1"
 	greaterform = "Nevrean"
 //	uni_append = // Left blank until we know what the fuck this is for. -Spades
 
