@@ -404,7 +404,7 @@
 	icobase = 'icons/mob/human_races/r_nevrean.dmi'
 	deform = 'icons/mob/human_races/r_def_nevrean.dmi'
 	language = "Birdsong" //New language. Birdsong.
-	//tail = "sergtail" This is a placeholder. Uncomment it and put in it's "tail" when its tail is fully sprited up and coded in.
+	tail = "nevrean" 
 	primitive = /mob/living/carbon/monkey/nevrean
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 
