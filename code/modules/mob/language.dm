@@ -307,7 +307,7 @@
 	speech_verb = "chirps"
 	colour = "#FFBBFF"
 	key = "n"
-	syllables = list ("chirp", "peep", "tweet")
+	syllables = list ("cheep", "peep")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
