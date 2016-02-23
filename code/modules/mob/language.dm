@@ -300,6 +300,14 @@
 	colour = "sergal"
 	key = "z"
 	syllables = list ("grr", "gah", "woof", "arf", "arra", "rah", "wor", "sarg")
+	
+/datum/language/birdsong
+	name = "Birdsong"
+	desc = "A language primarily spoken by Narvians"
+	speech_verb = "chirps"
+	colour = "#FFBBFF"
+	key = "n"
+	syllables = list ("chirp", "peep", "tweet")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
