@@ -1149,6 +1149,7 @@
 					/obj/item/clothing/suit/apron/overalls = 3,
 					/obj/item/clothing/suit/wcoat = 3,
 					/obj/item/clothing/suit/kimonored = 3,
+					/obj/item/clothing/under/tiger_bikini = 5,
 					/obj/item/clothing/accessory/collar_blk = 3,
 					/obj/item/clothing/accessory/collar_gld = 3,
 					/obj/item/clothing/accessory/collar_bell = 3,
