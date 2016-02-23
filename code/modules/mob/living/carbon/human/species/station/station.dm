@@ -405,7 +405,7 @@
 	deform = 'icons/mob/human_races/r_def_nevrean.dmi'
 	language = "Birdsong" //New language. Birdsong.
 	tail = "nevrean" 
-	primitive = /mob/living/carbon/monkey/nevrean
+	primitive = /mob/living/carbon/monkey/sparra
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 
 	blurb = "Nevreans are a race of avian and dinosaur-like creatures living on Tal. They belong to a group of races that hails from Eltus. " //If you would like to add more lore, just edit this "blurb" line. I didn't know what to add from their wiki, so I left it barebones.
