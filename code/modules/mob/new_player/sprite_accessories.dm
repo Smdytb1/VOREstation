@@ -781,7 +781,7 @@
 /datum/sprite_accessory/ears
 	name = "You should not see this..."
 	icon = 'icons/mob/fluff/ears.dmi'
-	do_colouration = 0
+	do_colouration = 0 //Set to 1 to convert greyscale to the haircolor
 
 	var/colored_overlay
 	var/desc = "You should not see this..."
@@ -864,6 +864,12 @@
 	name = "bee antennae"
 	desc = ""
 	icon_state = "bee"
+
+/datum/sprite_accessory/ears/oni_h1
+	name = "oni horns"
+	desc = ""
+	icon_state = "oni-h1"
+	do_colouration = 0
 
 // Special snowflake ears go below here.
 

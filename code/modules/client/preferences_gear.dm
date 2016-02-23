@@ -476,6 +476,12 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	cost = 1
 
+/datum/gear/tiger_bikini
+	display_name = "bikini, tiger"
+	path = /obj/item/clothing/under/tiger_bikini
+	slot = slot_w_uniform
+	cost = 1
+
 /datum/gear/amishsuit
 	display_name = "suit, amish"
 	path = /obj/item/clothing/under/sl_suit

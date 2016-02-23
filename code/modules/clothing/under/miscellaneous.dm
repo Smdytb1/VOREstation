@@ -515,3 +515,10 @@
 	desc = "When Spetznaz on scene, objective no longer save hostage."
 	icon_state = "russobluecamo"
 	item_color = "russobluecamo"
+
+/obj/item/clothing/under/tiger_bikini
+	name = "Tiger Bikini"
+	desc = "A stylish bikini made from authentic space tiger." //Don't worry, space tigers aren't endangered. In fact, they are considered a nusiance.
+	icon_state = "tiger_bikini"
+	item_state = "tiger_bikini"
+	item_color = "tiger_bikini"
