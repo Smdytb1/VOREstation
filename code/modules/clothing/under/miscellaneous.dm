@@ -515,3 +515,11 @@
 	desc = "When Spetznaz on scene, objective no longer save hostage."
 	icon_state = "russobluecamo"
 	item_color = "russobluecamo"
+	
+/obj/item/clothing/under/permit
+	name = "public nudity permit"
+	desc = "This permit entitles the bearer to conduct their duties without a uniform. Normally issued to furred crewmembers or those with nothing to hide."
+	icon = 'icons/obj/paper.dmi'
+	icon_state = "paper"
+	item_state = "golem"
+	item_color = "golem"
