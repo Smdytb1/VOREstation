@@ -17,6 +17,7 @@
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
 		"Akula"  = 'icons/mob/species/akula/helmet.dmi',
 		"Sergal" = 'icons/mob/species/sergal/helmet.dmi',
+		"Nevrean" = 'icons/mob/species/nevrean/helmet.dmi','
 		)
 	sprite_sheets_obj = list(
 		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
@@ -24,6 +25,7 @@
 		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
 		"Akula"  = 'icons/obj/clothing/species/akula/hats.dmi',
 		"Sergal" = 'icons/obj/clothing/species/sergal/hats.dmi',
+		"Nevrean" = 'icons/obj/clothing/species/nevrean/hats.dmi'
 		)
 
 	light_overlay = "helmet_light"
