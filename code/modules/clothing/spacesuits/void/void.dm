@@ -17,7 +17,7 @@
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
 		"Akula"  = 'icons/mob/species/akula/helmet.dmi',
 		"Sergal" = 'icons/mob/species/sergal/helmet.dmi',
-		"Nevrean" = 'icons/mob/species/nevrean/helmet.dmi','
+		"Nevrean" = 'icons/mob/species/nevrean/helmet.dmi',
 		)
 	sprite_sheets_obj = list(
 		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
@@ -48,6 +48,7 @@
 		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
 		"Akula"  = 'icons/mob/species/akula/suit.dmi',
 		"Sergal" = 'icons/mob/species/sergal/suit.dmi',
+		"Nevrean" = 'icons/mob/species/nevrean/suit.dmi',
 		)
 	sprite_sheets_obj = list(
 		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
@@ -55,6 +56,7 @@
 		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
 		"Akula"  = 'icons/obj/clothing/species/akula/suits.dmi',
 		"Sergal" = 'icons/obj/clothing/species/sergal/suits.dmi',
+		"Nevrean" = 'icons/obj/clothing/species/nevrean/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
