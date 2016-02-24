@@ -2206,22 +2206,22 @@ datum
 			id = "protein"
 			color = "#440000"
 
-			on_mob_life(var/mob/living/M, var/alien)
+			/*on_mob_life(var/mob/living/M, var/alien) // Vorestation edit
 				if(alien && alien == IS_SKRELL)
 					M.adjustToxLoss(0.5)
 					M.nutrition -= nutriment_factor
-				..()
+				..()*/
 
 		nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
 			name = "egg yolk"
 			id = "egg"
 			color = "#FFFFAA"
 
-			on_mob_life(var/mob/living/M, var/alien)
+			/*on_mob_life(var/mob/living/M, var/alien) // Vorestation edit
 				if(alien && alien == IS_SKRELL)
 					M.adjustToxLoss(0.5)
 					M.nutrition -= nutriment_factor
-				..()
+				..()*/
 
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
@@ -3408,8 +3408,8 @@ datum
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
 					if(A != src && isnum(A.data)) d += A.data
 
-				if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly.
-					d*=5
+				/*if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly. // Vorestation edit
+					d*=5*/
 
 				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)

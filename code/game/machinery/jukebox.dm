@@ -8,7 +8,7 @@ datum/track/New(var/title_name, var/audio)
 	title = title_name
 	sound = audio
 
-/obj/machinery/media/jukebox/
+/obj/machinery/media/jukebox
 	name = "space jukebox"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
@@ -47,13 +47,14 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Ransacked", 'sound/music/jukebox/Ransacked.ogg'),
 		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg'), // EVEN THOUGH THE STATION IS FULL OF HUNGRY WOLVES
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
+		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
-		new/datum/track("Welcome To Jurassic Park", 'sound/music/jukebox/WelcomeToJurassicPark.mid'),
+		new/datum/track("Welcome To Jurassic Park", 'sound/music/jukebox/WelcomeToJurassicPark.mid')
 	)
 	// Only visible if hacked
 	var/list/datum/track/secret_tracks = list(
-		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
+		new/datum/track("Bandit Radio", 'sound/music/jukebox/bandit_radio.ogg'),
+		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg')
 	)
 
 /obj/machinery/media/jukebox/New()
@@ -256,6 +257,7 @@ datum/track/New(var/title_name, var/audio)
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
 
 ///////////////////////////////////////////
 // Event-specific jukeboxes go below here

@@ -11,7 +11,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	name = "Immovable Rod"
 	desc = "What the fuck is that?"
 	icon = 'icons/obj/objects.dmi'
-	icon_state = "immrod"
+	icon_state = "anom"//"immrod"
 	throwforce = 100
 	density = 1
 	anchored = 1
@@ -86,4 +86,4 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	for(var/obj/effect/immovablerod/imm in world)
 		return
 	sleep(50)
-	command_announcement.Announce("What the fuck was that?!", "General Alert")
+	command_announcement.Announce("The station is about to strike a gravitational hardpoint anomaly caused by a fatal bluespace warp drive failure on another ship. Please put on emergency suits immediately in case of hull breach.", "General Alert", new_sound = 'sound/AI/spanomalies.ogg')

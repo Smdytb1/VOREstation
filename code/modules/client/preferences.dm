@@ -128,6 +128,8 @@ datum/preferences
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
 
+	var/list/inside_flavour_texts = list()
+
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -419,6 +421,8 @@ datum/preferences
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
+
+	dat += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=open'><b>Set Inside Flavour Texts</b></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
@@ -737,6 +741,33 @@ datum/preferences
 	user << browse(HTML, "window=flavor_text;size=430x300")
 	return
 
+/datum/preferences/proc/SetInsideFlavourText(mob/user)
+	var/HTML = "<body>"
+	HTML += "<tt><center>"
+	HTML += "<b>Set Inside Flavour Text</b> <hr />"
+	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Stomach'>Stomach:</a> "
+	HTML += TextPreview(inside_flavour_texts["Stomach"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Cock'>Balls:</a> "
+	HTML += TextPreview(inside_flavour_texts["Cock"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Womb'>Womb:</a> "
+	HTML += TextPreview(inside_flavour_texts["Womb"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Boob'>Boobs:</a> "
+	HTML += TextPreview(inside_flavour_texts["Boob"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
+	HTML += TextPreview(inside_flavour_texts["Tail"])
+	HTML += "<br>"
+	HTML += "<hr />"
+	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
+	HTML += "<tt>"
+	user << browse(null, "window=preferences")
+	user << browse(HTML, "window=inside_flavour_text;size=430x300")
+	return
+
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
 	var/HTML = "<body>"
 	HTML += "<tt><center>"
@@ -1029,6 +1060,25 @@ datum/preferences
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
+
+	else if(href_list["preference"] == "inside_flavour_text")
+		switch(href_list["task"])
+			if("open")
+				SetInsideFlavourText(user)
+				return
+			if("done")
+				user << browse(null, "window=inside_flavour_text")
+				ShowChoices(user)
+				return
+			else
+				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Inside Flavour Text",html_decode(inside_flavour_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				inside_flavour_texts[href_list["task"]] = msg
+		SetInsideFlavourText(user)
+		return
+
 
 	else if(href_list["preference"] == "flavour_text_robot")
 		switch(href_list["task"])
@@ -1447,8 +1497,9 @@ datum/preferences
 				if("ear_style")
 					var/list/pretty_ear_styles = list("Normal")
 					for(var/path in ear_styles_list)
-						var/obj/item/clothing/head/instance = ear_styles_list[path]
-						pretty_ear_styles[instance.name] = path
+						var/datum/sprite_accessory/ears/instance = ear_styles_list[path]
+						if((!instance.ckeys_allowed) || (usr.ckey in instance.ckeys_allowed))
+							pretty_ear_styles[instance.name] = path
 
 					var/selection = input(user, "Pick ears (doesn't update preview)", "Character Preference") as null|anything in pretty_ear_styles
 					if(selection && selection != "Normal")
@@ -1460,7 +1511,8 @@ datum/preferences
 					var/list/pretty_tail_styles = list("Normal")
 					for(var/path in tail_styles_list)
 						var/datum/sprite_accessory/tail/instance = tail_styles_list[path]
-						pretty_tail_styles[instance.name] = path
+						if((!instance.ckeys_allowed) || (usr.ckey in instance.ckeys_allowed))
+							pretty_tail_styles[instance.name] = path
 
 					var/selection = input(user, "Pick tail (doesn't update preview)", "Character Preference") as null|anything in pretty_tail_styles
 					if(selection && selection != "Normal")
@@ -1736,6 +1788,11 @@ datum/preferences
 	character.flavor_texts["hands"] = flavor_texts["hands"]
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
+
+	// This is gonna be interesting. Let's see if I can figure out inside flavour texts -Nightwing
+	for (var/bellytype in character.internal_contents)
+		var/datum/belly/belly = character.internal_contents[bellytype]
+		belly.inside_flavor = inside_flavour_texts[belly.belly_type]
 
 	character.med_record = med_record
 	character.sec_record = sec_record

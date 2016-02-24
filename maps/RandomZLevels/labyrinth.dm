@@ -18,6 +18,7 @@
 	ambience = list('sound/music/TheClownChild.ogg')
 
 // These extra areas must break up the large area, or the game crashes when machinery (like an airlock) makes sparks.
+// I have no idea why. It's a nasty bug.
 /area/awaymission/labyrinth/temple/south_east
 	icon_state = "red"
 
@@ -74,6 +75,7 @@
 /obj/effect/decal/mecha_wreckage/honker/cluwne
 	name = "cluwne mech wreckage"
 	icon_state = "cluwne-broken"
+	desc = "Not so funny anymore."
 
 
 /obj/structure/falsewall/cultspecial
@@ -107,23 +109,22 @@
 	icon_state = "cluwne"
 	initial_icon = "cluwne"
 	step_in = 2
-	health = 300
+	health = 500
 	deflect_chance = 60
 	internal_damage_threshold = 60
 	damage_absorption = list("brute"=1.2,"fire"=1.5,"bullet"=1,"laser"=1,"energy"=1,"bomb"=1)
 	max_temperature = 25000
 	infra_luminosity = 5
-	operation_req_access = list(access_clown)
+	operation_req_access = list(access_cent_creed)
 	wreckage = /obj/effect/decal/mecha_wreckage/honker/cluwne
 	max_equip = 4
-	var/obj/item/weapon/cell/infinite
 
 
 /obj/mecha/combat/honker/cluwne/New()
 	..()
-	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
+	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	ME.attach(src)
-	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
+	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar
 	ME.attach(src)

@@ -632,6 +632,11 @@ var/list/be_special_flags = list(
 #define CAN_JOIN       16384 // Species is selectable in chargen.
 #define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
 
+// Species equip_problems flags
+#define BOOT_PROBLEMS  1	 // Species has issues with normal shoes.
+#define GLOVE_PROBLEMS 2	 // Species has issues equipping normal gloves.
+#define HEAD_PROBLEMS  4	 // Species has issues with equipping head problems.
+
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED  2   // Language can only be accquired by spawning or an admin.
@@ -705,6 +710,7 @@ var/list/be_special_flags = list(
 #define IS_SKRELL 3
 #define IS_UNATHI 4
 #define IS_XENOS  5
+#define IS_SLIMEP  6
 
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 

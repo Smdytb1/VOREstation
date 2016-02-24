@@ -4,14 +4,14 @@
 	icon_state = "fox"
 	icon_living = "fox"
 	icon_dead = "fox_dead"
-	speak = list("Ack-Ack","Ack-Ack-Ack-Ackawoooo","Geckers","Awoo","Tchoff")
+	speak = list("Ack-Ack","Ack-Ack-Ack-Ackawoooo","Awoo","Tchoff")
 	speak_emote = list("geckers", "barks")
 	emote_hear = list("howls","barks")
-	emote_see = list("shakes its head", "shivers")
+	emote_see = list("shakes its head", "shivers", "geckers")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/fox
 	response_help = "scritches"
 	response_disarm = "gently pushes aside"
 	response_harm = "kicks"
@@ -246,11 +246,14 @@
 	set_dir(get_dir(src, friend))
 	say("Yap!")
 
+/obj/item/weapon/reagent_containers/food/snacks/meat/fox
+	name = "Fox meat"
+	desc = "The fox doesn't say a god damn thing, now."
 
 //Captain fox
 /mob/living/simple_animal/fox/fluff/Renault
 	name = "Renault"
-	desc = "Renault, the Captain's trustworthy fox.I wonder what it says?"
+	desc = "Renault, the Captain's trustworthy fox. I wonder what it says?"
 	isPredator = 1
 	befriend_job = "Captain"
 

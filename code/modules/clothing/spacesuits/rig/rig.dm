@@ -412,6 +412,9 @@
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
 	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
 
+	data["tankPressure"] = air_supply ? round(air_supply.air_contents.return_pressure() ? air_supply.air_contents.return_pressure() : 0) : 0
+	data["relPressure"] =  air_supply ? round(air_supply.distribute_pressure ? air_supply.distribute_pressure : 0) : 0
+
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked
 	data["interfacelock"] = interface_locked

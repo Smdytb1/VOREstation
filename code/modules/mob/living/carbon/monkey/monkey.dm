@@ -39,6 +39,24 @@
 	greaterform = "Unathi"
 	uni_append = list(0x044,0xC5D,0x00,0x00,0x00,0x999) // 044C5D
 
+
+/mob/living/carbon/monkey/shark
+	name = "sobaka"
+	voice_name = "sobaka"
+	speak_emote = list("squeaks")
+	icon_state = "sharkpup1"
+	greaterform = "Akula"
+//	uni_append = // Left blank until we know what the fuck this is for. -Spades
+
+/mob/living/carbon/monkey/sergal
+	name = "sergaling"
+	voice_name = "sergaling"
+	speak_emote = list("growls")
+	icon_state = "sergal1"
+	greaterform = "Sergal"
+//	uni_append = // Left blank until we know what the fuck this is for. -Spades
+
+
 /mob/living/carbon/monkey/New()
 
 	verbs += /mob/living/proc/ventcrawl

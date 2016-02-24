@@ -34,10 +34,7 @@
 			new /obj/item/ammo_casing/shotgun/beanbag(Barpack)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/ammo_casing/shotgun/beanbag(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/shotgun_ammo/beanbag, slot_in_backpack)
 
 		return 1
 
@@ -150,7 +147,7 @@
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#dddddd"
 	idtype = /obj/item/weapon/card/id/cargo
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 
 
@@ -179,7 +176,7 @@
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#dddddd"
 	idtype = /obj/item/weapon/card/id/cargo
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mint, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting)
 	alt_titles = list("Drill Technician","Prospector")
 
@@ -341,7 +338,7 @@
 
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
 /datum/job/lawyer
-	title = "Internal Affairs Agent"
+	title = "Lawyer"
 	flag = LAWYER
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -352,7 +349,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_lawyer, access_court, access_sec_doors, access_maint_tunnels)
 	minimal_access = list(access_lawyer, access_court, access_sec_doors)
-	alt_titles = list("Lawyer")
+	alt_titles = list("Internal Affairs Agent")
 
 
 	equip(var/mob/living/carbon/human/H)

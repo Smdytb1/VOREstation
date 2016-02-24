@@ -498,11 +498,12 @@ var/global/datum/controller/occupations/job_master
 						else
 							H << "\red Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug."
 
-		//TODO: Generalize this by-species
 		if(H.species)
-			if(H.species.name == "Tajara" || H.species.name == "Unathi")
+			if(H.species.equip_problems & BOOT_PROBLEMS)
 				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
-			else if(H.species.name == "Vox")
+
+			//TODO: Make this provide any air for any species that they require.
+			if(H.species.name == "Vox")
 				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
 				if(!H.r_hand)
 					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)

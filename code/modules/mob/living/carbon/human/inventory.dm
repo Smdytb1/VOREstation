@@ -679,7 +679,7 @@ It can still be worn/put on as normal.
 				//check that we are still grabbing them
 				var/grabbing = 0
 				for (var/obj/item/weapon/grab/G in target.grabbed_by)
-					if (G.loc == source && G.state >= GRAB_AGGRESSIVE)
+					if (G.loc == source && G.state >= GRAB_PASSIVE)
 						grabbing = 1
 						break
 				if (!grabbing)

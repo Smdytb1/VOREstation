@@ -6,7 +6,7 @@
 	density = 1
 	anchored = 1
 	unacidable = 1 //To avoid the pilot-deleting shit that came with mechas
-	layer = MOB_LAYER
+//	layer = MOB_LAYER // I'm not sure if this will break shit. -Spades
 	//var/can_move = 1
 	var/mob/living/carbon/occupant = null
 	//var/step_in = 10 //make a step in step_in/10 sec.

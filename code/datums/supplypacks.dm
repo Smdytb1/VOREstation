@@ -82,7 +82,7 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	containername = "Farwa crate"
 	group = "Livestock"
 
-/datum/supply_packs/skrell
+/datum/supply_packs/neaera
 	name = "Neaera crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
 	cost = 30
@@ -96,6 +96,22 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Stok crate"
+	group = "Livestock"
+
+/datum/supply_packs/sobaka
+	name = "Sobaka crate"
+	contains = list (/obj/item/weapon/storage/box/monkeycubes/sobakacubes)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "Sobaka crate"
+	group = "Livestock"
+
+/datum/supply_packs/sergaling
+	name = "Sergaling crate"
+	contains = list (/obj/item/weapon/storage/box/monkeycubes/sergalingcubes)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "Sergaling crate"
 	group = "Livestock"
 
 /datum/supply_packs/beanbagammo
@@ -393,6 +409,16 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	cost = 10
 	containertype = /obj/structure/closet/crate/medical
 	containername = "Medical crate"
+	group = "Medical"
+
+/datum/supply_packs/glasses
+	name = "Pescription lense crate"
+	contains = list(/obj/item/device/glasses_upgrade,
+					/obj/item/device/glasses_upgrade,
+					/obj/item/device/glasses_upgrade)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Pescription lense crate"
 	group = "Medical"
 
 /datum/supply_packs/bloodpack

@@ -17,7 +17,7 @@
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
-	minimal_player_age = 14
+	minimal_player_age = 10
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

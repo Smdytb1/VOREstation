@@ -575,37 +575,34 @@
 					if(src.playerscale > tmob.playerscale)
 						now_pushing = 0
 						loc = tmob.loc
+
+						/* Holders have procs for this, and we don't need to make them a holder if we can't get them anyway.
 						var/obj/item/weapon/holder/micro/D = new(loc)
 						tmob.loc = D
 						D.name = "Micro ([tmob.name])"
 						if(D.mob_can_equip(src,slot_shoes,1))
-							if(istype(src, /mob/living/carbon/human))
-								var/mob/living/carbon/human/M = src
+						*/
+						if(istype(src, /mob/living/carbon/human) && istype(tmob, /mob/living/carbon/human))
+							var/mob/living/carbon/human/M = src
+							var/mob/living/carbon/human/T = tmob
+							if(!M.shoes)
 								if(M.taur == 2)
 									M << "You wrap up [tmob] with your powerful tail!"
-									tmob << "[M] binds you with their powerful tail!"
+									T << "[M] binds you with their powerful tail!"
 								else
 									M << "You clench your toes around [tmob]'s body!"
-									tmob << "[M] grabs your body with their toes!"
+									T << "[M] grabs your body with their toes!"
+
+								equip_to_slot_if_possible(T.get_scooped(src),slot_shoes,0,1)
 							else
-								src << "You clench your toes around [tmob]'s body!"
-								tmob << "[src] grabs your body with their toes!"
-							equip_to_slot_if_possible(D,slot_shoes,0,1)
-						else
-							if(istype(src, /mob/living/carbon/human))
-								var/mob/living/carbon/human/M = src
 								if(M.taur == 2)
 									M << "You carefully squish [tmob] under your tail!"
 									tmob << "[M] pins you under their tail!"
 								else
 									M << "You pin [tmob] beneath your foot!"
 									tmob << "[M] pins you beneath their foot!"
-							else
-								src << "You pin [tmob] beneath your foot!"
-								tmob << "[src] pins you beneath their foot!"
-							tmob.Stun(4)
-						return
-
+								tmob.Stun(4)
+							return
 
 			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
 				if(prob(40) && !(FAT in src.mutations))

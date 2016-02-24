@@ -215,10 +215,8 @@
 /atom/DblClick(object,location,control,params)
 	var/mob/M = src.mob
 	if(M && M.in_contents_of(/obj/mecha))
-
 		if(mech_click == world.time) return
 		mech_click = world.time
-
 		if(!istype(object, /atom)) return
 		if(istype(object, /obj/screen))
 			var/obj/screen/using = object
@@ -1195,15 +1193,12 @@
 				var/env_pressure = environment.return_pressure()
 				var/pressure_delta = (cabin.return_pressure() - env_pressure)
 		//Can not have a pressure delta that would cause environment pressure > tank pressure
-
 				var/transfer_moles = 0
 				if(pressure_delta > 0)
 					transfer_moles = pressure_delta*environment.volume/(cabin.return_temperature() * R_IDEAL_GAS_EQUATION)
-
 			//Actually transfer the gas
 					var/datum/gas_mixture/removed = cabin.air_contents.remove(transfer_moles)
 					loc.assume_air(removed)
-
 			occupant.SetStunned(5)
 			occupant.SetWeakened(5)
 			occupant << "You were blown out of the mech!"
@@ -1293,7 +1288,6 @@
 						        window.location='byond://?src=\ref[src]&update_content=1';
 						    }, 1000);
 						}
-
 						window.onload = function() {
 							dropdowns();
 							ticker();
@@ -1410,7 +1404,6 @@
 		output += "<b>Available equipment slots:</b> [max_equip-equipment.len]"
 		output += "</div></div>"
 	return output
-
 /obj/mecha/proc/get_equipment_list() //outputs mecha equipment list in html
 	if(!equipment.len)
 		return
@@ -1429,8 +1422,6 @@
 						"}
 	output += "</body></html>"
 	return output
-
-
 /obj/mecha/proc/output_access_dialog(obj/item/weapon/card/id/id_card, mob/user)
 	if(!id_card || !user) return
 	var/output = {"<html>
@@ -1462,7 +1453,6 @@
 	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
 	if (locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in contents)
 		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>"
-
 	var/output = {"<html>
 						<head>
 						<style>
@@ -1479,33 +1469,25 @@
 	user << browse(output, "window=exosuit_maint_console")
 	onclose(user, "exosuit_maint_console")
 	return
-
-
 ////////////////////////////////
 /////// Messages and Log ///////
 ////////////////////////////////
-
 /obj/mecha/proc/occupant_message(message as text)
 	if(message)
 		if(src.occupant && src.occupant.client)
 			src.occupant << "\icon[src] [message]"
 	return
-
 /obj/mecha/proc/log_message(message as text,red=null)
 	log.len++
 	log[log.len] = list("time"=world.timeofday,"message"="[red?"<font color='red'>":null][message][red?"</font>":null]")
 	return log.len
-
 /obj/mecha/proc/log_append_to_last(message as text,red=null)
 	var/list/last_entry = src.log[src.log.len]
 	last_entry["message"] += "<br>[red?"<font color='red'>":null][message][red?"</font>":null]"
 	return
-
-
 /////////////////
 ///// Topic /////
 /////////////////
-
 /obj/mecha/Topic(href, href_list)
 	..()
 	if(href_list["update_content"])
@@ -1620,23 +1602,17 @@
 		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
 			if (P.occupant)
 				passengers["[P.occupant]"] = P
-
 		if (!passengers)
 			user << "\red There are no passengers to remove."
 			return
-
 		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
-
 		if (!pname)
 			return
-
 		var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
 		var/mob/occupant = P.occupant
-
 		user.visible_message("\red [user] begins opening the hatch on \the [P]...", "\red You begin opening the hatch on \the [P]...")
 		if (!do_after(user, 40, needhand=0))
 			return
-
 		user.visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!", "\red You open the hatch on \the [P] and remove [occupant]!")
 		P.go_out()
 		P.log_message("[occupant] was removed.")
@@ -1682,7 +1658,6 @@
 			else
 				src.occupant_message("<font color='red'>Recalibration failed.</font>")
 				src.log_message("Recalibration of coordination system failed with 1 error.",1)
-
 	//debug
 	/*
 	if(href_list["debug"])
@@ -1692,11 +1667,7 @@
 			clearInternalDamage(filter.getNum("clear_i_dam"))
 		return
 	*/
-
-
-
 /*
-
 	if (href_list["ai_take_control"])
 		var/mob/living/silicon/ai/AI = locate(href_list["ai_take_control"])
 		var/duration = text2num(href_list["duration"])
@@ -1742,50 +1713,38 @@
 			src.occupant = cur_occupant
 */
 	return
-
 ///////////////////////
 ///// Power stuff /////
 ///////////////////////
-
 /obj/mecha/proc/has_charge(amount)
 	return (get_charge()>=amount)
-
 /obj/mecha/proc/get_charge()
 	return call((proc_res["dyngetcharge"]||src), "dyngetcharge")()
-
 /obj/mecha/proc/dyngetcharge()//returns null if no powercell, else returns cell.charge
 	if(!src.cell) return
 	return max(0, src.cell.charge)
-
 /obj/mecha/proc/use_power(amount)
 	return call((proc_res["dynusepower"]||src), "dynusepower")(amount)
-
 /obj/mecha/proc/dynusepower(amount)
 	if(get_charge())
 		cell.use(amount)
 		return 1
 	return 0
-
 /obj/mecha/proc/give_power(amount)
 	if(!isnull(get_charge()))
 		cell.give(amount)
 		return 1
 	return 0
-
 /obj/mecha/proc/reset_icon()
 	if (initial_icon)
 		icon_state = initial_icon
 	else
 		icon_state = initial(icon_state)
 	return icon_state
-
 /obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
-
 	if(!damage)
 		return 0
-
 	src.log_message("Attack by an animal. Attacker - [user].",1)
-
 	if(!prob(src.deflect_chance))
 		src.take_damage(damage)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
@@ -1798,30 +1757,22 @@
 		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	return 1
-
-
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////
 //////////////////////////////////////////
-
-
 /datum/global_iterator/mecha_preserve_temp  //normalizing cabin air temperature to 20 degrees celsium
 	delay = 20
-
 	process(var/obj/mecha/mecha)
 		if(mecha.cabin_air && mecha.cabin_air.volume > 0)
 			var/delta = mecha.cabin_air.temperature - T20C
 			mecha.cabin_air.temperature -= max(-10, min(10, round(delta/4,0.1)))
 		return
-
 /datum/global_iterator/mecha_tank_give_air
 	delay = 15
-
 	process(var/obj/mecha/mecha)
 		if(mecha.internal_tank)
 			var/datum/gas_mixture/tank_air = mecha.internal_tank.return_air()
 			var/datum/gas_mixture/cabin_air = mecha.cabin_air
-
 			var/release_pressure = mecha.internal_tank_valve
 			var/cabin_pressure = cabin_air.return_pressure()
 			var/pressure_delta = min(release_pressure - cabin_pressure, (tank_air.return_pressure() - cabin_pressure)/2)
@@ -1913,7 +1864,8 @@
 						<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_FIRE]'>MECHA_INT_FIRE</a><br />
 						<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_TEMP_CONTROL]'>MECHA_INT_TEMP_CONTROL</a><br />
 						<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_SHORT_CIRCUIT]'>MECHA_INT_SHORT_CIRCUIT</a><br />
-						<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_TANK_BREACH]'>MECHA_INT_TANK_BREACH</a><br />
+
+<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_TANK_BREACH]'>MECHA_INT_TANK_BREACH</a><br />
 						<a href='?src=\ref[src];debug=1;set_i_dam=[MECHA_INT_CONTROL_LOST]'>MECHA_INT_CONTROL_LOST</a><br />
 						<hr />
 						<h3>Clear:</h3>
@@ -1924,7 +1876,6 @@
 						<a href='?src=\ref[src];debug=1;clear_i_dam=[MECHA_INT_CONTROL_LOST]'>MECHA_INT_CONTROL_LOST</a><br />
  					   </body>
 						</html>"}
-
 	occupant << browse(output, "window=ex_debug")
 	//src.health = initial(src.health)/2.2
 	//src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))

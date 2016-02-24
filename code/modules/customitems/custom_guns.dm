@@ -111,7 +111,7 @@
 
 
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/wicked
-	name = "'Wicked Butterfly' ZM Kar 1"
+	name = "'Wicked Butterfly' ZM Kar S1"
 	desc = "A customized bolt-action sniper rifle that was carried by some of the most revered snipers in the Federation. The stock has a small butterfly engraved on it. Uses 7.62mm ammo."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "wickedbutterfly"
@@ -127,14 +127,14 @@
 
 	toggle_scope(2.0)
 
-
+/*
 /obj/item/weapon/gun/projectile/automatic/crestrose
 	name = "Crescent Rose"
 	desc = "Can you match my resolve? If so then you will succeed. I believe that the human spirit is indomitable. Keep Moving Forward."
 	origin_tech = "materials=7"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "crestrose"
-	item_state = "crestrose"
+	item_state = null // So it inherits the icon_state.
 	w_class = 4
 	fire_sound = 'sound/weapons/rifleshot.ogg'
 	force = 40
@@ -147,7 +147,7 @@
 
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/modifystate = "crestrose"
-	var/mode = 0 //0 = stun, 1 = kill
+	var/mode = 0 //0 = unfolded, 1 = folded
 
 /obj/item/weapon/gun/projectile/automatic/crestrose/attack_self(mob/living/user as mob)
 	switch(mode)
@@ -156,16 +156,16 @@
 			user.visible_message("\red [src.name] folds up into a cool looking rifle.")
 			force = 5
 			throwforce = 2
-			modifystate = "crestrose_fold"
+			modifystate = crestrose_fold
 		if(1)
-			mode = 0 // I feel like this mode should prevent it from shooting. Otherwise, what's the point? -Spades
+			mode = 0 // I feel like this mode should prevent it from shooting. Otherwise, what's the point? -Spades ||Probably need assistance in that. Original design of Crescent Rose is to shoot no matter what form it was in. Perhaps lowering accuracy will provide a con buffer here. -- Joan
 			user.visible_message("\red [src.name] changes into a very intimidating looking weapon.")
 			force = 40
 			throwforce = 10
-			modifystate = "crestrose"
+			modifystate = crestrose
 	update_icon()
 	update_held_icon()
-
+*/
 
 // Energy Weapons
 // -------------- KIN-H21 -------------
@@ -370,3 +370,11 @@
 
 /obj/item/ammo_magazine/battlerifle/empty
 	initial_ammo = 0
+
+//------------- Clockwork Rifle -------------
+/obj/item/weapon/gun/projectile/shotgun/pump/rifle/clockwork
+	name = "Clockwork Rifle"
+	desc = "Brass, copper, and lots of gears. Well lubricated for fluid movement as each round is loaded, locked, and fired. Just like clockwork."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "clockworkrifle"
+	item_state = "clockworkrifle"

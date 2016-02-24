@@ -1173,6 +1173,10 @@ area/space/atmosalert()
 		name = "\improper Aft Port Solar Array"
 		icon_state = "panelsP"
 
+	research
+		name = "\improper Research Outpost Solar Array"
+		icon_state = "yellow"
+
 /area/maintenance/auxsolarport
 	name = "Fore Port Solar Maintenance"
 	icon_state = "SolarcontrolP"

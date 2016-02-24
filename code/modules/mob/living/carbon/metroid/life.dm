@@ -224,9 +224,9 @@
 				if(issilicon(L) && (rabid || attacked)) // They can't eat silicons, but they can glomp them in defence
 					targets += L // Possible target found!
 
-				if(istype(L, /mob/living/carbon/human) && dna) //Ignore slime(wo)men
+				if(istype(L, /mob/living/carbon/human) && dna) //Ignore slime(wo)men (both starting race and xenobio)
 					var/mob/living/carbon/human/H = L
-					if(H.species.name == "Slime")
+					if(H.species.name == "Slime" || H.species.name == "Slime Person")
 						continue
 
 				if(!L.canmove) // Only one slime can latch on at a time.
@@ -481,7 +481,7 @@
 			if (prob(1))
 				if (prob(1))
 					if (prob(1)) //1 in millon chance to add this to the slime phrases.
-						phrases += "Eat the nerd..."  //Easter Egg. Orbis
+						phrases += "Eat the nerd..."  //Easter Egg. Orbis [I spot you~ -Antsnap :3]
 			if (rabid || attacked)
 				phrases += "Hrr..."
 				phrases += "Nhuu..."

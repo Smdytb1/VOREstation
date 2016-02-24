@@ -325,6 +325,7 @@
 			character.loc = C.loc
 
 			AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
+			world << sound('sound/AI/newAI.ogg')
 			ticker.mode.latespawn(character)
 
 			del(C)

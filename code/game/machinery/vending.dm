@@ -214,6 +214,8 @@
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		src.panel_open = !src.panel_open
+		log_game("\blue [usr.key] [key_name(usr)] used a screwdriver on a vending machine.")
+		message_admins("[usr.key] [key_name(usr)] used a screwdriver on a vending machine.")
 		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
 		src.overlays.Cut()
 		if(src.panel_open)
@@ -222,6 +224,8 @@
 		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
+		log_game("\blue [usr.key] [key_name(usr)] used wirectuters on a vending machine.")
+		message_admins("[usr.key] [key_name(usr)] used wirecutters on a vending machine.")
 		if(src.panel_open)
 			attack_hand(user)
 		return
@@ -823,10 +827,14 @@
 	icon_deny = "wallmed-deny"
 	req_access_txt = "5"
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/stack/medical/bruise_pack = 2,/obj/item/stack/medical/ointment = 2,/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,/obj/item/device/healthanalyzer = 1)
+	products = list(/obj/item/stack/medical/bruise_pack = 2,
+					/obj/item/stack/medical/ointment = 2,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,
+					/obj/item/device/healthanalyzer = 1,
+					/obj/item/device/glasses_upgrade = 6)
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
 
-/obj/machinery/vending/wallmed2
+/obj/machinery/vending/wallmed2 // Why do we even have this? Why two? -Spades
 	name = "NanoMed"
 	desc = "Wall-mounted Medical Equipment dispenser."
 	icon_state = "wallmed"
@@ -1141,12 +1149,14 @@
 					/obj/item/clothing/suit/apron/overalls = 3,
 					/obj/item/clothing/suit/wcoat = 3,
 					/obj/item/clothing/suit/kimonored = 3,
+					/obj/item/clothing/under/tiger_bikini = 5,
 					/obj/item/clothing/accessory/collar_blk = 3,
 					/obj/item/clothing/accessory/collar_gld = 3,
 					/obj/item/clothing/accessory/collar_bell = 3,
 					/obj/item/clothing/accessory/shock_collar = 3,
 					/obj/item/clothing/accessory/collar_spike = 3,
-					/obj/item/clothing/accessory/collar_pink = 3
+					/obj/item/clothing/accessory/collar_pink = 3,
+					/obj/item/clothing/accessory/collar_holo = 3
 					)
 	contraband = list(/obj/item/clothing/under/color/orange = 3,
 					/obj/item/clothing/under/stripper/mankini= 3,

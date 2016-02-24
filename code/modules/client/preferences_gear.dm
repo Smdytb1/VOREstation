@@ -417,6 +417,18 @@ var/global/list/gear_datums = list()
 
 // Uniform slot
 
+/datum/gear/permit
+	display_name = "nudity permit (jumpsuit)"
+	path = /obj/item/clothing/under/permit
+	slot = slot_w_uniform
+	cost = 1
+	
+/datum/gear/mankini
+	display_name = "mankini (jumpsuit)"
+	path = /obj/item/clothing/under/stripper/mankini
+	slot = slot_w_uniform
+	cost = 1
+
 /datum/gear/blazer_blue
 	display_name = "blazer, blue"
 	path = /obj/item/clothing/under/blazer
@@ -473,6 +485,12 @@ var/global/list/gear_datums = list()
 /datum/gear/skirt_black
 	display_name = "skirt, black"
 	path = /obj/item/clothing/under/blackskirt
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/tiger_bikini
+	display_name = "bikini, tiger"
+	path = /obj/item/clothing/under/tiger_bikini
 	slot = slot_w_uniform
 	cost = 1
 
@@ -1185,6 +1203,12 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 2
 
+/datum/gear/wallet_grey
+	display_name = "wallet, grey"
+	path = /obj/item/weapon/storage/wallet/grey
+	sort_category = "utility"
+	cost = 2
+
 // The rest of the trash.
 
 /datum/gear/ashtray
@@ -1322,3 +1346,4 @@ var/global/list/gear_datums = list()
 	cost = 1
 	sort_category = "ears"
 	whitelisted = "Skrell"
+

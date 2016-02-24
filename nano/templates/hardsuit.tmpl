@@ -56,6 +56,14 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					{{:helper.displayBar(data.chargestatus, 0, 50, (data.chargestatus >= 35) ? 'good' : (data.chargestatus >= 15) ? 'average' : 'bad')}} {{:data.charge}}/{{:data.maxcharge}}
 				</div>
 			</div>
+			<div class='inlineBlock extraTopPadding'>
+				<div class='fixedLeft boldText'>
+					Air supply
+				</div>
+				<div>
+					{{:helper.displayBar(data.tankPressure, 0, 1013, (data.tankPressure > 200) ? 'good' : ((data.tankPressure > 100) ? 'average' : 'bad'))}} {{:data.tankPressure}} kPa ({{:data.relPressure}} kPa)
+				</div>
+			</div>
 			<div>
 				<div class='inlineBlock extraTopPadding'>
 					<div class='fixedLeft boldText'>

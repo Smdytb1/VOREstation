@@ -244,7 +244,7 @@
 
 /obj/item/clothing/glasses/thermal/eyepatch
 	name = "Optical Thermal Eyepatch"
-	desc = "An eyepatch with built-in thermal optics"
+	desc = "An eyepatch with built-in thermal optics. It makes you feel like a big boss."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	toggleable = 0
@@ -255,4 +255,5 @@
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+	prescription = 1
 	toggleable = 0

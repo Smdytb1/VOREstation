@@ -29,10 +29,13 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human","Unathi", "Akula")
+	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person") //fingerscrossed
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
+
+	// Ckey of person allowed to use this, if defined.
+	var/list/ckeys_allowed = null
 
 
 /*
@@ -493,13 +496,13 @@
 
 	icon = 'icons/mob/Human_face.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
-	species_allowed = list("Human")
+	species_allowed = list("Human", "Slime Person")
 
 	shaved
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine", "Sergal", "Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine", "Sergal", "Akula", "Slime Person")
 
 	watson
 		name = "Watson Mustache"
@@ -600,6 +603,11 @@
 		icon_state = "soghun_horns"
 		species_allowed = list("Unathi")
 
+	una_hood
+		name = "Cobra Hood"
+		icon_state = "soghun_hood"
+//		species_allowed = list("Unathi")
+
 	skr_tentacle_m
 		name = "Skrell Male Tentacles"
 		icon_state = "skrell_hair_m"
@@ -682,6 +690,21 @@
 		icon_state = "serg_plain"
 		species_allowed = list("Sergal")
 
+	serg_medicore_s
+		name = "Sergal Medicore"
+		icon_state = "serg_medicore"
+		species_allowed = list("Sergal")
+
+	serg_tapered_s
+		name = "Sergal Tapered"
+		icon_state = "serg_tapered"
+		species_allowed = list("Sergal")
+
+	serg_fairytail_s
+		name = "Sergal Fairytail"
+		icon_state = "serg_fairytail"
+		species_allowed = list("Sergal")
+
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
@@ -758,7 +781,7 @@
 /datum/sprite_accessory/ears
 	name = "You should not see this..."
 	icon = 'icons/mob/fluff/ears.dmi'
-	do_colouration = 0
+	do_colouration = 0 //Set to 1 to convert greyscale to the haircolor
 
 	var/colored_overlay
 	var/desc = "You should not see this..."
@@ -842,31 +865,56 @@
 	desc = ""
 	icon_state = "bee"
 
+/datum/sprite_accessory/ears/oni_h1
+	name = "oni horns"
+	desc = ""
+	icon_state = "oni-h1"
+	do_colouration = 0
+
+/datum/sprite_accessory/ears/demon_horns1
+	name = "demon horns"
+	desc = ""
+	icon_state = "demon-horns1"
+	do_colouration = 0
+
+
+// Special snowflake ears go below here.
+
 /datum/sprite_accessory/ears/molenar_kitsune
 	name = "quintail kitsune ears (Molenar)"
 	desc = ""
 	icon_state = "molenar-kitsune"
+	ckeys_allowed = list("molenar")
 
 /datum/sprite_accessory/ears/molenar_deathclaw
 	name = "deathclaw ears (Molenar)"
 	desc = ""
 	icon_state = "molenar-deathclaw"
+	ckeys_allowed = list("molenar")
 
 /datum/sprite_accessory/ears/runac
 	name = "fennecsune ears (Runac)"
 	desc = ""
 	icon_state = "runac"
+	ckeys_allowed = list("rebcom1807")
 
 /datum/sprite_accessory/ears/kerena
 	name = "wingwolf ears (Kerena)"
 	desc = ""
 	icon_state = "kerena"
+	ckeys_allowed = list("somekindofpony")
 
 /datum/sprite_accessory/ears/rosey
 	name = "tritail kitsune ears (Rosey)"
 	desc = ""
 	icon_state = "rosey"
+	ckeys_allowed = list("joey4298")
 
+/datum/sprite_accessory/ears/aronai
+	name = "aronai ears/head (Aronai)"
+	desc = ""
+	icon_state = "aronai"
+	ckeys_allowed = list("arokha")
 
 /*
 ////////////////////////////
@@ -974,6 +1022,12 @@
 	desc = ""
 	icon_state = "wolf-wise"
 
+
+/datum/sprite_accessory/tail/wisewolf
+ 	name = "wolf, black"
+ 	desc = ""
+ 	icon_state = "wolf"
+
 /datum/sprite_accessory/tail/wolf
 	name = "wolf, hair-colored"
 	desc = ""
@@ -1039,31 +1093,73 @@
 	name = "quintail kitsune tails (Molenar)"
 	desc = ""
 	icon_state = "molenar-kitsune"
+	ckeys_allowed = list("molenar")
 
 /datum/sprite_accessory/tail/molenar_deathclaw
 	name = "deathclaw bits (Molenar)"
 	desc = ""
 	icon_state = "molenar-deathclaw"
+	ckeys_allowed = list("molenar")
 
 /datum/sprite_accessory/tail/runac
 	name = "fennecsune tails (Runac)"
 	desc = ""
 	icon_state = "runac"
+	ckeys_allowed = list("rebcom1807")
 
 /datum/sprite_accessory/tail/kerena
 	name = "wingwolf tail (+wings) (Kerena)"
 	desc = ""
 	icon_state = "kerena"
+	ckeys_allowed = list("somekindofpony")
 
 /datum/sprite_accessory/tail/rosey
 	name = "tritail kitsune tails (Rosey)"
 	desc = ""
 	icon_state = "rosey"
+	ckeys_allowed = list("joey4298")
 
 /datum/sprite_accessory/tail/scree
 	name = "green taj tail (+wings) (Scree)"
 	desc = ""
 	icon_state = "scree"
+	ckeys_allowed = list("scree")
+
+/datum/sprite_accessory/tail/aronai
+	name = "aronai tail (Aronai)"
+	desc = ""
+	icon_state = "aronai"
+	ckeys_allowed = list("arokha")
+
+/datum/sprite_accessory/tail/feathered
+	name = "feathered wings"
+	desc = ""
+	icon_state = "feathered"
+
+
+/datum/sprite_accessory/tail/special
+	name = "Blank tail. Do not select."
+	icon = 'icons/effects/species.dmi'
+	
+/datum/sprite_accessory/tail/special/unathi
+	name = "unathi tail"
+	desc = ""
+	icon_state = "sogtail_s"
+	
+/datum/sprite_accessory/tail/special/tajaran
+	name = "tajaran tail"
+	desc = ""
+	icon_state = "tajtail_s"
+	
+/datum/sprite_accessory/tail/special/sergal
+	name = "sergal tail"
+	desc = ""
+	icon_state = "sergtail_s"
+	
+/datum/sprite_accessory/tail/special/akula
+	name = "akula tail"
+	desc = ""
+	icon_state = "sharktail_s"
 
 /*
 ////////////////////////////

@@ -28,6 +28,10 @@
 
 	var/obj/item/weapon/card/id/front_id = null
 
+/obj/item/weapon/storage/wallet/grey
+	name = "wallet"
+	desc = "Now in stylish grey!"
+	icon_state = "greywallet"
 
 /obj/item/weapon/storage/wallet/remove_from_storage(obj/item/W as obj, atom/new_location)
 	. = ..(W, new_location)
@@ -42,42 +46,59 @@
 	if(.)
 		if(!front_id && istype(W, /obj/item/weapon/card/id))
 			front_id = W
-			name = "[name] ([front_id])"
+			name = "[name] - [front_id.registered_name] ([front_id.assignment])"
 			update_icon()
 
 /obj/item/weapon/storage/wallet/update_icon()
 	if(front_id)
 		switch(front_id.icon_state)
-			if("id")
-				icon_state = "walletid"
+			if("id") //The plain assistant ID
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_id")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
 				return
-			if("silver")
-				icon_state = "walletid_silver"
-				return
-			if("gold")
-				icon_state = "walletid_gold"
-				return
-			if("centcom")
-				icon_state = "walletid_centcom"
-				return
-			if("lifetime")
-				icon_state = "walletid_lifetime"
-				return
-			else
-				if(front_id.primary_color && front_id.secondary_color)
-					var/icon/new_wallet = new/icon("icon" = 'icons/obj/storage.dmi', "icon_state" = "walletid")
-					var/icon/pri_overlay = new/icon("icon" = 'icons/obj/storage.dmi', "icon_state" = "wallet_idprimary")
-					var/icon/sec_overlay = new/icon("icon" = 'icons/obj/storage.dmi', "icon_state" = "wallet_idsecondary")
+			if("silver") //HoP's ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idsilver")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			if("gold") //Captain's ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idgold")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			if("centcom") //Centcom ID has a special overlay.
+				var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+				var/icon/id_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idcentcom")
+				new_wallet.Blend(id_overlay, ICON_OVERLAY)
+				del id_overlay
+				icon = new_wallet
+			else //Doesn't match a special overlay type.
+				if(front_id.primary_color && front_id.secondary_color) //Colored ID with stripe and oval colors (pri/sec).
+					var/icon/new_wallet = new/icon("icon" = initial(icon), "icon_state" = initial(icon_state))
+					var/icon/id_icon = new/icon("icon" = initial(icon), "icon_state" = "wallet_id")
+					var/icon/pri_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idprimary")
+					var/icon/sec_overlay = new/icon("icon" = initial(icon), "icon_state" = "wallet_idsecondary")
 
 					pri_overlay.Blend(front_id.primary_color, ICON_ADD)
 					sec_overlay.Blend(front_id.secondary_color, ICON_ADD)
 
+					new_wallet.Blend(id_icon, ICON_OVERLAY)
+					del id_icon
 					new_wallet.Blend(pri_overlay, ICON_OVERLAY)
+					del pri_overlay
 					new_wallet.Blend(sec_overlay, ICON_OVERLAY)
+					del sec_overlay
+
 					icon = new_wallet
 					return
-				else
-					icon_state = "walletid"
+
+				else //Dunno what to do. Resort to plain assistant ID.
+					icon_state = initial(icon_state) + "id"
 					return
 	else
 		icon = initial(icon)

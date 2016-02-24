@@ -9,15 +9,15 @@
 	selection_color = "#ffddff"
 	idtype = /obj/item/weapon/card/id/science/head
 	req_admin_notify = 1
-	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
+	access = list(access_rd, access_heads, access_tox, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
-	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
+	minimal_access = list(access_rd, access_heads, access_tox, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
-	minimal_player_age = 14
+	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -51,7 +51,7 @@
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
 
-	minimal_player_age = 14
+	minimal_player_age = 3
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -84,7 +84,7 @@
 	minimal_access = list(access_research, access_xenobiology)
 	alt_titles = list("Xenobotanist")
 
-	minimal_player_age = 14
+	minimal_player_age = 3
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H) return 0
@@ -115,7 +115,7 @@
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
 
-	minimal_player_age = 7
+	minimal_player_age = 1
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
