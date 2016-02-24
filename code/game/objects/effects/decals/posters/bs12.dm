@@ -172,7 +172,7 @@
 /datum/poster/bay_35
 	icon_state="bsposter35"
 	name = "Lamarr"
-	desc = "This is a poster depicting the pet and mascot of the NSS V.O.R.E. science department."
+	desc = "This is a poster depicting the pet and mascot of the V.O.R.E. science department."
 
 /datum/poster/bay_36
 	icon_state="bsposter36"
@@ -263,3 +263,38 @@
 	icon_state="bsposter53"
 	name = "Keyhole Joan Poster"
 	desc = "Where are people getting posters of Joan posing for a camera? Look at her, showing off that keyhole sweater and her cleavage."
+
+/datum/poster/bay_54
+	icon_state="bsposter54"
+	name = "Anatomical Chart"
+	desc = "This looks like an chart for doctors or biology students, labelling all the parts of the body - but you're fairly sure there's no such part as the 'sirloin'."
+
+/datum/poster/bay_55
+	icon_state="bsposter55"
+	name = "Safety first! Get a genetic scan!"
+	desc = "Jenny didn't get a scan. NOW she doesn't need one. Remember - safety first, safety second."
+
+/datum/poster/bay_56
+	icon_state="bsposter56"
+	name = "Food Pyramid"
+	desc = "A handy guide to healthy eating. There's a little picture of a man in a red circle with a line through it for some reason."
+
+/datum/poster/bay_57
+	icon_state="bsposter57"
+	name = "Jaws"
+	desc = "We're gonna need a bigger shuttle."
+
+/datum/poster/bay_58
+	icon_state="bsposter58"
+	name = "Material Safety Data Sheet - Phoron"
+	desc = "Phoron is extremely toxic, highly flammable, volatile, biohazardous, reacts with and catalyses a number of chemical compounds and should not be inhaled, ingested, injected, touched or looked at. In the event of direct contact with phoron in any form, seek urgent medical attention, followed by the legal department to make out a will."
+
+/datum/poster/bay_59
+	icon_state="bsposter59"
+	name = "Scree's Salvage Service"
+	desc = "Got something lodged somewhere that needs fetching? Give Scree's Salvage Service a call for quick and easy retrieval! Terms and conditions apply. Hourly rates may be charged for extended duration."
+
+/datum/poster/bay_60
+	icon_state="bsposter60"
+	name = "Turn your suit sensors on!"
+	desc = "A poster imploring crewmembers to turn their suit sensors up, bearing the slogan 'Help us to help you! Turn your suit sensors up!'"
