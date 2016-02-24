@@ -43,7 +43,7 @@
 	breach_threshold = 38
 	resilience = 0.2
 	can_breach = 1
-	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi', "Sergal" = 'icons/mob/species/sergal/suit.dmi',"Akula" = 'icons/mob/species/akula/suit.dmi',"Nevrean" = 'icons/mob/species/Nevrean/suit.dmi') //Temporary suits. I found it weird that skrells didn't have chestpieces in the original
+	sprite_sheets = list("Tajara" = 'icons/mob/species/tajaran/suit.dmi',"Unathi" = 'icons/mob/species/unathi/suit.dmi', "Sergal" = 'icons/mob/species/sergal/suit.dmi',"Akula" = 'icons/mob/species/akula/suit.dmi',"Nevrean" = 'icons/mob/species/nevrean/suit.dmi') //Temporary suits. I found it weird that skrells didn't have chestpieces in the original
 	supporting_limbs = list()
 
 //TODO: move this to modules
