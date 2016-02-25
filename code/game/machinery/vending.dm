@@ -1146,6 +1146,8 @@
 					*/
 					/obj/item/clothing/shoes/leather = 5,
 					/obj/item/clothing/shoes/sandal = 5,
+					/obj/item/clothing/shoes/footwraps = 5,
+					/obj/item/clothing/shoes/ankleBracelets = 5,
 					/obj/item/clothing/suit/apron/overalls = 3,
 					/obj/item/clothing/suit/wcoat = 3,
 					/obj/item/clothing/suit/kimonored = 3,

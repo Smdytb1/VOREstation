@@ -140,3 +140,15 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+/obj/item/clothing/shoes/ankleBracelets
+	desc = "Who needs shoes when you have braclets?"
+	name = "ankle bracelets"
+	icon_state = "ankleBracelets"
+	item_color = "ankleBracelets"
+
+/obj/item/clothing/shoes/footwraps
+	desc = "Cloth wraps for your feet."
+	name = "footwraps"
+	icon_state = "footwraps"
+	item_color = "footwraps"

@@ -1135,6 +1135,18 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_shoes
 
+/datum/gear/footwraps
+	display_name = "footwraps, white"
+	path = /obj/item/clothing/shoes/footwraps
+	cost = 1
+	slot = slot_shoes
+
+/datum/gear/ankleBracelets
+	display_name = "ankle bracelets, gold"
+	path = /obj/item/clothing/shoes/ankleBracelets
+	cost = 1
+	slot = slot_shoes
+
 // "Useful" items - I'm guessing things that might be used at work?
 
 /datum/gear/briefcase
