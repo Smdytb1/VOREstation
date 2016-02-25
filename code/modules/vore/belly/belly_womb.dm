@@ -78,7 +78,7 @@
 							P.r_eyes = O.r_eyes
 							P.g_eyes = O.g_eyes
 							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
+							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
 							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
 							P.update_body()
 
@@ -90,7 +90,7 @@
 							P.g_skin = O.g_skin
 							P.b_skin = O.b_skin
 							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
+							P << "<span class='notice'>Your body tingles all over...</span>"
 							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 							P.update_hair()
 							P.update_body()
@@ -98,7 +98,7 @@
 						if(TFmodify == 3 && P.gender != FEMALE)
 							P.f_style = "Shaved"
 							P.gender = FEMALE
-							P << "<span class='notice'>Your body feels very strange...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
+							P << "<span class='notice'>Your body feels very strange...</span>"
 							owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 							P.update_body()
 
@@ -126,8 +126,8 @@
 							P.r_eyes = O.r_eyes
 							P.g_eyes = O.g_eyes
 							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
+							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
 							P.update_body()
 
 						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
@@ -141,15 +141,15 @@
 							P.g_skin = O.g_skin
 							P.b_skin = O.b_skin
 							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>Your body tingles all over...</span>"
+							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 							P.update_hair()
 							P.update_body()
 
 						if(TFmodify == 3 && P.gender != MALE)
 							P.gender = MALE
-							P << "<span class='notice'>Your body feels very strange...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>Your body feels very strange...</span>"
+							owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 							P.update_body()
 
 					M.adjustBruteLoss(-1)
@@ -176,7 +176,7 @@
 							P.r_eyes = O.r_eyes
 							P.g_eyes = O.g_eyes
 							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
+							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
 							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
 							P.update_body()
 
@@ -191,8 +191,8 @@
 							P.g_skin = O.g_skin
 							P.b_skin = O.b_skin
 							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>Your body tingles all over...</span>"
+							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 							P.update_hair()
 							P.update_body()
 
@@ -219,8 +219,8 @@
 							P.r_eyes = O.r_eyes
 							P.g_eyes = O.g_eyes
 							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>You feel lightheaded and drowsy...)</span>"
+							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
 							P.update_body()
 
 						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
@@ -234,8 +234,8 @@
 							P.g_skin = O.g_skin
 							P.b_skin = O.b_skin
 							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>Your body tingles all over...</span>"
+							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 							P.update_hair()
 							P.update_body()
 							//Omitted clause : P.race_icon != O.race_icon
@@ -258,10 +258,11 @@
 							P.b_taur = O.b_taur
 							P.h_style = "Bedhead"
 							P.species = O.species //FINGERS CROSSED
-							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... ((You must use the fix taur button in the resize tab for changes to show up.))</span>"
-							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
+							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... </span>"
+							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.</span>"
 							P.update_hair()
 							P.update_body()
+							P.update_tail_showing()
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
