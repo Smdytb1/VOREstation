@@ -93,6 +93,7 @@
 							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
 							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 							P.update_hair()
+							P.update_body()
 
 						if(TFmodify == 3 && P.gender != FEMALE)
 							P.f_style = "Shaved"
@@ -143,6 +144,7 @@
 							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
 							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
 							P.update_hair()
+							P.update_body()
 
 						if(TFmodify == 3 && P.gender != MALE)
 							P.gender = MALE
@@ -192,6 +194,7 @@
 							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
 							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
 							P.update_hair()
+							P.update_body()
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
@@ -234,6 +237,7 @@
 							P << "<span class='notice'>Your body tingles all over...((You must use the fix taur button in the resize tab for changes to show up.))</span>"
 							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
 							P.update_hair()
+							P.update_body()
 							//Omitted clause : P.race_icon != O.race_icon
 							//No idea how to work with that one, species system got changed a lot
 							//Also this makes it similar to the previous one until fixed
@@ -257,6 +261,7 @@
 							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... ((You must use the fix taur button in the resize tab for changes to show up.))</span>"
 							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.((Your prey must use the fix taur button in the resize tab for  changes to show up))</span>"
 							P.update_hair()
+							P.update_body()
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
