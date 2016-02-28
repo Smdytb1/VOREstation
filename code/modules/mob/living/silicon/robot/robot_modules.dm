@@ -448,6 +448,7 @@
 	src.modules += new /obj/item/device/flashlight(src)
 	src.modules += new /obj/item/device/gps(src)
 	src.modules += new /obj/item/device/ano_scanner(src)
+	src.modules += new /obj/item/weapon/card/id/science //So they can use the field generator.
 	return
 
 /obj/item/weapon/robot_module/drone
