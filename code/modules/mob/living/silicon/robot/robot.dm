@@ -350,6 +350,12 @@ var/list/robot_verbs_default = list(
 			module_sprites["Destroyer Droid"] = "droid-combat"
 			module_sprites["Mister Gutsy"] = "mrgutsy"
 			module.channels = list("Security" = 1)
+			
+		if("Xenoarch")
+			module = new /obj/item/weapon/robot_module/xenoarch(src)
+			module_sprites["Basic"] = "landmate" //These sprites will do
+			module_sprites["Basic - Treaded"] = "engiborg+tread" //And so will these.
+			module.channels = list("Science" = 1) //Give em science comms, why not.
 
 	//languages
 	module.add_languages(src)
