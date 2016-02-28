@@ -286,20 +286,20 @@
 	else
 		T.charge_tick = 0
 
-/obj/item/weapon/robot_module/janitor
-	name = "janitorial robot module"
-
-/obj/item/weapon/robot_module/janitor/New()
-	..()
-	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/weapon/soap/nanotrasen(src)
-	src.modules += new /obj/item/weapon/storage/bag/trash(src)
-	src.modules += new /obj/item/weapon/mop(src)
-	src.modules += new /obj/item/device/lightreplacer(src)
-	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("lube", 250)
-	src.emag.name = "Lube spray"
-	return
+	/obj/item/weapon/robot_module/janitor
+		name = "janitorial robot module"
+	
+	/obj/item/weapon/robot_module/janitor/New()
+		..()
+		src.modules += new /obj/item/device/flash(src)
+		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
+		src.modules += new /obj/item/weapon/storage/bag/trash(src)
+		src.modules += new /obj/item/weapon/mop(src)
+		src.modules += new /obj/item/device/lightreplacer(src)
+		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
+		src.emag.reagents.add_reagent("lube", 250)
+		src.emag.name = "Lube spray"
+		return
 
 /obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
@@ -432,6 +432,22 @@
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
 	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
+	return
+	
+/obj/item/weapon/robot_module/xenoarch
+	name = "xenoarch robot module"
+
+/obj/item/weapon/robot_module/xenoarch/New()
+	..()
+	src.modules += new /obj/item/weapon/pickaxe/excavationdrill(src)
+	src.modules += new /obj/item/borg/sight/meson(src)
+	src.modules += new /obj/item/device/beacon_locator(src)
+	src.modules += new /obj/item/device/measuring_tape(src)
+	src.modules += new /obj/item/device/depth_scanner(src)
+	src.modules += new /obj/item/weapon/wrench(src)
+	src.modules += new /obj/item/device/flashlight(src)
+	src.modules += new /obj/item/device/gps(src)
+	src.modules += new /obj/item/device/ano_scanner(src)
 	return
 
 /obj/item/weapon/robot_module/drone
