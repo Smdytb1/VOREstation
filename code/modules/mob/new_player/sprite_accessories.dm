@@ -1165,6 +1165,36 @@
 	name = "nevrean tail"
 	desc = ""
 	icon_state = "nevrean_s"
+	
+/datum/sprite_accessory/tail/special/unathi
+	name = "unathi tail, hair colored"
+	desc = ""
+	icon_state = "sogtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/tajaran
+	name = "tajaran tail, hair colored"
+	desc = ""
+	icon_state = "tajtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/sergal
+	name = "sergal tail, hair colored"
+	desc = ""
+	icon_state = "sergtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/akula
+	name = "akula tail, hair colored"
+	desc = ""
+	icon_state = "sharktail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/nevrean
+	name = "nevrean tail, hair colored"
+	desc = ""
+	icon_state = "nevrean_s"
+	do_colouration = 1
 /*
 ////////////////////////////
 /  =--------------------=  /
