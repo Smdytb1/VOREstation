@@ -251,6 +251,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "robot"
 			module_sprites["Drone"] = "drone-standard"
+			module_sprites["Borgi"] = "corgi"
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
@@ -261,6 +262,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service" // How does this even work...? Oh well.
+			module_sprites["Borgi"] = "corgi"
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
@@ -355,6 +357,7 @@ var/list/robot_verbs_default = list(
 			module = new /obj/item/weapon/robot_module/xenoarch(src)
 			module_sprites["Basic"] = "droid-miner" //These sprites will do
 			module_sprites["Drone"] = "drone-miner" //And so will these.
+			module_sprites["Borgi"] = "corgi" //Give them another sprite. Why not?
 			module.channels = list("Science" = 1) //Give em science comms, why not.
 
 	//languages
