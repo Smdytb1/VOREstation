@@ -227,7 +227,7 @@
 	desc = "The common galactic tongue."
 	speech_verb = "says"
 	whisper_verb = "whispers"
-	key = "c"
+	key = "6"
 	flags = RESTRICTED
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
