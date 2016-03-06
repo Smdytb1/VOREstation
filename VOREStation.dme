@@ -1577,6 +1577,7 @@
 #include "code\modules\virus2\items_devices.dm"
 #include "code\modules\vore\hotfixes.dm"
 #include "code\modules\vore\resize.dm"
+#include "code\modules\vore\spiderTaurPowers.dm"
 #include "code\modules\vore\vore.dm"
 #include "code\modules\vore\belly\belly.dm"
 #include "code\modules\vore\belly\belly_balls.dm"

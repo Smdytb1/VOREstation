@@ -113,6 +113,7 @@ var/last_chew = 0
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 
+
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"
 
