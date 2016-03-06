@@ -263,6 +263,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service" // How does this even work...? Oh well.
 			module_sprites["Borgi"] = "corgi"
+			module_sprites["Alien-Maid"] = "alienborg"
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
@@ -351,8 +352,9 @@ var/list/robot_verbs_default = list(
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Destroyer Droid"] = "droid-combat"
 			module_sprites["Mister Gutsy"] = "mrgutsy"
+			module_sprites["Dog"] = "syndicatedog"
 			module.channels = list("Security" = 1)
-			
+
 		if("Xenoarch")
 			module = new /obj/item/weapon/robot_module/xenoarch(src)
 			module_sprites["Basic"] = "droid-miner" //These sprites will do
