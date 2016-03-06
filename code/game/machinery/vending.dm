@@ -1094,7 +1094,7 @@
 /obj/machinery/vending/clothes
 	name = "UniVend"
 	desc = "A uniform vending machine, so you can stand out instead of being washed away by the grey tide."
-//	icon_state = ""
+	icon_state = "clothing"
 	products = list(/obj/item/clothing/under/aqua = 5,
 					/obj/item/clothing/under/color/black = 5,
 					/obj/item/clothing/under/color/blackf = 5,
