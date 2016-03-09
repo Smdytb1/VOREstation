@@ -306,7 +306,7 @@
 	desc = "A language primarily spoken by Narvians"
 	speech_verb = "chirps"
 	colour = "#FFBBFF"
-	key = "n"
+	key = "7"
 	syllables = list ("cheep", "peep", "tweet")
 
 /datum/language/xenocommon

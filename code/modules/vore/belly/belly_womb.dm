@@ -219,7 +219,7 @@
 							P.r_eyes = O.r_eyes
 							P.g_eyes = O.g_eyes
 							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...)</span>"
+							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
 							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
 							P.update_body()
 
