@@ -422,7 +422,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/under/permit
 	slot = slot_w_uniform
 	cost = 1
-	
+
 /datum/gear/mankini
 	display_name = "mankini (jumpsuit)"
 	path = /obj/item/clothing/under/stripper/mankini
@@ -491,6 +491,36 @@ var/global/list/gear_datums = list()
 /datum/gear/tiger_bikini
 	display_name = "bikini, tiger"
 	path = /obj/item/clothing/under/tiger_bikini
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/black_swimsuit
+	display_name = "swimsuit, black"
+	path = /obj/item/clothing/under/swimsuit/black
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/blue_swimsuit
+	display_name = "swimsuit, blue"
+	path = /obj/item/clothing/under/swimsuit/blue
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/purple_swimsuit
+	display_name = "swimsuit, purple"
+	path = /obj/item/clothing/under/swimsuit/purple
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/green_swimsuit
+	display_name = "swimsuit, green"
+	path = /obj/item/clothing/under/swimsuit/green
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/red_swimsuit
+	display_name = "swimsuit, red"
+	path = /obj/item/clothing/under/swimsuit/red
 	slot = slot_w_uniform
 	cost = 1
 

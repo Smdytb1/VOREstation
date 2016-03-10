@@ -82,6 +82,8 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Languages */
 
+.demonishc				{color: #CC0044;}
+.birdsongc				{color: #FFBBFF;}
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}

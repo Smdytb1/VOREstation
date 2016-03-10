@@ -1132,6 +1132,11 @@
 					/obj/item/clothing/under/suit_jacket/red = 5,
 					/obj/item/clothing/under/sundress = 5,
 					/obj/item/clothing/under/wedding/bride_white = 5,
+					/obj/item/clothing/under/swimsuit/black = 5,
+					/obj/item/clothing/under/swimsuit/blue = 5,
+					/obj/item/clothing/under/swimsuit/purple = 5,
+					/obj/item/clothing/under/swimsuit/green = 5,
+					/obj/item/clothing/under/swimsuit/red = 5,
 					/obj/item/clothing/shoes/black = 5,
 					/*
 					/obj/item/clothing/shoes/blue = 5,

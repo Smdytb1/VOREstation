@@ -300,14 +300,22 @@
 	colour = "sergal"
 	key = "z"
 	syllables = list ("grr", "gah", "woof", "arf", "arra", "rah", "wor", "sarg")
-	
+
 /datum/language/birdsong
 	name = "Birdsong"
 	desc = "A language primarily spoken by Narvians"
 	speech_verb = "chirps"
-	colour = "#FFBBFF"
+	colour = "birdsongc"
 	key = "7"
 	syllables = list ("cheep", "peep", "tweet")
+
+/datum/language/demonish
+	name = "Demonish"
+	desc = "Forged in hell and consisting of rough syllables, it is fitting as the universal language of sin."
+	speech_verb = "avers"
+	colour = "demonishc"
+	key = "8"
+	syllables = list ("poz","gluth","roq","vu","sa","ozh","izh","ra","tho","ni","th","gro","voth","ensh", "gra")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
