@@ -336,7 +336,7 @@
 							P.update_tail_showing()
 							spawn()
 							new /obj/structure/closet/egg/
-							P.set_loc(/obj/structure/closet/egg/)
+							P.newloc(/obj/structure/closet/egg/)
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
