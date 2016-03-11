@@ -57,15 +57,6 @@
 	icon_opened = "egg_skrell_open" 
 */
 
-/obj/structure/closet/proc/req_breakout()
-	if(breakout)
-		return 0 //Already breaking out.
-	if(opened)
-		return 0 //Door's open... wait, why are you in it's contents then?
-	if(!welded)
-		return 0 //closed but not welded...
-	return 1
-
 /obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
 	var/breakout_time = 2 //2 minutes by default
 
@@ -102,12 +93,3 @@
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()
 	animate_shake()
-
-/obj/structure/closet/proc/break_open()
-	welded = 0
-	update_icon()
-	//Do this to prevent contents from being opened into nullspace (read: bluespace)
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
-	open()
