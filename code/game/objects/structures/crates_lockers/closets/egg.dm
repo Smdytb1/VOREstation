@@ -28,7 +28,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "egg_nevarean"
 	icon_closed = "egg_nevarean"
-	icon_opened = "egg_open" 
+	icon_opened = "egg_nevarean_open" 
 	
 /obj/structure/closet/egg/Human
 	name = "human egg"
@@ -36,7 +36,7 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "egg_human"
 	icon_closed = "egg_human"
-	icon_opened = "egg_open" 
+	icon_opened = "egg_human_open" 
 	
 	/obj/structure/closet/egg/Tajaran
 	name = "tajaran egg"
