@@ -13,9 +13,10 @@
 	welded = 0 //If it is welded, people can't escape. DON'T WELD IT
 	health = 100
 	
+var/obj/structure/closet/secure_closet/egg/L = /obj/structure/closet/secure_closet/egg
 /obj/structure/closet/secure_closet/egg/attackby(obj/item/weapon/W, mob/user as mob)
 	if(istype(W, /obj/item/weapon/weldingtool))
-		del()
+		del(L)
 	
 	
 //Sprites and extra coding needed for these to work with transformation. For now, a regular egg should suffice.
