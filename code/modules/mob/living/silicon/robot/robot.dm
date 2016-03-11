@@ -360,6 +360,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Basic"] = "droid-miner" //These sprites will do
 			module_sprites["Drone"] = "drone-miner" //And so will these.
 			module_sprites["Borgi"] = "corgi" //Give them another sprite. Why not?
+			module_sprites["Science"] = "sciborg" //Let's give them an actual science cyborg.
 			module.channels = list("Science" = 1) //Give em science comms, why not.
 
 	//languages
