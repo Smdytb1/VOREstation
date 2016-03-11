@@ -5,7 +5,8 @@
 	icon_state = "egg"
 	density = 0 //Just in case there's a lot of eggs, so it doesn't block hallways/areas.
 	icon_closed = "egg"
-	icon_opened = "egg_open" //Need a sprite of a broken egg.
+	icon_opened = "egg_open"
+	icon_locked = "egg"
 	open_sound = 'sound/vore/schlorp.ogg'
 	close_sound = 'sound/vore/schlorp.ogg'
 	opened = 0
