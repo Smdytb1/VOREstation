@@ -69,7 +69,7 @@
 	primitive = /mob/living/carbon/monkey/tajara
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
+	slowdown = -1.5
 	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
@@ -397,14 +397,14 @@
 	breath_type = null //no breathing?
 //	poison_type = null //no poison?
 	reagent_tag = IS_SLIMEP
-	
+
 /datum/species/nevrean
 	name = "Nevrean" //Basically, just a new sprite. No upsides and no downsides, other than a new language.
 	name_plural = "Nevreans"
 	icobase = 'icons/mob/human_races/r_nevrean.dmi'
 	deform = 'icons/mob/human_races/r_def_nevrean.dmi'
 	language = "Birdsong" //New language. Birdsong.
-	tail = "nevrean" 
+	tail = "nevrean"
 	primitive = /mob/living/carbon/monkey/sparra
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 
