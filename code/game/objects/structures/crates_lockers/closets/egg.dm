@@ -72,7 +72,7 @@
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		playsound(src.loc, 'sound/effects/schlorp.ogg', 100, 1)
+		playsound(src.loc, 'sound/vore/schlorp.ogg', 100, 1)
 		animate_shake()
 		
 		if(!do_after(escapee, 50)) //5 seconds
