@@ -279,40 +279,14 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			var/obj/structure/closet/secure_closet/egg/I = /obj/structure/closet/secure_closet/egg
+			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
 
 			if(air_master.current_cycle%3==1)
 				if(!(M.status_flags & GODMODE))
 
-					var/TFchance = prob(10)
+					var/TFchance = prob(100) //This has to happen, otherwise it spawns a bunch of eggs.
 					if(TFchance == 1)
-						var/TFmodify = rand(1,3)
-						if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
-							P.r_eyes = O.r_eyes
-							P.g_eyes = O.g_eyes
-							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
-							P.update_body()
-
-						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
-							//Omitted clause : P.race_icon != O.race_icon
-							//No idea how to work with that one, species system got changed a lot
-							//Also this makes it similar to the previous one until fixed
+						var/TFmodify = 3
 
 						if(TFmodify == 3 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin || P.taur != O.taur || P.r_taur != O.r_taur || P.g_taur != O.g_taur || P.b_taur != O.b_taur)
 							P.r_hair = O.r_hair
