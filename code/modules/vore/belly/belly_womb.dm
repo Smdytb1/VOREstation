@@ -279,6 +279,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
+			var/obj/structure/closet/egg/A = A
 
 			if(air_master.current_cycle%3==1)
 				if(!(M.status_flags & GODMODE))
