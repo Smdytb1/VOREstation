@@ -14,7 +14,7 @@
 
 // @Override
 /datum/belly/womb/toggle_digestion()
-	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)","Digest", "Transform (Change Species) (EGG)")
+	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)","Digest", "Transform (Change Species) (EGG), "Transform (Keep Gender) (EGG)", "Transform (Male) (EGG)", "Transform (Female) (EGG)")
 	switch (digest_mode)
 		if("Heal")
 			owner << "<span class='notice'>You will now heal people you've unbirthed.</span>"
@@ -32,7 +32,12 @@
 			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to your species.</span>"
 		if("Transform (Change Species) (EGG)")
 			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to your species, and surround them with an egg</span>"
-
+		if("Transform (Keep Gender) (EGG)")
+			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to you and surround them with an egg, but they will keep their gender.</span>"
+		if("Transform (Male) (EGG)")
+			owner << "<span class='notice'>You will now transform people you've unbirthed into your son, and will surround them with an egg.</span>"
+		if("Transform (Female) (EGG)")
+			owner << "<span class='notice'>You will now transform people you've unbirthed into your daughter.</span>"
 // @Override
 /datum/belly/womb/process_Life()
 	for(var/mob/living/M in internal_contents)
@@ -275,7 +280,7 @@
 						P.nutrition += 1
 						
 						
-		//WOMB TRANSFORM (EGG) This is VERY hacky, but it works. Any other way that I tried spawns LOADS OF EGGS, or simply causes problems
+		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
@@ -304,3 +309,71 @@
 			//spawn()
 			//var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
 			P.loc = I
+
+		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
+			var/mob/living/carbon/human/P = M
+			var/mob/living/carbon/human/O = owner
+			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+
+			P.r_hair = O.r_hair
+			P.r_facial = O.r_hair
+			P.g_hair = O.g_hair
+			P.g_facial = O.g_hair
+			P.b_hair = O.b_hair
+			P.b_facial = O.b_hair
+			P.r_skin = O.r_skin
+			P.g_skin = O.g_skin
+			P.b_skin = O.b_skin
+			P.h_style = "Bedhead"
+			P << "<span class='notice'>Your body tingles all over...</span>"
+			owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+			P.update_hair()
+			P.update_body()
+			P.loc = I
+			
+		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
+			var/mob/living/carbon/human/P = M
+			var/mob/living/carbon/human/O = owner
+			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+
+			P.r_hair = O.r_hair
+			P.r_facial = O.r_hair
+			P.g_hair = O.g_hair
+			P.g_facial = O.g_hair
+			P.b_hair = O.b_hair
+			P.b_facial = O.b_hair
+			P.r_skin = O.r_skin
+			P.g_skin = O.g_skin
+			P.b_skin = O.b_skin
+			P.h_style = "Bedhead"
+			P.gender = MALE
+			P.loc = I
+			P << "<span class='notice'>Your body feels very strange...</span>"
+			owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+			P.update_hair()
+			P.update_body()
+			
+		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
+			var/mob/living/carbon/human/P = M
+			var/mob/living/carbon/human/O = owner
+			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+
+			P.r_hair = O.r_hair
+			P.r_facial = O.r_hair
+			P.g_hair = O.g_hair
+			P.g_facial = O.g_hair
+			P.b_hair = O.b_hair
+			P.b_facial = O.b_hair
+			P.r_skin = O.r_skin
+			P.g_skin = O.g_skin
+			P.b_skin = O.b_skin
+			P.h_style = "Bedhead"
+			P.gender = FEMALE
+			P.loc = I
+			P << "<span class='notice'>Your body feels very strange...</span>"
+			owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+			P.update_hair()
+			P.update_body()
