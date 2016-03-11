@@ -82,7 +82,8 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Languages */
 
-.daemonc				{color: #CC0044;}
+
+.demonishc				{color: #CC0044;}
 .birdsongc				{color: #FFBBFF;}
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
