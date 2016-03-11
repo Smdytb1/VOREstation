@@ -275,48 +275,32 @@
 						P.nutrition += 1
 						
 						
-		//WOMB TRANSFORM (EGG)
+		//WOMB TRANSFORM (EGG) This is VERY hacky, but it works. Any other way that I tried spawns LOADS OF EGGS, or simply causes problems
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
 
-			if(air_master.current_cycle%3==1)
-				if(!(M.status_flags & GODMODE))
-
-					var/TFchance = prob(100) //This has to happen, otherwise it spawns a bunch of eggs.
-					if(TFchance == 1)
-						var/TFmodify = 3
-
-						if(TFmodify == 3 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin || P.taur != O.taur || P.r_taur != O.r_taur || P.g_taur != O.g_taur || P.b_taur != O.b_taur)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.taur = O.taur
-							P.r_taur = O.r_taur
-							P.g_taur = O.g_taur
-							P.b_taur = O.b_taur
-							P.h_style = "Bedhead"
-							P.species = O.species //FINGERS CROSSED
-							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-							P.update_hair()
-							P.update_body()
-							P.update_tail_showing()
-							spawn()
-							new /obj/structure/closet/secure_closet/egg(O.loc)
-							P.loc = I
-
-					M.adjustBruteLoss(-1)
-					M.adjustFireLoss(-1)
-
-					if(O.nutrition > 0)
-						O.nutrition -= 2
-					if(P.nutrition < 400)
-						P.nutrition += 1
+			P.r_hair = O.r_hair
+			P.r_facial = O.r_hair
+			P.g_hair = O.g_hair
+			P.g_facial = O.g_hair
+			P.b_hair = O.b_hair
+			P.b_facial = O.b_hair
+			P.r_skin = O.r_skin
+			P.g_skin = O.g_skin
+			P.b_skin = O.b_skin
+			P.taur = O.taur
+			P.r_taur = O.r_taur
+			P.g_taur = O.g_taur
+			P.b_taur = O.b_taur
+			P.h_style = "Bedhead"
+			P.species = O.species //FINGERS CROSSED
+			P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+			owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+			P.update_hair()
+			P.update_body()
+			P.update_tail_showing()
+			spawn()
+			new /obj/structure/closet/secure_closet/egg(O.loc)
+			P.loc = I
