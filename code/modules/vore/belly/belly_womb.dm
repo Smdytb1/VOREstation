@@ -335,8 +335,8 @@
 							P.update_body()
 							P.update_tail_showing()
 							spawn()
-							var/obj/structure/closet/egg/O = new /obj/structure/closet/egg/(O.loc)
-							P.loc = O
+							var/obj/structure/closet/egg/A = new /obj/structure/closet/egg/(O.loc)
+							P.loc = A
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
