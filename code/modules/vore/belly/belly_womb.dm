@@ -334,7 +334,7 @@
 							P.update_hair()
 							P.update_body()
 							P.update_tail_showing()
-							var/obj/structure/closet/egg/S = new /obj/structure/closet/statue(user.loc, user)
+							var/obj/structure/closet/egg/S = new /obj/structure/closet/egg(user.loc, user)
 
 					M.adjustBruteLoss(-1)
 					M.adjustFireLoss(-1)
