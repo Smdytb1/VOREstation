@@ -309,11 +309,11 @@
 	key = "7"
 	syllables = list ("cheep", "peep", "tweet")
 
-/datum/language/demonish
-	name = "Demonish"
+/datum/language/Daemon
+	name = "Daemon"
 	desc = "Forged in hell and consisting of rough syllables, it is fitting as the universal language of sin."
 	speech_verb = "avers"
-	colour = "demonishc"
+	colour = "daemonc"
 	key = "8"
 	syllables = list ("poz","gluth","roq","vu","sa","ozh","izh","ra","tho","ni","th","gro","voth","ensh", "gra")
 
