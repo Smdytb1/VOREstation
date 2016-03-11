@@ -302,5 +302,5 @@
 			P.update_body()
 			P.update_tail_showing()
 			spawn()
-			new /obj/structure/closet/secure_closet/egg(O.loc)
+			/obj/structure/closet/secure_closet/egg(O.loc)
 			P.loc = I
