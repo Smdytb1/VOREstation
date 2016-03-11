@@ -14,7 +14,7 @@
 
 // @Override
 /datum/belly/womb/toggle_digestion()
-	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)","Digest", "Transform (Change Species) (EGG), "Transform (Keep Gender) (EGG)", "Transform (Male) (EGG)", "Transform (Female) (EGG)")
+	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)", "Digest", "Transform (Change Species) (EGG)", "Transform (Keep Gender) (EGG)", "Transform (Male) (EGG)", "Transform (Female) (EGG)")
 	switch (digest_mode)
 		if("Heal")
 			owner << "<span class='notice'>You will now heal people you've unbirthed.</span>"
