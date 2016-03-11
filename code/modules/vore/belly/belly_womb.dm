@@ -279,7 +279,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+			var/obj/structure/closet/secure_closet/egg/I = /obj/structure/closet/secure_closet/egg(O.loc)
 
 			if(air_master.current_cycle%3==1)
 				if(!(M.status_flags & GODMODE))
