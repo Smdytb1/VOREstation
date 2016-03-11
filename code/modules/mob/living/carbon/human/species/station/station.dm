@@ -69,7 +69,7 @@
 	primitive = /mob/living/carbon/monkey/tajara
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1.5
+	//slowdown = -1 By ace's request, removed bonus movespeed from taj -Antsnap
 	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
