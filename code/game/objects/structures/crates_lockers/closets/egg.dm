@@ -15,6 +15,7 @@
 	
 /obj/structure/closet/secure_closet/egg/attackby(obj/item/weapon/W, mob/user as mob)
 	if(istype(W, /obj/item/weapon/weldingtool))
+		opened = 1
 		del(src)
 	
 	
