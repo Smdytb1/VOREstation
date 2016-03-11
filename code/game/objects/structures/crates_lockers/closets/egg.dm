@@ -9,7 +9,7 @@
 	open_sound = 'sound/vore/schlorp.ogg'
 	close_sound = 'sound/vore/schlorp.ogg'
 	opened = 0
-	welded = 1 //Person needs to resist to break out of the egg. Hacky, but it works.
+	welded = 0 //If it is welded, people can't escape. DON'T WELD IT
 	health = 100
 	
 	
