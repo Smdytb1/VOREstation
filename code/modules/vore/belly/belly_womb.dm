@@ -336,7 +336,7 @@
 							P.update_body()
 							P.update_tail_showing()
 							spawn()
-							new A(O.loc)
+							new var/obj/structure/closet/egg/(O.loc)
 							P.loc = A
 
 					M.adjustBruteLoss(-1)
