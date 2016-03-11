@@ -335,7 +335,7 @@
 							P.update_body()
 							P.update_tail_showing()
 							spawn()
-							/obj/structure/closet/gmcloset/New()
+							/obj/structure/closet/egg/New()
 								..()
 								new P(src)
 
