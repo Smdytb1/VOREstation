@@ -279,7 +279,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			//var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
 
 			P.r_hair = O.r_hair
 			P.r_facial = O.r_hair
@@ -301,6 +301,6 @@
 			P.update_hair()
 			P.update_body()
 			P.update_tail_showing()
-			spawn()
-			var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
+			//spawn()
+			//var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)
 			P.loc = I
