@@ -31,7 +31,7 @@
 	
 /obj/structure/closet/secure_closet/egg/nevarean
 	name = "nevarean egg"
-	desc = "Most Nevareans lay hard-shelled eggs!"'
+	desc = "Most Nevareans lay hard-shelled eggs!""
 	icon_state = "egg_nevarean"
 	icon_closed = "egg_nevarean"
 	icon_opened = "egg_nevarean_open" 
