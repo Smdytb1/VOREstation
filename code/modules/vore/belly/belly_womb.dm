@@ -285,7 +285,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			
-			if ("O.species = Unathi")
+			if (O.species = Unathi)
 				if ("O.species = Unathi" && "O.species != Tajaran" && "O.species != Skrell" && "O.species != Sergal" && "O.species != Shark" && "O.species != Nevrean" && "O.species != Human")
 					P.r_hair = O.r_hair
 					P.r_facial = O.r_hair
