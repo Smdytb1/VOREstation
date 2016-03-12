@@ -20,7 +20,7 @@
 	
 	
 //Sprites and extra coding needed for these to work with transformation. For now, a regular egg should suffice.
-/*
+
 
 /obj/structure/closet/secure_closet/egg/unathi
 	name = "unathi egg"
@@ -61,4 +61,4 @@
 	icon_state = "egg_skrell"
 	icon_closed = "egg_skrell"
 	icon_opened = "egg_skrell_open" 
-*/
+
