@@ -309,7 +309,7 @@
 				P.update_tail_showing()
 				P.loc = I
 			
-			else if ("O.species = skrell")
+			else if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -500,7 +500,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = skrell")
+			else if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -650,7 +650,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = skrell")
+			else if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -807,7 +807,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = skrell")
+			else if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
