@@ -285,28 +285,28 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			if (O.species = unathi)
-				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
 			if (O.species = tajaran)
-				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 
 			if (O.species = skrell)
-				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 
 			if (O.species = sergal)
-				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 
 			if (O.species = shark)
-				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 
 			if (O.species = nevrean)
-				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 
 			if (O.species = human)
-				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				
 			else //If you're none of these species, then you get the default egg
-				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
+				then var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 
 			P.r_hair = O.r_hair
 			P.r_facial = O.r_hair
@@ -337,28 +337,28 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			if (O.species = unathi)
-				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
 			if (O.species = tajaran)
-				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 
 			if (O.species = skrell)
-				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 
 			if (O.species = sergal)
-				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 
 			if (O.species = shark)
-				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 
 			if (O.species = nevrean)
-				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 
 			if (O.species = human)
-				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				
 			else //If you're none of these species, then you get the default egg
-				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
+				then var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 
 			P.r_hair = O.r_hair
 			P.r_facial = O.r_hair
@@ -381,28 +381,28 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			if (O.species = unathi)
-				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
 			if (O.species = tajaran)
-				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 
 			if (O.species = skrell)
-				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 
 			if (O.species = sergal)
-				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 
 			if (O.species = shark)
-				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 
 			if (O.species = nevrean)
-				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 
 			if (O.species = human)
-				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				
 			else //If you're none of these species, then you get the default egg
-				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
+				then var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 
 			P.r_hair = O.r_hair
 			P.r_facial = O.r_hair
@@ -426,28 +426,28 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			if (O.species = unathi)
-				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
 			if (O.species = tajaran)
-				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 
 			if (O.species = skrell)
-				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 
 			if (O.species = sergal)
-				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 
 			if (O.species = shark)
-				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 
 			if (O.species = nevrean)
-				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 
 			if (O.species = human)
-				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				then var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				
 			else //If you're none of these species, then you get the default egg
-				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
+				then var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 
 			P.r_hair = O.r_hair
 			P.r_facial = O.r_hair
