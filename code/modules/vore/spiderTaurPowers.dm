@@ -18,6 +18,7 @@ obj/item/clothing/suit/web_bindings
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
+/* //Commenting all this out, as people keep abusing it. Sorry!
 mob/proc/weaveWeb()
 	set name = "Weave Web"
 	set category = "Species Powers"
@@ -27,14 +28,15 @@ mob/proc/weaveWeb()
 		spawn(30) //3 seconds to form
 		new /obj/effect/spider/stickyweb(src.loc)
 	else
-		src << "You do not have enough nutrition to create webbing! ((You need at least FIVE hundred for a web.))"
+		src << "You do not have enough nutrition to create webbing!"
+*/
 
 mob/proc/weaveWebBindings()
 	set name = "Weave Web Bindings"
 	set category = "Species Powers"
-	if(nutrition >= 200) //This isn't a huge problem. This is so you can bind people up, and you should only need one of them, two at max.
+	if(nutrition >= 30) //This isn't a huge problem. This is so you can bind people up, and you should only need one of them, two at max.
 		src.visible_message("\blue \the [src] pulls silk from their spinneret and delicately weaves it into bindings.")
-		nutrition -= 200 //People abused it and made the coders cry. RIP
+		nutrition -= 30 //People abused it and made the coders cry. RIP
 		spawn(30) //5 seconds to weave the bindings~
 			var/obj/item/clothing/suit/web_bindings/bindings = new() //This sprite is amazing, I must say.
 			src.put_in_hands(bindings)
