@@ -23,7 +23,7 @@ mob/proc/weaveWeb()
 	set category = "Species Powers"
 	if(nutrition >= 500) //People decided to abuse it. Sorry. It was asked to be made so it couldn't be spammed, and what do ya know, people are spamming it everywhere.
 		src.visible_message("\blue \the [src] weaves a web from their spinneret silk.")
-		nutrition -= 500 //Squash the bugs!
+		nutrition -= 500
 		spawn(30) //3 seconds to form
 		new /obj/effect/spider/stickyweb(src.loc)
 	else
@@ -34,7 +34,7 @@ mob/proc/weaveWebBindings()
 	set category = "Species Powers"
 	if(nutrition >= 200) //This isn't a huge problem. This is so you can bind people up, and you should only need one of them, two at max.
 		src.visible_message("\blue \the [src] pulls silk from their spinneret and delicately weaves it into bindings.")
-		nutrition -= 200 //So don't abuse this or you'll make the coders cry and raise the nutirition needed.
+		nutrition -= 200 //People abused it and made the coders cry. RIP
 		spawn(30) //5 seconds to weave the bindings~
 			var/obj/item/clothing/suit/web_bindings/bindings = new() //This sprite is amazing, I must say.
 			src.put_in_hands(bindings)
