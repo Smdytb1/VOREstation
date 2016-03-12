@@ -446,7 +446,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && o.species != "/datum/species/human")
+			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -593,7 +593,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && o.species != "/datum/species/human") //If you're none of these species,  you get the default egg
+			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human") //If you're none of these species,  you get the default egg
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -739,7 +739,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && o.species != "/datum/species/human")
+			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -888,7 +888,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && o.species != "/datum/species/human")
+			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
