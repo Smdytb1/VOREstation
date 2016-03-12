@@ -445,7 +445,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-			else //If you're none of these species,  you get the default egg
+			if ("O.species = unathi" && "O.species = tajaran" && "O.species = skrell" && "O.species = sergal" && "O.species = shark" && "O.species = nevrean" && "O.species = human") //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)  
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -592,7 +592,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-			else //If you're none of these species,  you get the default egg
+			if ("O.species = unathi" && "O.species = tajaran" && "O.species = skrell" && "O.species = sergal" && "O.species = shark" && "O.species = nevrean" && "O.species = human") //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)  
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -740,7 +740,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-			else //If you're none of these species,  you get the default egg
+			if ("O.species = unathi" && "O.species = tajaran" && "O.species = skrell" && "O.species = sergal" && "O.species = shark" && "O.species = nevrean" && "O.species = human") //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -889,7 +889,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-			else //If you're none of these species,  you get the default egg
+			if ("O.species = unathi" && "O.species = tajaran" && "O.species = skrell" && "O.species = sergal" && "O.species = shark" && "O.species = nevrean" && "O.species = human") //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
