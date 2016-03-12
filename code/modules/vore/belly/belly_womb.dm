@@ -751,7 +751,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -768,7 +768,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -785,7 +785,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -802,7 +802,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -819,7 +819,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new/obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -836,7 +836,7 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = I
+				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
