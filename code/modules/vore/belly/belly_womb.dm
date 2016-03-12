@@ -71,7 +71,7 @@
 					M.adjustFireLoss(3)
 
 		//WOMB TRANSFORM (FEM)
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 
@@ -118,7 +118,7 @@
 						P.nutrition += 1
 
 		//WOMB TRANSFORM (MALE)
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 
@@ -168,7 +168,7 @@
 						P.nutrition += 1
 
 		//WOMB TRANSFORM (KEEP GENDER)
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 
@@ -212,7 +212,7 @@
 						P.nutrition += 1
 
 		//WOMB TRANSFORM (CHANGE SPECIES)
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 
@@ -281,7 +281,7 @@
 						
 						
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 			if ("O.species = Unathi")
@@ -469,7 +469,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
 
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 			if ("O.species = Unathi")
@@ -609,7 +609,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
 			
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 			if ("O.species = Unathi")
@@ -757,7 +757,7 @@
 				P.update_body()
 			
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
-		if(isHuman(M) && isHuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
+		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/Human/P = M
 			var/mob/living/carbon/Human/O = owner
 			if ("O.species = Unathi")
