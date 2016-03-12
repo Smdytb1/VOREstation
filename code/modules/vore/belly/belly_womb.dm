@@ -31,7 +31,7 @@
 		if("Transform (Change Species)")
 			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to your species.</span>"
 		if("Transform (Change Species) (EGG)")
-			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to your species, and surround them with an egg</span>"
+			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to your species, and surround them with an egg.</span>"
 		if("Transform (Keep Gender) (EGG)")
 			owner << "<span class='notice'>You will now transform people you've unbirthed to look similar to you and surround them with an egg, but they will keep their gender.</span>"
 		if("Transform (Male) (EGG)")
