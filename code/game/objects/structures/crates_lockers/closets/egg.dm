@@ -66,7 +66,7 @@
 	
 /obj/structure/closet/secure_closet/egg/sergal
 	name = "sergal egg"
-	desc = "An egg with a slightly fuzzy, almost fluffy exterior."
+	desc = "An egg with a slightly fuzzy exterior, with a hard layer beneath."
 	icon_state = "egg_sergal"
 	icon_closed = "egg_sergal"
 	icon_opened = "egg_sergal_open" 
