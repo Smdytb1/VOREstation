@@ -286,7 +286,6 @@
 			var/mob/living/carbon/human/O = owner
 			if ("O.species = unathi")
 				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
-			
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -308,8 +307,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-			
-			else if ("O.species = tajaran")
+			if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -332,8 +330,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
-			else if ("O.species = skrell")
+			if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -356,8 +353,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
-			else if ("O.species = sergal")
+			if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -380,8 +376,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
-			else if ("O.species = shark")
+			if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -404,8 +399,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
-			else if ("O.species = nevrean")
+			if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -428,8 +422,7 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
-			else if ("O.species = human")
+			if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -452,10 +445,8 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = I
-
 			else //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)  
-
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -499,8 +490,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = tajaran")
+			if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -517,8 +507,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = skrell")
+			if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -535,8 +524,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = sergal")
+			if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -553,8 +541,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = shark")
+			if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -571,8 +558,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = nevrean")
+			if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -589,8 +575,7 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-
-			else if ("O.species = human")
+			if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -607,10 +592,8 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = I
-				
 			else //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc)  
-
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -649,8 +632,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = tajaran")
+			if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -668,8 +650,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = skrell")
+			if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -687,8 +668,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = sergal")
+			if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -706,8 +686,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = shark")
+			if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -725,8 +704,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = nevrean")
+			if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -744,8 +722,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = human")
+			if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -763,10 +740,8 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
 			else //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
-
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -806,8 +781,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = tajaran")
+			if ("O.species = tajaran")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -825,8 +799,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = skrell")
+			if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -844,8 +817,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = sergal")
+			if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -863,8 +835,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = shark")
+			if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -882,8 +853,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = nevrean")
+			if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -901,8 +871,7 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
-			else if ("O.species = human")
+			if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -920,10 +889,8 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-
 			else //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/I = new /obj/structure/closet/secure_closet/egg(O.loc) 
-
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
