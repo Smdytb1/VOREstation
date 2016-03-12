@@ -284,7 +284,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			if ("O.species = /datum/species/unathi")
+			if ("O.species = unathi")
 				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
 				P.r_hair = O.r_hair
@@ -309,7 +309,7 @@
 				P.update_tail_showing()
 				P.loc = I
 			
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -333,7 +333,7 @@
 				P.update_tail_showing()
 				P.loc = I
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -357,7 +357,7 @@
 				P.update_tail_showing()
 				P.loc = I
 
-			else if ("O.species = /datum/species/sergal")
+			else if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -381,7 +381,7 @@
 				P.update_tail_showing()
 				P.loc = I
 
-			else if ("O.species = /datum/species/shark")
+			else if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -405,7 +405,7 @@
 				P.update_tail_showing()
 				P.loc = I
 
-			else if ("O.species = /datum/species/nevrean")
+			else if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -429,7 +429,7 @@
 				P.update_tail_showing()
 				P.loc = I
 
-			else if ("O.species = /datum/species/human")
+			else if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -482,7 +482,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			if ("O.species = /datum/species/unathi")
+			if ("O.species = unathi")
 				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -500,7 +500,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -518,7 +518,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -536,7 +536,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/sergal")
+			else if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -554,7 +554,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/shark")
+			else if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -572,7 +572,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/nevrean")
+			else if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -590,7 +590,7 @@
 				P.update_body()
 				P.loc = I
 
-			else if ("O.species = /datum/species/human")
+			else if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -631,7 +631,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			if ("O.species = /datum/species/unathi")
+			if ("O.species = unathi")
 				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -650,7 +650,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -669,7 +669,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -688,7 +688,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/sergal")
+			else if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -707,7 +707,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/shark")
+			else if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -726,7 +726,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/nevrean")
+			else if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -745,7 +745,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/human")
+			else if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -788,7 +788,7 @@
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
-			if ("O.species = /datum/species/unathi")
+			if ("O.species = unathi")
 				var/obj/structure/closet/secure_closet/egg/unathi/I = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -807,7 +807,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/tajaran/I = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -826,7 +826,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/skrell")
+			else if ("O.species = skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/I = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -845,7 +845,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/sergal")
+			else if ("O.species = sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/I = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -864,7 +864,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/shark")
+			else if ("O.species = shark")
 				var/obj/structure/closet/secure_closet/egg/shark/I = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -883,7 +883,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/nevrean")
+			else if ("O.species = nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/I = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -902,7 +902,7 @@
 				P.update_hair()
 				P.update_body()
 
-			else if ("O.species = /datum/species/human")
+			else if ("O.species = human")
 				var/obj/structure/closet/secure_closet/egg/human/I = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
