@@ -38,7 +38,7 @@
 	
 /obj/structure/closet/secure_closet/egg/human
 	name = "human egg"
-	desc = "Some humans--wait, what?"
+	desc = "Some humans lay eggs that are--wait, what?"
 	icon_state = "egg_human"
 	icon_closed = "egg_human"
 	icon_opened = "egg_human_open" 
@@ -52,21 +52,21 @@
 	
 /obj/structure/closet/secure_closet/egg/skrell
 	name = "skrell egg"
-	desc = "It's soft and squishy"
+	desc = "Its soft and squishy"
 	icon_state = "egg_skrell"
 	icon_closed = "egg_skrell"
 	icon_opened = "egg_skrell_open" 
 
 /obj/structure/closet/secure_closet/egg/shark
 	name = "akula egg"
-	desc = "It's soft and slimy to the touch"
+	desc = "Its soft and slimy to the touch"
 	icon = 'icons/obj/closet.dmi'
 	icon_closed = "egg_akula"
 	icon_opened = "egg_akula_open" 
 	
 /obj/structure/closet/secure_closet/egg/sergal
 	name = "sergal egg"
-	desc = "An egg with a slightly fuzzy exterior, with a hard layer beneath."
+	desc = "An egg with a slightly fuzzy exterior, and a hard layer beneath."
 	icon_state = "egg_sergal"
 	icon_closed = "egg_sergal"
 	icon_opened = "egg_sergal_open" 
