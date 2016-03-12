@@ -29,7 +29,7 @@
 	icon_closed = "egg_unathi"
 	icon_opened = "egg_unathi_open" 
 	
-/obj/structure/closet/secure_closet/egg/nevarean
+/obj/structure/closet/secure_closet/egg/nevrean
 	name = "nevarean egg"
 	desc = "Most Nevareans lay hard-shelled eggs!"
 	icon_state = "egg_nevarean"
@@ -57,7 +57,7 @@
 	icon_closed = "egg_skrell"
 	icon_opened = "egg_skrell_open" 
 
-/obj/structure/closet/secure_closet/egg/akula
+/obj/structure/closet/secure_closet/egg/shark
 	name = "akula egg"
 	desc = "It's soft and slimy to the touch"
 	icon = 'icons/obj/closet.dmi'
