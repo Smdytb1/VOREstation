@@ -739,7 +739,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species != "list(Unathi)" && O.species != "list(Tajara)" && O.species != "list(Skrell)" && O.species != "list(Sergal)" && O.species != "list(Akula)" && O.species != "list(Nevrean)" && O.species != "list(Human)")
+			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
