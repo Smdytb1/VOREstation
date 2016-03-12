@@ -285,7 +285,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			
-			if(O.species == "/datum/species/unathi")
+			if(O.species == "Unathi")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -308,7 +308,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
-			if(O.species == "/datum/species/tajaran")
+			if(O.species == "Tajara")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -331,7 +331,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 		
-			if(O.species == "/datum/species/skrell")
+			if(O.species == "Skrell")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -354,7 +354,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 		
-			if(O.species == "/datum/species/sergal")
+			if(O.species == "Sergal")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -377,7 +377,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 		
-			if(O.species == "/datum/species/shark")
+			if(O.species == "Akula")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -400,7 +400,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 		
-			if(O.species == "/datum/species/nevrean")
+			if(O.species == "Nevrean")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -423,7 +423,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 		
-			if(O.species == "/datum/species/human")
+			if(O.species == "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -446,7 +446,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
+			if(O.species != "Unathi" && O.species != "Tajara" && O.species != "Skrell" && O.species != "Sergal" && O.species != "Akula" && O.species != "Nevrean" && O.species != "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -474,7 +474,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species == "/datum/species/unathi")
+			if(O.species == "Unathi")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -491,7 +491,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 		
-			if(O.species == "/datum/species/tajaran")
+			if(O.species == "Tajara")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -508,7 +508,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 		
-			if(O.species == "/datum/species/skrell")
+			if(O.species == "Skrell")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -525,7 +525,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 		
-			if(O.species == "/datum/species/sergal")
+			if(O.species == "Sergal")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -542,7 +542,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 		
-			if(O.species == "/datum/species/shark")
+			if(O.species == "Akula")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -559,7 +559,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 		
-			if(O.species == "/datum/species/nevrean")
+			if(O.species == "Nevrean")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -576,7 +576,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 		
-			if(O.species == "/datum/species/human")
+			if(O.species == "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -593,7 +593,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human") //If you're none of these species,  you get the default egg
+			if(O.species != "Unathi" && O.species != "Tajara" && O.species != "Skrell" && O.species != "Sergal" && O.species != "Akula" && O.species != "Nevrean" && O.species != "Human") //If you're none of these species,  you get the default egg
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -615,7 +615,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species == "/datum/species/unathi")
+			if(O.species == "Unathi")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -633,7 +633,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/tajaran")
+			if(O.species == "Tajara")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -651,7 +651,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/skrell")
+			if(O.species == "Skrell")
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
@@ -668,7 +668,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/sergal")
+			if(O.species == "Sergal")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -686,7 +686,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/shark")
+			if(O.species == "Akula")
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
@@ -697,13 +697,13 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new/obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/nevrean") 
+			if(O.species == "Nevrean") 
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -721,7 +721,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/human")
+			if(O.species == "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -739,7 +739,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
+			if(O.species != "Unathi" && O.species != "Tajara" && O.species != "Skrell" && O.species != "Sergal" && O.species != "Akula" && O.species != "Nevrean" && O.species != "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -762,7 +762,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species == "/datum/species/unathi")
+			if(O.species == "Unathi")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -780,7 +780,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/tajaran")
+			if(O.species == "Tajara")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -798,7 +798,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/skrell")
+			if(O.species == "Skrell")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -816,7 +816,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/sergal")
+			if(O.species == "Sergal")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -834,7 +834,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/shark")
+			if(O.species == "Akula")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -846,13 +846,13 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new/obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/nevrean")
+			if(O.species == "Nevrean")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -870,7 +870,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species == "/datum/species/human")
+			if(O.species == "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -888,7 +888,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species != "/datum/species/unathi" && O.species != "/datum/species/tajaran" && O.species != "/datum/species/skrell" && O.species != "/datum/species/sergal" && O.species != "/datum/species/shark" && O.species != "/datum/species/nevrean" && O.species != "/datum/species/human")
+			if(O.species != "Unathi" && O.species != "Tajara" && O.species != "Skrell" && O.species != "Sergal" && O.species != "Akula" && O.species != "Nevrean" && O.species != "Human")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
