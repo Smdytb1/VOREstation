@@ -285,7 +285,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			
-			if(O.species.name == "Unathi")
+			if(O.species.name == "Unathi" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -309,7 +309,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 			
-			if(O.species.name == "Tajara")
+			if(O.species.name == "Tajara" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -333,7 +333,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 		
-			if(O.species.name == "Skrell")
+			if(O.species.name == "Skrell" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -357,7 +357,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 		
-			if(O.species.name == "Sergal")
+			if(O.species.name == "Sergal" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -381,7 +381,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 		
-			if(O.species.name == "Akula")
+			if(O.species.name == "Akula" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -405,7 +405,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 		
-			if(O.species.name == "Nevrean")
+			if(O.species.name == "Nevrean" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -429,7 +429,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 		
-			if(O.species.name == "Human")
+			if(O.species.name == "Human" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -453,7 +453,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.custom_species != "null")
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -484,7 +484,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi")
+			if(O.species.name == "Unathi" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -501,7 +501,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 		
-			if(O.species.name == "Tajara")
+			if(O.species.name == "Tajara" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -518,7 +518,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 		
-			if(O.species.name == "Skrell")
+			if(O.species.name == "Skrell" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -535,7 +535,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 		
-			if(O.species.name == "Sergal")
+			if(O.species.name == "Sergal" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -552,7 +552,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 		
-			if(O.species.name == "Akula")
+			if(O.species.name == "Akula" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -569,7 +569,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 		
-			if(O.species.name == "Nevrean")
+			if(O.species.name == "Nevrean" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -586,7 +586,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 		
-			if(O.species.name == "Human")
+			if(O.species.name == "Human" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -603,7 +603,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human") //If you're none of these species,  you get the default egg
+			if(O.custom_species != "null") //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -627,7 +627,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi")
+			if(O.species.name == "Unathi" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -645,7 +645,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Tajara")
+			if(O.species.name == "Tajara" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -663,7 +663,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Skrell")
+			if(O.species.name == "Skrell" && O.custom_species == "null")
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
@@ -680,7 +680,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Sergal")
+			if(O.species.name == "Sergal" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -698,7 +698,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Akula")
+			if(O.species.name == "Akula" && O.custom_species == "null")
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
@@ -715,7 +715,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Nevrean") 
+			if(O.species.name == "Nevrean" && O.custom_species == "null") 
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -733,7 +733,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Human")
+			if(O.species.name == "Human" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -751,7 +751,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.custom_species != "null" )
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -776,7 +776,7 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi")
+			if(O.species.name == "Unathi" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -794,7 +794,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Tajara")
+			if(O.species.name == "Tajara" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -812,7 +812,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Skrell")
+			if(O.species.name == "Skrell" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -830,7 +830,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Sergal")
+			if(O.species.name == "Sergal" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -848,7 +848,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Akula")
+			if(O.species.name == "Akula" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -866,7 +866,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Nevrean")
+			if(O.species.name == "Nevrean" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -884,7 +884,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Human")
+			if(O.species.name == "Human" && O.custom_species == "null")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -902,7 +902,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.custom_species != "null")
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
