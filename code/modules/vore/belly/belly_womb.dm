@@ -960,6 +960,24 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
+				
+			if(O.species.name == "SlimePerson")
+				P.r_hair = O.r_hair
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.h_style = "Bedhead"
+				P.gender = FEMALE
+				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				P << "<span class='notice'>Your body feels very strange...</span>"
+				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+				P.update_hair()
+				P.update_body()
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human" && O.species.name != "SlimePerson)
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
