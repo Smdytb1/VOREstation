@@ -503,7 +503,7 @@
 				P.loc = J
 				J.name = "[O.custom_species] egg"
 
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
@@ -663,7 +663,7 @@
 				P.loc = J
 				J.name = "[O.custom_species] egg"
 			
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
@@ -830,7 +830,7 @@
 				P.update_hair()
 				P.update_body()
 			
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
