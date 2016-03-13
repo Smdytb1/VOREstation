@@ -454,7 +454,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
-				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
+				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -604,7 +604,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human") //If you're none of these species,  you get the default egg
-				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
+				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -752,7 +752,7 @@
 				P.update_body()
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
-				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
+				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -903,7 +903,7 @@
 				P.update_body()
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
-				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
+				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
