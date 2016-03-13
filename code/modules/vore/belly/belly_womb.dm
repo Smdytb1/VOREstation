@@ -454,6 +454,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -475,7 +476,8 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] egg"
 
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
@@ -602,6 +604,7 @@
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human") //If you're none of these species,  you get the default egg
+				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -616,7 +619,8 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] egg"
 			
 		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
@@ -748,6 +752,7 @@
 				P.update_body()
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -759,7 +764,8 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
@@ -897,6 +903,7 @@
 				P.update_body()
 		
 			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+				var/obj/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -908,7 +915,8 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
