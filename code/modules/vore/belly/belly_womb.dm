@@ -477,7 +477,7 @@
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 		
-			if(O.custom_species.name != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -644,7 +644,7 @@
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 		
-			if(O.custom_species.name != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara")) //If you're none of these species,  you get the default egg
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara")) //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -810,7 +810,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.custom_species.name != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -979,7 +979,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.custom_species.name != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
