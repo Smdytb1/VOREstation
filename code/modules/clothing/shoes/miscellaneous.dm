@@ -148,13 +148,6 @@
 	item_color = "ankleBracelets"
 	body_parts_covered = 0
 
-/obj/item/clothing/shoes/silverankleBracelets
-	desc = "Who needs shoes when you have bracelets?"
-	name = "silver ankle bracelets"
-	icon_state = "silverankleBracelets"
-	item_color = "silverankleBracelets"
-	body_parts_covered = 0
-
 /obj/item/clothing/shoes/footwraps
 	desc = "Cloth wraps for your feet."
 	name = "footwraps"
