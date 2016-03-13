@@ -452,8 +452,32 @@
 				P.update_body()
 				P.update_tail_showing()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				
+			if(O.species.name == "SlimePerson")
+				P.r_hair = O.r_hair
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.taur = O.taur
+				P.r_taur = O.r_taur
+				P.g_taur = O.g_taur
+				P.b_taur = O.b_taur
+				P.h_style = "Bedhead"
+				P.species = O.species 
+				P.custom_species = O.custom_species
+				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+				P.update_hair()
+				P.update_body()
+				P.update_tail_showing()
+				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human" && O.species.name != "SlimePerson)
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -602,8 +626,25 @@
 				P.update_hair()
 				P.update_body()
 				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				
+			if(O.species.name == "SlimePerson")
+				P.r_hair = O.r_hair
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.h_style = "Bedhead"
+				P << "<span class='notice'>Your body tingles all over...</span>"
+				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+				P.update_hair()
+				P.update_body()
+				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human") //If you're none of these species,  you get the default egg
+			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human" && O.species.name != "SlimePerson) //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -751,7 +792,25 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.species.name == "SlimePerson")
+				P.r_hair = O.r_hair
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.h_style = "Bedhead"
+				P.gender = MALE
+				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				P << "<span class='notice'>Your body feels very strange...</span>"
+				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+				P.update_hair()
+				P.update_body()
+		
+			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human" && O.species.name != "SlimePerson)
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -866,7 +925,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Nevrean custom_species = null ")
+			if(O.species.name == "Nevrean")
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -902,7 +961,7 @@
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
+			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human" && O.species.name != "SlimePerson)
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
