@@ -70,3 +70,19 @@
 	icon_state = "egg_sergal"
 	icon_closed = "egg_sergal"
 	icon_opened = "egg_sergal_open" 
+	
+/obj/structure/closet/secure_closet/egg/slime
+	name = "slime egg"
+	desc = "An egg with a soft and squishy interior, coated with slime."
+	icon_state = "egg_slime"
+	icon_closed = "egg_slime"
+	icon_opened = "egg_slime_open" 
+	
+/obj/structure/closet/secure_closet/egg/special
+	name = "unique egg"
+	desc = "This egg has a very unique look to it."
+	icon_state = "egg_unique"
+	icon_closed = "egg_unique"
+	icon_opened = "egg_unique_open" 
+
+//In case anyone stumbles upon this, MAJOR thanks to Vorrakul and Nightwing. Without them, this wouldn't be a reality. 
