@@ -79,7 +79,7 @@
 	icon_opened = "egg_slime_open" 
 	
 /obj/structure/closet/secure_closet/egg/special
-	name = "[O.custom_species] egg"
+	name = "special egg"
 	desc = "This egg has a very unique look to it."
 	icon_state = "egg_unique"
 	icon_closed = "egg_unique"
