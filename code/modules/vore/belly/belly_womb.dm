@@ -1070,4 +1070,4 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-/*
+*/
