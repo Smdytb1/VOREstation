@@ -301,6 +301,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -324,6 +325,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -347,6 +349,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -370,6 +373,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -393,6 +397,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -416,6 +421,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -439,6 +445,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
@@ -462,6 +469,7 @@
 				P.b_taur = O.b_taur
 				P.h_style = "Bedhead"
 				P.species = O.species 
+				P.custom_species = O.custom_species
 				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
 				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
 				P.update_hair()
