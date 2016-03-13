@@ -285,7 +285,8 @@
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			
-			if(O.species.name == "Unathi" && O.custom_species = " ")
+			if(O.species.name == "Unathi")
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -307,9 +308,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Unathi egg"
 			
-			if(O.species.name == "Tajara" && O.custom_species = " ")
+			if(O.species.name == "Tajara")
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -331,9 +334,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Tajara egg"
 		
-			if(O.species.name == "Skrell" && O.custom_species = " ")
+			if(O.species.name == "Skrell")
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -355,9 +360,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Skrell egg"
 		
-			if(O.species.name == "Sergal" && O.custom_species = " ")
+			if(O.species.name == "Sergal")
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -379,9 +386,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Sergal egg"
 		
-			if(O.species.name == "Akula" && O.custom_species = " ")
+			if(O.species.name == "Akula")
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -403,9 +412,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Akula egg"
 		
-			if(O.species.name == "Nevrean" && O.custom_species = " ")
+			if(O.species.name == "Nevrean")
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -427,9 +438,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Nevrean egg"
 		
-			if(O.species.name == "Human" && O.custom_species = " ")
+			if(O.species.name == "Human")
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -451,9 +464,11 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Human egg"
 				
-			if(O.species.name == "Slime Person" && O.custom_species = " ")
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -475,9 +490,12 @@
 				P.update_hair()
 				P.update_body()
 				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
-		
-			if(O.custom_species != " ")
+				P.loc = J
+				J.name = "[O.custom_species] Slime egg"
+				
+//Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
+/*
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -502,13 +520,14 @@
 				P.update_tail_showing()
 				P.loc = J
 				J.name = "[O.custom_species] egg"
-
+*/
 
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi" && O.custom_species = " ")
+			if(O.species.name == "Unathi")
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -523,9 +542,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Unathi egg"
 		
-			if(O.species.name == "Tajara" && O.custom_species = " ")
+			if(O.species.name == "Tajara")
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -540,9 +561,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Tajara egg"
 		
-			if(O.species.name == "Skrell" && O.custom_species = " ")
+			if(O.species.name == "Skrell")
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -557,9 +580,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Skrell egg"
 		
-			if(O.species.name == "Sergal" && O.custom_species = " ")
+			if(O.species.name == "Sergal")
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -574,9 +599,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Sergal egg"
 		
-			if(O.species.name == "Akula" && O.custom_species = " ")
+			if(O.species.name == "Akula")
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -591,9 +618,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Akula egg"
 		
-			if(O.species.name == "Nevrean" && O.custom_species = " ")
+			if(O.species.name == "Nevrean")
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -608,9 +637,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Nevrean egg"
 		
-			if(O.species.name == "Human" && O.custom_species = " ")
+			if(O.species.name == "Human")
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -625,9 +656,11 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Human egg"
 				
-			if(O.species.name == "Slime Person" && O.custom_species = " ")
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -642,9 +675,13 @@
 				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
 				P.update_hair()
 				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
-		
-			if(O.custom_species != " ")
+				P.loc = J
+				J.name = "[O.custom_species] Slime egg"
+
+
+//Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
+/*		
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara")) //If you're none of these species,  you get the default egg
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -663,12 +700,13 @@
 				P.loc = J
 				J.name = "[O.custom_species] egg"
 			
-
+*/
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi" && O.custom_species = " ")
+			if(O.species.name == "Unathi")
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -680,13 +718,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Unathi egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Tajara" && O.custom_species = " ")
+			if(O.species.name == "Tajara")
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -698,13 +738,34 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Tajara egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Skrell" && O.custom_species = " ")
+			if(O.species.name == "Skrell")
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.h_style = "Bedhead"
+				P.gender = MALE
+				P.loc = J
+				J.name = "[O.custom_species] Skrell egg"
+				P << "<span class='notice'>Your body feels very strange...</span>"
+				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+				P.update_hair()
+				P.update_body()
+		
+			if(O.species.name == "Sergal")
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -716,13 +777,34 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Sergal egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Sergal" && O.custom_species = " ")
+			if(O.species.name == "Akula")
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.r_facial = O.r_hair
+				P.g_hair = O.g_hair
+				P.g_facial = O.g_hair
+				P.b_hair = O.b_hair
+				P.b_facial = O.b_hair
+				P.r_skin = O.r_skin
+				P.g_skin = O.g_skin
+				P.b_skin = O.b_skin
+				P.h_style = "Bedhead"
+				P.gender = MALE
+				P.loc = J
+				J.name = "[O.custom_species] Akula egg"
+				P << "<span class='notice'>Your body feels very strange...</span>"
+				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+				P.update_hair()
+				P.update_body()
+		
+			if(O.species.name == "Nevrean") 
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -734,13 +816,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Nevrean egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Akula" && O.custom_species = " ")
+			if(O.species.name == "Human")
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -752,13 +836,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Human egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Nevrean" && O.custom_species = " ") 
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -770,49 +856,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Slime egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-		
-			if(O.species.name == "Human" && O.custom_species = " ")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
-		
-			if(O.species.name == "Slime Person" && O.custom_species = " ")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
-		
-			if(O.custom_species != " ")
+				//Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
+/*		
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -832,12 +884,13 @@
 				P.update_hair()
 				P.update_body()
 			
-
+*/
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
-			if(O.species.name == "Unathi" && O.custom_species = " ")
+			if(O.species.name == "Unathi")
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -849,13 +902,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Unathi egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Tajara" && O.custom_species = " ")
+			if(O.species.name == "Tajara")
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -867,13 +922,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Tajara egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Skrell" && O.custom_species = " ")
+			if(O.species.name == "Skrell")
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -885,13 +942,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Skrell egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Sergal" && O.custom_species = " ")
+			if(O.species.name == "Sergal")
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -903,13 +962,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Sergal egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Akula" && O.custom_species = " ")
+			if(O.species.name == "Akula")
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -921,13 +982,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Akula egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Nevrean" && O.custom_species = " ")
+			if(O.species.name == "Nevrean")
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -939,13 +1002,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Nevrean egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 		
-			if(O.species.name == "Human" && O.custom_species = " ")
+			if(O.species.name == "Human")
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -957,13 +1022,15 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Human egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
 				
-			if(O.species.name == "Slime Person" && O.custom_species = " ")
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
@@ -975,13 +1042,16 @@
 				P.b_skin = O.b_skin
 				P.h_style = "Bedhead"
 				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				P.loc = J
+				J.name = "[O.custom_species] Slime egg"
 				P << "<span class='notice'>Your body feels very strange...</span>"
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
-		
-			if(O.custom_species != " ")
+				
+//Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
+/*	
+			if(O.custom_species != "null" && O.species.name == list("Human","Unathi", "Akula", "Slime Person", "Nevrean", "Sergal", "Skrell", "Tajara"))
 				var/obj/structure/closet/secure_closet/egg/special/J = new /obj/structure/closet/secure_closet/egg/special(O.loc)
 				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
@@ -1000,3 +1070,4 @@
 				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 				P.update_hair()
 				P.update_body()
+/*
