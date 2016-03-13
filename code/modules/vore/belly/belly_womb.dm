@@ -705,6 +705,7 @@
 				P.update_body()
 		
 			if(O.species.name == "Skrell" && O.custom_species = " ")
+				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
@@ -740,6 +741,7 @@
 				P.update_body()
 		
 			if(O.species.name == "Akula" && O.custom_species = " ")
+				P.r_hair = O.r_hair
 				P.r_facial = O.r_hair
 				P.g_hair = O.g_hair
 				P.g_facial = O.g_hair
