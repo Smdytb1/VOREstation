@@ -78,11 +78,12 @@
 	icon_closed = "egg_slime"
 	icon_opened = "egg_slime_open" 
 	
-/obj/structure/closet/secure_closet/egg/special
+/obj/structure/closet/secure_closet/egg/special //Not actually used, but the sprites are in, and it's there in case any admins need to spawn in the egg for any specific reasons.
 	name = "special egg"
 	desc = "This egg has a very unique look to it."
 	icon_state = "egg_unique"
 	icon_closed = "egg_unique"
 	icon_opened = "egg_unique_open" 
 
-//In case anyone stumbles upon this, MAJOR thanks to Vorrakul and Nightwing. Without them, this wouldn't be a reality. 
+//In case anyone stumbles upon this, MAJOR thanks to Vorrakul and Nightwing. Without them, this wouldn't be a reality.
+//Also, huge thanks for Ace for helping me through with this and getting me to work at my full potential instead of tapping out early.
