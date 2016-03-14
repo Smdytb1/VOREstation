@@ -280,7 +280,7 @@
 						P.nutrition += 1
 						
 						
-		//WOMB TRANSFORM (EGG) VERY hacky code below, but it's about the only way to get the damn'd thing to work! Credit to Verkister with helping me out, and credit to Nightwing! Also, additional credit to Ace for providing support and suggestions, and helping me persevere through coding this masterpeice (see: Horrid mess) mess! ~CK
+		//WOMB TRANSFORM (EGG) Credit to Verkister with helping me out, and credit to Nightwing! Also, additional credit to Ace for providing support and suggestions, and helping me persevere through coding this masterpeice (see: Horrid mess) mess! ~CK
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
