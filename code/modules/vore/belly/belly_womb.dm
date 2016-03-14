@@ -313,7 +313,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 			
 			if(O.species.name == "Tajara")
 				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
@@ -343,7 +343,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
@@ -373,7 +373,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
@@ -403,7 +403,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Akula")
 				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
@@ -433,7 +433,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
@@ -463,7 +463,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Human")
 				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
@@ -493,7 +493,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 				
 			if(O.species.name == "Slime Person")
 				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
@@ -523,7 +523,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 				
 //Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
 /*
@@ -579,7 +579,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Tajara")
 				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
@@ -602,7 +602,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
@@ -625,7 +625,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
@@ -648,7 +648,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Akula")
 				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
@@ -671,7 +671,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
@@ -694,7 +694,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Human")
 				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
@@ -717,7 +717,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 				
 			if(O.species.name == "Slime Person")
 				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
@@ -740,7 +740,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 
 
 //Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
@@ -791,7 +791,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Tajara")
 				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
@@ -815,7 +815,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
@@ -838,7 +838,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
@@ -862,7 +862,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Akula")
 				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
@@ -885,7 +885,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Nevrean") 
 				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
@@ -929,7 +929,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Slime Person")
 				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
@@ -953,7 +953,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 					
 				//Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
 /*		
@@ -1004,7 +1004,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Tajara")
 				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
@@ -1028,7 +1028,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Skrell")
 				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
@@ -1052,7 +1052,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Sergal")
 				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
@@ -1076,7 +1076,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Akula")
 				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
@@ -1100,7 +1100,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Nevrean")
 				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
@@ -1124,7 +1124,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 		
 			if(O.species.name == "Human")
 				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
@@ -1148,7 +1148,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 				
 			if(O.species.name == "Slime Person")
 				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
@@ -1172,7 +1172,7 @@
 				if (O.custom_species)
 					var/defined_species/U = O.custom_species
 				else
-					U = O.species
+					var/defined_species/U = O.species
 
 //Below is being left for legacy reasons. Custom species is automatically set to "null", but the game refuses to acknowledge it as "null", as it's actually just a space. This means that it's physically impossible as far as I can see to code it in. I've done a bypass for this, but I'm just writing down this note.
 /*	
