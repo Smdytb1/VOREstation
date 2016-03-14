@@ -10,10 +10,10 @@
 	open_sound = 'sound/vore/schlorp.ogg'
 	close_sound = 'sound/vore/schlorp.ogg'
 	opened = 0
-	welded = 0 //If it is welded, people can't escape. DON'T WELD IT
+	welded = 0 //Don't touch this.
 	health = 100
 	
-/obj/structure/closet/secure_closet/egg/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/structure/closet/secure_closet/egg/attackby(obj/item/weapon/W, mob/user as mob) //This also prevents crew from welding the eggs and making them unable to be opened.
 	if(istype(W, /obj/item/weapon/weldingtool))
 		src.dump_contents()
 		del(src)
@@ -86,4 +86,5 @@
 	icon_opened = "egg_unique_open" 
 
 //In case anyone stumbles upon this, MAJOR thanks to Vorrakul and Nightwing. Without them, this wouldn't be a reality.
-//Also, huge thanks for Ace for helping me through with this and getting me to work at my full potential instead of tapping out early.
+//Also, huge thanks for Ace for helping me through with this and getting me to work at my full potential instead of tapping out early, along with coding advice.
+//Additionally, huge thanks to the entire Virgo community for giving suggestions about egg TF, the sprites, descriptions, etc etc. Cheers to everyone. Also, you should totally eat Cadence. ~CK
