@@ -312,6 +312,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -365,6 +366,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -418,6 +420,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -471,6 +474,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					
 				else
 					var/defined_species = O.species
@@ -525,6 +529,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -578,6 +583,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -631,6 +637,8 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -684,6 +692,7 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -735,6 +744,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					
 				else
 					var/defined_species = O.species
@@ -775,6 +785,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -814,6 +825,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -853,6 +865,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -892,6 +905,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -931,6 +945,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -970,6 +985,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -1009,6 +1025,7 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 				else
 					var/defined_species = O.species
 					P.r_hair = O.r_hair
@@ -1050,6 +1067,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1091,6 +1109,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1132,6 +1151,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1173,6 +1193,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1214,6 +1235,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1255,6 +1277,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1296,6 +1319,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1337,6 +1361,7 @@
 					P.gender = MALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1383,6 +1408,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1424,6 +1450,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1465,6 +1492,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1506,6 +1534,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1547,6 +1576,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1588,6 +1618,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1629,6 +1660,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
@@ -1670,6 +1702,7 @@
 					P.gender = FEMALE
 					P.loc = J
 					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
 					P << "<span class='notice'>Your body feels very strange...</span>"
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
