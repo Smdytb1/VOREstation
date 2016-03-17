@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person") //fingerscrossed
+	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person", "Nevrean") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -1160,7 +1160,11 @@
 	name = "akula tail"
 	desc = ""
 	icon_state = "sharktail_s"
-
+	
+/datum/sprite_accessory/tail/special/nevrean
+	name = "nevrean tail"
+	desc = ""
+	icon_state = "nevrean_s"
 /*
 ////////////////////////////
 /  =--------------------=  /
