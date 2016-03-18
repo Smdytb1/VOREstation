@@ -76,4 +76,5 @@ var/list/SINGLETON_VORETYPE_INSTANCES = list(
 		"Unbirth" = new /datum/voretype/unbirth(),
 		"Anal Vore" = new /datum/voretype/anal(),
 		"Cock Vore" = new /datum/voretype/cock(),
-		"Breast Vore" = new /datum/voretype/boobs())
+		"Breast Vore" = new /datum/voretype/boobs(),
+		"Tail Vore" = new /datum/voretype/tail())

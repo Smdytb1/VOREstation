@@ -222,13 +222,14 @@ var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J
 // Chemistry lists.
 var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
-var/list/heartstopper  = list("potassium_phorochloride", "zombie_powder") // This stops the heart.
+var/list/heartstopper  = list("potassium_chlorophoride", "zombie_powder") // This stops the heart.
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
 
 // Used by robots and robot preferences.
 var/list/robot_module_types = list(
 	"Standard", "Engineering", "Construction", "Surgeon",  "Crisis",
-	"Miner",    "Janitor",     "Service",      "Clerical", "Security"
+	"Miner",    "Janitor",     "Service",      "Clerical", "Security",
+	"Xenoarch"
 )
 
 // Some scary sounds.

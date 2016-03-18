@@ -25,7 +25,14 @@ var/list/ai_status_emotions = list(
 //	"Friend Computer" 			= new /datum/ai_emotion("ai_friend"),
 	"Flowey" 					= new /datum/ai_emotion("ai_flowey"),
 	"Glitchy Flowey" 			= new /datum/ai_emotion("ai_floweymalf"),
+	"Soviet Union"	 			= new /datum/ai_emotion("ai_soviet"),
+	"Communist" 				= new /datum/ai_emotion("ai_soviet_old"),
+	"Beer" 						= new /datum/ai_emotion("ai_beer"),
+	"Pie"			 			= new /datum/ai_emotion("ai_plump"),
+	"Holly"			 			= new /datum/ai_emotion("ai_holly"),
+	"Hilly"			 			= new /datum/ai_emotion("ai_hilly"),
 	"Tribunal" 					= new /datum/ai_emotion("ai_tribunal", "serithi"),
+	"Fish Tank" 					= new /datum/ai_emotion("ai_fishtank"),
 	"Tribunal Malfunctioning"	= new /datum/ai_emotion("ai_tribunal_malf", "serithi")
 	)
 

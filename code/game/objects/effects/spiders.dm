@@ -5,7 +5,7 @@
 	icon = 'icons/effects/effects.dmi'
 	anchored = 1
 	density = 0
-	var/health = 15
+	var/health = 1 //Used to be 15, nerfed so security can deal with web crazy driders until admins arrive :3 -Antsnap
 
 //similar to weeds, but only barfed out by nurses manually
 /obj/effect/spider/ex_act(severity)
@@ -58,12 +58,19 @@
 		if(prob(50))
 			icon_state = "stickyweb2"
 
-/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0) //taur = 6 means spider taur bod
 	if(air_group || (height==0)) return 1
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
 	else if(istype(mover, /mob/living))
-		if(prob(50))
+		if(istype(mover, /mob/living/carbon/human)) //If human and spider taur body
+			var/mob/living/carbon/human/M = mover
+			if(M.taur == 6)
+				return 1
+			else if(prob(15)) //  15% chance of getting stuck for humans
+				mover << "\red You get stuck in \the [src] for a moment."
+				return 0
+		else if (prob(50)) //Others get 1/2 chance
 			mover << "\red You get stuck in \the [src] for a moment."
 			return 0
 	else if(istype(mover, /obj/item/projectile))

@@ -34,7 +34,7 @@ var/list/whitelist = list()
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!config.usealienwhitelist)
 		return 1
-	if(species != "vox" && species != "Vox" && species != "diona" && species != "Diona")
+	if(species != "vox" && species != "Vox" && species != "diona" && species != "Diona" && species != "skeleton" && species != "Skeleton")
 		return 1
 	if(check_rights(R_ADMIN, 0))
 		return 1

@@ -153,7 +153,7 @@
 
 /obj/item/projectile/bullet/rifle/chalk
 	damage = 10
-	agony = 30 // It stings, but not very deadly. Intended for target practice and warning shots.
+	agony = 40 // It stings, but it's not very deadly. Intended for target practice and warning shots.
 	embed = 0
 	sharp = 0
 

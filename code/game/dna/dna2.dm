@@ -152,6 +152,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// Taur
 	var/taur	= character.taur // Taur is already stored as an integer
+	if(character.taur == 6) //if spider taur
+		//character.verbs += /mob/proc/weaveWeb
+		character.verbs += /mob/proc/weaveWebBindings
 
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)

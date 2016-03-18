@@ -82,6 +82,9 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Languages */
 
+
+.daemonc				{color: #990033;}
+.birdsongc				{color: #CC9900;}
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}

@@ -90,7 +90,7 @@
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
-	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
+	var/slowdown = -1              // Passive movement speed malus (or boost, if negative)
 	var/primitive                 // Lesser form, if any (ie. monkey for humans)
 	var/gluttonous                // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/equip_problems			  // Problems with equipment types for this species.

@@ -360,7 +360,7 @@
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
 	mutants = null
-	can_self_harvest = 1
+	can_self_harvest = 0
 	has_mob_product = /mob/living/simple_animal/mushroom
 
 /datum/seed/mushroom/plump/walking/New()

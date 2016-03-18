@@ -48,6 +48,7 @@
 	internal_contents["Cock"] = new /datum/belly/cock(src)
 	internal_contents["Womb"] = new /datum/belly/womb(src)
 	internal_contents["Boob"] = new /datum/belly/boob(src)
+	internal_contents["Tail"] = new /datum/belly/tail(src)
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
 	// Vore Code End
 
@@ -59,6 +60,7 @@
 	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	verbs += /mob/living/carbon/human/proc/insidePanel
 	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
+
 
 
 /mob/living/carbon/human/Stat()
