@@ -62,6 +62,7 @@
 	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
 
 
+
 /mob/living/carbon/human/Stat()
 	..()
 	statpanel("Status")

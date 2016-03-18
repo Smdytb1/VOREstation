@@ -1025,6 +1025,12 @@ datum/design/circuit/editor
 	id = "editor"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_path = /obj/item/weapon/circuitboard/editor
+	
+datum/design/circuit/suspension_field_generator
+	name = "suspension field generator"
+	id = "suspension_field_generator"
+	req_tech = list("programming" = 3, "magnets" = 3, "engineering" = 3) //Let's not be too brutal on the poor xenoarchs.
+	build_path = /obj/item/weapon/circuitboard/suspension_field_generator
 
 ////////////////////////////////////////
 /////////Civilian Circuit Boards////////
