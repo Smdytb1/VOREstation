@@ -38,6 +38,8 @@
 	update_icon()
 	wait = world.time + config.gateway_delay	//+ thirty minutes default
 	awaygate = locate(/obj/machinery/gateway/centeraway)
+	if(!awaygate)
+		log_admin("Station Gateway tried to ping the Away Gateway but failed.") // Trying to trace the issue. -Ace
 
 
 /obj/machinery/gateway/centerstation/update_icon()
@@ -152,6 +154,8 @@ obj/machinery/gateway/centerstation/process()
 /obj/machinery/gateway/centeraway/initialize()
 	update_icon()
 	stationgate = locate(/obj/machinery/gateway/centerstation)
+	if(!stationgate)
+		log_admin("Away Gateway tried to ping the Station Gateway but failed.") // Trying to trace the issue. -Ace
 
 
 /obj/machinery/gateway/centeraway/update_icon()
