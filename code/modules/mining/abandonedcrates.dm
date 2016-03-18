@@ -1,6 +1,6 @@
 /obj/structure/closet/crate/secure/loot
 	name = "abandoned crate"
-	desc = "What could be inside?"
+	desc = "A dusty crate, sealed with a tamper-resistant deca-code lock. What could be inside?"
 	icon_state = "securecrate"
 	icon_opened = "securecrateopen"
 	icon_closed = "securecrate"
@@ -150,7 +150,7 @@
 /obj/structure/closet/crate/secure/loot/togglelock(mob/user as mob)
 	if(locked)
 		user << "<span class='notice'>The crate is locked with a Deca-code lock.</span>"
-		var/input = input(usr, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
+		var/input = input(usr, "Enter [codelen] digits. All digits must be unique.", "Deca-Code Lock", "") as text
 		if(in_range(src, user))
 			if (input == code)
 				user << "<span class='notice'>The crate unlocks!</span>"
@@ -200,6 +200,6 @@
 						++bulls
 					else if(a)
 						++cows
-				user << "<span class='notice'>Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
+				user << "<span class='notice'>Last code attempt, [lastattempt], had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
 		else ..()
 	else ..()
