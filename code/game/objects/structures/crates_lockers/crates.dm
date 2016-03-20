@@ -133,6 +133,7 @@
 	var/emag = "securecrateemag"
 	var/broken = 0
 	var/locked = 1
+	var/tamper_proof = 0
 
 /obj/structure/closet/crate/secure/New()
 	..()
@@ -142,6 +143,8 @@
 	else
 		overlays.Cut()
 		overlays += greenlight
+	if(tamper_proof)
+		desc += " WARNING: Anti-Theft failsafe may cause fire or explosion if handled improperly while locked."
 
 /obj/structure/closet/crate/secure/can_open()
 	return !locked
@@ -224,6 +227,40 @@
 			src.req_access = list()
 			src.req_access += pick(get_all_accesses())
 	..()
+
+/obj/structure/closet/crate/secure/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
+	health -= Proj.damage
+	..()
+	if(locked && tamper_proof && health <= 0)
+		if(tamper_proof == 2) // Mainly used for events to prevent any chance of opening the box improperly.
+			visible_message("<font color='red'><b>The anti-tamper mechanism of [src] triggers an explosion!</b></font>")
+			var/turf/T = get_turf(src.loc)
+			explosion(T, 0, 0, 0, 1) // Non-damaging, but it'll alert security.
+			del(src)
+		var/open_chance = rand(1,5)
+		switch(open_chance)
+			if(1)
+				visible_message("<font color='red'><b>The anti-tamper mechanism of [src] causes an explosion!</b></font>")
+				var/turf/T = get_turf(src.loc)
+				explosion(T, 0, 0, 0, 1) // Non-damaging, but it'll alert security.
+				del(src)
+			if(2 to 4)
+				visible_message("<font color='red'><b>The anti-tamper mechanism of [src] causes a small fire!</b></font>")
+				for(var/atom/movable/A as mob|obj in src) // For every item in the box, we spawn a pile of ash.
+					new /obj/effect/decal/cleanable/ash(src.loc)
+				new /obj/fire(src.loc)
+				del(src)
+			if(5)
+				visible_message("<font color='green'><b>The anti-tamper mechanism of [src] fails!</b></font>")
+	if(health <= 0)
+		for(var/atom/movable/A as mob|obj in src)
+			A.loc = src.loc
+		del(src)
+
+	return
 
 /obj/structure/closet/crate/plastic
 	name = "plastic crate"
@@ -378,6 +415,7 @@
 	icon_state = "weaponcrate"
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
+	tamper_proof = 1
 
 /obj/structure/closet/crate/secure/phoron
 	name = "phoron crate"
@@ -385,6 +423,7 @@
 	icon_state = "phoroncrate"
 	icon_opened = "phoroncrateopen"
 	icon_closed = "phoroncrate"
+	tamper_proof = 1
 
 /obj/structure/closet/crate/secure/gear
 	name = "gear crate"
@@ -469,6 +508,7 @@
 /obj/structure/closet/crate/secure/large/reinforced
 	desc = "A hefty, reinforced metal crate with an electronic locking system."
 	health = 1000 // 10x more difficult to shoot open.
+	tamper_proof = 2 // And in case you do, fuck you.
 	icon_state = "largermetal"
 	icon_opened = "largermetalopen"
 	icon_closed = "largermetal"
@@ -488,8 +528,3 @@
 		new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
 		new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
 		new /obj/item/weapon/minihoe(src)
-//		new /obj/item/weapon/weedspray(src)
-//		new /obj/item/weapon/weedspray(src)
-//		new /obj/item/weapon/pestspray(src)
-//		new /obj/item/weapon/pestspray(src)
-//		new /obj/item/weapon/pestspray(src)
