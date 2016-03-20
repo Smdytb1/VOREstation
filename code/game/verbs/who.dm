@@ -28,13 +28,31 @@
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
+			if(C.is_afk()) //I'm a bad coder. ~CK
+				var/seconds = C.last_activity_seconds()
+				entry += " (AFK - "
+				entry += "[round(seconds / 60)] minutes, "
+				entry += "[seconds % 60] seconds)"
 			Lines += entry
 	else
 		for(var/client/C in clients)
 			if(C.holder && C.holder.fakekey)
-				Lines += C.holder.fakekey
+				var/entry = "\t[C.key]"
+				entry += C.holder.fakekey
+				if(C.is_afk()) //I'm a bad coder. ~CK
+					var/seconds = C.last_activity_seconds()
+					entry += " (AFK - "
+					entry += "[round(seconds / 60)] minutes, "
+					entry += "[seconds % 60] seconds)"
+				Lines += entry
 			else
-				Lines += C.key
+				var/entry = "\t[C.key]"
+				if(C.is_afk())
+					var/seconds = C.last_activity_seconds()
+					entry += " (AFK - "
+					entry += "[round(seconds / 60)] minutes, "
+					entry += "[seconds % 60] seconds)"
+				Lines += entry
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"
