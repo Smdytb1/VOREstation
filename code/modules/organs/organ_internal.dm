@@ -213,9 +213,13 @@
 				// Damaged liver means some chemicals are very dangerous
 				// The liver is also responsible for clearing out alcohol and toxins.
 				// Ethanol and all drinks are bad.K
+				// BUT for RP and immersion they shouldn't be that bad~
+				// Liver death from alcohol happens over long periods or very acute doses.
+				// Since everyone loves drunk RP but not "I'm dying and vomiting everywhere" RP, the tox from alcohol was 3rd'ed.
+				// Also this should make it more conveinient for giant drunkard characters to RP.
 				if(istype(R, /datum/reagent/ethanol))
 					if(filter_effect < 3)
-						owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
+						owner.adjustToxLoss(0.033 * PROCESS_ACCURACY)
 					owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
 				// Can't cope with toxins at all
 				else if(istype(R, /datum/reagent/toxin))
