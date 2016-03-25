@@ -219,7 +219,7 @@
 				// Also this should make it more conveinient for giant drunkard characters to RP.
 				if(istype(R, /datum/reagent/ethanol))
 					if(filter_effect < 3)
-						owner.adjustToxLoss(0.05 * PROCESS_ACCURACY)
+						owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
 					owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
 				// Can't cope with toxins at all
 				else if(istype(R, /datum/reagent/toxin))
