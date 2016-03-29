@@ -249,9 +249,12 @@
 
 //checks if a client is afk
 //3000 frames = 5 minutes
-/client/proc/is_afk(duration=3000)
+/client/proc/is_afk(duration=3000) //This gives people 5 minutes before they start showing up on the "AFK timer" in the who menu.
 	if(inactivity > duration)	return inactivity
 	return 0
+
+/client/proc/last_activity_seconds()
+	return inactivity / 10
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
