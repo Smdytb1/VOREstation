@@ -1094,7 +1094,7 @@
 /obj/machinery/vending/clothes
 	name = "UniVend"
 	desc = "A uniform vending machine, so you can stand out instead of being washed away by the grey tide."
-//	icon_state = ""
+	icon_state = "clothing"
 	products = list(/obj/item/clothing/under/aqua = 5,
 					/obj/item/clothing/under/color/black = 5,
 					/obj/item/clothing/under/color/blackf = 5,
@@ -1132,6 +1132,11 @@
 					/obj/item/clothing/under/suit_jacket/red = 5,
 					/obj/item/clothing/under/sundress = 5,
 					/obj/item/clothing/under/wedding/bride_white = 5,
+					/obj/item/clothing/under/swimsuit/black = 5,
+					/obj/item/clothing/under/swimsuit/blue = 5,
+					/obj/item/clothing/under/swimsuit/purple = 5,
+					/obj/item/clothing/under/swimsuit/green = 5,
+					/obj/item/clothing/under/swimsuit/red = 5,
 					/obj/item/clothing/shoes/black = 5,
 					/*
 					/obj/item/clothing/shoes/blue = 5,
@@ -1146,9 +1151,12 @@
 					*/
 					/obj/item/clothing/shoes/leather = 5,
 					/obj/item/clothing/shoes/sandal = 5,
+					/obj/item/clothing/shoes/footwraps = 5,
+					/obj/item/clothing/shoes/ankleBracelets = 5,
 					/obj/item/clothing/suit/apron/overalls = 3,
 					/obj/item/clothing/suit/wcoat = 3,
 					/obj/item/clothing/suit/kimonored = 3,
+					/obj/item/clothing/under/tiger_bikini = 5,
 					/obj/item/clothing/accessory/collar_blk = 3,
 					/obj/item/clothing/accessory/collar_gld = 3,
 					/obj/item/clothing/accessory/collar_bell = 3,

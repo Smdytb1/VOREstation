@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person") //fingerscrossed
+	var/list/species_allowed = list("Human","Unathi", "Akula", "Slime Person", "Nevrean") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -781,7 +781,7 @@
 /datum/sprite_accessory/ears
 	name = "You should not see this..."
 	icon = 'icons/mob/fluff/ears.dmi'
-	do_colouration = 0
+	do_colouration = 0 //Set to 1 to convert greyscale to the haircolor
 
 	var/colored_overlay
 	var/desc = "You should not see this..."
@@ -864,6 +864,19 @@
 	name = "bee antennae"
 	desc = ""
 	icon_state = "bee"
+
+/datum/sprite_accessory/ears/oni_h1
+	name = "oni horns"
+	desc = ""
+	icon_state = "oni-h1"
+	do_colouration = 0
+
+/datum/sprite_accessory/ears/demon_horns1
+	name = "demon horns"
+	desc = ""
+	icon_state = "demon-horns1"
+	do_colouration = 0
+
 
 // Special snowflake ears go below here.
 
@@ -1009,6 +1022,12 @@
 	desc = ""
 	icon_state = "wolf-wise"
 
+
+/datum/sprite_accessory/tail/wisewolf
+ 	name = "wolf, black"
+ 	desc = ""
+ 	icon_state = "wolf"
+
 /datum/sprite_accessory/tail/wolf
 	name = "wolf, hair-colored"
 	desc = ""
@@ -1117,6 +1136,65 @@
 	desc = ""
 	icon_state = "feathered"
 
+
+/datum/sprite_accessory/tail/special
+	name = "Blank tail. Do not select."
+	icon = 'icons/effects/species.dmi'
+	
+/datum/sprite_accessory/tail/special/unathi
+	name = "unathi tail"
+	desc = ""
+	icon_state = "sogtail_s"
+	
+/datum/sprite_accessory/tail/special/tajaran
+	name = "tajaran tail"
+	desc = ""
+	icon_state = "tajtail_s"
+	
+/datum/sprite_accessory/tail/special/sergal
+	name = "sergal tail"
+	desc = ""
+	icon_state = "sergtail_s"
+	
+/datum/sprite_accessory/tail/special/akula
+	name = "akula tail"
+	desc = ""
+	icon_state = "sharktail_s"
+	
+/datum/sprite_accessory/tail/special/nevrean
+	name = "nevrean tail"
+	desc = ""
+	icon_state = "nevrean_s"
+	
+/datum/sprite_accessory/tail/special/unathihc
+	name = "unathi tail, hair colored"
+	desc = ""
+	icon_state = "sogtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/tajaranhc
+	name = "tajaran tail, hair colored"
+	desc = ""
+	icon_state = "tajtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/sergalhc
+	name = "sergal tail, hair colored"
+	desc = ""
+	icon_state = "sergtail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/akulahc
+	name = "akula tail, hair colored"
+	desc = ""
+	icon_state = "sharktail_s"
+	do_colouration = 1
+	
+/datum/sprite_accessory/tail/special/nevreanhc
+	name = "nevrean tail, hair colored"
+	desc = ""
+	icon_state = "nevrean_s"
+	do_colouration = 1
 /*
 ////////////////////////////
 /  =--------------------=  /

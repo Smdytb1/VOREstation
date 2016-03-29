@@ -148,7 +148,9 @@
 #define NORMPIPERATE             30   // Pipe-insulation rate divisor.
 #define HEATPIPERATE             8    // Heat-exchange pipe insulation.
 #define FLOWFRAC                 0.99 // Fraction of gas transfered per process.
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
+#define SHOES_SLOWDOWN           0  // How much shoes slow you down by default. Negative values speed you up.
+//EDIT: Used to be -1. Removing barefoot speed penelty is impossible cause it doesn't exist, so instead we increase every species' runspeed by 1
+//I.e. set their slowdown to -1
 
 // Item inventory slot bitmasks.
 #define SLOT_OCLOTHING  1

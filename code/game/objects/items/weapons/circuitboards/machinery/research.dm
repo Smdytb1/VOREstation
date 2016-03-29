@@ -22,6 +22,18 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1)
+							
+/obj/item/weapon/circuitboard/suspension_field_generator
+	name = T_BOARD("suspension field generator")
+	build_path = "/obj/machinery/suspension_gen"
+	board_type = "machine"
+	origin_tech = "magnets=3;engineering=3;programming=3" 
+	frame_desc = "Requires 3 Scanning Modules, 2 Micro Manipulators, 2 Micro-Lasers, and 2 pieces of cable" //These things are pretty useful!
+	req_components = list(
+							"/obj/item/weapon/stock_parts/scanning_module" = 3,
+							"/obj/item/weapon/stock_parts/manipulator" = 2,
+							"/obj/item/weapon/stock_parts/micro_laser" = 2,
+							"/obj/item/stack/cable_coil" = 2)
 
 /obj/item/weapon/circuitboard/autolathe
 	name = T_BOARD("autolathe")

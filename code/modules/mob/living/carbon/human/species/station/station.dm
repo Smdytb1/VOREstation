@@ -69,7 +69,7 @@
 	primitive = /mob/living/carbon/monkey/tajara
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
+	//slowdown = -1 By ace's request, removed bonus movespeed from taj -Antsnap
 	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
@@ -397,3 +397,24 @@
 	breath_type = null //no breathing?
 //	poison_type = null //no poison?
 	reagent_tag = IS_SLIMEP
+
+/datum/species/nevrean
+	name = "Nevrean" //Basically, just a new sprite. No upsides and no downsides, other than a new language.
+	name_plural = "Nevreans"
+	icobase = 'icons/mob/human_races/r_nevrean.dmi'
+	deform = 'icons/mob/human_races/r_def_nevrean.dmi'
+	language = "Birdsong" //New language. Birdsong.
+	tail = "nevrean"
+	primitive = /mob/living/carbon/monkey/sparra
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+
+	blurb = "Nevreans are a race of avian and dinosaur-like creatures living on Tal. They belong to a group of races that hails from Eltus. " //If you would like to add more lore, just edit this "blurb" line. I didn't know what to add from their wiki, so I left it barebones.
+
+	flags = CAN_JOIN | HAS_LIPS | HAS_EYE_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flesh_color = "#AFA59E" //Not going to touch this unless I have to.
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
+
+	heat_discomfort_strings = list(
+		"Your feathers prickle in the heat.",
+		"You feel uncomfortably warm."
+		)
