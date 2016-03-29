@@ -44,7 +44,7 @@
 //Tasald's Big Iron revolver
 /obj/item/weapon/gun/projectile/shotgun/pump/bigiron
 	name = "Big Iron revolver"
-	desc = "A .357 single action revolver that was more controversial than it needed to be. The primary ammo for this gun is .357 flash."
+	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
 	icon_state = "tasaldrevolver"
 	item_state = "revolver"
 	fire_sound = 'sound/weapons/pistol.ogg'

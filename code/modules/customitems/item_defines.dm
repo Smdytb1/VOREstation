@@ -2392,3 +2392,14 @@
 
 /obj/item/clothing/glasses/hud/health/tempisthud/process_hud(var/mob/M)
 	process_med_hud(M, 1)
+
+//Lethe's hat
+/obj/item/clothing/head/helmet/hos/lethe
+	name = "Lethe's Hat"
+	desc = " This is Lethe's Hat! A little tag attached inside reads: 'If found please return to Lethe! Or else!' It looks rather worn in."
+	icon_state = "hoscap"
+	flags = HEADCOVERSEYES
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags_inv = HIDEEARS
+	body_parts_covered = 0
+	siemens_coefficient = 0.8

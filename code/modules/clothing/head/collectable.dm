@@ -113,7 +113,7 @@
 	item_state = "hardhat0_yellow"
 	body_parts_covered = 0
 
-/obj/item/clothing/head/collectable/HoS
+/obj/item/clothing/head/collectable/hos
 	name = "collectable HoS hat"
 	desc = "Now you can beat prisoners, set silly sentences and arrest for no reason too!"
 	icon_state = "hoscap"
