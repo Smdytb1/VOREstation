@@ -2,6 +2,10 @@
 #define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
+#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
+#define EJECT_CASINGS	1 //drop spent casings on the ground after firing
+#define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns
+
 // The M41A from the Xeno station mission is not yet here. Need to include ASAP.
 // Caseless ammo is now handled by ammunition.dm
 
@@ -36,6 +40,37 @@
 	w_class = 3 // Because collapsable stock so it fits in backpacks.
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
 	max_shells = 6
+
+//Tasald's Big Iron revolver
+/obj/item/weapon/gun/projectile/shotgun/pump/bigiron
+	name = "Big Iron revolver"
+	desc = "A .357 single action revolver that was more controversial than it needed to be. The primary ammo for this gun is .357 flash."
+	icon_state = "tasaldrevolver"
+	item_state = "revolver"
+	fire_sound = 'sound/weapons/pistol.ogg'
+	caliber = "357"
+	origin_tech = "combat=2;materials=2"
+	max_shells = 6
+	handle_casings = CYCLE_CASINGS
+	ammo_type = /obj/item/ammo_casing/a357f
+	load_method = SINGLE_CASING|SPEEDLOADER
+	cocksound = 'sound/weapons/riflebolt.ogg'
+
+/obj/item/ammo_casing/a357f
+	desc = "A .357 flash shell casing."
+	icon_state = "r-casing"
+	caliber = "357"
+	projectile_type = /obj/item/projectile/energy/flash
+
+/obj/item/ammo_magazine/a357f
+	name = "speed loader (.357 Flash)"
+	icon_state = "38"
+	caliber = "357"
+	ammo_type = /obj/item/ammo_casing/a357f
+	matter = list("metal" = 1080) // 1 .357 casing = 180 metal
+	max_ammo = 6
+	multiple_sprites = 1
+
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
@@ -127,6 +162,7 @@
 
 	toggle_scope(2.0)
 
+//This weapon is shelved until someone can fix the modifystate var and apply a safety to the scythe mode.
 /*
 /obj/item/weapon/gun/projectile/automatic/crestrose
 	name = "Crescent Rose"

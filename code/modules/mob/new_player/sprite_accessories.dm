@@ -815,6 +815,11 @@
 	icon_state = "bunny"
 	do_colouration = 1
 
+/datum/sprite_accessory/ears/bunny_white
+	name = "bunny, white"
+	desc = ""
+	icon_state = "bunny"
+
 /datum/sprite_accessory/ears/bear_brown
 	name = "bear, brown"
 	desc = ""
@@ -1140,56 +1145,56 @@
 /datum/sprite_accessory/tail/special
 	name = "Blank tail. Do not select."
 	icon = 'icons/effects/species.dmi'
-	
+
 /datum/sprite_accessory/tail/special/unathi
 	name = "unathi tail"
 	desc = ""
 	icon_state = "sogtail_s"
-	
+
 /datum/sprite_accessory/tail/special/tajaran
 	name = "tajaran tail"
 	desc = ""
 	icon_state = "tajtail_s"
-	
+
 /datum/sprite_accessory/tail/special/sergal
 	name = "sergal tail"
 	desc = ""
 	icon_state = "sergtail_s"
-	
+
 /datum/sprite_accessory/tail/special/akula
 	name = "akula tail"
 	desc = ""
 	icon_state = "sharktail_s"
-	
+
 /datum/sprite_accessory/tail/special/nevrean
 	name = "nevrean tail"
 	desc = ""
 	icon_state = "nevrean_s"
-	
+
 /datum/sprite_accessory/tail/special/unathihc
 	name = "unathi tail, hair colored"
 	desc = ""
 	icon_state = "sogtail_s"
 	do_colouration = 1
-	
+
 /datum/sprite_accessory/tail/special/tajaranhc
 	name = "tajaran tail, hair colored"
 	desc = ""
 	icon_state = "tajtail_s"
 	do_colouration = 1
-	
+
 /datum/sprite_accessory/tail/special/sergalhc
 	name = "sergal tail, hair colored"
 	desc = ""
 	icon_state = "sergtail_s"
 	do_colouration = 1
-	
+
 /datum/sprite_accessory/tail/special/akulahc
 	name = "akula tail, hair colored"
 	desc = ""
 	icon_state = "sharktail_s"
 	do_colouration = 1
-	
+
 /datum/sprite_accessory/tail/special/nevreanhc
 	name = "nevrean tail, hair colored"
 	desc = ""

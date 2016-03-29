@@ -40,6 +40,8 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/energy/flash
 
+
+
 /obj/item/ammo_casing/c9mmr
 	desc = "A 9mm rubber bullet casing."
 	icon_state = "r-casing"
