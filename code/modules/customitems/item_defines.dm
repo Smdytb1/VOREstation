@@ -2378,3 +2378,17 @@
 	reagents.add_reagent("tricordrazine", 25)
 	update_icon()
 	return
+
+//Chakat Tempest item
+
+/obj/item/clothing/glasses/hud/health/tempisthud
+	name = "Custom Health Scanner HUD"
+	desc = "A customized heads-up display that scans the humans in view and provides accurate data about their health status."
+	icon_state = "phealthhud"
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "phealthhud"
+	body_parts_covered = 0
+
+
+/obj/item/clothing/glasses/hud/health/tempisthud/process_hud(var/mob/M)
+	process_med_hud(M, 1)
