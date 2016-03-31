@@ -108,7 +108,8 @@
 	var/is_floating = 0
 	var/floatiness = 0
 	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/nutrition = 400.0// Carbon
+	var/weight = 137 // Carbon. Average human body weight in pounds. Why pounds? Because fuck you. VOREstation weight code.
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
