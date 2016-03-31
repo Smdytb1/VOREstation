@@ -1104,7 +1104,7 @@
 	name = "deathclaw bits (Molenar)"
 	desc = ""
 	icon_state = "molenar-deathclaw"
-	ckeys_allowed = list("molenar")
+	ckeys_allowed = list("molenar","jertheace")
 
 /datum/sprite_accessory/tail/runac
 	name = "fennecsune tails (Runac)"
