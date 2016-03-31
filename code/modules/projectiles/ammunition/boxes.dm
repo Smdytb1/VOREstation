@@ -7,6 +7,15 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/a357r
+	name = "speed loader (.357 wax)"
+	icon_state = "38"
+	caliber = "357"
+	ammo_type = /obj/item/ammo_casing/a357r
+	matter = list("metal" = 1080) // 1 .357 casing = 180 metal
+	max_ammo = 6
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/c38
 	name = "speed loader (.38)"
 	icon_state = "38"

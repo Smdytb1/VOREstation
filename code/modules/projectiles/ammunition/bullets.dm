@@ -3,6 +3,11 @@
 	caliber = "357"
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
+/obj/item/ammo_casing/a357r
+	desc = "A wax .357 bullet casing." // It's wax but it's basically an archaic rubber round. Named for consistency.
+	caliber = "357"
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber
+
 /obj/item/ammo_casing/a50
 	desc = "A .50AE bullet casing."
 	caliber = ".50"

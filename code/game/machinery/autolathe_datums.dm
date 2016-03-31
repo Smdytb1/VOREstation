@@ -308,6 +308,11 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_revolver_1r
+	name = "ammunition (.357)"
+	path = /obj/item/ammo_magazine/a357r
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_revolver_2
 	name = "ammunition (.45)"
 	path = /obj/item/ammo_magazine/c45m
