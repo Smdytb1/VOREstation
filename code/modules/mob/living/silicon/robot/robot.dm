@@ -363,6 +363,23 @@ var/list/robot_verbs_default = list(
 			module_sprites["Science"] = "sciborg" //Let's give them an actual science cyborg.
 			module.channels = list("Science" = 1) //Give em science comms, why not.
 
+		if("Medihound")
+			icon = 'icons/mob/widerobot.dmi'
+			icon_state = "medihound"
+			hands.icon_state = "medihound"
+			module = new /obj/item/weapon/robot_module/medihound(src)
+			module_sprites["Medihound"] = "medihound" //This is the only sprite it can use.
+			module.channels = list("Medical" = 1) //They are medical bots, after all!
+
+		if("K9")
+			icon = 'icons/mob/widerobot.dmi'
+			icon_state = "k9"
+			hands.icon_state = "k9"
+			module = new /obj/item/weapon/robot_module/k9(src)
+			module_sprites["K9 hound"] = "k9" //This is the only sprite it can use.
+			module.channels = list("Security" = 1) //It is a security borg.
+
+
 	//languages
 	module.add_languages(src)
 
@@ -380,6 +397,11 @@ var/list/robot_verbs_default = list(
 	choose_icon(6,module_sprites)
 	radio.config(module.channels)
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
+
+	if(icon_state == "k9" || "medihound") //use for wide sprites
+		icon = 'icons/mob/widerobot.dmi'
+		pixel_x = -16
+		return
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
@@ -961,6 +983,11 @@ var/list/robot_verbs_default = list(
 			icon_state = module_sprites[icontype]
 		return
 
+	if(sleeper_g == 1)
+		overlays += "sleeper_g"
+	if(sleeper_r == 1)
+		overlays += "sleeper_r"
+
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
 	if(!targeted_by && target_locked)
@@ -1209,6 +1236,11 @@ var/list/robot_verbs_default = list(
 		return
 
 	overlays -= "eyes"
+
+	if("k9")
+		overlays += "eyes-k9"
+	if("Medihound")
+		overlays += "eyes-medihound"
 	updateicon()
 
 	if (triesleft >= 1)

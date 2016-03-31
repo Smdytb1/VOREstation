@@ -451,6 +451,45 @@
 	src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 	return
 
+/obj/item/weapon/robot_module/k9
+	name = "Security K-9 Unit module"
+
+/obj/item/weapon/robot_module/k9/New()
+	..()
+	src.modules += new /obj/item/weapon/handcuffs/cyborg(src) //You need cuffs to be a proper sec borg!
+	src.modules += new /obj/item/weapon/dogborg/jaws/big(src) //In case there's some kind of hostile mob.
+	src.modules += new /obj/item/weapon/dogborg/pounce(src) //Pounce on criminals and people so you can lick them.
+	src.modules += new /obj/item/weapon/boop_module(src) //Boop people on the nose.
+	src.modules += new /obj/item/weapon/soap/tongue(src) //This is so they can clean up bloody evidence after it's examined, and so they can lick crew.
+	//src.modules += new /obj/item/weapon/storage/bag/borgdelivery(src) //Pick up small items of evidence. //This is causing problems
+	src.modules += new /obj/item/taperoll/police(src) //Block out crime scenes.
+	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src) //They /are/ a security borg, after all.
+	src.modules += new /obj/item/borg/sight/hud/sec(src)
+	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src) //Emag. Not a big problem.
+	return
+
+/obj/item/weapon/robot_module/medihound
+	name = "MediHound module"
+
+/obj/item/weapon/robot_module/medihound/New()
+	..()
+	src.modules += new /obj/item/weapon/dogborg/jaws/small(src) //In case a patient is being attacked by carp.
+	//src.modules += new /obj/item/weapon/storage/bag/borgdelivery(src) //Carry a small item, like a bottle of medicine that the chemist made. //Again, causing problems
+	src.modules += new /obj/item/weapon/boop_module(src) //Boop the crew.
+	src.modules += new /obj/item/weapon/soap/tongue(src) //Clean up bloody items by licking them, and eat rubbish for minor energy.
+	src.modules += new /obj/item/device/healthanalyzer(src) // See who's hurt specificially.
+	src.modules += new /obj/item/weapon/dogborg/sleeper(src) //So they can nom people and heal them
+	src.modules += new /obj/item/borg/sight/hud/med(src) //See who's hurt generally.
+	src.modules += new /obj/item/weapon/extinguisher/mini(src) //So they can put burning patients out.
+	src.modules += new /obj/item/weapon/reagent_containers/syringe(src) //In case the chemist is nice!
+	src.emag = new /obj/item/weapon/dogborg/pounce(src)
+	return
+
+
+
+
+
+
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
 
