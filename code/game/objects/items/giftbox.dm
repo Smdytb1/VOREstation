@@ -75,7 +75,8 @@
 						/obj/item/mecha_parts/part/phazon_left_arm,
 						/obj/item/mecha_parts/part/phazon_right_arm,
 						/obj/item/mecha_parts/part/phazon_left_leg,
-						/obj/item/mecha_parts/part/phazon_right_leg)
+						/obj/item/mecha_parts/part/phazon_right_leg,
+						/obj/item/weapon/reagent_containers/hypospray/autoinjector/shrink)
 		new loot(usr.loc)
 		usr << "You unwrap the box."
 		del(src)

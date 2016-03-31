@@ -494,7 +494,7 @@
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
-	
+
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))

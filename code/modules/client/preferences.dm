@@ -38,6 +38,9 @@ datum/preferences
 	var/last_ip
 	var/last_id
 
+	// Runtime preference flags (not saved!)
+	var/runtime_toggles = RUNTIME_TOGGLES_DEFAULT
+
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
@@ -53,9 +56,10 @@ datum/preferences
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
-	var/b_type = "O-"					//blood type (not-chooseable)
+	var/b_type = "O-"					//blood type
 	var/underwear						//underwear type
 	var/undershirt						//undershirt type
+	var/undersocks						//undersocks type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -76,7 +80,11 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/ear_style = null				//Ear style
+	var/tail_style = null				//Tail style
+	var/playerscale = RESIZE_NORMAL					//Custom playerscale
 	var/species = "Human"               //Species datum to use.
+	var/custom_species = null			//Custom species text
 	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
@@ -119,6 +127,8 @@ datum/preferences
 
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
+
+	var/list/inside_flavour_texts = list()
 
 	var/med_record = ""
 	var/sec_record = ""
@@ -308,13 +318,17 @@ datum/preferences
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
 	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
+	dat += "Custom Species: <a href='?src=\ref[user];preference=custom_species;task=input'>[custom_species ? custom_species : "None"]</a><br>"
+	dat += "Scale: <a href='?src=\ref[user];preference=playerscale;task=input'>[round(playerscale*100)]%</a><br>"
 	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 	//dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>" //Goodbye Skintone, Orbis
 	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
-	dat += "Taur body: <a href='byond://?src=\ref[user];preference=taurbody;task=input'>[taur]</a><br>"
+	dat += "Taur body: <a href='byond://?src=\ref[user];preference=taurbody;task=input'>[taur > 0 && taur <= taur_styles_list.len ? taur_styles_list[taur] : "None"]</a><br>"
 	dat += "<a href='?_src_=prefs;preference=t_tone;task=input'>Taur colour</a> <font face='fixedsys' size='3' color='#[num2hex(r_taur, 2)][num2hex(g_taur, 2)][num2hex(b_taur, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_taur, 2)][num2hex(g_taur, 2)][num2hex(b_taur)]'><tr><td>__</td></tr></table></font> "
 	dat += "(<a href='?_src_=prefs;preference=skin2taur;task=input'>Skin tone to taur colour</A>)<br>"
+	dat += "Ear Style: <a href='byond://?src=\ref[user];preference=ear_style;task=input'>[ear_style ? "Custom" : "Normal"]</a><br>"
+	dat += "Tail Style: <a href='byond://?src=\ref[user];preference=tail_style;task=input'>[tail_style ? "Custom" : "Normal"]</a><br>"
 	dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
 	dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
 	dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
@@ -386,6 +400,8 @@ datum/preferences
 
 	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[get_key_by_value(undershirt_t,undershirt)]</b></a><br>"
 
+	dat += "Socks: <a href='?_src_=prefs;preference=undersocks;task=input'><b>[get_key_by_value(undersocks_t,undersocks)]</b></a><br>"
+
 	dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 
 	dat += "Nanotrasen Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
@@ -405,6 +421,8 @@ datum/preferences
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
+
+	dat += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=open'><b>Set Inside Flavour Texts</b></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
@@ -723,6 +741,33 @@ datum/preferences
 	user << browse(HTML, "window=flavor_text;size=430x300")
 	return
 
+/datum/preferences/proc/SetInsideFlavourText(mob/user)
+	var/HTML = "<body>"
+	HTML += "<tt><center>"
+	HTML += "<b>Set Inside Flavour Text</b> <hr />"
+	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Stomach'>Stomach:</a> "
+	HTML += TextPreview(inside_flavour_texts["Stomach"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Cock'>Balls:</a> "
+	HTML += TextPreview(inside_flavour_texts["Cock"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Womb'>Womb:</a> "
+	HTML += TextPreview(inside_flavour_texts["Womb"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Boob'>Boobs:</a> "
+	HTML += TextPreview(inside_flavour_texts["Boob"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
+	HTML += TextPreview(inside_flavour_texts["Tail"])
+	HTML += "<br>"
+	HTML += "<hr />"
+	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
+	HTML += "<tt>"
+	user << browse(null, "window=preferences")
+	user << browse(HTML, "window=inside_flavour_text;size=430x300")
+	return
+
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
 	var/HTML = "<body>"
 	HTML += "<tt><center>"
@@ -1016,6 +1061,25 @@ datum/preferences
 		SetFlavorText(user)
 		return
 
+	else if(href_list["preference"] == "inside_flavour_text")
+		switch(href_list["task"])
+			if("open")
+				SetInsideFlavourText(user)
+				return
+			if("done")
+				user << browse(null, "window=inside_flavour_text")
+				ShowChoices(user)
+				return
+			else
+				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Inside Flavour Text",html_decode(inside_flavour_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				inside_flavour_texts[href_list["task"]] = msg
+		SetInsideFlavourText(user)
+		return
+
+
 	else if(href_list["preference"] == "flavour_text_robot")
 		switch(href_list["task"])
 			if("open")
@@ -1191,6 +1255,10 @@ datum/preferences
 					var/r = pick(undershirt_t)
 					undershirt = undershirt_t[r]
 					ShowChoices(user)
+				if("undersocks")
+					var/r = pick(undersocks_t)
+					undershirt = undersocks_t[r]
+					ShowChoices(user)
 				if("eyes")
 					r_eyes = rand(0,255)
 					g_eyes = rand(0,255)
@@ -1275,6 +1343,16 @@ datum/preferences
 						b_hair = 0//hex2num(copytext(new_hair, 6, 8))
 
 					//	s_tone = 0 //Goodbye Skintone, Orbis
+
+				if("playerscale")
+					var/list/size_types = player_sizes_list
+					var/new_size = input(user, "Choose your character's size:", "Character Preference") as null|anything in size_types
+					if(new_size)
+						playerscale = size_types[new_size]
+
+				if("custom_species")
+					var/raw_custom_species = input(user, "Input your character's species:", "Character Preference", custom_species)  as text|null
+					custom_species = sanitize(copytext(raw_custom_species,1,MAX_MESSAGE_LEN))
 
 				if("language")
 					var/languages_available
@@ -1375,6 +1453,15 @@ datum/preferences
 						undershirt = undershirt_options[new_undershirt]
 					ShowChoices(user)
 
+				if("undersocks")
+					var/list/undersocks_options
+					undersocks_options = undersocks_t
+
+					var/new_undersocks = input(user, "Choose your character's socks:", "Character Preference") as null|anything in undersocks_options
+					if (new_undersocks)
+						undersocks = undersocks_options[new_undersocks]
+					ShowChoices(user)
+
 				if("eyes")
 					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference", rgb(r_eyes, g_eyes, b_eyes)) as color|null
 					if(new_eyes)
@@ -1390,10 +1477,10 @@ datum/preferences
 			//			if(new_s_tone)
 			//				s_tone = 35 - max(min( round(new_s_tone), 220),1)
 				if("taurbody")
-					var/list/taur_types = list("None","Fluffy","Naga","Horse","Cow","Lizard","Spider")
-					var/new_taur = input(user, "Choose your character's taur body:", "Character Preference") as null|anything in taur_types  //list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
-					taur = taur_types.Find(new_taur) - 1
-
+					var/list/taur_types = list("None") + taur_styles_list
+					var/new_taur = input(user, "Choose your character's taur body:", "Character Preference") as null|anything in taur_types
+					if(new_taur)
+						taur = taur_types.Find(new_taur) - 1 // Subtract one to adjust for "None" being tacked on.
 
 				if("t_tone")
 					var/new_t_tone = input(user, "Choose your character's taur-tone:", "Character Preference")  as color|null
@@ -1406,6 +1493,32 @@ datum/preferences
 					r_taur = r_skin
 					g_taur = g_skin
 					b_taur = b_skin
+
+				if("ear_style")
+					var/list/pretty_ear_styles = list("Normal")
+					for(var/path in ear_styles_list)
+						var/datum/sprite_accessory/ears/instance = ear_styles_list[path]
+						if((!instance.ckeys_allowed) || (usr.ckey in instance.ckeys_allowed))
+							pretty_ear_styles[instance.name] = path
+
+					var/selection = input(user, "Pick ears (doesn't update preview)", "Character Preference") as null|anything in pretty_ear_styles
+					if(selection && selection != "Normal")
+						ear_style = pretty_ear_styles[selection]
+					else
+						ear_style = null
+
+				if("tail_style")
+					var/list/pretty_tail_styles = list("Normal")
+					for(var/path in tail_styles_list)
+						var/datum/sprite_accessory/tail/instance = tail_styles_list[path]
+						if((!instance.ckeys_allowed) || (usr.ckey in instance.ckeys_allowed))
+							pretty_tail_styles[instance.name] = path
+
+					var/selection = input(user, "Pick tail (doesn't update preview)", "Character Preference") as null|anything in pretty_tail_styles
+					if(selection && selection != "Normal")
+						tail_style = pretty_tail_styles[selection]
+					else
+						tail_style = null
 
 				if("skin")
 					if(species != "Vox" && species != "Machine" && species != "Diona")
@@ -1676,6 +1789,11 @@ datum/preferences
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
 
+	// This is gonna be interesting. Let's see if I can figure out inside flavour texts -Nightwing
+	for (var/bellytype in character.internal_contents)
+		var/datum/belly/belly = character.internal_contents[bellytype]
+		belly.inside_flavor = inside_flavour_texts[belly.belly_type]
+
 	character.med_record = med_record
 	character.sec_record = sec_record
 	character.gen_record = gen_record
@@ -1684,6 +1802,7 @@ datum/preferences
 	character.gender = gender
 	character.age = age
 	character.b_type = b_type
+	character.custom_species = custom_species
 
 	character.r_eyes = r_eyes
 	character.g_eyes = g_eyes
@@ -1707,6 +1826,11 @@ datum/preferences
 	character.r_taur = r_taur
 	character.g_taur = g_taur
 	character.b_taur = b_taur
+
+	character.ear_style = ear_styles_list[ear_style]
+	character.tail_style = tail_styles_list[tail_style]
+
+	character.playerscale = playerscale
 
 	character.h_style = h_style
 	character.f_style = f_style
@@ -1743,6 +1867,8 @@ datum/preferences
 	character.underwear = underwear
 
 	character.undershirt = undershirt
+
+	character.undersocks = undersocks
 
 	if(backbag > 4 || backbag < 1)
 		backbag = 1 //Same as above

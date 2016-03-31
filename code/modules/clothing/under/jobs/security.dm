@@ -162,7 +162,7 @@
 	item_state = "hos_corporate"
 	item_color = "hos_corporate"
 
-/obj/item/clothing/head/helmet/HoS
+/obj/item/clothing/head/helmet/hos
 	name = "Head of Security Hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon_state = "hoscap"

@@ -33,6 +33,12 @@
 	else
 		wires = new/datum/wires/smartfridge(src)
 
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/smartfridge(null, type)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	RefreshParts()
+
 /obj/machinery/smartfridge/Del()
 	del(wires) // qdel
 	..()
@@ -182,6 +188,13 @@
 		if(panel_open)
 			overlays += image(icon, icon_panel)
 		nanomanager.update_uis(src)
+		return
+
+	// Handle default machine operations
+	if(default_deconstruction_crowbar(user, O))
+		return
+
+	if(default_part_replacement(user, O))
 		return
 
 	if(istype(O, /obj/item/device/multitool)||istype(O, /obj/item/weapon/wirecutters))

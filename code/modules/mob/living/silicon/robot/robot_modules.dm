@@ -434,6 +434,23 @@
 	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
 	return
 
+/obj/item/weapon/robot_module/xenoarch
+	name = "xenoarch robot module"
+
+/obj/item/weapon/robot_module/xenoarch/New()
+	..()
+	src.modules += new /obj/item/weapon/pickaxe/excavationdrill(src)
+	src.modules += new /obj/item/borg/sight/meson(src)
+	src.modules += new /obj/item/device/beacon_locator(src)
+	src.modules += new /obj/item/device/measuring_tape(src)
+	src.modules += new /obj/item/device/depth_scanner(src)
+	src.modules += new /obj/item/weapon/wrench(src)
+	src.modules += new /obj/item/device/flashlight(src)
+	src.modules += new /obj/item/device/gps(src)
+	src.modules += new /obj/item/device/ano_scanner(src)
+	src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
+	return
+
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
 

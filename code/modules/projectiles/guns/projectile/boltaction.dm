@@ -8,7 +8,7 @@
 	caliber = "a762"
 	origin_tech = "combat=2" // Old as shit rifle doesn't have very good tech.
 	ammo_type = /obj/item/ammo_casing/a762
-	load_method = SINGLE_CASING | SPEEDLOADER
+	load_method = SINGLE_CASING|SPEEDLOADER
 	cocksound = 'sound/weapons/riflebolt.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin
@@ -38,3 +38,14 @@
 			user << "<span class='warning'>You shorten the barrel and stock of \the [src]!</span>"
 	else
 		..()
+
+
+
+/obj/item/weapon/gun/projectile/shotgun/pump/rifle/chalk // For target practice
+	desc = "A bolt-action rifle with a lightweight synthetic wood stock, designed for competitive shooting. Comes shipped with chalk rounds pre-loaded into the gun. Popular among professional marksmen. Uses 7.62mm ammo."
+	ammo_type = /obj/item/ammo_casing/a762/chalk
+
+/obj/item/weapon/gun/projectile/shotgun/pump/rifle/ceremonial // For Blueshield
+	name = "ceremonial bolt-action rifle"
+	desc = "A bolt-action rifle decorated with dazzling engravings across the stock. Usually loaded with blanks, but can fire live rounds. Popular among well-dressed guardsmen. Uses 7.62mm ammo."
+	ammo_type = /obj/item/ammo_casing/a762/blank

@@ -156,13 +156,45 @@
 
 		//Hair
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
+		if(hair == 0)
+			hair = 1
 		if((0 < hair) && (hair <= hair_styles_list.len))
 			H.h_style = hair_styles_list[hair]
 
 		//Facial Hair
 		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,facial_hair_styles_list.len)
+		if(beard == 0)
+			beard = 1
 		if((0 < beard) && (beard <= facial_hair_styles_list.len))
 			H.f_style = facial_hair_styles_list[beard]
+
+		//Ears
+		var/ears = dna.GetUIValueRange(DNA_UI_EAR_STYLE,ear_styles_list.len)
+		if(ears == 0)
+			H.ear_style = null
+		else if((0 < ears) && (ears <= ear_styles_list.len))
+			H.ear_style = ear_styles_list[ear_styles_list[ears]]
+
+		//Tail
+		var/tail = dna.GetUIValueRange(DNA_UI_TAIL_STYLE,tail_styles_list.len)
+		if(tail == 0)
+			H.tail_style = null
+		else if((0 < tail) && (tail <= tail_styles_list.len))
+			H.tail_style = tail_styles_list[tail_styles_list[tail]]
+
+		// Taur
+		var/taur = dna.GetUIValueRange(DNA_UI_TAUR_BODY,taur_styles_list.len)
+		if (taur == 0)
+			H.taur = 0
+		else if((0 < taur) && (taur <= taur_styles_list.len))
+			H.taur = taur // Taur is stored as the index for historical reasons
+
+		// Playerscale
+		var/playerscale = dna.GetUIValueRange(DNA_UI_PLAYERSCALE,player_sizes_list.len)
+		if (playerscale == 0)
+			H.playerscale = RESIZE_NORMAL
+		else if((0 < playerscale) && (playerscale <= player_sizes_list.len))
+			H.playerscale = player_sizes_list[player_sizes_list[playerscale]]
 
 		H.update_body(0)
 		H.update_hair()

@@ -242,6 +242,12 @@ datum/design/circuit/arcademachine
 	req_tech = list("programming" = 1)
 	build_path = /obj/item/weapon/circuitboard/arcade
 
+datum/design/circuit/jukebox
+	name = "jukebox"
+	id = "jukebox"
+	req_tech = list("programming" = 1)
+	build_path = /obj/item/weapon/circuitboard/jukebox
+
 datum/design/circuit/powermonitor
 	name = "power monitoring console"
 	id = "powermonitor"
@@ -428,6 +434,21 @@ datum/design/aimodule/core/paladin
 	name = "P.A.L.A.D.I.N."
 	id = "paladin"
 	build_path = /obj/item/weapon/aiModule/paladin
+
+datum/design/aimodule/core/nanotrasen
+	name = "Default NanoTrasen"
+	id = "nanotrasen"
+	build_path = /obj/item/weapon/aiModule/nanotrasen
+
+datum/design/aimodule/core/communist
+	name = "Communist"
+	id = "communist"
+	build_path = /obj/item/weapon/aiModule/communist
+
+datum/design/aimodule/core/corporate
+	name = "Corporate"
+	id = "corporate"
+	build_path = /obj/item/weapon/aiModule/corp
 
 datum/design/aimodule/core/tyrant
 	name = "T.Y.R.A.N.T."
@@ -992,6 +1013,46 @@ datum/design/circuit/recharge_station
 	id = "recharge_station"
 	req_tech = list("programming" = 3, "engineering" = 2)
 	build_path = /obj/item/weapon/circuitboard/recharge_station
+
+datum/design/circuit/extractor
+	name = "lysis-isolation centrifuge"
+	id = "extractor"
+	req_tech = list("programming" = 2, "engineering" = 2)
+	build_path = /obj/item/weapon/circuitboard/extractor
+
+datum/design/circuit/editor
+	name = "bioballistic delivery system"
+	id = "editor"
+	req_tech = list("programming" = 2, "engineering" = 2)
+	build_path = /obj/item/weapon/circuitboard/editor
+	
+datum/design/circuit/suspension_field_generator
+	name = "suspension field generator"
+	id = "suspension_field_generator"
+	req_tech = list("programming" = 3, "magnets" = 3, "engineering" = 3) //Let's not be too brutal on the poor xenoarchs.
+	build_path = /obj/item/weapon/circuitboard/suspension_field_generator
+
+////////////////////////////////////////
+/////////Civilian Circuit Boards////////
+////////////////////////////////////////
+
+datum/design/circuit/microwave
+	name = "Machine Design (Microwave Board)"
+	id = "microwave"
+	req_tech = list("programming" = 1, "magnets" = 2)
+	build_path = /obj/item/weapon/circuitboard/microwave
+
+datum/design/circuit/gibber
+	name = "gibber"
+	id = "gibber"
+	req_tech = list("programming" = 1, "materials" = 2)
+	build_path = /obj/item/weapon/circuitboard/gibber
+
+datum/design/circuit/smartfridge
+	name = "smartfridge"
+	id = "smartfridge"
+	req_tech = list("programming" = 1, "magnets" = 2, "engineering" = 2)
+	build_path = /obj/item/weapon/circuitboard/smartfridge
 
 /////////////////////////////////////////
 ////////Power Stuff Circuitboards////////
@@ -1619,6 +1680,22 @@ datum/design/item/mesons
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
 
+datum/design/item/material
+	name = "Optical material scanners design"
+	desc = "What the hell are these for, anyway?"
+	id = "material"
+	req_tech = list("magnets" = 3, "engineering" = 3)
+	materials = list("$metal" = 50, "$glass" = 50, "$uranium" = 50)
+	build_path = /obj/item/clothing/glasses/material
+
+datum/design/item/thermal
+	name = "Optical thermal scanners design"
+	desc = "Used for detecting infared signatures of life forms and violating company privacy policies."
+	id = "thermal"
+	req_tech = list("magnets" = 3, "syndicate" = 3)
+	materials = list("$metal" = 50, "$glass" = 50, "$uranium" = 50, "$phorontech" = 50)
+	build_path = /obj/item/clothing/glasses/thermal
+
 datum/design/item/binaryencrypt
 	name = "Binary encryption key"
 	desc = "Allows for deciphering the binary channel on-the-fly."
@@ -1635,11 +1712,29 @@ datum/design/item/chameleon
 	materials = list("$metal" = 500)
 	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
 
-datum/design/sizegun
+datum/design/item/sizegun
 	name = "Shrink Ray"
-	desc = "A ray gun that shoots bolts of energy which changes a target's size by warping the local space around them."
+	desc = "A ray gun that shoots bolts of energy which changes a target's size and weight by warping the local space around them."
 	id = "sizegun"
 	req_tech = list("redspace" = 1)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
-	build_path = "/obj/item/weapon/gun/energy/sizegun"
+	build_path = /obj/item/weapon/gun/energy/sizegun
+
+datum/design/item/tacheadset
+	name = "Tactical Headset"
+	desc = "A headset with a built in camera that connects wirelessly to the station's security network via bluespace transmitters."
+	id = "tacheadset"
+	req_tech = list("bluespace" = 2,"combat" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 75, "$glass" = 50, "$gold" = 30, "$diamond" = 50)
+	build_path = /obj/item/device/radio/headset/headset_sec/tactical/empty
+
+/datum/design/excavationdrill
+	name = "Excavation Drill"
+	desc = "Advanced archaeological drill combining ultrasonic excitation and bluespace manipulation to provide extreme precision. The diamond tip is adjustable from 1 to 30 cm."
+	id = "excavationdrill"
+	req_tech = list("materials" = 6, "powerstorage" = 3, "engineering" = 3, "bluespace" = 4)
+	build_type = PROTOLATHE
+	materials = list("$iron" = 4000, "$glass" = 1000, "$silver" = 1000, "$diamond" = 500)
+	build_path = /obj/item/weapon/pickaxe/excavationdrill

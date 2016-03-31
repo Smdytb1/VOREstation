@@ -15,6 +15,7 @@ datum/preferences
 		randomize_skin_color()
 		underwear = rand(1,underwear_m.len)
 		undershirt = rand(1,undershirt_t.len)
+		undersocks = rand(1,undersocks_t.len)
 		backbag = 2
 		age = rand(AGE_MIN,AGE_MAX)
 		if(H)
@@ -207,14 +208,37 @@ datum/preferences
 
 			preview_icon.Blend(temp, ICON_OVERLAY)
 
-		//Tail
-		if(current_species && (current_species.tail))
-			var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
-			preview_icon.Blend(temp, ICON_OVERLAY)
-
 		// Skin color
 		if(current_species && (current_species.flags & HAS_SKIN_COLOR))
 			preview_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY) //CHANGED ICON ADD TO MULTIPLY
+
+		//Tail (HORRIBLE COPY PASTE!)
+		if(taur && taur <= taur_styles_list.len) //taur is True and not exceeding the actual number of possible options
+			var/datum/sprite_accessory/taur/taur_style = taur_styles_list[taur_styles_list[taur]]  // Taur is int, list is by name
+			if(taur_style)
+				var/icon/taur_s = new/icon("icon" = taur_style.icon, "icon_state" = taur_style.icon_state)
+				if(taur_style.do_colouration)
+					taur_s.Blend(rgb(r_taur, g_taur, b_taur), ICON_MULTIPLY)
+					preview_icon.Blend(taur_s, ICON_OVERLAY, 1-(16*RESIZE_NORMAL))
+
+		else if(tail_style && tail_styles_list[tail_style])
+			var/datum/sprite_accessory/tail/meta = tail_styles_list[tail_style]
+			var/icon/tail_s = new/icon("icon" = meta.icon, "icon_state" = meta.icon_state)
+			if(meta.do_colouration)
+				tail_s.Blend(rgb(src.r_hair, src.g_hair, src.b_hair), ICON_ADD)
+			if(meta.colored_overlay)
+				var/icon/overlay = new/icon("icon" = meta.icon, "icon_state" = meta.colored_overlay)
+				tail_s.Blend(overlay, ICON_OVERLAY)
+			if(meta.show_species_tail && current_species.tail)
+				var/icon/spec_tail = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
+				spec_tail.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+				tail_s.Blend(spec_tail, ICON_OVERLAY)
+			preview_icon.Blend(tail_s, ICON_OVERLAY)
+
+		else if(current_species && (current_species.tail))
+			var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
+			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+			preview_icon.Blend(temp, ICON_OVERLAY)
 
 		// Skin tone //Goodbye Skintone, Orbis
 //		if(current_species && (current_species.flags & HAS_SKIN_TONE))
@@ -239,6 +263,18 @@ datum/preferences
 			facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
 			eyes_s.Blend(facial_s, ICON_OVERLAY)
 
+		// Ear Items (HORRIBLE COPY PASTE)
+		if(ear_style && ear_styles_list[ear_style])
+			var/datum/sprite_accessory/ears/meta = ear_styles_list[ear_style]
+			var/icon/ears_s = icon("icon" = meta.icon, "icon_state" = meta.icon_state)
+			if(meta.do_colouration)
+				ears_s.Blend(rgb(src.r_hair, src.g_hair, src.b_hair), ICON_ADD)
+			if(meta.colored_overlay)
+				var/icon/overlay = new/icon("icon" = meta.icon, "icon_state" = meta.colored_overlay)
+				ears_s.Blend(overlay, ICON_OVERLAY)
+			eyes_s.Blend(ears_s, ICON_OVERLAY)
+
+
 		var/icon/underwear_s = null
 		if(underwear && current_species.flags & HAS_UNDERWEAR)
 			underwear_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = underwear)
@@ -246,6 +282,10 @@ datum/preferences
 		var/icon/undershirt_s = null
 		if(undershirt && current_species.flags & HAS_UNDERWEAR)
 			undershirt_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = undershirt)
+
+		var/icon/undersocks_s = null
+		if(undersocks && current_species.flags & HAS_UNDERWEAR)
+			undersocks_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = undersocks)
 
 		var/icon/clothes_s = null
 		if(job_civilian_low & ASSISTANT)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
@@ -684,6 +724,8 @@ datum/preferences
 			preview_icon.Blend(underwear_s, ICON_OVERLAY)
 		if(undershirt_s)
 			preview_icon.Blend(undershirt_s, ICON_OVERLAY)
+		if(undersocks_s)
+			preview_icon.Blend(undersocks_s, ICON_OVERLAY)
 		if(clothes_s)
 			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 		preview_icon_front = new(preview_icon, dir = SOUTH)
@@ -692,4 +734,5 @@ datum/preferences
 		del(eyes_s)
 		del(underwear_s)
 		del(undershirt_s)
+		del(undersocks_s)
 		del(clothes_s)

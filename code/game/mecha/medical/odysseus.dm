@@ -61,6 +61,7 @@
 //TODO - Check documentation for client.eye and client.perspective...
 /obj/item/clothing/glasses/hud/health/mech
 	name = "Integrated Medical Hud"
+	prescription = 1
 
 
 	process_hud(var/mob/M)

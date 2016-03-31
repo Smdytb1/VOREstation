@@ -120,6 +120,14 @@
 	src << "You will [(prefs.toggles & CHAT_LOOC) ? "now" : "no longer"] see messages on the LOOC channel."
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/toogle_listen_rlooc()
+	set name = "Show/Hide Remote LOOC"
+	set category = "Preferences"
+	set desc = "Toggles seeing Remote Local OutOfCharacter chat"
+	prefs.runtime_toggles ^= CHAT_RLOOC
+
+	src << "You will [(prefs.runtime_toggles & CHAT_RLOOC) ? "now" : "no longer"] see remote messages on the LOOC channel."
+	feedback_add_details("admin_verb","TRLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/toggle_chattags()
 	set name = "Show/Hide Chat Tags"

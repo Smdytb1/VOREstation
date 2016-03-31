@@ -20,3 +20,8 @@
 
 	origin_tech = "magnets=1;engineering=1"
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
+	var/obj/link_buffer = null // For linking up stuff that isn't telecoms
+
+/obj/item/device/multitool/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
+	link_buffer = A
+	return ..()

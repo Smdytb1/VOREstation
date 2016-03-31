@@ -74,6 +74,7 @@
 							var/cp = text2path(A)
 							var/obj/ct = new cp() // have to quickly instantiate it get name
 							req_component_names[A] = ct.name
+							del ct // We should clean this
 						if(circuit.frame_desc)
 							desc = circuit.frame_desc
 						else
@@ -116,7 +117,9 @@
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
-							new_machine.component_parts.Cut()
+							for(var/obj/O in new_machine.component_parts)
+								del O
+							new_machine.component_parts.Cut() //Stupid list of nulls now
 							src.circuit.construct(new_machine)
 							for(var/obj/O in src)
 								if(circuit.contain_parts) // things like disposal don't want their parts in them

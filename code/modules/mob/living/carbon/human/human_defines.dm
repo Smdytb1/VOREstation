@@ -23,6 +23,10 @@
 	var/g_skin = 206
 	var/b_skin = 179
 
+	//Hooray furries
+	var/datum/sprite_accessory/ears/ear_style = null
+	var/datum/sprite_accessory/tail/tail_style = null
+
 	//Taur stuff
 	var/taur = 0
 	var/r_taur = 30
@@ -39,6 +43,7 @@
 
 	var/underwear = 1	//Which underwear the player wants
 	var/undershirt = 0	//Which undershirt the player wants.
+	var/undersocks = 0	//Which undersocks the player wants.
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
 	// General information

@@ -8,7 +8,7 @@ datum/track/New(var/title_name, var/audio)
 	title = title_name
 	sound = audio
 
-/obj/machinery/media/jukebox/
+/obj/machinery/media/jukebox
 	name = "space jukebox"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
@@ -21,6 +21,11 @@ datum/track/New(var/title_name, var/audio)
 	active_power_usage = 100
 
 	var/playing = 0
+
+	// Vars for hacking
+	var/datum/wires/jukebox/wires = null
+	var/hacked = 0 // Whether to show the hidden songs or not
+	var/freq = 0
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
@@ -42,14 +47,23 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Ransacked", 'sound/music/jukebox/Ransacked.ogg'),
 		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg'), // EVEN THOUGH THE STATION IS FULL OF HUNGRY WOLVES
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
+		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
-		new/datum/track("Welcome To Jurassic Park", 'sound/music/jukebox/WelcomeToJurassicPark.mid'),
+		new/datum/track("Welcome To Jurassic Park", 'sound/music/jukebox/WelcomeToJurassicPark.mid')
+	)
+	// Only visible if hacked
+	var/list/datum/track/secret_tracks = list(
+		new/datum/track("Bandit Radio", 'sound/music/jukebox/bandit_radio.ogg'),
+		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg')
 	)
 
+/obj/machinery/media/jukebox/New()
+	..()
+	wires = new/datum/wires/jukebox(src)
 
 /obj/machinery/media/jukebox/Del()
 	StopPlaying()
+	del(wires)
 	..()
 
 /obj/machinery/media/jukebox/power_change()
@@ -76,6 +90,8 @@ datum/track/New(var/title_name, var/audio)
 			overlays += "[state_base]-emagged"
 		else
 			overlays += "[state_base]-running"
+	if (panel_open)
+		overlays += "panel_open"
 
 /obj/machinery/media/jukebox/Topic(href, href_list)
 	if(..() || !(Adjacent(usr) || istype(usr, /mob/living/silicon)))
@@ -161,6 +177,15 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/attack_hand(var/mob/user as mob)
 	interact(user)
 
+/obj/machinery/media/jukebox/proc/set_hacked(var/newhacked)
+	if (hacked == newhacked) return
+	hacked = newhacked
+	if (hacked)
+		tracks.Add(secret_tracks)
+	else
+		tracks.Remove(secret_tracks)
+	updateDialog()
+
 /obj/machinery/media/jukebox/proc/explode()
 	walk_to(src,0)
 	src.visible_message("<span class='danger'>\the [src] blows apart!</span>", 1)
@@ -177,6 +202,12 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 
+	if (default_deconstruction_screwdriver(user, W))
+		return
+	if(istype(W, /obj/item/weapon/wirecutters))
+		return wires.Interact(user)
+	if(istype(W, /obj/item/device/multitool))
+		return wires.Interact(user)
 	if(istype(W, /obj/item/weapon/wrench))
 		if(playing)
 			StopPlaying()
@@ -216,6 +247,8 @@ datum/track/New(var/title_name, var/audio)
 
 	var/area/A = get_area(src)
 	A.forced_ambience = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+	if (freq)
+		A.forced_ambience.frequency = freq
 
 	for(var/mob/living/M in mobs_in_area(A))
 		if(M.mind)
@@ -224,6 +257,7 @@ datum/track/New(var/title_name, var/audio)
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
 
 ///////////////////////////////////////////
 // Event-specific jukeboxes go below here

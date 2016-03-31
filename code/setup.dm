@@ -148,7 +148,9 @@
 #define NORMPIPERATE             30   // Pipe-insulation rate divisor.
 #define HEATPIPERATE             8    // Heat-exchange pipe insulation.
 #define FLOWFRAC                 0.99 // Fraction of gas transfered per process.
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
+#define SHOES_SLOWDOWN           0  // How much shoes slow you down by default. Negative values speed you up.
+//EDIT: Used to be -1. Removing barefoot speed penelty is impossible cause it doesn't exist, so instead we increase every species' runspeed by 1
+//I.e. set their slowdown to -1
 
 // Item inventory slot bitmasks.
 #define SLOT_OCLOTHING  1
@@ -243,7 +245,7 @@
 #define slot_legs        21
 #define slot_tie         22
 
-// Mob sprite sheets. These need to be strings as numbers 
+// Mob sprite sheets. These need to be strings as numbers
 // cannot be used as associative list keys.
 #define icon_l_hand		"slot_l_hand"
 #define icon_r_hand		"slot_r_hand"
@@ -517,7 +519,7 @@
 
 #define R_MAXPERMISSION 32768 // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
-// Preference toggles.
+// Saved Preference toggles.
 #define SOUND_ADMINHELP 1
 #define SOUND_MIDI      2
 #define SOUND_AMBIENCE  4
@@ -536,6 +538,11 @@
 #define CHAT_NOICONS    32768
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
+
+// Runtime Preference Toggles
+#define CHAT_RLOOC		1
+
+#define RUNTIME_TOGGLES_DEFAULT (CHAT_RLOOC)
 
 #define BE_TRAITOR    1
 #define BE_OPERATIVE  2
@@ -627,6 +634,11 @@ var/list/be_special_flags = list(
 #define CAN_JOIN       16384 // Species is selectable in chargen.
 #define IS_RESTRICTED  32768 // Is not a core/normally playable species. (castes, mutantraces)
 
+// Species equip_problems flags
+#define BOOT_PROBLEMS  1	 // Species has issues with normal shoes.
+#define GLOVE_PROBLEMS 2	 // Species has issues equipping normal gloves.
+#define HEAD_PROBLEMS  4	 // Species has issues with equipping head problems.
+
 // Language flags.
 #define WHITELISTED 1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED  2   // Language can only be accquired by spawning or an admin.
@@ -700,6 +712,7 @@ var/list/be_special_flags = list(
 #define IS_SKRELL 3
 #define IS_UNATHI 4
 #define IS_XENOS  5
+#define IS_SLIMEP  6
 
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 

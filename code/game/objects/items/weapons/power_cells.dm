@@ -9,7 +9,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	w_class = 3.0
+	w_class = 2
 	var/charge = 0	// note %age conveted to actual charge in New
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
@@ -24,7 +24,7 @@
 
 /obj/item/weapon/cell/crap
 	name = "\improper Nanotrasen brand rechargable AA battery"
-	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
+	desc = "You can't top the phoron top." //TOTALLY TRADEMARK INFRINGEMENT
 	origin_tech = "powerstorage=0"
 	maxcharge = 500
 	matter = list("metal" = 700, "glass" = 40)
@@ -85,12 +85,14 @@
 	charge = 0
 
 /obj/item/weapon/cell/infinite
-	name = "infinite-capacity power cell!"
+	name = "infinite-capacity power cell"
 	icon_state = "icell"
+	desc = "UNLIMITED POWAAAAAAHHHH! Appears to be made out of a Bananium alloy."
 	origin_tech =  null
 	maxcharge = 30000 //determines how badly mobs get shocked
-	matter = list("metal" = 700, "glass" = 80)
-	
+	origin_tech = "powerstorage=10"
+	matter = list("metal"=500,"glass"=150,"gold"=500,"silver"=500)
+
 	check_charge()
 		return 1
 	use()
@@ -109,7 +111,7 @@
 
 /obj/item/weapon/cell/slime
 	name = "charged slime core"
-	desc = "A yellow slime core infused with phoron, it crackles with power."
+	desc = "A yellow slime core infused with phoron. It crackles with power."
 	origin_tech = "powerstorage=2;biotech=4"
 	icon = 'icons/mob/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"

@@ -170,6 +170,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				icon_state = "req_comp0"
 				for(var/msg in messages)
 					dat += text("[msg]<BR>")
+				dat += text("<HR><A href='?src=\ref[src];print=1'>Print</A><BR>")
 				dat += text("<A href='?src=\ref[src];setScreen=0'>Back to main menu</A><BR>")
 
 			if(9)	//authentication before sending
@@ -219,6 +220,14 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if(..())	return
 	usr.set_machine(src)
 	add_fingerprint(usr)
+
+	if(href_list["print"])
+		var/dat = "<H3>[department] Requests Console</H3>"
+		for(var/msg in messages)
+			dat += "[msg]<BR>"
+		var/obj/item/weapon/paper/R = new(src.loc)
+		R.name = "[department] Messages"
+		R.info = replacetext(dat, " href=", " nothref=") // Try and make links inoperative
 
 	if(reject_bad_text(href_list["write"]))
 		dpt = ckey(href_list["write"]) //write contains the string of the receiving department's name

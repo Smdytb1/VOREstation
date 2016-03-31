@@ -33,6 +33,8 @@ var/global/list/poster_designs = list()
 var/list/obj/item/device/uplink/world_uplinks = list()
 
 //Preferences stuff
+	// Taur body type
+var/global/list/taur_styles_list = list()
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
 var/global/list/hair_styles_male_list = list()
@@ -41,11 +43,18 @@ var/global/list/facial_hair_styles_list = list()	//stores /datum/sprite_accessor
 var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
+var/global/list/ear_styles_list = list()
+var/global/list/tail_styles_list = list()
+var/global/list/player_sizes_list = list()
+
 	//Underwear
-var/global/list/underwear_m = list("White" = "m1", "Grey" = "m2", "Green" = "m3", "Blue" = "m4", "Black" = "m5", "Mankini" = "m6", "None") //Curse whoever made male/female underwear diffrent colours
-var/global/list/underwear_f = list("Red" = "f1", "White" = "f2", "Yellow" = "f3", "Blue" = "f4", "Black" = "f5", "Thong" = "f6", "Black Sports" = "f7","White Sports" = "f8","None")
+var/global/list/underwear_m = list("Male, White" = "m1", "Male, Grey" = "m2", "Male, Green" = "m3", "Male, Blue" = "m4", "Male, Black" = "m5", "Male, Kinky white" = "m6", "Male, Kinky Red" = "m7", "Male, Boxer Hearts" = "m8", "Male, Boxer Black" = "m9", "Male, Boxer Grey" = "m10", "Male, Boxer Green" = "m11", "None") //Curse whoever made male/female underwear diffrent colours
+var/global/list/underwear_f = list("Female, Red" = "f1", "Female, White" = "f2", "Female, Yellow" = "f3", "Female, Blue" = "f4", "Female, Black" = "f5", "Female, Black & Red Lace" = "f6", "Female, Black Sports" = "f7","Female, White Sports" = "f8", "Female, Black Training" = "f9", "Female, White Thong" = "f10", "Female, Black Thong" = "f11", "Female, Pink Thong" = "f12", "Female, Green Thong" = "f13", "Female, Transparent Babydoll" = "f14", "Female, Blue Babydoll" = "f15","Female, Pink Babydoll" = "f16", "None")
+var/global/list/underwear_t = list("Male, White" = "m1", "Male, Grey" = "m2", "Male, Green" = "m3", "Male, Blue" = "m4", "Male, Black" = "m5", "Male, Kinky white" = "m6", "Male, Kinky Red" = "m7", "Male, Boxer Hearts" = "m8", "Male, Boxer Black" = "m9", "Male, Boxer Grey" = "m10", "Male, Boxer Green" = "m11", "Female, Red" = "f1", "Female, White" = "f2", "Female, Yellow" = "f3", "Female, Blue" = "f4", "Female, Black" = "f5", "Female, Black & Red Lace" = "f6", "Female, Black Sports" = "f7","Female, White Sports" = "f8", "Female, Black Training" = "f9", "Female, White Thong" = "f10", "Female, Black Thong" = "f11", "Female, Pink Thong" = "f12", "Female, Green Thong" = "f13", "Female, Transparent Babydoll" = "f14", "Female, Blue Babydoll" = "f15","Female, Pink Babydoll" = "f16", "None") //made this one becouse I didn't want to properly fix the Underwear machine. Orbis
 	//undershirt
 var/global/list/undershirt_t = list("White Tank top" = "u1", "Black Tank top" = "u2", "Black shirt" = "u3", "White shirt" = "u4", "None")
+	//socks
+var/global/list/undersocks_t = list("White, normal" = "white_nom_s", "White, short" = "white_short_s", "White, knee" = "white_knee_s", "White, thigh" = "white_thigh_s","Black, normal" = "black_nom_s", "Black, short" = "black_short_s", "Black, knee" = "black_knee_s", "Black, thigh" = "black_thigh_s","Thin, knee" = "thin_knee_s", "Thin, thigh" = "thin_thigh_s","Pantyhose" = "pantyhose_s","Rainbow, knee" = "rainbow_knee_s", "Rainbow, thigh" = "rainbow_thigh_s","Striped, knee" = "striped_knee_s", "Striped, thigh" = "striped_thigh_s", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
 
@@ -55,6 +64,12 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 
 /proc/makeDatumRefLists()
 	var/list/paths
+
+	// Taurs - Initialise all /datum/sprite_accessory/taur into an list indexed by taur type name
+	paths = typesof(/datum/sprite_accessory/taur) - /datum/sprite_accessory/taur
+	for(var/path in paths)
+		var/datum/sprite_accessory/taur/H = new path()
+		taur_styles_list[H.name] = H
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
@@ -79,6 +94,21 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 			else
 				facial_hair_styles_male_list += H.name
 				facial_hair_styles_female_list += H.name
+
+	//Custom Ears
+	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	for(var/path in paths)
+		var/obj/item/clothing/head/instance = new path()
+		ear_styles_list[path] = instance
+
+	//Custom Tails
+	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail
+	for(var/path in paths)
+		var/datum/sprite_accessory/tail/instance = new path()
+		tail_styles_list[path] = instance
+
+	//Standard sizes
+	player_sizes_list = list("Macro" = RESIZE_HUGE, "Big" = RESIZE_BIG, "Normal" = RESIZE_NORMAL, "Small" = RESIZE_SMALL, "Tiny" = RESIZE_TINY)
 
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = typesof(/datum/surgery_step)-/datum/surgery_step

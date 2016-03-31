@@ -49,7 +49,7 @@
 	var/n     = 1
 
 	// Figure out power. (power of 2)
-	while (n < num)
+	while (n <= num)
 		power += 4
 		n     *= 16
 

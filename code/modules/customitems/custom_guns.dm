@@ -2,6 +2,10 @@
 #define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
+#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
+#define EJECT_CASINGS	1 //drop spent casings on the ground after firing
+#define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns.
+
 // The M41A from the Xeno station mission is not yet here. Need to include ASAP.
 // Caseless ammo is now handled by ammunition.dm
 
@@ -36,6 +40,32 @@
 	w_class = 3 // Because collapsable stock so it fits in backpacks.
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
 	max_shells = 6
+
+// bwoincognito:Tasald Corlethian
+/* Removed until this can be made to work right without being horrible and hacky.
+/obj/item/weapon/gun/projectile/shotgun/pump/bigiron
+	name = "Big Iron revolver"
+	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	icon_state = "tasaldrevolver"
+	item_state = "revolver"
+	fire_sound = 'sound/weapons/pistol.ogg'
+	caliber = "357"
+	origin_tech = "combat=2;materials=2"
+	max_shells = 6
+	handle_casings = CYCLE_CASINGS
+	ammo_type = /obj/item/ammo_casing/a357r
+	load_method = SINGLE_CASING|SPEEDLOADER
+	cocksound = 'sound/weapons/riflebolt.ogg'
+*/
+
+// bwoincognito:Tasald Corlethian
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian
+	name = "Big Iron revolver"
+	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	icon_state = "tasaldrevolver"
+	item_state = "revolver"
+	fire_sound = 'sound/weapons/pistol.ogg'
+	ammo_type = /obj/item/ammo_magazine/c38/rubber
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
@@ -109,18 +139,8 @@
 	name = "\improper ZM Kar 1"
 	desc = "A reproduction of an old ZM Kar 1 Rifle from the Autocratic East Europan Imperial Alliance of Gaia. Popular among imperials and collectors within the Federation and its allies. Uses 7.62mm ammo."
 
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/chalk // For target practice
-	desc = "A bolt-action rifle with a lightweight synthetic wood stock, designed for competitive shooting. Comes shipped with chalk rounds pre-loaded into the gun. Popular among professional marksmen. Uses 7.62mm ammo."
-	ammo_type = /obj/item/ammo_casing/a762/chalk
-
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/ceremonial // For Blueshield
-	name = "ceremonial bolt-action rifle"
-	desc = "A bolt-action rifle decorated with dazzling engravings across the stock. Usually loaded with blanks, but can fire live rounds. Popular among well-dressed guardsmen. Uses 7.62mm ammo."
-	ammo_type = /obj/item/ammo_casing/a762/blank
-
-
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/wicked
-	name = "'Wicked Butterfly' ZM Kar 1"
+	name = "'Wicked Butterfly' ZM Kar S1"
 	desc = "A customized bolt-action sniper rifle that was carried by some of the most revered snipers in the Federation. The stock has a small butterfly engraved on it. Uses 7.62mm ammo."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "wickedbutterfly"
@@ -136,14 +156,15 @@
 
 	toggle_scope(2.0)
 
-
+//This weapon is shelved until someone can fix the modifystate var and apply a safety to the scythe mode.
+/*
 /obj/item/weapon/gun/projectile/automatic/crestrose
 	name = "Crescent Rose"
 	desc = "Can you match my resolve? If so then you will succeed. I believe that the human spirit is indomitable. Keep Moving Forward."
 	origin_tech = "materials=7"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "crestrose"
-	item_state = "crestrose"
+	item_state = null // So it inherits the icon_state.
 	w_class = 4
 	fire_sound = 'sound/weapons/rifleshot.ogg'
 	force = 40
@@ -156,7 +177,7 @@
 
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/modifystate = "crestrose"
-	var/mode = 0 //0 = stun, 1 = kill
+	var/mode = 0 //0 = unfolded, 1 = folded
 
 /obj/item/weapon/gun/projectile/automatic/crestrose/attack_self(mob/living/user as mob)
 	switch(mode)
@@ -165,28 +186,105 @@
 			user.visible_message("\red [src.name] folds up into a cool looking rifle.")
 			force = 5
 			throwforce = 2
-			modifystate = "crestrose_fold"
+			modifystate = crestrose_fold
 		if(1)
-			mode = 0 // I feel like this mode should prevent it from shooting. Otherwise, what's the point? -Spades
+			mode = 0 // I feel like this mode should prevent it from shooting. Otherwise, what's the point? -Spades ||Probably need assistance in that. Original design of Crescent Rose is to shoot no matter what form it was in. Perhaps lowering accuracy will provide a con buffer here. -- Joan
 			user.visible_message("\red [src.name] changes into a very intimidating looking weapon.")
 			force = 40
 			throwforce = 10
-			modifystate = "crestrose"
+			modifystate = crestrose
 	update_icon()
 	update_held_icon()
-
+*/
 
 // Energy Weapons
-
+// -------------- KIN-H21 -------------
+// QUAD LASER. THERE IS NO AVOIDING IT. JUMPING, IS USELESS.
 /obj/item/weapon/gun/energy/gun/fluff/aro
 	name = "KIN-H21"
-	desc = "The Kitsuhana Heavy Industries standard Imperial Navy energy sidearm, commonly called the KIN21, is a fairly typical energy weapon with two modes: stun, and lethal."
+	desc = "The Kitsuhana Heavy Industries standard Imperial Navy energy sidearm, commonly called the KIN21. This one appears to have been modified to have additional features at the cost of battery life."
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "Kraystun100"
+	icon_state = "kinh21off"
 	item_state = null // So it inherits the icon_state.
-	modifystate = "Kraystun"
-	stunstate = "Kraystun"
-	killstate = "Kraykill"
+
+	modifystate = "kinh21stun"
+	stunstate = "kinh21stun"
+	killstate = "kinh21kill"
+	var/shrinkstate = "kinh21shrink"
+	var/growstate = "kinh21grow"
+
+	charge_cost = INFINITY //Starts safed
+	var/turnedoff = 1
+	var/mode_name = "<font color=\"#0000FF\">STUN</font>" //It's the default
+
+
+// Four way switch for stun, kill, shrink, grow
+/obj/item/weapon/gun/energy/gun/fluff/aro/attack_self(mob/living/user as mob)
+	switch(mode)
+		if(0)
+			mode = 1
+			fire_sound = 'sound/weapons/blaster_pistol.ogg'
+			mode_name = "<font color=\"#FF0000\">KILL</font>"
+			//user << "<span class='warning'>[src.name] is now set to kill.</span>"
+			projectile_type = /obj/item/projectile/beam
+			modifystate = killstate
+		if(1)
+			mode = 2
+			fire_sound = 'sound/weapons/wave.ogg'
+			mode_name = "<font color=\"#FF00FF\">SHRINK</font>"
+			//user << "<span class='warning'>[src.name] is now set to shrink.</span>"
+			projectile_type = /obj/item/projectile/beam/shrinklaser
+			modifystate = shrinkstate
+		if(2)
+			mode = 3
+			fire_sound = 'sound/weapons/pulse3.ogg'
+			mode_name = "<font color=\"#BBBB00\">GROW</font>"
+			//user << "<span class='warning'>[src.name] is now set to grow.</span>"
+			projectile_type = /obj/item/projectile/beam/growlaser
+			modifystate = growstate
+		if(3)
+			mode = 0 // This is the default mode, as defined in energy.dm for the egun
+			fire_sound = 'sound/weapons/Taser.ogg'
+			mode_name = "<font color=\"#0000FF\">STUN</font>"
+			//user << "<span class='warning'>[src.name] is now set to stun.</span>"
+			projectile_type = /obj/item/projectile/beam/stun
+			modifystate = stunstate
+	update_icon()
+	update_held_icon()
+	user << "<span class='warning'>[src.name] is now set to [src.mode_name]"
+
+/obj/item/weapon/gun/energy/gun/fluff/aro/verb/togglepower()
+	set name = "Toggle KIN-H21"
+	set desc = "Turn the KIN-H21 power on or off."
+	set category = "Object"
+	switch(turnedoff)
+		if(0)
+			turnedoff = 1
+			charge_cost = INFINITY
+			icon_state = "kinh21off"
+			usr << "<span class='warning'>[src.name] powered off.</span>"
+		if(1)
+			turnedoff = 0
+			charge_cost = 125
+			update_icon()
+			update_held_icon()
+			usr << "<span class='warning'>[src.name] powered on.</span>"
+
+/obj/item/weapon/gun/energy/gun/fluff/aro/update_icon()
+	if(charge_meter && !turnedoff)
+		var/ratio = power_supply.charge / power_supply.maxcharge
+
+		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
+		if(power_supply.charge < charge_cost)
+			ratio = 0
+		else
+			ratio = max(round(ratio, 0.25) * 100, 25)
+
+		if(modifystate)
+			icon_state = "[modifystate][ratio]"
+		else
+			icon_state = "[initial(icon_state)][ratio]"
+
 
 // -------------- Dominator -------------
 /obj/item/weapon/gun/energy/gun/fluff/dominator
@@ -212,7 +310,7 @@
 			modifystate = "dominatorkill"
 		if(1)
 			mode = 0
-			charge_cost = 200
+			charge_cost = 125 //Changed to match new egun value
 			fire_sound = 'sound/weapons/Taser.ogg'
 			user << "\red [src.name] is now set to Paralyzer Mode. Target will be stunned"
 			user.visible_message("\red [src.name] is set to Paralyzer Mode.")
@@ -302,3 +400,12 @@
 
 /obj/item/ammo_magazine/battlerifle/empty
 	initial_ammo = 0
+
+//------------- Clockwork Rifle -------------
+// molenar:Kari Akiren
+/obj/item/weapon/gun/projectile/shotgun/pump/rifle/fluff/kari_akiren
+	name = "Clockwork Rifle"
+	desc = "Brass, copper, and lots of gears. Well lubricated for fluid movement as each round is loaded, locked, and fired. Just like clockwork."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "clockworkrifle"
+	item_state = "clockworkrifle"

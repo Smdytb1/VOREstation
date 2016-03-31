@@ -25,7 +25,7 @@
 			modifystate = killstate
 		if(1)
 			mode = 0
-			charge_cost = 200 // So there's a benefit to using normal tasers.
+			charge_cost = 125 // So there's a benefit to using normal tasers.
 			fire_sound = 'sound/weapons/Taser.ogg'
 			user << "<span class='warning'>[src.name] is now set to stun.</span>"
 			projectile_type = /obj/item/projectile/beam/stun

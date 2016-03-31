@@ -28,13 +28,35 @@
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
+			if(C.is_afk()) //This will give admins information about how long someone has been afk.
+				var/seconds = C.last_activity_seconds() //So they can see if someone is hogging a job sloy and not using it.
+				entry += " (AFK - "
+				entry += "[round(seconds / 60)] minutes, "
+				entry += "[seconds % 60] seconds)" //Let's go into the seconds, why not?
 			Lines += entry
 	else
 		for(var/client/C in clients)
 			if(C.holder && C.holder.fakekey)
-				Lines += C.holder.fakekey
+				var/entry = "\t[C.key]"
+				var/mob/dead/observer/O = C.mob
+				entry += C.holder.fakekey
+				if(isobserver(O)) //If i'm going to be honest, this was fun to add in.
+					entry += " - <font color='gray'>Observing</font>"
+				else if(istype(O,/mob/new_player)) // It looks really nice,and there's no bugs <3
+					entry += " - <font color='blue'>In Lobby</font>"
+				else //Love you all, ~CK
+					entry += " - <font color='green'>Playing</font>"
+				Lines += entry
 			else
-				Lines += C.key
+				var/entry = "\t[C.key]"
+				var/mob/dead/observer/O = C.mob
+				if(isobserver(O)) //Woo, players can see
+					entry += " - <font color='gray'>Observing</font>"
+				else if(istype(O,/mob/new_player))
+					entry += " - <font color='blue'>In Lobby</font>"
+				else
+					entry += " - <font color='green'>Playing</font>"
+				Lines += entry
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"

@@ -64,7 +64,7 @@
 /datum/unarmed_attack/slime_glomp
 	attack_verb = list("glomped")
 	attack_noun = list("body")
-	damage = 0
+	damage = 5
 
 /datum/unarmed_attack/slime_glomp/apply_effects()
 	//Todo, maybe have a chance of causing an electrical shock?

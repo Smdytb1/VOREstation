@@ -427,7 +427,12 @@
 		"BlackOps Commander",
 		"Supreme Commander",
 		"Emergency Response Team",
-		"Emergency Response Team Leader")
+		"Emergency Response Team Leader",
+		"Nanotrasen Impartial Observer",
+		"Nanotrasen Quality Assurance Officer",
+		"CentCom Representative",
+		"CentCom Chief Administrative Officer",
+		"SWAT Commando")
 
 proc/GetIdCard(var/mob/living/carbon/human/H)
 	if(H.wear_id)

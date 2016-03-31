@@ -541,6 +541,8 @@
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2
 
+		if ("v")
+
 		if ("help")
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,\nwink, yawn"
 
@@ -569,6 +571,9 @@
 				O.show_message(message, m_type)
 		else if (m_type & 2)
 			for (var/mob/O in (hearers(src.loc, null) | get_mobs_in_view(world.view,src)))
+				O.show_message(message, m_type)
+		else if (m_type & 4)
+			for (var/mob/O in get_mobs_in_view(1,src))
 				O.show_message(message, m_type)
 
 

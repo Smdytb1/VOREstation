@@ -8,9 +8,10 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
+	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
+	alt_titles = list("Counselor","Therapist","Priest","Cleric","Divine","Monk","Priestess","Imam","Rabbi")
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -76,7 +77,7 @@
 
 			while(!accepted)
 				if(!B) break // prevents possible runtime errors
-				new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon")
+				new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Shinto", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon")
 				switch(new_book_style)
 					if("Koran")
 						B.icon_state = "koran"
@@ -104,6 +105,9 @@
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.set_dir(10)
+					if("Shinto")
+						B.icon_state = "shinto"
+						B.item_state = "syringe_kit"
 					if("Tome")
 						B.icon_state = "tome"
 						B.item_state = "syringe_kit"

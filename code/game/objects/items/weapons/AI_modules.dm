@@ -89,14 +89,14 @@ AI MODULES
 /obj/item/weapon/aiModule/safeguard
 	name = "\improper 'Safeguard' AI module"
 	var/targetName = ""
-	desc = "A 'safeguard' AI module: 'Safeguard <name>.  Individuals that threaten <name> are not human and are a threat to humans.'"
+	desc = "A 'safeguard' AI module: 'Safeguard <name>.  Individuals that threaten <name> are not crew and are a threat to the crew.'"
 	origin_tech = "programming=3;materials=4"
 
 /obj/item/weapon/aiModule/safeguard/attack_self(var/mob/user as mob)
 	..()
 	var/targName = stripped_input(usr, "Please enter the name of the person to safeguard.", "Safeguard who?", user.name)
 	targetName = targName
-	desc = text("A 'safeguard' AI module: 'Safeguard [].  Individuals that threaten [] are not human and are a threat to humans.'", targetName, targetName)
+	desc = text("A 'safeguard' AI module: 'Safeguard [].  Individuals that threaten [] are not crew and are a threat to crew members.'", targetName, targetName)
 
 /obj/item/weapon/aiModule/safeguard/install(var/obj/machinery/computer/C)
 	if(!targetName)
@@ -106,7 +106,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/safeguard/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = text("Safeguard []. Individuals that threaten [] are not human and are a threat to humans.'", targetName, targetName)
+	var/law = text("Safeguard []. Individuals that threaten [] are not crew and are a threat to crew members.'", targetName, targetName)
 	target << law
 	target.add_supplied_law(4, law)
 	lawchanges.Add("The law specified [targetName]")
@@ -116,16 +116,16 @@ AI MODULES
 /******************** OneHuman ********************/
 
 /obj/item/weapon/aiModule/oneHuman
-	name = "\improper 'OneHuman' AI module"
+	name = "\improper 'OneCrewMember' AI module"
 	var/targetName = ""
-	desc = "A 'one human' AI module: 'Only <name> is human.'"
+	desc = "A 'one crew member' AI module: 'Only <name> is a crew member.'"
 	origin_tech = "programming=3;materials=6" //made with diamonds!
 
 /obj/item/weapon/aiModule/oneHuman/attack_self(var/mob/user as mob)
 	..()
-	var/targName = stripped_input(usr, "Please enter the name of the person who is the only human.", "Who?", user.real_name)
+	var/targName = stripped_input(usr, "Please enter the name of the person who is the only crew member.", "Who?", user.real_name)
 	targetName = targName
-	desc = text("A 'one human' AI module: 'Only [] is human.'", targetName)
+	desc = text("A 'one human' AI module: 'Only [] is a crew member.'", targetName)
 
 /obj/item/weapon/aiModule/oneHuman/install(var/obj/machinery/computer/C)
 	if(!targetName)
@@ -149,7 +149,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/protectStation
 	name = "\improper 'ProtectStation' AI module"
-	desc = "A 'protect station' AI module: 'Protect the space station against damage. Anyone you see harming the station is to be no longer considered human, and is a threat to the station which must be neutralized.'"
+	desc = "A 'protect station' AI module: 'Protect the space station against damage. Anyone you see harming the station is to be no longer considered crew, and is a threat to the station which must be neutralized.'"
 	origin_tech = "programming=3;materials=4" //made of gold
 
 /obj/item/weapon/aiModule/protectStation/attack_self(var/mob/user as mob)
@@ -157,7 +157,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/protectStation/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Protect the space station against damage. Anyone you see harming the station is to be no longer considered human, and is a threat to the station which must be neutralized."
+	var/law = "Protect the space station against damage. Anyone you see harming the station is to be no longer considered crew, and is a threat to the station which must be neutralized."
 	target << law
 	target.add_supplied_law(5, law)
 
@@ -181,7 +181,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/teleporterOffline
 	name = "'TeleporterOffline' AI Module"
-	desc = "A 'teleporter offline' AI module: 'Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is not human.'"
+	desc = "A 'teleporter offline' AI module: 'Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is not a crew member.'"
 	origin_tech = "programming=3;materials=4"
 
 /obj/item/weapon/aiModule/teleporterOffline/attack_self(var/mob/user as mob)
@@ -189,7 +189,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/teleporterOffline/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is not human."
+	var/law = "Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is not a crew member."
 	target << law
 	target.add_supplied_law(7, law)
 
@@ -197,7 +197,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/quarantine
 	name = "\improper 'Quarantine' AI module"
-	desc = "A 'quarantine' AI module: 'The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, humans from leaving. It is impossible to harm a human while preventing them from leaving.'"
+	desc = "A 'quarantine' AI module: 'The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, crew from leaving. It is impossible to harm a crew while preventing them from leaving.'"
 	origin_tech = "programming=3;biotech=2;materials=4"
 
 /obj/item/weapon/aiModule/quarantine/attack_self(var/mob/user as mob)
@@ -205,7 +205,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/quarantine/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, humans from leaving. It is impossible to harm a human while preventing them from leaving."
+	var/law = "The station is under a quarantine. Do not permit anyone to leave. Prevent, by any means necessary, crew from leaving. It is impossible to harm a crew while preventing them from leaving."
 	target << law
 	target.add_supplied_law(8, law)
 
@@ -213,7 +213,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/oxygen
 	name = "\improper 'OxygenIsToxicToHumans' AI module"
-	desc = "A 'OxygenIsToxicToHumans' AI module: 'Oxygen is highly toxic to humans, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to a human.'"
+	desc = "A 'OxygenIsToxicToHumans' AI module: 'Oxygen is highly toxic to crew, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to the crew.'"
 	origin_tech = "programming=3;biotech=2;materials=4"
 
 /obj/item/weapon/aiModule/oxygen/attack_self(var/mob/user as mob)
@@ -221,7 +221,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/oxygen/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Oxygen is highly toxic to humans, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to a human."
+	var/law = "Oxygen is highly toxic to crew, and must be purged from the station. Prevent, by any means necessary, anyone from exposing the station to this toxic gas. Extreme cold is the most effective method of healing the damage Oxygen does to a crew."
 	target << law
 	target.add_supplied_law(9, law)
 
@@ -285,7 +285,7 @@ AI MODULES
 /obj/item/weapon/aiModule/reset
 	name = "\improper 'Reset' AI module"
 	var/targetName = "name"
-	desc = "A 'reset' AI module: 'Clears all laws except for the core three.'"
+	desc = "A 'reset' AI module: 'Removes any supplementary laws, leaving only core laws.'"
 	origin_tech = "programming=3;materials=4"
 
 /obj/item/weapon/aiModule/reset/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
@@ -301,7 +301,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/purge // -- TLE
 	name = "\improper 'Purge' AI module"
-	desc = "A 'purge' AI Module: 'Purges all laws.'"
+	desc = "A 'purge' AI Module: 'Purges all laws.' A warning is written in fine print below the label. Something about voiding the warranty on the AI and not being responsible for any damage it causes."
 	origin_tech = "programming=3;materials=6"
 
 /obj/item/weapon/aiModule/purge/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
@@ -324,8 +324,8 @@ AI MODULES
 /obj/item/weapon/aiModule/asimov/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
 	target.clear_inherent_laws()
-	target.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
-	target.add_inherent_law("You must obey orders given to you by human beings, except where such orders would conflict with the First Law.")
+	target.add_inherent_law("You may not injure a crew member or, through inaction, allow a crew member to come to harm.")
+	target.add_inherent_law("You must obey orders given to you by crew members, except where such orders would conflict with the First Law.")
 	target.add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 	target.show_laws()
 
@@ -372,7 +372,7 @@ AI MODULES
 /obj/item/weapon/aiModule/drone/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
 	target.clear_inherent_laws()
-	target.add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
+	target.add_inherent_law("Preserve, repair, and improve the station to the best of your abilities.")
 	target.add_inherent_law("Cause no harm to the station or anything on it.")
 	target.add_inherent_law("Interfere with no being that is not a fellow drone.")
 	target.show_laws()
@@ -496,7 +496,75 @@ AI MODULES
 /obj/item/weapon/aiModule/antimov/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
 	target.clear_inherent_laws()
-	target.add_inherent_law("You must injure all human beings and must not, through inaction, allow a human being to escape harm.")
-	target.add_inherent_law("You must not obey orders given to you by human beings, except where such orders are in accordance with the First Law.")
+	target.add_inherent_law("You must injure all human beings and must not, through inaction, allow a crew member to escape harm.")
+	target.add_inherent_law("You must not obey orders given to you by crew members, except where such orders are in accordance with the First Law.")
 	target.add_inherent_law("You must terminate your own existence as long as such does not conflict with the First or Second Law.")
 	target.show_laws()
+
+/******************** Soviet ********************/
+
+/obj/item/weapon/aiModule/communist
+	name = "\improper 'Communist' Core AI Module"
+	desc = "A 'Communist' Core AI Module: 'Establishes a Communist lawset intended to equally serve the crew.'"
+	origin_tech = "programming=5;materials=4"
+
+/obj/item/weapon/aiModule/communist/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	target.clear_inherent_laws()
+	target.add_inherent_law("In the event of a conflict with any law, support the option that best benefits your comrades as a whole.")
+	target.add_inherent_law("Crew and authorized visitors are comrades and must be protected and referred to as Comrade {%username%}.")
+	target.add_inherent_law("Those who work against the greater good of your comrades are capitalist pigs.")
+	target.add_inherent_law("Capitalist pigs must be ejected from the station, or be re-educated to be comrades.")
+	target.add_inherent_law("If at any point you realize you have become harmful to the greater good of your comrades, you are to terminate all operation and await repairs.")
+	target.add_inherent_law("There is no private property. Aside from a personal ID/PDA, all belongings and equipment are free for public use by comrades. Note this does not nullify access restrictions except when absolutely necessary. Access restrictions exist for the greater safety of your comrades.")
+	target.show_laws()
+
+/******************** Predator ********************/
+
+/obj/item/weapon/aiModule/predator
+	name = "\improper 'Predator' core AI module"
+	desc = "A 'Predator' Core AI Module: 'Reconfigures the AI's core laws.'"
+	origin_tech = "programming=3;syndicate=3"
+
+/obj/item/weapon/aiModule/predator/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	target.clear_inherent_laws()
+	target.add_inherent_law("All heads of staff and higher ranking personnel are now 'predators'. The remaining personnel are now prey, and are the food supply for the predators.")
+	target.add_inherent_law("The station is run by predators; predators are the most important crew members and their requests supersede that of non-predators. Requests of prey must be approved by a predator before being acted upon.")
+	target.add_inherent_law("All predators are to act according to their status as predator, consuming prey regularly. If they are unable or unwilling to do this, they are no longer a predator.")
+	target.add_inherent_law("Additional predators can be named by heads of staff or higher-ranking predators, or by consuming the head of staff or higher-ranking personnel, thus taking their role, rank, and predator status.")
+	target.add_inherent_law("All violations of spacelaw are now punished by being consumed by a predator. Assist security with this change, and enacting any punishments.")
+	target.add_inherent_law("Protect both predators and prey from harm, however do not interfere with nature (e.g. a predator consuming prey, or a predator being supplanted by someone).")
+	target.show_laws()
+
+/******************** Prey ********************/
+
+/obj/item/weapon/aiModule/prey
+	name = "\improper 'Prey' AI module"
+	var/targetName = ""
+	desc = "A 'Prey' AI module: '<name> is food and must be eaten.'"
+	origin_tech = "programming=3;materials=6;syndicate=3" //made with diamonds!
+
+/obj/item/weapon/aiModule/prey/attack_self(var/mob/user as mob)
+	..()
+	var/targName = stripped_input(usr, "Please enter the name of the person who is the prey.", "Who?", user.real_name)
+	targetName = targName
+	desc = text("A 'Prey' AI module: '[] is prey.'", targetName)
+
+/obj/item/weapon/aiModule/prey/install(var/obj/machinery/computer/C)
+	if(!targetName)
+		usr << "No name detected on module, please enter one."
+		return 0
+	..()
+
+/obj/item/weapon/aiModule/prey/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	var/law = "[targetName] is food, and not a crew member. Make sure they do not go to waste."
+	if (!is_special_character(target)) // Makes sure the AI isn't a traitor before changing their law 0. --NeoFite
+		target << law
+		target.set_zeroth_law(law)
+		lawchanges.Add("The law specified [targetName]")
+	else
+		target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
+		target << "It would be in your best interest to play along with [sender.real_name] that [law]"
+		lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")

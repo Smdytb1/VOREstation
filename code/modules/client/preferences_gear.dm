@@ -417,6 +417,18 @@ var/global/list/gear_datums = list()
 
 // Uniform slot
 
+/datum/gear/permit
+	display_name = "nudity permit (jumpsuit)"
+	path = /obj/item/clothing/under/permit
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/mankini
+	display_name = "mankini (jumpsuit)"
+	path = /obj/item/clothing/under/stripper/mankini
+	slot = slot_w_uniform
+	cost = 1
+
 /datum/gear/blazer_blue
 	display_name = "blazer, blue"
 	path = /obj/item/clothing/under/blazer
@@ -473,6 +485,42 @@ var/global/list/gear_datums = list()
 /datum/gear/skirt_black
 	display_name = "skirt, black"
 	path = /obj/item/clothing/under/blackskirt
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/tiger_bikini
+	display_name = "bikini, tiger"
+	path = /obj/item/clothing/under/tiger_bikini
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/black_swimsuit
+	display_name = "swimsuit, black"
+	path = /obj/item/clothing/under/swimsuit/black
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/blue_swimsuit
+	display_name = "swimsuit, blue"
+	path = /obj/item/clothing/under/swimsuit/blue
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/purple_swimsuit
+	display_name = "swimsuit, purple"
+	path = /obj/item/clothing/under/swimsuit/purple
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/green_swimsuit
+	display_name = "swimsuit, green"
+	path = /obj/item/clothing/under/swimsuit/green
+	slot = slot_w_uniform
+	cost = 1
+
+/datum/gear/red_swimsuit
+	display_name = "swimsuit, red"
+	path = /obj/item/clothing/under/swimsuit/red
 	slot = slot_w_uniform
 	cost = 1
 
@@ -714,6 +762,18 @@ var/global/list/gear_datums = list()
 	slot = slot_tie
 	cost = 1
 
+/datum/gear/tie_black
+	display_name = "tie, black"
+	path = /obj/item/clothing/accessory/black
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/scarf
+	display_name = "Scarf"
+	path = /obj/item/clothing/accessory/scarf
+	slot = slot_tie
+	cost = 1
+
 /datum/gear/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/accessory/storage/brown_vest
@@ -733,6 +793,44 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/accessory/storage/webbing
 	slot = slot_tie
 	cost = 2
+
+// Collars
+
+/datum/gear/collar_silver
+	display_name = "Collar, Silver"
+	path = /obj/item/clothing/accessory/collar_blk
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/collar_golden
+	display_name = "Collar, Golden"
+	path = /obj/item/clothing/accessory/collar_gld
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/collar_
+	display_name = "Collar, Bell"
+	path = /obj/item/clothing/accessory/collar_bell
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/collar_shock
+	display_name = "Collar, Shock"
+	path = /obj/item/clothing/accessory/shock_collar
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/collar_spike
+	display_name = "Collar, Spike"
+	path = /obj/item/clothing/accessory/collar_spike
+	slot = slot_tie
+	cost = 1
+
+/datum/gear/collar_
+	display_name = "Collar, Pink"
+	path = /obj/item/clothing/accessory/collar_pink
+	slot = slot_tie
+	cost = 1
 
 // Suit slot
 
@@ -1079,6 +1177,18 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_shoes
 
+/datum/gear/footwraps
+	display_name = "footwraps, white"
+	path = /obj/item/clothing/shoes/footwraps
+	cost = 1
+	slot = slot_shoes
+
+/datum/gear/ankleBracelets
+	display_name = "ankle bracelets, gold"
+	path = /obj/item/clothing/shoes/ankleBracelets
+	cost = 1
+	slot = slot_shoes
+
 // "Useful" items - I'm guessing things that might be used at work?
 
 /datum/gear/briefcase
@@ -1132,6 +1242,12 @@ var/global/list/gear_datums = list()
 /datum/gear/wallet
 	display_name = "wallet"
 	path = /obj/item/weapon/storage/wallet
+	sort_category = "utility"
+	cost = 2
+
+/datum/gear/wallet_grey
+	display_name = "wallet, grey"
+	path = /obj/item/weapon/storage/wallet/grey
 	sort_category = "utility"
 	cost = 2
 
@@ -1272,3 +1388,4 @@ var/global/list/gear_datums = list()
 	cost = 1
 	sort_category = "ears"
 	whitelisted = "Skrell"
+

@@ -36,8 +36,7 @@
 					sleep(30)
 					if(M in oview(1, src))
 						custom_emote(1, "swallows down [M] into their hungry gut!")
-						M.loc = src
-						stomach_contents.Add(M)
+						src.insides.nom_mob(M)
 						playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 					else
 						M << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
@@ -58,27 +57,30 @@
 		break
 
 	if(!stat && !resting && !buckled) //SEE A MICRO AND ARE A PREDATOR, EAT IT!
-		for(var/mob/living/carbon/human/food in oview(src, 3))
+		for(var/mob/living/carbon/human/food in oview(src, 5))
+
 			if(food.playerscale <= RESIZE_A_SMALLTINY)
 				if(prob(10))
 					custom_emote(1, pick("eyes [food] hungrily!","licks their lips and turns towards [food] a little!","purrs as they imagine [food] being in their belly."))
 					break
 				else
-					if(prob(2))
+					if(prob(5))
 						movement_target = food
 						break
+
 		for(var/mob/living/carbon/human/bellyfiller in oview(1, src))
+			if(bellyfiller in src.prey_excludes)
+				continue
+
 			if(bellyfiller.playerscale <= RESIZE_A_SMALLTINY && isPredator)
 				movement_target = null
 				custom_emote(1, pick("slurps [bellyfiller] with their sandpapery tongue.","looms over [bellyfiller] with their maw agape.","sniffs at [bellyfiller], their belly grumbling hungrily."))
-				sleep(2)
-
-				custom_emote(1, "scoops [bellyfiller] into their maw!")
+				sleep(10)
+				custom_emote(1, "starts to scoop [bellyfiller] into their maw!")
 				sleep(swallowTime)
 				if(bellyfiller in oview(1, src))
 					custom_emote(1, "swallows down [bellyfiller] with a happy purr!")
-					bellyfiller.loc = src
-					stomach_contents.Add(bellyfiller)
+					src.insides.nom_mob(bellyfiller)
 					msg_admin_attack("[key_name(bellyfiller)] got eaten by [src]!")
 					playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 				else
@@ -112,7 +114,7 @@
 
 	if(movement_target)
 		stop_automated_movement = 1
-		walk_to(src,movement_target,0,3)
+		walk_to(src,movement_target,0,10)
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
@@ -253,6 +255,7 @@
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 	befriend_job = "Chief Medical Officer"
+	isPredator = 1
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
@@ -265,3 +268,42 @@
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
 	..()
+
+//////
+// Vorestuff that has to be here because constructors are the only place they can be.
+//////
+
+/* I can't think of cat messages. I am a fox. Please put some in and remove this comment. :( -Aro
+/mob/living/simple_animal/cat/stomach_emotes = list(
+							"",
+							"",
+							"",
+							"",
+							"",
+							"")
+
+/mob/living/simple_animal/cat/stomach_emotes_d = list(
+							"",
+							"",
+							"",
+							"",
+							"",
+							"")
+
+*/
+
+/mob/living/simple_animal/cat/fluff/Runtime/stomach_emotes = list(
+							"Runtime's stomach kneads gently on you and you're fairly sure you can hear her start purring.",
+							"Most of what you can hear are slick noises, Runtime breathing, and distant purring.",
+							"Runtime seems perfectly happy to have you in there. She lays down for a moment to groom and squishes you against the walls.",
+							"The CMO's pet seems to have found a patient of her own, and is treating them with warm, wet kneading walls.",
+							"Runtime mostly just lazes about, and you're left to simmer in the hot, slick guts unharmed.",
+							"Runtime's master might let you out of this fleshy prison, eventually. Maybe.")
+
+/mob/living/simple_animal/cat/fluff/Runtime/stomach_emotes_d = list(
+							"Runtime's stomach is treating you rather like a mouse, kneading acids into you with vigor.",
+							"A thick dollop of bellyslime drips from above while the CMO's pet's gut works on churning you up.",
+							"Runtime seems to have decided you're food, based on the acrid air in her guts and the pooling fluids.",
+							"Runtime's stomach tries to claim you, kneading and pressing inwards again and again against your form.",
+							"Runtime flops onto their side for a minute, spilling acids over your form as you remain trapped in them.",
+							"The CMO's pet doesn't seem to think you're any different from any other meal. At least, their stomach doesn't.")

@@ -19,8 +19,8 @@
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	language = "Sinta'unathi"
 	tail = "sogtail"
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive = /mob/living/carbon/monkey/unathi
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 3
 	gluttonous = 1
 
@@ -39,8 +39,8 @@
 	heat_level_3 = 1100 //Default 1000
 
 	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
-
 	flesh_color = "#34AF10"
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
@@ -66,10 +66,11 @@
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'tajr"
 	tail = "tajtail"
+	primitive = /mob/living/carbon/monkey/tajara
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
-	slowdown = -1
-	brute_mod = 1.2
+	//slowdown = -1 By ace's request, removed bonus movespeed from taj -Antsnap
+	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -85,14 +86,12 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	primitive = /mob/living/carbon/monkey/tajara
-
-	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR| HAS_SKIN_COLOR
-
+	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
 
-	heat_discomfort_level = 312 // Is this too high?
+	heat_discomfort_level = 312
 	heat_discomfort_strings = list(
 		"Your fur prickles in the heat.",
 		"You feel uncomfortably warm.",
@@ -109,6 +108,7 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 	unarmed_types = list(/datum/unarmed_attack/punch)
+
 	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
 	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
@@ -116,7 +116,6 @@
 	the secrets of their empire to their allies."
 
 	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
-
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 
@@ -128,8 +127,8 @@
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	primitive = /mob/living/carbon/alien/diona
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	slowdown = 7
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
@@ -166,7 +165,6 @@
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
-
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
 
@@ -225,6 +223,12 @@
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
+	flags = CAN_JOIN | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	blood_color = "#1F181F"
+	flesh_color = "#575757"
+
+	has_organ = list() //TODO: Positronic brain.
+
 	heat_discomfort_level = 400
 	heat_discomfort_strings = list(
 		"Your cooling fan is maxed out, and yet it still fails to keep your core cool.",
@@ -239,14 +243,6 @@
 		"You don't even have to run your cooling fan above 5% speed."
 		)
 
-
-	flags = CAN_JOIN | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
-
-	blood_color = "#1F181F"
-	flesh_color = "#575757"
-
-	has_organ = list() //TODO: Positronic brain.
-
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(flags & IS_SYNTHETIC)
@@ -254,19 +250,17 @@
 		spawn(100)
 			if(H) H.update_hair()
 
-
 /datum/species/sergal
-
 	name = "Sergal"
 	name_plural = "sergals"
-
 	icobase = 'icons/mob/human_races/r_sergal.dmi'
 	deform = 'icons/mob/human_races/r_def_sergal.dmi'
-	language = "Sâgaru"
+	language = "Sagaru"
 	tail = "sergtail"
-	primitive = /mob/living/carbon/monkey/tajara
+	primitive = /mob/living/carbon/monkey/sergal
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
+
 	blurb = "There are two subspecies of Sergal; Southern and Northern. Northern sergals are a highly aggressive race \
 	that lives in the plains and tundra of their homeworld. They are characterized by long, fluffy fur bodies with cold colors; \
 	usually with white abdomens, somewhat short ears, and thick faces. Southern sergals are much more docile and live in the \
@@ -276,36 +270,26 @@
 	lifespan, but due to their lust for violence, only a handful have ever survived beyond the age of 80, such as the infamous and \
 	legendary General Rain Silves who is claimed to have lived to 5000."
 
-	/* Sergals are a temperate species able to survive in a variety of environments.
-	cold_level_1 = 200 //Default 260
-	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80 //Default 120
-
-	heat_level_1 = 330 //Default 360
-	heat_level_2 = 380 //Default 400
-	heat_level_3 = 800 //Default 1000
-	*/
-
 	flags = CAN_JOIN | HAS_LIPS | HAS_EYE_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
 	flesh_color = "#AFA59E"
-	//heat_discomfort_level = 312
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
+
 	heat_discomfort_strings = list(
 		"Your fur prickles in the heat.",
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
-	//cold_discomfort_level = 225
-
 
 /datum/species/shark
 	name = "Akula"
-	name_plural = "akulas"
+	name_plural = "akuly"
 	icobase = 'icons/mob/human_races/r_shark.dmi'
 	deform = 'icons/mob/human_races/r_def_shark.dmi'
 	language = "Skrellian"
 	tail = "sharktail"
-	primitive = /mob/living/carbon/monkey/skrell
+	primitive = /mob/living/carbon/monkey/shark
 	unarmed_types = list(/datum/unarmed_attack/bite/sharp)
+
 	blurb = "The Akula are a species of amphibious humanoids like the Skrell, but have an appearance very similar to that of a shark. \
 	They were first discovered as a primitive race of underwater dwelling tribal creatures by the Skrell. At first they were not believed \
 	to be noteworthy, but the Akula proved to be such swift and clever learners that the Skrell reclassified them as sentients. Allegedly, \
@@ -317,6 +301,7 @@
 	flags = CAN_JOIN | HAS_LIPS | HAS_EYE_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
 	flesh_color = "#AFA59E"
 	blood_color = "#1D2CBF"
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
 
 	heat_discomfort_strings = list(
 		"Your skin feels sore and unbearably itchy.",
@@ -328,4 +313,108 @@
 		"You feel chilly.",
 		"You feel sluggish and cold.",
 		"Your skin bristles against the cold."
+		)
+
+/datum/species/skeleton
+    name = "Skeleton"
+    name_plural = "Skeletons"
+
+    icobase = 'icons/mob/human_races/r_skeleton.dmi' //These sprites SHOULD work.
+    deform = 'icons/mob/human_races/r_skeleton.dmi'  //These sprites SHOULD work.
+    language = "Sol Common"
+    unarmed_types = list(/datum/unarmed_attack/punch)
+    rarity_value = 2
+    burn_mod = 1.5
+    brute_mod = 1.5
+    blurb = "(INSERT SKELETON LORE HERE) "
+
+    cold_level_1 = 50 //Bones shouldn't freeze
+    cold_level_2 = -1
+    cold_level_3 = -1
+
+    heat_level_1 = 600
+    heat_level_2 = 1100
+    heat_level_3 = 2200
+
+    flags = CAN_JOIN | NO_BREATHE | NO_SCAN | IS_WHITELISTED | NO_BLOOD | NO_POISON //All of this SHOULD hopefully work. No_scan put in since the skeleton has no actual "DNA" other than the organs inside of them. A big enough nerf that all the other stuff shouldn't matter.
+    blood_color = "#FFFFFF" //White blood
+    flesh_color = "#FFFFFF" //White flesh
+    has_organ = list()
+    heat_discomfort_level = 500
+    heat_discomfort_strings = list(
+        "Your bones feel hard and brittle.",
+        "Your bones ache and burn.",
+        "You feel uncomfortably warm."
+        )
+
+/datum/species/slimePerson
+	name = "Slime Person" //Slime People to not interfeer with the xenobio green extract created slimes
+	name_plural = "slime people"
+
+	icobase = 'icons/mob/human_races/r_slime.dmi'
+	deform = 'icons/mob/human_races/r_slime.dmi'
+	language = "Sol Common" //todo?
+	burn_mod = 1.2
+	brute_mod = 1
+	blurb = "Gelatinous beings from who knows where. They take up the shape of humans when convenient."
+
+	cold_level_1 = 260 //Default 260
+	cold_level_2 = 230 //Default 200
+	cold_level_3 = 150 //Default 120
+
+	heat_level_1 = 360 //Default 360
+	heat_level_2 = 400 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+
+
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/slime_glomp)
+	flags = CAN_JOIN | NO_SLIP | NO_BREATHE | HAS_EYE_COLOR | HAS_SKIN_COLOR
+	darksight = 3
+
+	blood_color = "#05FF9B"
+	//flesh_color = "#05FFFB" overwrites custom ones i think...
+
+	heat_discomfort_strings = list(
+		"Your slime feels warm.",
+		"You're feeling irritable from the unpleasant heat.",
+		"You feel dizzy and dehyrdrated."
+		)
+
+	cold_discomfort_strings = list(
+		"Your slime gets chilly.",
+		"You feel very cold and sluggish.",
+		"Your slime unstablizies in the cold."
+		)
+
+	remains_type = /obj/effect/decal/cleanable/ash
+	death_message = "rapidly loses cohesion, splattering across the ground..."
+
+	has_organ = list(
+		"brain" = /datum/organ/internal/brain/slime
+		)
+
+	breath_type = null //no breathing?
+//	poison_type = null //no poison?
+	reagent_tag = IS_SLIMEP
+
+/datum/species/nevrean
+	name = "Nevrean" //Basically, just a new sprite. No upsides and no downsides, other than a new language.
+	name_plural = "Nevreans"
+	icobase = 'icons/mob/human_races/r_nevrean.dmi'
+	deform = 'icons/mob/human_races/r_def_nevrean.dmi'
+	language = "Birdsong" //New language. Birdsong.
+	tail = "nevrean"
+	primitive = /mob/living/carbon/monkey/sparra
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+
+	blurb = "Nevreans are a race of avian and dinosaur-like creatures living on Tal. They belong to a group of races that hails from Eltus. " //If you would like to add more lore, just edit this "blurb" line. I didn't know what to add from their wiki, so I left it barebones.
+
+	flags = CAN_JOIN | HAS_LIPS | HAS_EYE_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flesh_color = "#AFA59E" //Not going to touch this unless I have to.
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
+
+	heat_discomfort_strings = list(
+		"Your feathers prickle in the heat.",
+		"You feel uncomfortably warm."
 		)

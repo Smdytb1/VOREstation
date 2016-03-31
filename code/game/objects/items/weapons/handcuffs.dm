@@ -31,7 +31,7 @@
 
 		//check for an aggressive grab
 		for (var/obj/item/weapon/grab/G in C.grabbed_by)
-			if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+			if (G.loc == user && G.state >= GRAB_PASSIVE)
 				place_handcuffs(C, user)
 				return
 		user << "\red You need to have a firm grip on [C] before you can put \the [src] on!"
@@ -112,6 +112,7 @@ var/last_chew = 0
 	icon_state = "cuff_white"
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
+
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"

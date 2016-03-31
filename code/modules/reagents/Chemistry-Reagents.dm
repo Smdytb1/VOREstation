@@ -1455,28 +1455,17 @@ datum
 			description = "Glowing yellow liquid."
 			reagent_state = LIQUID
 			color = "#FFFF00" // rgb: 255, 255, 0
+			custom_metabolism = 2.5
 
-			reaction_mob(var/mob/living/carbon/M, var/method=TOUCH, var/volume)
-				src = null
-				if( ( (method == TOUCH) && (prob(20) ) ) || (method == INGEST) )
-					switch(M.playerscale)
-						if(RESIZE_BIG to RESIZE_HUGE)
-							M.resize(RESIZE_HUGE)
-							M << "<font color='green'>You grow!</font>"
-						if(RESIZE_NORMAL to RESIZE_BIG)
-							M.resize(RESIZE_BIG)
-							M << "<font color='green'>You grow!</font>"
-						if(RESIZE_SMALL to RESIZE_NORMAL)
-							M.resize(RESIZE_NORMAL)
-							M << "<font color='green'>You grow!</font>"
-						if(RESIZE_TINY to RESIZE_SMALL)
-							M.resize(RESIZE_SMALL)
-							M << "<font color='green'>You grow!</font>"
-						if(RESIZE_HUGE to INFINITY)
-							M << "<span class='alert'>Your body can't grow any larger!</span>"
-						else
-							M.resize(RESIZE_HUGE)
-							M << "<font color='green'>You grow!</font><span class='alert'> And you broke something in the code. Congrats on reaching a size that shouldn't have been possible.</span>"
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				for(var/size in list(RESIZE_SMALL, RESIZE_NORMAL, RESIZE_BIG, RESIZE_HUGE))
+					if(M.playerscale < size)
+						M.resize(size)
+						M << "<font color='green'>You grow!</font>"
+						break
+				..()
+				return
 
 		microcillin
 			name = "Microcillin"
@@ -1484,29 +1473,58 @@ datum
 			description = "Murky purple liquid."
 			reagent_state = LIQUID
 			color = "#800080"
+			custom_metabolism = 2.5
 
-			reaction_mob(var/mob/living/carbon/M, var/method=TOUCH, var/volume)
-				src = null
-				if( ( (method == TOUCH) && (prob(20) ) ) || (method == INGEST) )
-					switch(M.playerscale)
-						if(RESIZE_HUGE to INFINITY)
-							M.resize(RESIZE_BIG)
-							M << "<span class='alert'>You shrink!</span>"
-						if(RESIZE_BIG to RESIZE_HUGE)
-							M.resize(RESIZE_NORMAL)
-							M << "<span class='alert'>You shrink!</span>"
-						if(RESIZE_NORMAL to RESIZE_BIG)
-							M.resize(RESIZE_SMALL)
-							M << "<span class='alert'>You shrink!</span>"
-						if(RESIZE_SMALL to RESIZE_NORMAL)
-							M.resize(RESIZE_TINY)
-							M << "<span class='alert'>You shrink!</span>"
-						if((0 - INFINITY) to RESIZE_TINY)
-							M.resize(RESIZE_TINY)
-							M << "<span class='alert'>You can't shrink any further.</span>"
-						else
-							M.resize(RESIZE_TINY)
-							M << "<span class='alert'>You shrink! <b>And you broke something in the code.</b> Congrats on reaching a size that shouldn't have been possible.</span>"
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				for(var/size in list(RESIZE_BIG, RESIZE_NORMAL, RESIZE_SMALL, RESIZE_TINY))
+					if(M.playerscale > size)
+						M.resize(size)
+						M << "<span class='alert'>You shrink!</span>"
+						break;
+				..()
+				return
+
+		normalcillin
+			name = "Normalcillin"
+			id = "normalcillin"
+			description = "Translucent cyan liquid."
+			reagent_state = LIQUID
+			color = "#00FFFF"
+			custom_metabolism = 2.5
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				if(M.playerscale > RESIZE_BIG)
+					M.resize(RESIZE_BIG)
+					M << "<span class='alert'>You shrink!</span>"
+				else if(M.playerscale > RESIZE_NORMAL)
+					M.resize(RESIZE_NORMAL)
+					M << "<span class='alert'>You shrink!</span>"
+				else if(M.playerscale < RESIZE_NORMAL)
+					M.resize(RESIZE_NORMAL)
+					M << "<font color='green'>You grow!</font>"
+				else if(M.playerscale < RESIZE_SMALL)
+					M.resize(RESIZE_SMALL)
+					M << "<font color='green'>You grow!</font>"
+				..()
+				return
+
+		sizeoxadone
+			name = "Sizeoxadone"
+			id = "sizeoxadone"
+			description = "A volatile liquid used as a precursor to size-altering chemicals. Causes dizziness if taken unprocessed."
+			reagent_state = LIQUID
+			color = "#1E90FF"
+			overdose = REAGENTS_OVERDOSE
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.make_dizzy(1)
+				if(!M.confused) M.confused = 1
+				M.confused = max(M.confused, 20)
+				..()
+				return
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2188,22 +2206,22 @@ datum
 			id = "protein"
 			color = "#440000"
 
-			on_mob_life(var/mob/living/M, var/alien)
+			/*on_mob_life(var/mob/living/M, var/alien) // Vorestation edit
 				if(alien && alien == IS_SKRELL)
 					M.adjustToxLoss(0.5)
 					M.nutrition -= nutriment_factor
-				..()
+				..()*/
 
 		nutriment/egg // Also bad for skrell. Not a child of protein because it might mess up, not sure.
 			name = "egg yolk"
 			id = "egg"
 			color = "#FFFFAA"
 
-			on_mob_life(var/mob/living/M, var/alien)
+			/*on_mob_life(var/mob/living/M, var/alien) // Vorestation edit
 				if(alien && alien == IS_SKRELL)
 					M.adjustToxLoss(0.5)
 					M.nutrition -= nutriment_factor
-				..()
+				..()*/
 
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
@@ -3390,8 +3408,21 @@ datum
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
 					if(A != src && isnum(A.data)) d += A.data
 
-				if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly.
-					d*=5
+				/*if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly. // Vorestation edit
+					d*=5*/
+
+				//Seems like a big benefit to be huge, but the idea is that a full bottle of vodka would be a shots worth to them.
+				//This is still not enough to make that true, but is a fair balance imo.
+				switch(M.playerscale)
+					if(RESIZE_HUGE to INFINITY)
+						d*= (1.0/4.5)
+					if(RESIZE_BIG to RESIZE_HUGE)
+						d*= (1.0/2.5)
+					if(RESIZE_SMALL to RESIZE_BIG)
+						d*= 1.50 // 50% more drunk per unit of ethanol~
+					if(RESIZE_TINY to RESIZE_SMALL)
+						d*= 2 // get drunk twice as fast. Very generous considering a shot could be as tall as them~
+
 
 				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)

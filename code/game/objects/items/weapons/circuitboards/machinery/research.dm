@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 obj/item/weapon/circuitboard/rdserver
@@ -22,6 +22,18 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1)
+							
+/obj/item/weapon/circuitboard/suspension_field_generator
+	name = T_BOARD("suspension field generator")
+	build_path = "/obj/machinery/suspension_gen"
+	board_type = "machine"
+	origin_tech = "magnets=3;engineering=3;programming=3" 
+	frame_desc = "Requires 3 Scanning Modules, 2 Micro Manipulators, 2 Micro-Lasers, and 2 pieces of cable" //These things are pretty useful!
+	req_components = list(
+							"/obj/item/weapon/stock_parts/scanning_module" = 3,
+							"/obj/item/weapon/stock_parts/manipulator" = 2,
+							"/obj/item/weapon/stock_parts/micro_laser" = 2,
+							"/obj/item/stack/cable_coil" = 2)
 
 /obj/item/weapon/circuitboard/autolathe
 	name = T_BOARD("autolathe")
@@ -68,3 +80,23 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1)
+
+/obj/item/weapon/circuitboard/extractor
+	name = "Circuit board (Lysis-isolation Centrifuge)"
+	build_path = "/obj/machinery/botany/extractor"
+	board_type = "machine"
+	origin_tech = "programming=2;engineering=2"
+	frame_desc = "Requires 2 Matter Bins, and 2 Micro Manipulators."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/matter_bin" = 2,
+							"/obj/item/weapon/stock_parts/manipulator" = 2)
+
+/obj/item/weapon/circuitboard/editor
+	name = "Circuit board (Bioballistic Delivery System)"
+	build_path = "/obj/machinery/botany/editor"
+	board_type = "machine"
+	origin_tech = "programming=2;engineering=2"
+	frame_desc = "Requires 3 Micro Manipulators, and 1 Micro-Laser."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/manipulator" = 3,
+							"/obj/item/weapon/stock_parts/micro_laser" = 1)

@@ -418,8 +418,7 @@
 							sleep(swallowTime)
 							if(istype(held_item,/obj/item/weapon/holder/micro))
 								custom_emote(1, "swallows [held_item] alive, a little lump sliding into its gut!")
-								M.loc = src
-								stomach_contents.Add(M)
+								src.insides.nom_mob(held_item)
 								msg_admin_attack("[key_name(M)] got eaten by [src]!")
 								playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
@@ -768,3 +767,26 @@
 	parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
 	icon_state = "parrot_fly"
 	return success
+
+
+
+//////
+// Vorestuff that has to be here because constructors are the only place they can be.
+//////
+/* Dunno about parrot emotes. Please add some and uncomment this! -Aro
+/mob/living/simple_animal/parrot/stomach_emotes = list(
+							"",
+							"",
+							"",
+							"",
+							"",
+							"")
+
+/mob/living/simple_animal/parrot/stomach_emotes_d = list(
+							"",
+							"",
+							"",
+							"",
+							"",
+							"")
+*/

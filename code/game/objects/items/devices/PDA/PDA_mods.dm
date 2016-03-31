@@ -1,4 +1,4 @@
-// DO-DO: Add a vending machine for these.
+// TODO: Add a vending machine for these.
 
 /obj/item/device/pda_mod
 	name = "Basic PDA case"

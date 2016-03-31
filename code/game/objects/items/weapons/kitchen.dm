@@ -192,6 +192,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "tacknife"
 	force = 20
+	w_class = 2 // Should be concealable.
 	item_state = "knife"
 	attack_verb = list("stabbed", "chopped", "cut")
 

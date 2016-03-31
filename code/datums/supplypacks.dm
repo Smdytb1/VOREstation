@@ -26,9 +26,11 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 
 /datum/supply_packs/New()
 	manifest += "<ul>"
-	for(var/atom/movable/path in contains)
-		if(!path)	continue
-		manifest += "<li>[initial(path.name)]</li>"
+	for(var/path in contains)
+		if(!path || !ispath(path, /atom))
+			continue
+		var/atom/O = path
+		manifest += "<li>[initial(O.name)]</li>"
 	manifest += "</ul>"
 
 /datum/supply_packs/specialops
@@ -80,7 +82,7 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	containername = "Farwa crate"
 	group = "Livestock"
 
-/datum/supply_packs/skrell
+/datum/supply_packs/neaera
 	name = "Neaera crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
 	cost = 30
@@ -94,6 +96,22 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Stok crate"
+	group = "Livestock"
+
+/datum/supply_packs/sobaka
+	name = "Sobaka crate"
+	contains = list (/obj/item/weapon/storage/box/monkeycubes/sobakacubes)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "Sobaka crate"
+	group = "Livestock"
+
+/datum/supply_packs/sergaling
+	name = "Sergaling crate"
+	contains = list (/obj/item/weapon/storage/box/monkeycubes/sergalingcubes)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "Sergaling crate"
 	group = "Livestock"
 
 /datum/supply_packs/beanbagammo
@@ -391,6 +409,16 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	cost = 10
 	containertype = /obj/structure/closet/crate/medical
 	containername = "Medical crate"
+	group = "Medical"
+
+/datum/supply_packs/glasses
+	name = "Pescription lense crate"
+	contains = list(/obj/item/device/glasses_upgrade,
+					/obj/item/device/glasses_upgrade,
+					/obj/item/device/glasses_upgrade)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Pescription lense crate"
 	group = "Medical"
 
 /datum/supply_packs/bloodpack
@@ -851,12 +879,17 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	access = access_armory
 	group = "Security"
 
-/datum/supply_packs/SVD
+/datum/supply_packs/svd
 	name = "Ballistic Sharpshooter Crate"
 	contains = list(/obj/item/weapon/gun/projectile/SVD,
 					/obj/item/weapon/gun/projectile/SVD,
 					/obj/item/ammo_magazine/SVD,
 					/obj/item/ammo_magazine/SVD)
+	cost = 90
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Ballistic marksman crate"
+	access = access_armory
+	group = "Security"
 
 /datum/supply_packs/shotgunpellets
 	name = "Buckshot crate"
@@ -1004,7 +1037,7 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 					/obj/item/clothing/head/collectable/rabbitears,
 					/obj/item/clothing/head/collectable/wizard,
 					/obj/item/clothing/head/collectable/hardhat,
-					/obj/item/clothing/head/collectable/HoS,
+					/obj/item/clothing/head/collectable/hos,
 					/obj/item/clothing/head/collectable/thunderdome,
 					/obj/item/clothing/head/collectable/swat,
 					/obj/item/clothing/head/collectable/slime,

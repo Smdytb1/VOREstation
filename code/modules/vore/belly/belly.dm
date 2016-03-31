@@ -77,6 +77,23 @@
 		tick++
 	return tick
 
+// Release a specific atom from the contents of this belly into the owning mob's location.
+// If that location is another mob, the atom is transferred into whichever of its bellies the owning mob is in.
+// Returns the number of atoms so released.
+/datum/belly/proc/release_specific_contents(var/atom/movable/M)
+	if (!(M in internal_contents))
+		return 0 // They weren't in this belly anyway
+	M.loc = owner.loc  // Move the belly contents into the same location as belly's owner.
+	src.internal_contents -= M  // Remove from the belly contents
+
+	if (iscarbon(owner.loc)) // This makes sure that the mob behaves properly if released into another mob
+		var/mob/living/carbon/loc_mob = owner.loc
+		for (var/bellytype in loc_mob.internal_contents)
+			var/datum/belly/belly = loc_mob.internal_contents[bellytype]
+			if (owner in belly.internal_contents)
+				belly.internal_contents += M
+	return 1
+
 //
 // Actually perform the mechanics of devouring the tasty prey.
 // The purpose of this method is to avoid duplicate code, and ensure that all necessary

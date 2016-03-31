@@ -111,3 +111,23 @@
 		/obj/item/rig_module/mounted/egun,
 		/obj/item/rig_module/maneuvering_jets
 		)
+
+/obj/item/weapon/rig/security
+	name = "security hardsuit control module"
+	suit_type = "security hardsuit"
+	desc = "A Nanotrasen security hardsuit designed for prolonged EVA in dangerous environments."
+	icon_state = "security_rig"
+	armor = list(melee = 60, bullet = 30, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
+	slowdown = 1
+	offline_vision_restriction = 1
+
+	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
+
+	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
+
+	req_access = list(access_hos)
+
+	initial_modules = list(
+		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/maneuvering_jets
+		)

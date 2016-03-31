@@ -400,6 +400,7 @@
 	new /obj/item/weapon/storage/belt/security/tactical(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/gloves/black(src)
+	new /obj/item/device/radio/headset/headset_sec/tactical(src)
 	return
 
 /obj/structure/closet/wardrobe/suit

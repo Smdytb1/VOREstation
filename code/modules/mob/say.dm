@@ -31,6 +31,7 @@
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
+	set desc = "Emote to nearby people"
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
@@ -41,6 +42,23 @@
 	set_typing_indicator(0)
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
+	else
+		usr.emote(message)
+
+/mob/verb/me_verb_subtle(message as text)
+	set name = "Subtle"
+	set category = "IC"
+	set desc = "Emote to nearby people (and your pred/prey)"
+
+	if(say_disabled)	//This is here to try to identify lag problems
+		usr << "\red Speech is currently admin-disabled."
+		return
+
+	message = strip_html_properly(message)
+
+	set_typing_indicator(0)
+	if(use_me)
+		usr.emote("me",4,message) //Hardcoded message type 4 for subtle
 	else
 		usr.emote(message)
 

@@ -5,6 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
+	var/mob/living/carbon/human/holden_mob
 
 /obj/item/weapon/holder/New()
 	item_state = icon_state
@@ -17,14 +18,29 @@
 
 /obj/item/weapon/holder/process()
 
+	var/needs_resprite = 0
+
+	for(var/obj/M in contents)
+		M.loc = get_turf(src)
+		needs_resprite = 1
+
+	if(needs_resprite)
+		overlays.Cut()
+		icon = holden_mob.icon
+		icon_state = holden_mob.icon_state
+		for(var/I in holden_mob.overlays_standing)
+			overlays += I
+
 	if(istype(loc,/turf) || !(contents.len))
 
 		for(var/mob/M in contents)
-
 			var/atom/movable/mob_container
 			mob_container = M
 			mob_container.forceMove(get_turf(src))
 			M.reset_view()
+
+		for(var/obj/M in contents)
+			M.loc = get_turf(src)
 
 		del(src)
 
@@ -43,14 +59,23 @@
 	if(!holder_type || buckled || pinned.len)
 		return
 
+	var/mob/living/carbon/human/grubben = src
 	var/obj/item/weapon/holder/H = new holder_type(loc)
 	src.loc = H
-	H.name = loc.name
+	H.name = name
 	H.attack_hand(grabber)
-
 	grabber << "You scoop up [src]."
 	src << "[grabber] scoops you up."
 	grabber.status_flags |= PASSEMOTES
+
+	//Going to update the icon to look like the person
+	H.icon = src.icon
+	H.icon_state = src.icon_state
+	for(var/I in grubben.overlays_standing)
+		H.overlays += I
+
+	H.holden_mob = grubben
+
 	return H
 
 //Mob specific holders.
@@ -86,8 +111,33 @@
 	name = "micro"
 	desc = "Another crewmember, small enough to fit in your hand."
 	icon_state = "micro"
-	slot_flags = SLOT_FEET | SLOT_HEAD
+	slot_flags = SLOT_FEET | SLOT_HEAD | SLOT_ID
 	w_class = 2
+
+/obj/item/weapon/holder/micro/examine(var/mob/user)
+	for(var/mob/living/M in contents)
+		M.examine(user)
+
+/obj/item/weapon/holder/MouseDrop(mob/M as mob)
+	..()
+	if(M != usr) return
+	if(usr == src) return
+	if(!Adjacent(usr)) return
+	if(istype(M,/mob/living/silicon/ai)) return
+	for(var/mob/living/carbon/human/O in contents)
+		O.show_inv(usr)
+
+/obj/item/weapon/holder/GetAccess()
+	var/list/access_sum = list()
+	var/obj/item/M_hand = holden_mob.get_active_hand()
+	var/obj/item/M_id = holden_mob.wear_id
+
+	if(M_hand)
+		access_sum += M_hand.GetAccess()
+	if(M_id)
+		access_sum += M_id.GetAccess()
+
+	return(access_sum)
 
 /obj/item/weapon/holder/micro/attack_self(var/mob/living/user)
 	for(var/mob/living/carbon/human/M in contents)

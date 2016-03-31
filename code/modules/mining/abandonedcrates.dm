@@ -1,6 +1,6 @@
 /obj/structure/closet/crate/secure/loot
 	name = "abandoned crate"
-	desc = "What could be inside?"
+	desc = "A dusty crate, sealed with a tamper-resistant deca-code lock. What could be inside?"
 	icon_state = "securecrate"
 	icon_opened = "securecrateopen"
 	icon_closed = "securecrate"
@@ -9,6 +9,7 @@
 	var/attempts = 10
 	var/codelen = 4
 	locked = 1
+	tamper_proof = 1
 
 /obj/structure/closet/crate/secure/loot/New()
 	..()
@@ -36,7 +37,8 @@
 			new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
 		if(16 to 20)
 			for(var/i = 0, i < 10, i++)
-				new/obj/item/weapon/ore/diamond(src)
+				var/newmineral = pick(typesof(/obj/item/weapon/ore) - /obj/item/weapon/ore)
+				new newmineral(src)
 		if(21 to 25)
 			for(var/i = 0, i < 3, i++)
 				new/obj/machinery/portable_atmospherics/hydroponics(src)
@@ -58,11 +60,13 @@
 			new/obj/item/weapon/melee/classic_baton(src)
 		if(53 to 54)
 			new/obj/item/latexballon(src)
+			new/obj/item/weapon/aiModule/prey(src)
 		if(55 to 56)
 			var/newitem = pick(typesof(/obj/item/toy/prize) - /obj/item/toy/prize)
 			new newitem(src)
 		if(57 to 58)
 			new/obj/item/toy/syndicateballoon(src)
+			new/obj/item/weapon/aiModule/predator(src)
 		if(59 to 60)
 			new/obj/item/weapon/rig(src)
 		if(61 to 62)
@@ -71,7 +75,7 @@
 		if(63 to 64)
 			var/t = rand(4,7)
 			for(var/i = 0, i < t, ++i)
-				var/newcoin = pick(/obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/gold, /obj/item/weapon/coin/diamond, /obj/item/weapon/coin/phoron, /obj/item/weapon/coin/uranium, /obj/item/weapon/coin/platinum)
+				var/newcoin = pick(typesof(/obj/item/weapon/coin) - /obj/item/weapon/coin)
 				new newcoin(src)
 		if(65 to 66)
 			new/obj/item/clothing/suit/ianshirt(src)
@@ -107,7 +111,7 @@
 		if(90)
 			new/obj/item/organ/heart(src)
 		if(91)
-			new/obj/item/device/soulstone(src)
+			new/obj/item/weapon/aiModule/communist(src)
 		if(92)
 			new/obj/item/weapon/katana(src)
 		if(93)
@@ -142,12 +146,12 @@
 			new/obj/item/weapon/storage/belt/champion(src)
 			new/obj/item/clothing/mask/luchador(src)
 		if(100)
-			new/obj/item/clothing/head/bearpelt(src)
+			new/obj/item/mysteryBox(src) // Illegal goodies.
 
 /obj/structure/closet/crate/secure/loot/togglelock(mob/user as mob)
 	if(locked)
 		user << "<span class='notice'>The crate is locked with a Deca-code lock.</span>"
-		var/input = input(usr, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
+		var/input = input(usr, "Enter [codelen] digits. All digits must be unique.", "Deca-Code Lock", "") as text
 		if(in_range(src, user))
 			if (input == code)
 				user << "<span class='notice'>The crate unlocks!</span>"
@@ -197,6 +201,6 @@
 						++bulls
 					else if(a)
 						++cows
-				user << "<span class='notice'>Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
+				user << "<span class='notice'>Last code attempt, [lastattempt], had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
 		else ..()
 	else ..()

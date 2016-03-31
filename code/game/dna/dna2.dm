@@ -33,7 +33,11 @@
 #define DNA_UI_GENDER      14
 #define DNA_UI_BEARD_STYLE 15
 #define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_LENGTH      16 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_EAR_STYLE   17
+#define DNA_UI_TAIL_STYLE  18
+#define DNA_UI_TAUR_BODY   19
+#define DNA_UI_PLAYERSCALE 20
+#define DNA_UI_LENGTH      20 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -129,6 +133,29 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		character.f_style = "Shaved"
 	var/beard	= facial_hair_styles_list.Find(character.f_style)
 
+	// Demi Ears
+	var/ear_style = 0
+	if(character.ear_style)
+		ear_style = ear_styles_list.Find(character.ear_style.type)
+
+	// Demi Tails
+	var/tail_style = 0
+	if(character.tail_style)
+		tail_style = tail_styles_list.Find(character.tail_style.type)
+
+	// Playerscale
+	var/playerscale = 3 //Currently the middle 'normal' size choice in the list
+	for(var/N in player_sizes_list)
+		if(character.playerscale == player_sizes_list[N])
+			playerscale = player_sizes_list.Find(N)
+
+
+	// Taur
+	var/taur	= character.taur // Taur is already stored as an integer
+	if(character.taur == 6) //if spider taur
+		//character.verbs += /mob/proc/weaveWeb
+		character.verbs += /mob/proc/weaveWebBindings
+
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
@@ -149,15 +176,19 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 
-	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
-	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
+	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  		hair_styles_list.len,       1)
+	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, 		facial_hair_styles_list.len,1)
+	SetUIValueRange(DNA_UI_EAR_STYLE,	ear_style,	ear_styles_list.len,		1)
+	SetUIValueRange(DNA_UI_TAIL_STYLE,	tail_style,	tail_styles_list.len,		1)
+	SetUIValueRange(DNA_UI_TAUR_BODY, 	taur,  		taur_styles_list.len,       1)
+	SetUIValueRange(DNA_UI_PLAYERSCALE,	playerscale,player_sizes_list.len,		1)
 
 	UpdateUI()
 
 // Set a DNA UI block's raw value.
 /datum/dna/proc/SetUIValue(var/block,var/value,var/defer=0)
 	if (block<=0) return
-	ASSERT(value>0)
+	ASSERT(value>=0)
 	ASSERT(value<=4095)
 	UI[block]=value
 	dirtyUI=1
@@ -173,17 +204,15 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Used in hair and facial styles (value being the index and maxvalue being the len of the hairstyle list)
 /datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue,var/defer=0)
 	if (block<=0) return
-	if (value==0) value = 1   // FIXME: hair/beard/eye RGB values if they are 0 are not set, this is a work around we'll encode it in the DNA to be 1 instead.
 	ASSERT(maxvalue<=4095)
 	var/range = (4095 / maxvalue)
-	if(value)
-		SetUIValue(block,round(value * range),defer)
+	SetUIValue(block,round(value * range),defer)
 
 // Getter version of above.
 /datum/dna/proc/GetUIValueRange(var/block,var/maxvalue)
 	if (block<=0) return 0
 	var/value = GetUIValue(block)
-	return round(1 +(value / 4096)*maxvalue)
+	return round(0.5+(value / 4095)*maxvalue)
 
 // Is the UI gene "on" or "off"?
 // For UI, this is simply a check of if the value is > 2050.

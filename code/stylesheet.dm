@@ -82,12 +82,16 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Languages */
 
+
+.daemonc				{color: #990033;}
+.birdsongc				{color: #CC9900;}
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .solcom					{color: #22228B;}
+.sergal					{color: #0077FF;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}

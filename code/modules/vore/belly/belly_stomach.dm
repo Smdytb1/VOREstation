@@ -68,7 +68,7 @@
 									M << "<span class='notice'>[owner]'s stomach begins gushing your remains through their system, adding some extra weight to [owner]'s tits.</span>"
 						if(6)
 							owner << "<span class='notice'>Your stomach groans as [M] falls apart into a thick soup. You can feel their remains soon flowing deeper into your body to be absorbed.</span>"
-							M << "<span class='notice'>[owner]'s stomach groans as you falls apart into a thick soup. Your remains soon flow deeper into [owner]'s body to be absorbed.</span>"
+							M << "<span class='notice'>[owner]'s stomach groans as you fall apart into a thick soup. Your remains soon flow deeper into [owner]'s body to be absorbed.</span>"
 						if(7)
 							owner << "<span class='notice'>Your gut kneads on every fiber of [M], softening them down into mush to fuel your next hunt.</span>"
 							M << "<span class='notice'>[owner]'s gut kneads on every fiber of your body, softening you down into mush to fuel their next hunt.</span>"
@@ -79,12 +79,80 @@
 							owner << "<span class='notice'>You feel a rush of warmth as [M]'s now-liquified remains start pumping through your intestines.</span>"
 							M << "<span class='notice'>Your now-liquified remains start pumping through [owner]'s intestines, filling their body with a rush of warmth.</span>"
 					owner.nutrition += 20 // so eating dead mobs gives you *something*.
+					switch(rand(1,10))
+						if (1)
+							owner << sound('sound/vore/death1.ogg')
+							M << sound('sound/vore/death1.ogg')
+						if (2)
+							owner << sound('sound/vore/death2.ogg')
+							M << sound('sound/vore/death2.ogg')
+						if (3)
+							owner << sound('sound/vore/death3.ogg')
+							M << sound('sound/vore/death3.ogg')
+						if (4)
+							owner << sound('sound/vore/death4.ogg')
+							M << sound('sound/vore/death4.ogg')
+						if (5)
+							owner << sound('sound/vore/death5.ogg')
+							M << sound('sound/vore/death5.ogg')
+						if (6)
+							owner << sound('sound/vore/death6.ogg')
+							M << sound('sound/vore/death6.ogg')
+						if (7)
+							owner << sound('sound/vore/death7.ogg')
+							M << sound('sound/vore/death7.ogg')
+						if (8)
+							owner << sound('sound/vore/death8.ogg')
+							M << sound('sound/vore/death8.ogg')
+						if (9)
+							owner << sound('sound/vore/death9.ogg')
+							M << sound('sound/vore/death9.ogg')
+						if (10)
+							owner << sound('sound/vore/death10.ogg')
+							M << sound('sound/vore/death10.ogg')
 					digestion_death(M)
 					continue
 
 				// Deal digestion damage (and feed the pred)
 				if(air_master.current_cycle%3==1)
 					if(!(M.status_flags & GODMODE))
+						switch(rand(1,12))
+							if (1)
+								owner << sound('sound/vore/digest1.ogg')
+								M << sound('sound/vore/digest1.ogg')
+							if (2)
+								owner << sound('sound/vore/digest2.ogg')
+								M << sound('sound/vore/digest2.ogg')
+							if (3)
+								owner << sound('sound/vore/digest3.ogg')
+								M << sound('sound/vore/digest3.ogg')
+							if (4)
+								owner << sound('sound/vore/digest4.ogg')
+								M << sound('sound/vore/digest4.ogg')
+							if (5)
+								owner << sound('sound/vore/digest5.ogg')
+								M << sound('sound/vore/digest5.ogg')
+							if (6)
+								owner << sound('sound/vore/digest6.ogg')
+								M << sound('sound/vore/digest6.ogg')
+							if (7)
+								owner << sound('sound/vore/digest7.ogg')
+								M << sound('sound/vore/digest7.ogg')
+							if (8)
+								owner << sound('sound/vore/digest8.ogg')
+								M << sound('sound/vore/digest8.ogg')
+							if (9)
+								owner << sound('sound/vore/digest9.ogg')
+								M << sound('sound/vore/digest9.ogg')
+							if (10)
+								owner << sound('sound/vore/digest10.ogg')
+								M << sound('sound/vore/digest10.ogg')
+							if (11)
+								owner << sound('sound/vore/digest11.ogg')
+								M << sound('sound/vore/digest11.ogg')
+							if (12)
+								owner << sound('sound/vore/digest12.ogg')
+								M << sound('sound/vore/digest12.ogg')
 						M.adjustBruteLoss(2)
 						M.adjustFireLoss(3)
 						var/difference = owner.playerscale / M.playerscale 	// LOOK HOW FUCKING CLEVER I AM.
@@ -96,7 +164,7 @@
 	if (!(user in internal_contents))
 		return  // User is not in this belly!
 
-	if(prob(40))
+	if(prob(80))
 		var/struggle_outer_message
 		var/struggle_user_message
 		var/stomach_noun = pick("stomach","gut","tummy","belly") // To randomize the word for 'stomach'

@@ -52,6 +52,11 @@
 
 /obj/machinery/gibber/New()
 	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/gibber(null, type)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	RefreshParts()
 	src.overlays += image('icons/obj/kitchen.dmi', "grjam")
 
 /obj/machinery/gibber/update_icon()
@@ -85,6 +90,13 @@
 	usr << "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"]."
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
+	// Handle default machine operations
+	if(default_deconstruction_screwdriver(user, W))
+		return
+	if(default_deconstruction_crowbar(user, W))
+		return
+	if(default_part_replacement(user, W))
+		return
 
 	if(istype(W,/obj/item/weapon/card))
 		if(!allowed(user) && !istype(W,/obj/item/weapon/card/emag))

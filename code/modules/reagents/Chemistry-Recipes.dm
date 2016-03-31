@@ -23,6 +23,8 @@ datum
 
 		//I recommend you set the result amount to the total volume of all components.
 
+///////////////////////////////////////////////////////////////////////////////////
+
 		explosion_potassium
 			name = "Explosion"
 			id = "explosion_potassium"
@@ -56,6 +58,56 @@ datum
 				empulse(location, round(created_volume / 24), round(created_volume / 14), 1)
 				holder.clear_reagents()
 				return
+
+///////////////////////////////////////////////////////////////////////////////////
+/// Micro/Macro chemicals
+
+		sizeoxadone
+			name = "sizeoxadone"
+			id = "sizeoxadone"
+			result = "sizeoxadone"
+			required_reagents = list("clonexadone" = 1, "tramadol" = 3, "phoron" = 1)
+			required_catalysts = list("phoron" = 5)
+			result_amount = 5
+
+		macrocillin
+			name = "Macrocillin"
+			id = "macrocillin"
+			result = "macrocillin"
+			requires_heating = 1
+			required_reagents = list("sizeoxadone" = 20, "diethylamine" = 20)
+			result_amount = 1
+
+		microcillin
+			name = "Microcillin"
+			id = "microcillin"
+			result = "microcillin"
+			requires_heating = 1
+			required_reagents = list("sizeoxadone" = 20, "sodiumchloride" = 20)
+			result_amount = 1
+
+		normalcillin
+			name = "Normalcillin"
+			id = "normalcillin"
+			result = "normalcillin"
+			requires_heating = 1
+			required_reagents = list("sizeoxadone" = 20, "leporazine" = 20)
+			result_amount = 1
+
+		dontcrossthebeams
+			name = "Don't Cross The Beams"
+			id = "dontcrossthebeams"
+			result = null
+			required_reagents = list("microcillin" = 1, "macrocillin" = 1)
+			on_reaction(var/datum/reagents/holder, var/created_volume)
+				var/location = get_turf(holder.my_atom)
+				playsound(location, 'sound/weapons/gauss_shoot.ogg', 50, 1)
+				var/datum/effect/effect/system/grav_pull/s = new /datum/effect/effect/system/grav_pull
+				s.set_up(3, 3, location)
+				s.start()
+				holder.clear_reagents()
+
+///////////////////////////////////////////////////////////////////////////////////
 
 		silicate
 			name = "Silicate"
@@ -1079,6 +1131,8 @@ datum
 					/mob/living/simple_animal/hostile/bear/Hudson, // bugged
 					/mob/living/simple_animal/hostile/hivebot/tele, // bugged
 					/mob/living/simple_animal/hostile/viscerator,
+					/mob/living/simple_animal/hostile/tunnelclown,
+					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
 					/*/mob/living/simple_animal/hostile/wizard, // None of these are re-added yet.
 					/mob/living/simple_animal/hostile/wizard/red,
 					/mob/living/simple_animal/hostile/wizard/marisa,
@@ -1154,6 +1208,8 @@ datum
 					/mob/living/simple_animal/hostile/bear/Hudson, // bugged
 					/mob/living/simple_animal/hostile/hivebot/tele, // bugged
 					/mob/living/simple_animal/hostile/viscerator,
+					/mob/living/simple_animal/hostile/tunnelclown,
+					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
 					/*/mob/living/simple_animal/hostile/wizard, // None of these are re-added yet.
 					/mob/living/simple_animal/hostile/wizard/red,
 					/mob/living/simple_animal/hostile/wizard/marisa,

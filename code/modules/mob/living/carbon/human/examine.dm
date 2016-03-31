@@ -53,8 +53,11 @@
 				t_him = "her"
 
 	msg += "<EM>[src.name]</EM>"
-	if(species.name != "Human")
-		msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	if(species.name != "Human" || src.custom_species)
+		if(src.custom_species)
+			msg += ", a <b>[src.custom_species]</b>"
+		else
+			msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
 	msg += "!\n"
 
 	//uniform
@@ -261,8 +264,10 @@
 	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[t_He] [t_is] sleeping too deeply to be woken up by any means.</span>\n"
-		else if(!client)
-			msg += "[t_He] [t_has] suddenly fallen asleep. (( Player is not connected. ))\n"
+		else if(!client && disconnect_time)
+			msg += "[t_He] [t_has] suddenly fallen asleep. (( Disconnected/ghosted for [round(((world.realtime - src.disconnect_time) / 10) / 60)] minutes. ))\n"
+		else if((client.inactivity / 10)/60 > 20)
+			msg += "[t_He] [t_has] zoned out, staring at nothing. (( Idle for [round((client.inactivity / 10) / 60)] minutes. ))\n"
 
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()

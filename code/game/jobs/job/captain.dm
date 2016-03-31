@@ -87,7 +87,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
-		return 1
 
 		var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/notice2.ogg', volume=20)
 		captain_announcement.Announce("All hands, [H.real_name] is the Head of Personnel!", new_sound=announce_sound)

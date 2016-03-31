@@ -435,4 +435,5 @@
 		h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 	undershirt = null
 	underwear = null
+	undersocks = null
 	regenerate_icons()

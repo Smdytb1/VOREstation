@@ -515,3 +515,18 @@
 	desc = "When Spetznaz on scene, objective no longer save hostage."
 	icon_state = "russobluecamo"
 	item_color = "russobluecamo"
+
+/obj/item/clothing/under/tiger_bikini
+	name = "Tiger Bikini"
+	desc = "A stylish bikini made from authentic space tiger." //Don't worry, space tigers aren't endangered. In fact, they are considered a nusiance.
+	icon_state = "tiger_bikini"
+	item_state = "tiger_bikini"
+	item_color = "tiger_bikini"
+
+/obj/item/clothing/under/permit
+	name = "public nudity permit"
+	desc = "This permit entitles the bearer to conduct their duties without a uniform. Normally issued to furred crewmembers or those with nothing to hide."
+	icon = 'icons/obj/card.dmi'
+	icon_state = "permit"
+	item_state = "golem"
+	item_color = "golem"

@@ -1,4 +1,3 @@
-//Lallander was here
 /mob/living/carbon/human/whisper(message as text)
 	var/alt_name = ""
 
@@ -109,8 +108,8 @@
 			message = replacetext(message, "u", "µ")
 			message = replacetext(message, "b", "ß")
 
-	var/list/listening = hearers(message_range, src)
-	listening |= src
+	var/list/listening = get_mobs_in_view(message_range, src)
+	// listening |= src //Not needed with 'mobs_in_view' anymore.
 
 	//ghosts
 	for (var/mob/M in dead_mob_list)	//does this include players who joined as observers as well?
@@ -120,10 +119,12 @@
 			listening |= M
 
 	//Pass whispers on to anything inside the immediate listeners.
+	/* Commented out, now using get_mobs_in_view, which works better for this.
 	for(var/mob/L in listening)
 		for(var/mob/C in L.contents)
 			if(istype(C,/mob/living))
 				listening += C
+	*/
 
 	//pass on the message to objects that can hear us.
 	for (var/obj/O in view(message_range, src))

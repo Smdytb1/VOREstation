@@ -6,7 +6,9 @@
 	icon_state = "body_m_s"
 
 	var/list/hud_list[9]
-	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
+	var/embedded_flag	  	//To check if we've need to roll for damage on movement while an item is imbedded in us.
+	var/custom_species 		//For anything it needs to be used for
+	var/disconnect_time		//For setting with Logout() to when the client leaves as client.inactivity will not be usable then
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -46,6 +48,7 @@
 	internal_contents["Cock"] = new /datum/belly/cock(src)
 	internal_contents["Womb"] = new /datum/belly/womb(src)
 	internal_contents["Boob"] = new /datum/belly/boob(src)
+	internal_contents["Tail"] = new /datum/belly/tail(src)
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
 	// Vore Code End
 
@@ -57,6 +60,7 @@
 	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	verbs += /mob/living/carbon/human/proc/insidePanel
 	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
+
 
 
 /mob/living/carbon/human/Stat()

@@ -18,7 +18,6 @@
 	desc = "A little cleaning robot, he looks so excited!"
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "cleanbot0"
-	layer = 5.0
 	density = 0
 	anchored = 0
 	//weight = 1.0E7
@@ -32,7 +31,7 @@
 	var/obj/effect/decal/cleanable/target
 	var/obj/effect/decal/cleanable/oldtarget
 	var/oldloc = null
-	req_access = list(access_janitor)
+	req_access = list(access_janitor, access_hydroponics, access_bar, access_kitchen)
 	var/path[] = new()
 	var/patrol_path[] = null
 	var/beacon_freq = 1445		// navigation beacon frequency

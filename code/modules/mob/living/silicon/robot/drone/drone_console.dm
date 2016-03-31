@@ -68,6 +68,7 @@
 		usr << "\blue You issue a maintenance request for all active drones, highlighting [drone_call_area]."
 		for(var/mob/living/silicon/robot/drone/D in world)
 			if(D.client && D.stat == 0)
+				D << sound('sound/machines/chime.ogg')
 				D << "-- Maintenance drone presence requested in: [drone_call_area]."
 
 	else if (href_list["resync"])

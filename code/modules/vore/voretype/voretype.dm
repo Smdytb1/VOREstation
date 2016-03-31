@@ -37,7 +37,10 @@
 //
 /datum/voretype/proc/perform_the_nom(var/mob/user, var/mob/living/prey, var/vore/pred_capable/pred, attempt_msg, success_msg, sound)
 	// Announce that we start the attempt!
-	user.visible_message(attempt_msg)
+	//user.visible_message(attempt_msg) //Doesn't work for micros and people in people
+
+	for (var/mob/O in get_mobs_in_view(world.view,user))
+		O.show_message(attempt_msg)
 
 	// Now give the prey time to escape... return if they did
 	var/swallow_time = istype(prey, /mob/living/carbon/human) ? human_prey_swallow_time : nonhuman_prey_swallow_time
@@ -47,7 +50,10 @@
 		return 0 // Prey escpaed (or user disabled) before timer expired.
 
 	// If we got this far, nom successful! Announce it!
-	user.visible_message(success_msg)
+	for (var/mob/O in get_mobs_in_view(world.view,user))
+		O.show_message(success_msg)
+
+	//user.visible_message(success_msg) //Doesn't work for micros and people in people
 	playsound(user, sound, 100, 1)
 
 	// Actually shove prey into the belly.
@@ -70,4 +76,5 @@ var/list/SINGLETON_VORETYPE_INSTANCES = list(
 		"Unbirth" = new /datum/voretype/unbirth(),
 		"Anal Vore" = new /datum/voretype/anal(),
 		"Cock Vore" = new /datum/voretype/cock(),
-		"Breast Vore" = new /datum/voretype/boobs())
+		"Breast Vore" = new /datum/voretype/boobs(),
+		"Tail Vore" = new /datum/voretype/tail())

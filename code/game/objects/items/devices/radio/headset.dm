@@ -73,9 +73,10 @@
 //------ Tactical headset ------//
 
 /obj/item/device/radio/headset/headset_sec/tactical
-	name = "Tactical Radio Headset"
-	desc = "A Tactical Radio Headset. It's basically a security headset with a camera. You wonder why this isn't standard issue. To access the security channel, use :s"
+	name = "tactical radio headset"
+	desc = "A tactical radio headset. It's basically a normal headset with a camera. You wonder why this isn't standard issue."
 	icon_state = "tac_headset"
+	origin_tech = "bluespace=2;combat=2" // They use bluespace transmitters!
 	var/obj/machinery/camera/camera
 
 /obj/item/device/radio/headset/headset_sec/tactical/attack_self(mob/user)
@@ -87,6 +88,9 @@
 		cameranet.removeCamera(camera)
 		camera.c_tag = "TacCam Headset - [user.name]" // This is better, so they are organized when in use.
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
+
+/obj/item/device/radio/headset/headset_sec/tactical/empty // For RnD to build them in a protolathe.
+	ks2type = null
 
 //------------------------------//
 

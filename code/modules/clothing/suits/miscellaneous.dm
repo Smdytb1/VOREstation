@@ -64,6 +64,12 @@
 	icon_state = "nazi"
 	item_state = "nazi"
 
+/obj/item/clothing/suit/kimonored
+	name = "red kimono"
+	desc = "A white and red kimono"
+	icon_state = "kimonored"
+	item_state = "kimonored"
+
 
 /obj/item/clothing/suit/johnny_coat
 	name = "johnny~~ coat"
@@ -228,6 +234,14 @@
 /*
  * Misc
  */
+
+/obj/item/clothing/suit/web_bindings
+	name = "web bindings"
+	desc = "A webbed cocoon that completely restrains the wearer."
+	icon_state = "web_bindings"
+	item_state = "web_bindings"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/suit/straight_jacket
 	name = "straight jacket"

@@ -495,12 +495,114 @@
 			if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
 				var/turf/oldloc = loc
 				loc = tmob.loc
+				if(src.playerscale <= RESIZE_A_SMALLTINY && tmob.playerscale <= RESIZE_A_SMALLTINY)
+					now_pushing = 0
+					return
+				if(abs(src.playerscale - tmob.playerscale) >= 0.75)
+					now_pushing = 0
+					if(src.playerscale > tmob.playerscale)
+						if(istype(src, /mob/living/carbon/human))
+							var/mob/living/carbon/human/M = src
+							if(M.taur == 2)
+								M << "You carefully slither around [tmob]."
+								tmob << "[M]'s huge tail slithers past beside you!"
+							else
+								M << "You carefully step over [tmob]."
+								tmob << "[M] steps over you carefully!"
+						else
+							src << "You carefully step over [tmob]."
+							tmob << "[src] steps over you carefully!"
+					if(tmob.playerscale > src.playerscale)
+						if(istype(tmob, /mob/living/carbon/human))
+							var/mob/living/carbon/human/victim = tmob
+							if(victim.taur == 2)
+								src << "You jump over [victim]'s thick tail."
+								tmob << "[src] bounds over your tail."
+							else
+								src << "You run between [victim]'s legs."
+								tmob << "[src] runs between your legs."
+					return
 				tmob.loc = oldloc
 				now_pushing = 0
 				for(var/mob/living/carbon/slime/slime in view(1,tmob))
 					if(slime.Victim == tmob)
 						slime.UpdateFeed()
 				return
+
+			// NW was here, adding even more options for stomping! FIX THIS
+			if((a_intent == "disarm") && tmob.canmove && canmove)
+				if(abs(src.playerscale - tmob.playerscale) >= 0.75 && ishuman(tmob))
+					if(src.playerscale > tmob.playerscale)
+						now_pushing = 0
+						loc = tmob.loc
+						if(istype(src, /mob/living/carbon/human))
+							var/mob/living/carbon/human/M = src
+							if(M.taur == 2)
+								M << "You carefully squish [tmob] under your tail!"
+								tmob << "[M] pins you under their tail!"
+							else
+								M << "You pin [tmob] beneath your foot!"
+								tmob << "[M] pins you beneath their foot!"
+						else
+							src << "You pin [tmob] beneath your foot!"
+							tmob << "[src] pins you beneath their foot!"
+						tmob.Stun(4)
+						return
+
+			if((a_intent == "hurt") && canmove)
+				if(abs(src.playerscale - tmob.playerscale) >= 0.75 && ishuman(tmob))
+					if(src.playerscale > tmob.playerscale)
+						now_pushing = 0
+						loc = tmob.loc
+						if(istype(src, /mob/living/carbon/human))
+							var/mob/living/carbon/human/M = src
+							if(M.taur == 2)
+								M << "You steamroller over [tmob] with your heavy tail!"
+								tmob << "[M] ploughs you down mercilessly with their heavy tail!"
+							else
+								M << "You bring your foot down heavily upon [tmob]!"
+								tmob << "[M] steps carelessly on your body!"
+						else
+							src << "You bring your foot down heavily upon [tmob]!"
+							tmob << "[src] steps carelessly on your body!"
+						if(istype(tmob, /mob/living/carbon/human))
+							var/mob/living/carbon/human/victim = tmob
+							victim.apply_damage(10,HALLOSS)
+						return
+
+			if((a_intent == "grab") && canmove)
+				if(abs(src.playerscale - tmob.playerscale) >= 0.75 && ishuman(tmob))
+					if(src.playerscale > tmob.playerscale)
+						now_pushing = 0
+						loc = tmob.loc
+
+						/* Holders have procs for this, and we don't need to make them a holder if we can't get them anyway.
+						var/obj/item/weapon/holder/micro/D = new(loc)
+						tmob.loc = D
+						D.name = "Micro ([tmob.name])"
+						if(D.mob_can_equip(src,slot_shoes,1))
+						*/
+						if(istype(src, /mob/living/carbon/human) && istype(tmob, /mob/living/carbon/human))
+							var/mob/living/carbon/human/M = src
+							var/mob/living/carbon/human/T = tmob
+							if(!M.shoes)
+								if(M.taur == 2)
+									M << "You wrap up [tmob] with your powerful tail!"
+									T << "[M] binds you with their powerful tail!"
+								else
+									M << "You clench your toes around [tmob]'s body!"
+									T << "[M] grabs your body with their toes!"
+
+								equip_to_slot_if_possible(T.get_scooped(src),slot_shoes,0,1)
+							else
+								if(M.taur == 2)
+									M << "You carefully squish [tmob] under your tail!"
+									tmob << "[M] pins you under their tail!"
+								else
+									M << "You pin [tmob] beneath your foot!"
+									tmob << "[M] pins you beneath their foot!"
+								tmob.Stun(4)
+							return
 
 			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
 				if(prob(40) && !(FAT in src.mutations))

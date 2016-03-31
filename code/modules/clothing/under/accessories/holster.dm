@@ -4,6 +4,7 @@
 	icon_state = "holster"
 	item_color = "holster"
 	slot = "utility"
+	w_class = 3
 	var/obj/item/holstered = null
 
 /obj/item/clothing/accessory/holster/proc/holster(obj/item/I, mob/user as mob)

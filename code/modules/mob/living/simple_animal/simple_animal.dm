@@ -54,19 +54,14 @@
 	var/friendly = "nuzzles"
 	var/wall_smash = 0
 
-	//Vore stuff! -NW
-	var/list/stomach_contents = list() //Stomach contents list
-	var/digest_stomach = 1 //Do they digest? 0=no digest, 1=digest
-	var/digestable = 1 //Can they be digested? Probably not functional yet
-	var/isPredator = 0 //Are they capable of performing and pre-defined vore actions for their species?
-	var/swallowTime = 30 //How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
-
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
 	// Vore Code Start
-	// Setup the types of bellies present.
-	internal_contents["Stomach"] = new /datum/belly/stomach(src)
+	// Setup the types of bellies present
+
+	insides = new /datum/belly/simple(src)
+	internal_contents["Stomach"] = insides
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
 	// Vore Code End
 

@@ -10,7 +10,7 @@
 	var/hasinner = 1
 	var/icon/mob
 	var/icon/mob2
-	siemens_coefficient = 1.5 // Because fuck furries apparently? ... I'm not touching this until I know why it's here. -Ace
+	//siemens_coefficient = 1.5 // Because fuck furries apparently? ... I'm not touching this until I know why it's here. -Ace // I will, because no, not fuck furries. -Aro
 
 	update_icon(var/mob/living/carbon/human/user) // Code needed in human/inventory.dm:291 and human/update_icons.dm:691 for this to work.
 		if(!istype(user)) return
@@ -24,6 +24,17 @@
 			var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "[icon_state]inner2")
 			mob.Blend(earbit, ICON_OVERLAY)
 			mob2.Blend(earbit2, ICON_OVERLAY)
+
+/*
+==================================================
+==   STOP   STOP   STOP   STOP   STOP   STOP
+==
+==         DO NOT ADD MORE THINGS HERE!!!
+==        ADD THEM TO sprite_accessories.dm
+==
+==   STOP   STOP   STOP   STOP   STOP   STOP
+==================================================
+*/
 
 //------ Actual items ------//
 
@@ -59,15 +70,6 @@
 	name = "Mouse Ears"
 	desc = "The early bird gets the worm, but the second mouse gets the cheese."
 	icon_state = "mouse"
-
-/*
-/obj/item/clothing/head/accessory/fluff/threetail
-	name = "Rosey's three tails"
-	desc = "Three fox tails. They shouldn't be detached from Rosey..."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "threetail"
-	hasinner = 0
-*/
 
 /obj/item/clothing/head/accessory/squirrel
 	name = "squirrel ears"
