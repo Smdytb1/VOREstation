@@ -192,7 +192,7 @@
 //Sleeper
 
 /obj/item/weapon/dogborg/sleeper
-	name = "mounted sleeper"
+	name = "Medbelly"
 	desc = "Equipment for medical hound. A mounted sleeper that stabilizes patients and can inject reagents in the borg's reserves."
 	icon = 'icons/mob/dogborg.dmi'
 	icon_state = "sleeper"
@@ -201,7 +201,7 @@
 	var/inject_amount = 10
 	var/min_health = -100
 	var/occupied = 0
-	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","antitoxin")
+	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","antitoxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
 
 /obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
@@ -211,18 +211,22 @@
 		return
 	if(!ishuman(target))
 		return
-	if(!patient_insertion_check(target))
+	//if(!patient_insertion_check(target))
+		//return
+	if(target.buckled)
+		user << "\red The user is buckled and can not be put into your [src]."
 		return
-	user.visible_message("<span class='warning'>[user] starts putting [target] into \the [src].</span>", "<span class='notice'>You start putting [target] into [src]...</span>")
-	if(do_after(user, 50, target = target))
-		if(!patient_insertion_check(target))
-			return
+	if(patient)
+		user << "\red Your [src] is already occupied."
+		return
+	user.visible_message("<span class='warning'>[user] is ingesting [target] into their [src].</span>", "<span class='notice'>You start ingesting [target] into your [src]...</span>")
+	if(!patient && ishuman(target) && !target.buckled && do_after (user, 50)) //(do_after(user, 50, target = target))
 		target.forceMove(src)
 		patient = target
 		hound = user
 		target.reset_view(src)
-		user << "<span class='notice'>[target] successfully loaded into [src]. Life support functions engaged.</span>"
-		user.visible_message("<span class='warning'>[user] loads [target] into [src].</span>")
+		user << "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>"
+		user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>")
 		user.visible_message("[target] loaded. Life support functions engaged.")
 		src.occupied = 1
 		var/mob/living/silicon/robot.R = user
@@ -234,16 +238,7 @@
 			R.sleeper_g = 0
 			R.sleeper_r = 1
 			R.update_icons()
-		//SSobj.processing |= src //This is causing problems
-
-/obj/item/weapon/dogborg/sleeper/proc/patient_insertion_check(mob/living/carbon/target, mob/user)
-	if(target.buckled)
-		user << "<span class='warning'>[target] will not fit into the sleeper because they are buckled to [target.buckled]!</span>"
-		return
-	if(patient)
-		user << "<span class='warning'>The sleeper is already occupied!</span>"
-		return
-	return 1
+		processing_objects |= src
 
 /obj/item/weapon/dogborg/sleeper/proc/go_out()
 	if(src.occupied == 0)
@@ -358,14 +353,14 @@
 			if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, 10)
 				var/mob/living/silicon/robot.R = user
-				R.cell.charge = R.cell.charge - 250 //-250 charge per injection
+				R.cell.charge = R.cell.charge - 750 //-250 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
-			user << "<span class='notice'>Occupant now has [units] unit\s of [chemical_reagents_list[chem]] in their bloodstream.</span>"
+			user << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
 
 /obj/item/weapon/dogborg/sleeper/process()
-	//if(src.occupied == 0) //This is also causing problems.
-		//SSobj.processing.Remove(src)
-		//return
+	if(src.occupied == 0)
+		processing_objects.Remove(src)
+		return
 	if(patient.health > 0)
 		patient.adjustOxyLoss(-1) //Heal some oxygen damage if they're in critical condition
 		patient.updatehealth()
@@ -374,78 +369,19 @@
 	src.drain()
 	if(patient.reagents.get_reagent_amount("inaprovaline") < 5)
 		patient.reagents.add_reagent("inaprovaline", 5)
-
-// Pounce stuff for K-9
-
-/obj/item/weapon/dogborg/pounce
-	name = "pounce"
-	icon = 'icons/mob/dogborg.dmi'
-	icon_state = "pounce"
-	desc = "Leap at your target to momentarily stun them."
-	force = 0
-	throwforce = 0
-
 /mob/living/silicon/robot
-	var/leaping = 0
-	var/pounce_cooldown = 0
-	var/pounce_cooldown_time = 40
-	var/leap_at
-	var/disabler
-	var/laser
 	var/sleeper_g
 	var/sleeper_r
 
-#define MAX_K9_LEAP_DIST 3
 
-/obj/item/weapon/dogborg/pounce/afterattack(atom/A, mob/user)
-	var/mob/living/silicon/robot.R = user
-	R.leap_at(A)
 
-/mob/living/silicon/robot/proc/leap_at(atom/A)
-	if(pounce_cooldown)
-		src << "<span class='danger'>Your leg actuators are still recharging!</span>"
-		return
 
-	if(leaping) //Leap while you leap, so you can leap while you leap
-		return
-
-	if(cell.charge <= 500)
-		return
-
-	else
-		leaping = 1
-		pixel_y = 10
-		throw_at(A,MAX_K9_LEAP_DIST,1, spin=0, diagonals_first = 1)
-		leaping = 0
-		pixel_y = initial(pixel_y)
-		cell.charge = cell.charge - 500 //Large energy consumption.
-		pounce_cooldown = !pounce_cooldown
-		spawn(pounce_cooldown_time)
-			pounce_cooldown = !pounce_cooldown
-
-/mob/living/silicon/robot/throw_impact(atom/A, params)
-
-	if(!leaping)
-		return ..()
-
-	if(A)
-		if(istype(A, /mob/living))
-			var/mob/living/L = A
-			var/blocked = 0
-			if(ishuman(A))
-				var/mob/living/carbon/human/H = A
-				if(H.check_shields(90, "the [name]", src, 1))
-					blocked = 1
-			if(!blocked)
-				L.visible_message("<span class ='danger'>[src] pounces on [L]!</span>", "<span class ='userdanger'>[src] pounces on you!</span>")
-				L.Weaken(2)// Not enough time to cuff a criminal.
-				sleep(2)//Runtime prevention (infinite bump() calls on hulks)
-				step_towards(src,L)
-
-		else if(A.density && !A.CanPass(src))
-			visible_message("<span class ='danger'>[src] smashes into [A]!</span>")
-			weakened = 2
-
-		if(leaping)
-			leaping = 0
-			update_canmove()
+/obj/item/weapon/dogborg/sleeper/K9 //The K9 portabrig
+	name = "Brig-Belly"
+	desc = "Equipment for a K9 unit. A mounted portable-brig that holds criminals."
+	icon = 'icons/mob/dogborg.dmi'
+	icon_state = "sleeper"
+	inject_amount = 0
+	min_health = -100
+	occupied = 0
+	list/injection_chems = list("water") //So they don't have all the same chems as the medihound!
