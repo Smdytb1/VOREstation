@@ -3411,6 +3411,19 @@ datum
 				/*if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly. // Vorestation edit
 					d*=5*/
 
+				//Seems like a big benefit to be huge, but the idea is that a full bottle of vodka would be a shots worth to them.
+				//This is still not enough to make that true, but is a fair balance imo.
+				switch(M.playerscale)
+					if(RESIZE_HUGE to INFINITY)
+						d*= (1.0/4.5)
+					if(RESIZE_BIG to RESIZE_HUGE)
+						d*= (1.0/2.5)
+					if(RESIZE_SMALL to RESIZE_BIG)
+						d*= 1.50 // 50% more drunk per unit of ethanol~
+					if(RESIZE_TINY to RESIZE_SMALL)
+						d*= 2 // get drunk twice as fast. Very generous considering a shot could be as tall as them~
+
+
 				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)
 					if (!M:slurring) M:slurring = 1

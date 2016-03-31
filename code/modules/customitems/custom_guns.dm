@@ -2,6 +2,10 @@
 #define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
+#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
+#define EJECT_CASINGS	1 //drop spent casings on the ground after firing
+#define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns.
+
 // The M41A from the Xeno station mission is not yet here. Need to include ASAP.
 // Caseless ammo is now handled by ammunition.dm
 
@@ -36,6 +40,32 @@
 	w_class = 3 // Because collapsable stock so it fits in backpacks.
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
 	max_shells = 6
+
+// bwoincognito:Tasald Corlethian
+/* Removed until this can be made to work right without being horrible and hacky.
+/obj/item/weapon/gun/projectile/shotgun/pump/bigiron
+	name = "Big Iron revolver"
+	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	icon_state = "tasaldrevolver"
+	item_state = "revolver"
+	fire_sound = 'sound/weapons/pistol.ogg'
+	caliber = "357"
+	origin_tech = "combat=2;materials=2"
+	max_shells = 6
+	handle_casings = CYCLE_CASINGS
+	ammo_type = /obj/item/ammo_casing/a357r
+	load_method = SINGLE_CASING|SPEEDLOADER
+	cocksound = 'sound/weapons/riflebolt.ogg'
+*/
+
+// bwoincognito:Tasald Corlethian
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian
+	name = "Big Iron revolver"
+	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	icon_state = "tasaldrevolver"
+	item_state = "revolver"
+	fire_sound = 'sound/weapons/pistol.ogg'
+	ammo_type = /obj/item/ammo_magazine/c38/rubber
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
@@ -109,7 +139,6 @@
 	name = "\improper ZM Kar 1"
 	desc = "A reproduction of an old ZM Kar 1 Rifle from the Autocratic East Europan Imperial Alliance of Gaia. Popular among imperials and collectors within the Federation and its allies. Uses 7.62mm ammo."
 
-
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/wicked
 	name = "'Wicked Butterfly' ZM Kar S1"
 	desc = "A customized bolt-action sniper rifle that was carried by some of the most revered snipers in the Federation. The stock has a small butterfly engraved on it. Uses 7.62mm ammo."
@@ -127,6 +156,7 @@
 
 	toggle_scope(2.0)
 
+//This weapon is shelved until someone can fix the modifystate var and apply a safety to the scythe mode.
 /*
 /obj/item/weapon/gun/projectile/automatic/crestrose
 	name = "Crescent Rose"
@@ -372,7 +402,8 @@
 	initial_ammo = 0
 
 //------------- Clockwork Rifle -------------
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/clockwork
+// molenar:Kari Akiren
+/obj/item/weapon/gun/projectile/shotgun/pump/rifle/fluff/kari_akiren
 	name = "Clockwork Rifle"
 	desc = "Brass, copper, and lots of gears. Well lubricated for fluid movement as each round is loaded, locked, and fired. Just like clockwork."
 	icon = 'icons/obj/custom_items.dmi'
