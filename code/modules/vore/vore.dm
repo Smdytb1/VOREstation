@@ -158,7 +158,7 @@
 			message_admins("[key_name(src)] used the OOC escape button to get out of [pred] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 
 	//You're in a PC!
-	else if(istype(src.loc, /mob/living/carbon))
+	else if(istype(src.loc,/mob/living/carbon))
 		var/mob/living/carbon/pred = src.loc
 		var/confirm = alert(src, "You're in a player-character. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If you are in more than one pred, use this more than once. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
@@ -166,23 +166,17 @@
 				var/datum/belly/CB = pred.internal_contents[O]
 				CB.release_specific_contents(src)
 			message_admins("[key_name(src)] used the OOC escape button to get out of [pred] (PC) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+
+	else if(istype(src.loc, /obj/item/weapon/dogborg/sleeper))
+		var/confirm = alert(src, "You're in a player-character cyborg. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
+		if(confirm == "Okay")
+			forceMove(get_turf(src)) //Since they're not in a vore organ, you can't eject them "normally"
+			reset_view() //This will kick them out of the borg's stomach sleeper in case the borg goes AFK or whatnot.
+			message_admins("[key_name(src)] used the OOC escape button to get out of a cyborg..") //Not much information,
+
 	else
 		src << "<span class='alert'>You aren't inside anyone, you clod.</span>"
 
-
-/mob/living/proc/escapeOOC2()
-	set name = "Borg OOC escape"
-	set category = "Vore"
-
-	if(istype(src.loc, /obj/item/weapon/dogborg/sleeper))
-		var/confirm = alert(src, "You're in a player-character. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If you are in more than one pred, use this more than once. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
-		if(confirm == "Okay")
-			forceMove(get_turf(src))
-			reset_view()
-			message_admins("[key_name(src)] used the Borg OOC escape button.")
-
-	else
-		src << "<span class='alert'>You're not inside of a borg.</span>"
 /////////////////////////
 /// NW's Inside Panel ///
 /////////////////////////
