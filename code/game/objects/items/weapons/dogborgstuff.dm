@@ -211,8 +211,6 @@
 		return
 	if(!ishuman(target))
 		return
-	//if(!patient_insertion_check(target))
-		//return
 	if(target.buckled)
 		user << "\red The user is buckled and can not be put into your [src]."
 		return
