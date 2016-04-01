@@ -350,12 +350,16 @@
 /obj/item/weapon/dogborg/sleeper/proc/inject_chem(mob/user, chem)
 	if(patient && patient.reagents)
 		if(chem in injection_chems + "inaprovaline")
-			if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
+			var/mob/living/silicon/robot.R = user
+			if(R.cell.charge < 750) //This is so borgs don't kill theirselves with it.
+				R << "<span class='notice'>You don't have enough power to synthesise fluids.</span>"
+				return
+
+			else if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, inject_amount)
-				var/mob/living/silicon/robot.R = user
-				R.cell.charge = R.cell.charge - 750 //-250 charge per injection
+				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
-			user << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
+			R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
 
 /obj/item/weapon/dogborg/sleeper/process()
 	if(src.occupied == 0)
