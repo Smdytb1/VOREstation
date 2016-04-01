@@ -60,6 +60,7 @@
 	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	verbs += /mob/living/carbon/human/proc/insidePanel
 	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
+	verbs += /mob/living/proc/escapeOOC2
 
 
 

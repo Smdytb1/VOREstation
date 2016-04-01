@@ -351,7 +351,7 @@
 	if(patient && patient.reagents)
 		if(chem in injection_chems + "inaprovaline")
 			if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
-				patient.reagents.add_reagent(chem, 10)
+				patient.reagents.add_reagent(chem, inject_amount)
 				var/mob/living/silicon/robot.R = user
 				R.cell.charge = R.cell.charge - 750 //-250 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
@@ -384,4 +384,4 @@
 	inject_amount = 0
 	min_health = -100
 	occupied = 0
-	list/injection_chems = list("water") //So they don't have all the same chems as the medihound!
+	injection_chems = list("water") //So they don't have all the same chems as the medihound!
