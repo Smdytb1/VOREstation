@@ -118,7 +118,7 @@
 		user << "<span class='warning'>You need to take that [target.name] off before cleaning it!</span>"
 	else if(istype(target,/obj/effect/decal/cleanable))
 		user.visible_message("[user] begins to lick off \the [target.name].", "<span class='warning'>You begin to lick off \the [target.name]...</span>")
-		if(do_after(user, target = target))
+		if(do_after (user, 50))
 			user << "<span class='notice'>You finish licking off \the [target.name].</span>"
 			del(target)
 			var/mob/living/silicon/robot.R = user
@@ -126,7 +126,7 @@
 	else if(istype(target,/obj/item))
 		if(istype(target,/obj/item/trash))
 			user.visible_message("[user] nibbles away at \the [target.name].", "<span class='warning'>You begin to nibble away at \the [target.name]...</span>")
-			if(do_after(user, target = target))
+			if(do_after (user, 50))
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				del(target)
 				var/mob/living/silicon/robot.R = user
@@ -134,7 +134,7 @@
 			return
 		if(istype(target,/obj/item/weapon/cell))
 			user.visible_message("[user] begins cramming \the [target.name] down its throat.", "<span class='warning'>You begin cramming \the [target.name] down your throat...</span>")
-			if(do_after(user, 50, target = target))
+			if(do_after (user, 50))
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				var/mob/living/silicon/robot.R = user
 				var/obj/item/weapon/cell.C = target
@@ -144,7 +144,7 @@
 		var/obj/item/I = target
 		if(!I.anchored && src.emagged)
 			user.visible_message("[user] begins chewing up \the [target.name]. Looks like it's trying to loophole around its diet restriction!", "<span class='warning'>You begin chewing up \the [target.name]...</span>")
-			if(do_after(user, 100, target = I))
+			if(do_after (user, 50))
 				visible_message("<span class='warning'>[user] chews up \the [target.name] and cleans off the debris!</span>")
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				del(I)
@@ -152,7 +152,7 @@
 				R.cell.charge = R.cell.charge + 500
 			return
 		user.visible_message("[user] begins to lick \the [target.name] clean...", "<span class='notice'>You begin to lick \the [target.name] clean...</span>")
-		if(do_after(user, target = target))
+		if(do_after (user, 50))
 			user << "<span class='notice'>You clean \the [target.name].</span>"
 			var/obj/effect/decal/cleanable/C = locate() in target
 			del(C)
@@ -171,18 +171,18 @@
 			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 			R.cell.charge = R.cell.charge - 666
 		else
-			user.visible_message("<span class='warning'>\the [user] affectionally licks \the [target]'s face!</span>", "<span class='notice'>You affectionally lick \the [target]'s face!</span>")
+			user.visible_message("<span class='warning'>\the [user] affectionally licks all over \the [target]'s face!</span>", "<span class='notice'>You affectionally lick all over \the [target]'s face!</span>")
 			playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1)
 			return
 	else if(istype(target, /obj/structure/window))
 		user.visible_message("[user] begins to lick \the [target.name] clean...", "<span class='notice'>You begin to lick \the [target.name] clean...</span>")
-		if(do_after(user, target = target))
+		if(do_after (user, 50))
 			user << "<span class='notice'>You clean \the [target.name].</span>"
 			target.color = initial(target.color)
 			target.SetOpacity(initial(target.opacity))
 	else
 		user.visible_message("[user] begins to lick \the [target.name] clean...", "<span class='notice'>You begin to lick \the [target.name] clean...</span>")
-		if(do_after(user, target = target))
+		if(do_after (user, 50))
 			user << "<span class='notice'>You clean \the [target.name].</span>"
 			var/obj/effect/decal/cleanable/C = locate() in target
 			del(C)
@@ -220,7 +220,7 @@
 		user << "\red Your [src] is already occupied."
 		return
 	user.visible_message("<span class='warning'>[user] is ingesting [target] into their [src].</span>", "<span class='notice'>You start ingesting [target] into your [src]...</span>")
-	if(!patient && ishuman(target) && !target.buckled && do_after (user, 50)) //(do_after(user, 50, target = target))
+	if(!patient && ishuman(target) && !target.buckled && do_after (user, 50))
 		target.forceMove(src)
 		patient = target
 		hound = user
