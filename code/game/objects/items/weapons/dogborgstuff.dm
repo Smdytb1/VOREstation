@@ -333,7 +333,7 @@
 			usr << "<span class='notice'>ERROR: Subject is not in stable condition for auto-injection.</span>"
 			
 	else if(patient && patient.stat == DEAD) //This is so they can digest someone that is dead
-		var/confirm = alert(src, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
+		var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			var/mob/living/silicon/robot.R = usr
 			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
@@ -360,7 +360,7 @@
 			var/units = round(patient.reagents.get_reagent_amount(chem))
 			R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
 	if(patient && patient.stat == DEAD) //So is this. If they inject a dead person, this pops up.
-		var/confirm = alert(src, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
+		var/confirm = alert(user, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			var/mob/living/silicon/robot.R = user
 			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
