@@ -3240,8 +3240,6 @@ datum
 				if(M.confused !=0) M.confused = max(0,M.confused - 5)
 				..()
 				return
-				
-				
 //////////////////////////////////////////////The ten friggen million reagents that get you drunk//////////////////////////////////////////////
 
 		atomicbomb
