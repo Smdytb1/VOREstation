@@ -244,7 +244,7 @@
 
 /obj/item/weapon/dogborg/sleeper/proc/drain()
 	var/mob/living/silicon/robot.R = hound
-	R.cell.charge = R.cell.charge - 10
+	R.cell.charge = R.cell.charge - 5
 
 /obj/item/weapon/dogborg/sleeper/attack_self(mob/user)
 	if(..())
