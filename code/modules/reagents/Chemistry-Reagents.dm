@@ -3221,7 +3221,6 @@ datum
 			description = "A gulp a day keeps the MediBot away. That's probably for the best."
 			reagent_state = LIQUID
 			color = "#FF8CFF" // rgb: 255, 140, 255
-
 			nutriment_factor = 1 * FOOD_METABOLISM
 
 			glass_icon_state = "doctorsdelightglass"
