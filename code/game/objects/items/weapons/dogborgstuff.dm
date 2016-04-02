@@ -191,7 +191,7 @@
 	var/inject_amount = 10
 	var/min_health = -100
 	var/occupied = 0
-	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","antitoxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
+	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
 
 /obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
@@ -342,13 +342,21 @@
 			if(R.cell.charge < 750) //This is so borgs don't kill theirselves with it.
 				R << "<span class='notice'>You don't have enough power to synthesise fluids.</span>"
 				return
-
+			else if(patient.reagents.get_reagent_amount(chem) + 10 >= 20) //Preventing people from accidentally killing theirselves by trying to inject too many chemicals!
+				R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]]. Your stomach is currently too full of fluids to secrete more.</span>"
 			else if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, inject_amount)
 				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
 			R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
-
+	if(patient && patient.stat = DEAD)
+		var/confirm = alert(src, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
+		if(confirm == "Okay")
+			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
+			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
+			del(patient)
+			R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+			
 /obj/item/weapon/dogborg/sleeper/process()
 	if(src.occupied == 0)
 		processing_objects.Remove(src)
