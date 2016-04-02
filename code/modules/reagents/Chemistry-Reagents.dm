@@ -3208,7 +3208,6 @@ datum
 			glass_name = "glass of Rewriter"
 			glass_desc = "The secret of the sanctuary of the Libarian..."
 			glass_center_of_mass = list("x"=16, "y"=9)
-
 			on_mob_life(var/mob/living/M as mob)
 				..()
 				M.make_jittery(5)
@@ -3222,7 +3221,6 @@ datum
 			reagent_state = LIQUID
 			color = "#FF8CFF" // rgb: 255, 140, 255
 			nutriment_factor = 1 * FOOD_METABOLISM
-
 			glass_icon_state = "doctorsdelightglass"
 			glass_name = "glass of The Doctor's Delight"
 			glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
