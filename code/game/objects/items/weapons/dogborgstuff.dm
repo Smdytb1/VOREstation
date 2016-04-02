@@ -141,7 +141,10 @@
 				R.cell.charge = R.cell.charge + (C.maxcharge / 3)
 				del(target)
 			return
+<<<<<<< HEAD
 		var/obj/item/I = target
+=======
+>>>>>>> origin/master
 		user.visible_message("[user] begins to lick \the [target.name] clean...", "<span class='notice'>You begin to lick \the [target.name] clean...</span>")
 		if(do_after (user, 50))
 			user << "<span class='notice'>You clean \the [target.name].</span>"
