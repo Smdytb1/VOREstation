@@ -191,7 +191,7 @@
 	var/inject_amount = 10
 	var/min_health = -100
 	var/occupied = 0
-	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol", "digestive_enzyme") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
+	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol", "digestive_enzymes") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
 
 /obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
@@ -386,4 +386,4 @@
 	inject_amount = 10
 	min_health = -100
 	occupied = 0
-	injection_chems = list("digestive_enzyme") //So they don't have all the same chems as the medihound!
+	injection_chems = list("digestive_enzymes") //So they don't have all the same chems as the medihound!
