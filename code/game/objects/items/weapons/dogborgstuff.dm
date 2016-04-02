@@ -343,7 +343,7 @@
 				R << "<span class='notice'>You don't have enough power to synthesise fluids.</span>"
 				return
 			else if(patient.reagents.get_reagent_amount(chem) + 10 >= 20) //Preventing people from accidentally killing theirselves by trying to inject too many chemicals!
-				R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]]. Your stomach is currently too full of fluids to secrete more.</span>"
+				R << "<span class='notice'>Your stomach is currently too full of fluids to secrete more fluids of this kind.</span>"
 			else if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, inject_amount)
 				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
@@ -352,6 +352,7 @@
 	if(patient && patient.stat = DEAD)
 		var/confirm = alert(src, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
+			var/mob/living/silicon/robot.R = user
 			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
 			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
 			del(patient)
