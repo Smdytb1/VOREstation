@@ -3227,7 +3227,6 @@ datum
 			glass_name = "glass of The Doctor's Delight"
 			glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
 			glass_center_of_mass = list("x"=16, "y"=8)
-			
 			on_mob_life(var/mob/living/M as mob)
 				M:nutrition += nutriment_factor
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
