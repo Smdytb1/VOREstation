@@ -349,7 +349,7 @@
 				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
 			R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
-	if(patient && patient.stat = DEAD)
+	if(patient && patient.stat == DEAD)
 		var/confirm = alert(src, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			var/mob/living/silicon/robot.R = user
