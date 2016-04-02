@@ -141,16 +141,6 @@
 				R.cell.charge = R.cell.charge + (C.maxcharge / 3)
 				del(target)
 			return
-		var/obj/item/I = target
-		if(!I.anchored && src.emagged)
-			user.visible_message("[user] begins chewing up \the [target.name]. Looks like it's trying to loophole around its diet restriction!", "<span class='warning'>You begin chewing up \the [target.name]...</span>")
-			if(do_after (user, 50))
-				visible_message("<span class='warning'>[user] chews up \the [target.name] and cleans off the debris!</span>")
-				user << "<span class='notice'>You finish off \the [target.name].</span>"
-				del(I)
-				var/mob/living/silicon/robot.R = user
-				R.cell.charge = R.cell.charge + 500
-			return
 		user.visible_message("[user] begins to lick \the [target.name] clean...", "<span class='notice'>You begin to lick \the [target.name] clean...</span>")
 		if(do_after (user, 50))
 			user << "<span class='notice'>You clean \the [target.name].</span>"
