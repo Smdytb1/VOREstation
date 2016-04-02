@@ -251,8 +251,8 @@
 		msg += "[t_He] [t_is] so absolutely stuffed that you aren't sure how it's possible to move. [t_He] can't seem to get any bigger. The surface of [t_his] belly looks sorely strained!\n"
 //		else
 
-	// VOREstation weight code TODO.
-/*	if(weight < 50) // used to be 100, changed this
+	// VOREstation weight code TODO. Need fatty emotes. Reminder that weight can only be between 70 and 500. See BMI charts for ideas.
+/*	if(weight < 70)
 		msg += "[t_He] [t_is] starving! You can hear [t_his] stomach snarling from across the room!\n"
 	else if(weight >= 50 && weight < 100)
 		msg += "[t_He] [t_is] extremely hungry. A deep growl occasionally rumbles from [t_his] empty stomach.\n"

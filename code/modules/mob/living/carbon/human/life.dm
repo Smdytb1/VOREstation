@@ -979,15 +979,17 @@
 			else //heal in the dark
 				heal_overall_damage(1,1)
 
-		// VOREstation weight code TODO.
+		// VOREstation weight code.
 		// Weight should be limited between 70 and 500 pounds min and max. Beyond that gets fucky and not believable and the person would likely keel over and die.
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)
 			nutrition = max (0, nutrition - HUNGER_FACTOR)
-		/*
-		else if (nutrition =< 0 && stat != 2)
-			weight -= new math is needed here
-		*/
+			if (weight < 500 && metabolism) // weight increase
+				weight = metabolism*(0.3*(max (0, nutrition - HUNGER_FACTOR))) // 1 nutriment = ~3 pounds worth of calories.
+
+		else if (nutrition <= 0 && stat != 2 && weight > 70 && metabolism)
+			weight -= 0.5*(max (0, nutrition - HUNGER_FACTOR)) // weight decrease from starvation
+
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
