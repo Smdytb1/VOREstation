@@ -142,13 +142,16 @@
 	species_restricted = null
 
 /obj/item/clothing/shoes/ankleBracelets
-	desc = "Who needs shoes when you have braclets?"
-	name = "ankle bracelets"
+	desc = "Who needs shoes when you have bracelets?"
+	name = "gold ankle bracelets"
 	icon_state = "ankleBracelets"
 	item_color = "ankleBracelets"
+	body_parts_covered = 0
 
 /obj/item/clothing/shoes/footwraps
 	desc = "Cloth wraps for your feet."
 	name = "footwraps"
 	icon_state = "footwraps"
 	item_color = "footwraps"
+	body_parts_covered = 0
+

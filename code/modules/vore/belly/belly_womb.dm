@@ -280,628 +280,1449 @@
 						P.nutrition += 1
 						
 						
-		//WOMB TRANSFORM (EGG) VERY hacky code below, but it's about the only way to get the damn'd thing to work! Credit to Verkister with helping me out, and credit to Nightwing! ~CK
+		//WOMB TRANSFORM (EGG) Credit to Verkister with helping me out, and credit to Nightwing! Also, additional credit to Ace for providing support and suggestions, and helping me persevere through coding this masterpeice (see: Horrid mess) mess! ~CK
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 			
 			if(O.species.name == "Unathi")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 			
 			if(O.species.name == "Tajara")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Skrell")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Sergal")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Akula")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Nevrean")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
-		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.taur = O.taur
-				P.r_taur = O.r_taur
-				P.g_taur = O.g_taur
-				P.b_taur = O.b_taur
-				P.h_style = "Bedhead"
-				P.species = O.species 
-				P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
-				owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
-				P.update_hair()
-				P.update_body()
-				P.update_tail_showing()
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+				
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species 
+					P.custom_species = O.custom_species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb as you're encased in an egg. </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body as you encase them in an egg.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
+					P.loc = J
+					J.name = "[defined_species] egg"
+				
 
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
 			if(O.species.name == "Unathi")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Tajara")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Skrell")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Sergal")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Akula")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
 		
 			if(O.species.name == "Nevrean")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
-		
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+				
 			if(O.species.name == "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
-		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human") //If you're none of these species,  you get the default egg
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P << "<span class='notice'>Your body tingles all over...</span>"
-				owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-				P.update_hair()
-				P.update_body()
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
-			
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+				
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.loc = J
+					J.name = "[defined_species] egg"
+
+
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
 			if(O.species.name == "Unathi")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Tajara")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Skrell")
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Sergal")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Akula")
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Nevrean") 
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
-			if(O.species != "list(Unathi)" && O.species != "list(Tajara)" && O.species != "list(Skrell)" && O.species != "list(Sergal)" && O.species != "list(Akula)" && O.species != "list(Nevrean)" && O.species != "list(Human)")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = MALE
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
-			
-		//WOMB TRANSFORM (EGG) Hacky. It instantly transforms them, but any other way will cause infinite eggs.
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = MALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+					
+
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 		
 			if(O.species.name == "Unathi")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/unathi/J = new /obj/structure/closet/secure_closet/egg/unathi(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Tajara")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/tajaran/J = new /obj/structure/closet/secure_closet/egg/tajaran(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Skrell")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/skrell/J = new /obj/structure/closet/secure_closet/egg/skrell(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Sergal")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/sergal/J = new /obj/structure/closet/secure_closet/egg/sergal(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Akula")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/shark/J = new /obj/structure/closet/secure_closet/egg/shark(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Nevrean")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/nevrean/J = new /obj/structure/closet/secure_closet/egg/nevrean(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
 		
 			if(O.species.name == "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg/human(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
-		
-			if(O.species.name != "Unathi" && O.species.name != "Tajara" && O.species.name != "Skrell" && O.species.name != "Sergal" && O.species.name != "Akula" && O.species.name != "Nevrean" && O.species.name != "Human")
-				P.r_hair = O.r_hair
-				P.r_facial = O.r_hair
-				P.g_hair = O.g_hair
-				P.g_facial = O.g_hair
-				P.b_hair = O.b_hair
-				P.b_facial = O.b_hair
-				P.r_skin = O.r_skin
-				P.g_skin = O.g_skin
-				P.b_skin = O.b_skin
-				P.h_style = "Bedhead"
-				P.gender = FEMALE
-				P.loc = new /obj/structure/closet/secure_closet/egg(O.loc)
-				P << "<span class='notice'>Your body feels very strange...</span>"
-				owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-				P.update_hair()
-				P.update_body()
+				var/obj/structure/closet/secure_closet/egg/human/J = new /obj/structure/closet/secure_closet/egg/human(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				
+			if(O.species.name == "Slime Person")
+				var/obj/structure/closet/secure_closet/egg/slime/J = new /obj/structure/closet/secure_closet/egg/slime(O.loc)
+				if (O.custom_species)
+					var/defined_species = O.custom_species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					J.desc = "This egg has a very unique look to it."
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
+				else
+					var/defined_species = O.species
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P.gender = FEMALE
+					P.loc = J
+					J.name = "[defined_species] egg"
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_hair()
+					P.update_body()
