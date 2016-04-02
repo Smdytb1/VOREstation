@@ -3208,6 +3208,7 @@ datum
 			glass_name = "glass of Rewriter"
 			glass_desc = "The secret of the sanctuary of the Libarian..."
 			glass_center_of_mass = list("x"=16, "y"=9)
+
 			on_mob_life(var/mob/living/M as mob)
 				..()
 				M.make_jittery(5)
@@ -3220,11 +3221,14 @@ datum
 			description = "A gulp a day keeps the MediBot away. That's probably for the best."
 			reagent_state = LIQUID
 			color = "#FF8CFF" // rgb: 255, 140, 255
+
 			nutriment_factor = 1 * FOOD_METABOLISM
+
 			glass_icon_state = "doctorsdelightglass"
 			glass_name = "glass of The Doctor's Delight"
 			glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
 			glass_center_of_mass = list("x"=16, "y"=8)
+
 			on_mob_life(var/mob/living/M as mob)
 				M:nutrition += nutriment_factor
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
@@ -3237,6 +3241,7 @@ datum
 				if(M.confused !=0) M.confused = max(0,M.confused - 5)
 				..()
 				return
+
 //////////////////////////////////////////////The ten friggen million reagents that get you drunk//////////////////////////////////////////////
 
 		atomicbomb
