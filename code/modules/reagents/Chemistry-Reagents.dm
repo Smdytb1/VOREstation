@@ -2651,6 +2651,19 @@ datum
 				M.nutrition += nutriment_factor
 				..()
 				return
+				
+		digestive_enzymes
+			name = "Digestive Enzymes"
+			id = "digestive_enzymes"
+			description = "Digestive enzymes are one of the most corrosive fluids known in the universe. Rapidly breaks down and digests anything it comes in contact with."
+			reagent_state = LIQUID
+			color = "#673910" // rgb: 103, 57, 16
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.adjustFireLoss(3) // 3 burn per tick. About as much as digestion.
+				..()
+				return
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// DRINKS BELOW, Beer is up there though, along with cola. Cap'n Pete's Cuban Spiced Rum////////////////////////////////
@@ -3410,6 +3423,19 @@ datum
 
 				/*if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly. // Vorestation edit
 					d*=5*/
+
+				//Seems like a big benefit to be huge, but the idea is that a full bottle of vodka would be a shots worth to them.
+				//This is still not enough to make that true, but is a fair balance imo.
+				switch(M.playerscale)
+					if(RESIZE_HUGE to INFINITY)
+						d*= (1.0/4.5)
+					if(RESIZE_BIG to RESIZE_HUGE)
+						d*= (1.0/2.5)
+					if(RESIZE_SMALL to RESIZE_BIG)
+						d*= 1.50 // 50% more drunk per unit of ethanol~
+					if(RESIZE_TINY to RESIZE_SMALL)
+						d*= 2 // get drunk twice as fast. Very generous considering a shot could be as tall as them~
+
 
 				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)

@@ -27,7 +27,7 @@ HONK Blaster and a pulse cannon protected by projectile armor and powered by a b
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/mg42
 	name = "Maschinengewehr 60"
-	icon_state = "mecha_scatter"
+	icon_state = "mecha_scatter" // placeholder
 	equip_cooldown = 10
 	projectile = /obj/item/projectile/bullet/rifle/a762
 	fire_sound = 'sound/weapons/mg42.ogg'
