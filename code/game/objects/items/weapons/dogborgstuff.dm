@@ -302,7 +302,6 @@
 		dat += text("[]\t-Toxin Content %: []</FONT><BR>", (patient.getToxLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), patient.getToxLoss())
 		dat += text("[]\t-Burn Severity %: []</FONT><BR>", (patient.getFireLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), patient.getFireLoss())
 		dat += text("<HR>Paralysis Summary %: [] ([] seconds left!)<BR>", patient.paralysis, round(patient.paralysis / 4))
-		dat += "<div class='line'><span class='average'>Subject appears to have cellular damage.</span></div><br>"
 
 		if(patient.getBrainLoss())
 			dat += "<div class='line'><span class='average'>Significant brain damage detected.</span></div><br>"
