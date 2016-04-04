@@ -147,6 +147,7 @@
 	icon_state = "ankleBracelets"
 	item_color = "ankleBracelets"
 	body_parts_covered = 0
+	species_restricted = null
 
 /obj/item/clothing/shoes/footwraps
 	desc = "Cloth wraps for your feet."
@@ -154,4 +155,5 @@
 	icon_state = "footwraps"
 	item_color = "footwraps"
 	body_parts_covered = 0
+	species_restricted = null
 
