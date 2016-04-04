@@ -58,7 +58,6 @@
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/melee/energy/sword(src)
 	return
 
@@ -80,7 +79,6 @@
 	src.modules += new /obj/item/weapon/circular_saw(src)
 	src.modules += new /obj/item/weapon/surgicaldrill(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
@@ -122,7 +120,6 @@
 	src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
@@ -177,7 +174,6 @@
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
 	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
@@ -221,7 +217,6 @@
 	src.modules += new /obj/item/taperoll/engineering(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/borg/stun(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(40000)
@@ -273,7 +268,6 @@
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
 	src.modules += new /obj/item/taperoll/police(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	return
 
@@ -302,7 +296,6 @@
 	src.modules += new /obj/item/weapon/storage/bag/trash(src)
 	src.modules += new /obj/item/weapon/mop(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("lube", 250)
 	src.emag.name = "Lube spray"
@@ -336,7 +329,6 @@
 
 	src.modules += new /obj/item/weapon/tray/robotray(src)
 	src.modules += new /obj/item/weapon/reagent_containers/food/drinks/shaker(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 
 	var/datum/reagents/R = new/datum/reagents(50)
@@ -367,7 +359,6 @@
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
 	src.modules += new /obj/item/device/destTagger(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/stamp/denied(src)
 
 /obj/item/weapon/robot_module/clerical/add_languages(var/mob/living/silicon/robot/R)
@@ -402,7 +393,6 @@
 	src.modules += new /obj/item/weapon/gripper/miner(src)
 	src.modules += new /obj/item/weapon/mining_scanner(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	return
 
@@ -416,7 +406,6 @@
 	src.modules += new /obj/item/weapon/melee/energy/sword(src)
 	src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 	src.modules += new /obj/item/weapon/card/emag(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	var/jetpack = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
 	src.modules += jetpack
 	R.internals = jetpack
@@ -442,7 +431,6 @@
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
 	return
 
@@ -461,7 +449,6 @@
 	src.modules += new /obj/item/device/gps(src)
 	src.modules += new /obj/item/device/ano_scanner(src)
 	src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
-	src.modules += new /obj/item/weapon/dogborg/vore(src)
 	return
 
 /obj/item/weapon/robot_module/k9
