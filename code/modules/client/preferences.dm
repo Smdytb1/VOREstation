@@ -1318,13 +1318,25 @@ datum/preferences
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")
 							weight = round(0.4535*text2num(new_weight),4)
+						if(weight > WEIGHT_MAX)
+							weight = WEIGHT_MAX
+						if(weight < WEIGHT_MIN)
+							weight = WEIGHT_MIN
 				if("weight_gain")
 					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_gain_rate)
+						if(weight_gain_rate > WEIGHT_CHANGE_MAX)
+							weight_gain_rate = WEIGHT_CHANGE_MAX
+						if(weight_gain_rate < WEIGHT_CHANGE_MIN)
+							weight_gain_rate = WEIGHT_CHANGE_MIN
 						weight_gain = 0.01*round(text2num(weight_gain_rate),1)
 				if("weight_loss")
 					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_loss_rate)
+						if(weight_loss_rate > WEIGHT_CHANGE_MAX)
+								weight_loss_rate = WEIGHT_CHANGE_MAX
+							if(weight_loss_rate < WEIGHT_CHANGE_MIN)
+								weight_loss_rate = WEIGHT_CHANGE_MIN
 						weight_loss = 0.01*round(text2num(weight_loss_rate),1)
 
 				if("species")
