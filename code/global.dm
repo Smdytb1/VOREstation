@@ -229,7 +229,7 @@ var/list/cheartstopper = list("potassium_chloride")                       // Thi
 var/list/robot_module_types = list(
 	"Standard", "Engineering", "Construction", "Surgeon",  "Crisis",
 	"Miner",    "Janitor",     "Service",      "Clerical", "Security",
-	"Xenoarch"
+	"Xenoarch", "K9", "Medihound"
 )
 
 // Some scary sounds.
