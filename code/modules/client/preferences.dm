@@ -1317,7 +1317,7 @@ datum/preferences
 						if(unit_of_measurement == "Pounds")
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")
-							weight = round(0.4535*text2num(new_weight),4)
+							weight = round(2.20462*text2num(new_weight),4)
 						if(weight > WEIGHT_MAX)
 							weight = WEIGHT_MAX
 						if(weight < WEIGHT_MIN)
