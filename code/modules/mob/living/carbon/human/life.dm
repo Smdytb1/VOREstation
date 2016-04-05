@@ -987,12 +987,13 @@
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)
 			nutrition = max (0, nutrition - HUNGER_FACTOR)
-			if (weight < 500 && metabolism) // weight increase
-				weight = metabolism*(0.3*(max (0, nutrition - HUNGER_FACTOR))) // 1 nutriment = ~3 pounds worth of calories.
+			if (nutrition > 450 /*&& weight < 500*/ && weight_gain) // weight increase
+			//	weight += metabolism*(0.03*(max (0, nutrition - HUNGER_FACTOR)))
+				weight += weight_gain*metabolism // REALLY FUCKING HACKY. // 0.0011 =  47.08
+			//	If someone can come back to this later and un-fuck this, the goal is for each 1 nutriment removed to be worth 0.03 pounds added. This was a hacky fix.
 
-		else if (nutrition <= 0 && stat != 2 && weight > 70 && metabolism)
-			weight -= 0.5*(max (0, nutrition - HUNGER_FACTOR)) // weight decrease from starvation
-
+		else if (nutrition <= 0 && stat != 2 && weight > 70 && weight_loss)
+			weight += weight_loss*metabolism
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
