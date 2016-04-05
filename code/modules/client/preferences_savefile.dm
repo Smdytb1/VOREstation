@@ -294,10 +294,10 @@
 	S["real_name"]			<< real_name
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender
-	S["age"]				>> age
-	S["weight"]				>> weight
-	S["weight_gain"]		>> weight_gain
-	S["weight_loss"]		>> weight_loss
+	S["age"]				<< age
+	S["weight"]				<< weight
+	S["weight_gain"]		<< weight_gain
+	S["weight_loss"]		<< weight_loss
 	S["species"]			<< species
 	S["custom_species"]		<< custom_species
 	S["language"]			<< language

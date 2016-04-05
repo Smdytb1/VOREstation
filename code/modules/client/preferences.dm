@@ -1250,7 +1250,7 @@ datum/preferences
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
 				if("weight")
-					age = rand(90,330)
+					weight = rand(90,330)
 				if("hair")
 					r_hair = rand(0,255)
 					g_hair = rand(0,255)
