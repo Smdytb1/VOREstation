@@ -1848,6 +1848,10 @@ datum/preferences
 	character.b_type = b_type
 	character.custom_species = custom_species
 
+	character.weight = weight
+	character.weight_gain = weight_gain
+	character.weight_loss = weight_loss
+
 	character.r_eyes = r_eyes
 	character.g_eyes = g_eyes
 	character.b_eyes = b_eyes
