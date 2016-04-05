@@ -2295,6 +2295,7 @@
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tasald(src)
 	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tas_coat(src)
+	new /obj/item/fluff/permit/tasald_corlethian(src)
 	..()
 	return
 
