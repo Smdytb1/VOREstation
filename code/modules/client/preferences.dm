@@ -82,12 +82,17 @@ datum/preferences
 	var/b_eyes = 0						//Eye color
 	var/ear_style = null				//Ear style
 	var/tail_style = null				//Tail style
-	var/playerscale = RESIZE_NORMAL					//Custom playerscale
+	var/playerscale = RESIZE_NORMAL		//Custom playerscale
 	var/species = "Human"               //Species datum to use.
 	var/custom_species = null			//Custom species text
 	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
+
+	// Body weight stuff.
+	var/weight = 137					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_gain = 1					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_loss = 0.5					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -273,11 +278,20 @@ datum/preferences
 
 	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
+	dat += "<b>Weight:</b> <a href='?_src_=prefs;preference=weight;task=input'>[weight]</a><br>"
+
 	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
 	dat += "<br>"
 	dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
+
+	dat += "<br>"
+	dat += "<b>Percent of realism at which you...<br>"
+	dat += "<b>Gain Weight:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
+	dat += "<b>Lose Weight:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
+
+	dat += "<br>"
 	dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 	dat += "-Alpha(transparency): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 	dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -1235,6 +1249,8 @@ datum/preferences
 					real_name = random_name(gender,species)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
+				if("weight")
+					age = rand(90,330)
 				if("hair")
 					r_hair = rand(0,255)
 					g_hair = rand(0,255)
@@ -1294,6 +1310,15 @@ datum/preferences
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				if("weight")
+					var/new_weight = input(user, "Choose your character's body weight.\nNote: This measurement should be set assuming they are the same size scale as a normal person.\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
+					if(new_weight) // Todo: Add an input to ask "Is that in pounds or kilograms?"
+						var/unit_of_measurement = alert(user, "Is that in pounds (lbs) or kilograms (kg)?", "Pounds", "Kilograms")
+						if(unit_of_measurement == "Pounds")
+							weight = round(text2num(new_weight),4)
+						if(unit_of_measurement == "Kilograms")
+							weight = round(0.4535*text2num(new_weight),4)
 
 				if("species")
 					user << browse(null, "window=species")
