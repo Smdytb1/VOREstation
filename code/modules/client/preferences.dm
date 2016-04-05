@@ -1329,7 +1329,7 @@ datum/preferences
 							weight_gain_rate = WEIGHT_CHANGE_MAX
 						if(weight_gain_rate < WEIGHT_CHANGE_MIN)
 							weight_gain_rate = WEIGHT_CHANGE_MIN
-						weight_gain = 0.01*round(text2num(weight_gain_rate),1)
+						weight_gain = round(text2num(weight_gain_rate),1)
 				if("weight_loss")
 					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_loss_rate)
@@ -1337,7 +1337,7 @@ datum/preferences
 							weight_loss_rate = WEIGHT_CHANGE_MAX
 						if(weight_loss_rate < WEIGHT_CHANGE_MIN)
 							weight_loss_rate = WEIGHT_CHANGE_MIN
-						weight_loss = 0.01*round(text2num(weight_loss_rate),1)
+						weight_loss = round(text2num(weight_loss_rate),1)
 
 				if("species")
 					user << browse(null, "window=species")
