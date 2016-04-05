@@ -1312,22 +1312,20 @@ datum/preferences
 
 				if("weight")
 					var/new_weight = input(user, "Choose your character's body weight.\nNote: This measurement should be set assuming they are the same size scale as a normal person.\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
-					if(new_weight) // Todo: Add an input to ask "Is that in pounds or kilograms?"
+					if(new_weight)
 						var/unit_of_measurement = alert(user, "Is that in pounds (lbs) or kilograms (kg)?", "Pounds", "Kilograms")
 						if(unit_of_measurement == "Pounds")
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")
 							weight = round(0.4535*text2num(new_weight),4)
 				if("weight_gain")
-					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism, default) and 0% (no weight gain).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
-					if(weight_gain_rate) // Todo: Add an input to ask "Is that in pounds or kilograms?"
-						if(weight_gain_rate)
-							weight_gain = 0.1*round(text2num(weight_gain_rate),1)
+					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_gain_rate)
+						weight_gain = 0.01*round(text2num(weight_gain_rate),1)
 				if("weight_loss")
-					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (strongest realistic metabolism) and 0% (extremely poor metabolism).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
-					if(weight_loss_rate) // Todo: Add an input to ask "Is that in pounds or kilograms?"
-						if(weight_loss_rate)
-							weight_loss = 0.1*round(text2num(weight_loss_rate),1)
+					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_loss_rate)
+						weight_loss = 0.01*round(text2num(weight_loss_rate),1)
 
 				if("species")
 					user << browse(null, "window=species")
