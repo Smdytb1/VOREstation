@@ -239,25 +239,7 @@
 		msg += "<span class='warning'>[t_He] [t_is] on fire!.</span>\n"
 	msg += "<span class='warning'>"
 
-	// Vorestation code.
-	// 1 same size person is worth ~1070 nutriment.
-	// Starting nutriment is 400.
-	if(nutrition < 50) // used to be 100, changed this
-		msg += "[t_He] [t_is] starving! You can hear [t_his] stomach snarling from across the room!\n"
-	else if(nutrition >= 50 && nutrition < 100)
-		msg += "[t_He] [t_is] extremely hungry. A deep growl occasionally rumbles from [t_his] empty stomach.\n"
-	else if(nutrition >= 500 && nutrition < 865) // Fat.
-		msg += "[t_He] has a stuffed belly, bloated fat and round from eating too much.\n"
-	else if(nutrition >= 1200 && nutrition < 1935) // One person fully digested.
-		msg += "[t_He] [t_is] sporting a large, round, sagging stomach. It's contains at least their body weight worth of glorping slush.\n"
-	else if(nutrition >= 1935 && nutrition < 3005) // Two people.
-		msg += "[t_He] [t_is] engorged with a huge stomach that sags and wobbles as they move. They must have consumed at least twice their body weight. It looks incredibly soft.\n"
-	else if(nutrition >= 3005 && nutrition < 4075) // Three people.
-		msg += "[t_He] stomach is firmly packed with digesting slop. They must have eaten at least a few times worth their body weight! It looks hard for them to stand, and [t_his] gut jiggles when they move.\n"
-	else if(nutrition >= 4075) // Four or more people.
-		msg += "[t_He] [t_is] so absolutely stuffed that you aren't sure how it's possible to move. [t_He] can't seem to swell any bigger. The surface of [t_his] belly looks sorely strained!\n"
-
-	// VOREstation weight code.
+	// VOREstation code. Weight gain/loss.
 	if(weight < 75)
 		msg += "[t_He] [t_is] terribly lithe and frail!\n"
 	else if(weight >= 75 && weight < 125)
@@ -276,6 +258,23 @@
 		msg += "[t_He] [t_is] incredibly obese. [t_His] massive potbelly sags over [t_his] waistline while [t_his] fat ass would probably require two chairs to sit down comfortably!\n"
 	else if(weight >= 475)
 		msg += "[t_He] [t_is] so morbidly obese, you wonder how they can even stand—let alone waddle around the station. [t_He] can't get any fatter without being immobilized.\n"
+
+	// Vorestation code.
+	// 1 same size person is worth ~1070 nutriment. Starting nutriment is 400.
+	if(nutrition < 50)
+		msg += "[t_He] [t_is] starving! You can hear [t_his] stomach snarling from across the room!\n"
+	else if(nutrition >= 50 && nutrition < 100)
+		msg += "[t_He] [t_is] extremely hungry. A deep growl occasionally rumbles from [t_his] empty stomach.\n"
+	else if(nutrition >= 500 && nutrition < 865) // Fat.
+		msg += "[t_He] has a stuffed belly, bloated fat and round from eating too much.\n"
+	else if(nutrition >= 1200 && nutrition < 1935) // One person fully digested.
+		msg += "[t_He] [t_is] sporting a large, round, sagging stomach. It's contains at least their body weight worth of glorping slush.\n"
+	else if(nutrition >= 1935 && nutrition < 3005) // Two people.
+		msg += "[t_He] [t_is] engorged with a huge stomach that sags and wobbles as they move. They must have consumed at least twice their body weight. It looks incredibly soft.\n"
+	else if(nutrition >= 3005 && nutrition < 4075) // Three people.
+		msg += "[t_He] stomach is firmly packed with digesting slop. They must have eaten at least a few times worth their body weight! It looks hard for them to stand, and [t_his] gut jiggles when they move.\n"
+	else if(nutrition >= 4075) // Four or more people.
+		msg += "[t_He] [t_is] so absolutely stuffed that you aren't sure how it's possible to move. [t_He] can't seem to swell any bigger. The surface of [t_his] belly looks sorely strained!\n"
 
 
 	// For each belly type, print description if someone is inside!
