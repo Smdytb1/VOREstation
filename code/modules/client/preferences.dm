@@ -287,7 +287,6 @@ datum/preferences
 	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
 
 	dat += "<br>"
-	dat += "<b>Percent of realism at which you...<br>"
 	dat += "<b>Gain Weight:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
 	dat += "<b>Lose Weight:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
 
@@ -1319,6 +1318,16 @@ datum/preferences
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")
 							weight = round(0.4535*text2num(new_weight),4)
+				if("weight_gain")
+					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism, default) and 0% (no weight gain).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_gain_rate) // Todo: Add an input to ask "Is that in pounds or kilograms?"
+						if(weight_gain_rate)
+							weight_gain = 0.1*round(text2num(weight_gain_rate),1)
+				if("weight_loss")
+					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (strongest realistic metabolism) and 0% (extremely poor metabolism).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_loss_rate) // Todo: Add an input to ask "Is that in pounds or kilograms?"
+						if(weight_loss_rate)
+							weight_loss = 0.1*round(text2num(weight_loss_rate),1)
 
 				if("species")
 					user << browse(null, "window=species")
