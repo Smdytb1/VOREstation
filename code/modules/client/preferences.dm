@@ -1313,7 +1313,7 @@ datum/preferences
 				if("weight")
 					var/new_weight = input(user, "Choose your character's body weight.\nNote: This measurement should be set assuming they are the same size scale as a normal person.\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
 					if(new_weight)
-						var/unit_of_measurement = alert(user, "Is that in pounds (lbs) or kilograms (kg)?", "Pounds", "Kilograms")
+						var/unit_of_measurement = alert(user, "Is that number in pounds (lbs) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
 						if(unit_of_measurement == "Pounds")
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")
@@ -1334,9 +1334,9 @@ datum/preferences
 					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_loss_rate)
 						if(weight_loss_rate > WEIGHT_CHANGE_MAX)
-								weight_loss_rate = WEIGHT_CHANGE_MAX
-							if(weight_loss_rate < WEIGHT_CHANGE_MIN)
-								weight_loss_rate = WEIGHT_CHANGE_MIN
+							weight_loss_rate = WEIGHT_CHANGE_MAX
+						if(weight_loss_rate < WEIGHT_CHANGE_MIN)
+							weight_loss_rate = WEIGHT_CHANGE_MIN
 						weight_loss = 0.01*round(text2num(weight_loss_rate),1)
 
 				if("species")
