@@ -993,7 +993,7 @@
 			//	If someone can come back to this later and un-fuck this, the goal is for each 1 nutriment removed to be worth 0.03 pounds added. This was a hacky fix.
 
 		else if (nutrition <= 0 && stat != 2 && weight > 70 && weight_loss)
-			weight += weight_loss*metabolism
+			weight -= weight_loss*metabolism
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
