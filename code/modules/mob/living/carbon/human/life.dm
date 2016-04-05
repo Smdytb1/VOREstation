@@ -983,17 +983,15 @@
 				heal_overall_damage(1,1)
 
 		// VOREstation weight code.
-		// Weight should be limited between 70 and 500 pounds min and max. Beyond that gets fucky and not believable and the person would likely keel over and die.
-		// nutrition decrease
+		// Weight should be limited between 70 and 500 pounds min and max. Beyond that gets not believable because the person would more likely keel over and die or be immobile.
 		if (nutrition > 0 && stat != 2)
-			nutrition = max (0, nutrition - HUNGER_FACTOR)
-			if (nutrition > 450 /*&& weight < 500*/ && weight_gain) // weight increase
-			//	weight += metabolism*(0.03*(max (0, nutrition - HUNGER_FACTOR)))
-				weight += weight_gain*metabolism // REALLY FUCKING HACKY. // 0.0011 =  47.08
+			nutrition = max (0, nutrition - HUNGER_FACTOR) // nutrition decrease
+			if (nutrition > 450 && weight < 500 && weight_gain)
+				weight += weight_gain*metabolism  // weight increase. WARNING: REALLY FUCKING HACKY.
 			//	If someone can come back to this later and un-fuck this, the goal is for each 1 nutriment removed to be worth 0.03 pounds added. This was a hacky fix.
 
-		else if (nutrition <= 0 && stat != 2 && weight > 70 && weight_loss)
-			weight -= weight_loss*metabolism
+		else if (nutrition <= 50 && stat != 2 && weight > 70 && weight_loss)
+			weight -= weight_loss*metabolism // starvation weight loss
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
