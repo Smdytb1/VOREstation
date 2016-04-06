@@ -1323,7 +1323,7 @@ datum/preferences
 						if(weight < WEIGHT_MIN)
 							weight = WEIGHT_MIN
 				if("weight_gain")
-					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n(Due to a small bug, if you want to disable weight gain, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_gain_rate)
 						if(weight_gain_rate > WEIGHT_CHANGE_MAX)
 							weight_gain_rate = WEIGHT_CHANGE_MAX
@@ -1331,7 +1331,7 @@ datum/preferences
 							weight_gain_rate = WEIGHT_CHANGE_MIN
 						weight_gain = round(text2num(weight_gain_rate),1)
 				if("weight_loss")
-					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n(Due to a small bug, if you want to disable weight loss, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
 					if(weight_loss_rate)
 						if(weight_loss_rate > WEIGHT_CHANGE_MAX)
 							weight_loss_rate = WEIGHT_CHANGE_MAX
