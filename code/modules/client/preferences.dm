@@ -91,8 +91,8 @@ datum/preferences
 
 	// Body weight stuff.
 	var/weight = 137					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
-	var/weight_gain = 1					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
-	var/weight_loss = 0.5					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_gain = 100				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_loss = 50				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
