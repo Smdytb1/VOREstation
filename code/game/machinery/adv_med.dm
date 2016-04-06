@@ -271,6 +271,7 @@
 		"stationtime" = worldtime2text(),
 		"stat" = H.stat,
 		"health" = H.health,
+		"weight" = H.weight,
 		"virus_present" = H.virus2.len,
 		"bruteloss" = H.getBruteLoss(),
 		"fireloss" = H.getFireLoss(),
@@ -322,6 +323,7 @@
 	dat += text("[]\tApprox. Brain Damage %: []</font><br>", (occ["brainloss"] < 1 ?"<font color='blue'>" : "<font color='red'>"), occ["brainloss"])
 	dat += text("Paralysis Summary %: [] ([] seconds left!)<br>", occ["paralysis"], round(occ["paralysis"] / 4))
 	dat += text("Body Temperature: [occ["bodytemp"]-T0C]&deg;C ([occ["bodytemp"]*1.8-459.67]&deg;F)<br><HR>")
+	dat += text("Body Weight (to scale): [occ["weight"]]lbs / [occ["weight"] / 2.20463]kg<br><HR>")
 
 	if(occ["borer_present"])
 		dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<br>"

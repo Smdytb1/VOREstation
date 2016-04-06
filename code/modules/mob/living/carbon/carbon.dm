@@ -22,7 +22,7 @@
 			germ_level++
 
 /*
- * Commented in favor of full Vore code
+ * Derelict in favor of Vorestation code. Left for only reference.
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
 	if((user in src.stomach_contents) && istype(user))
 		if(user.last_special <= world.time)

@@ -2234,10 +2234,10 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.nutrition = max(M.nutrition - nutriment_factor, 0)
+				M.weight = max(M.weight - nutriment_factor, 0)
 				M.overeatduration = 0
-				if(M.nutrition < 0)//Prevent from going into negatives.
-					M.nutrition = 0
+				if(M.nutrition < 70)//Prevent from going into negatives.
+					M.nutrition = 70
 				..()
 				return
 
@@ -2651,7 +2651,7 @@ datum
 				M.nutrition += nutriment_factor
 				..()
 				return
-				
+
 		digestive_enzymes
 			name = "Digestive Enzymes"
 			id = "digestive_enzymes"

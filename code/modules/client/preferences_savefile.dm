@@ -106,6 +106,9 @@
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
 	S["age"]				>> age
+	S["weight"]				>> weight
+	S["weight_gain"]		>> weight_gain
+	S["weight_loss"]		>> weight_loss
 	S["species"]			>> species
 	S["custom_species"]		>> custom_species
 	S["language"]			>> language
@@ -225,6 +228,9 @@
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
 	gender			= sanitize_gender(gender)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
+	weight				= sanitize_integer(weight, WEIGHT_MIN, WEIGHT_MAX, initial(weight))
+	weight_gain			= sanitize_integer(weight_gain, WEIGHT_CHANGE_MIN, WEIGHT_CHANGE_MAX, initial(weight_gain))
+	weight_loss			= sanitize_integer(weight_loss, WEIGHT_CHANGE_MIN, WEIGHT_CHANGE_MAX, initial(weight_loss))
 	taur			= sanitize_integer(taur, 0, taur_styles_list.len, initial(taur))
 	playerscale		= sanitize_inlist(playerscale, list(RESIZE_HUGE, RESIZE_BIG, RESIZE_NORMAL, RESIZE_SMALL, RESIZE_TINY), initial(playerscale))
 	r_hair			= sanitize_integer(r_hair, 0, 255, initial(r_hair))
@@ -289,6 +295,9 @@
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender
 	S["age"]				<< age
+	S["weight"]				<< weight
+	S["weight_gain"]		<< weight_gain
+	S["weight_loss"]		<< weight_loss
 	S["species"]			<< species
 	S["custom_species"]		<< custom_species
 	S["language"]			<< language
