@@ -677,6 +677,13 @@
 			if("done")
 				src << browse(null, "window=flavor_changes")
 				return
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, Such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["flavor_change"]] = msg
+				return
 			if("general")
 				var/msg = input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
@@ -1298,6 +1305,13 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
+	flavor_text = flavor_texts["preferences"]
+	flavor_text += "\n\n"
+	for (var/T in flavor_texts)
+		if(flavor_texts[T] && flavor_texts[T] != "")
+			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
+				flavor_text += flavor_texts[T]
+				flavor_text += "\n\n"
 	flavor_text = flavor_texts["general"]
 	flavor_text += "\n\n"
 	for (var/T in flavor_texts)
