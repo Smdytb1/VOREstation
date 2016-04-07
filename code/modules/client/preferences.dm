@@ -720,6 +720,9 @@ datum/preferences
 	HTML += "<tt><center>"
 	HTML += "<b>Set Flavour Text</b> <hr />"
 	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=preferences'>Preferences:</a> "
+	HTML += TextPreview(flavor_texts["preferences"])
+	HTML += "<br>"
 	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=general'>General:</a> "
 	HTML += TextPreview(flavor_texts["general"])
 	HTML += "<br>"
@@ -1823,6 +1826,7 @@ datum/preferences
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
+	character.flavor_texts["preferences"] = flavor_texts["preferences"]
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
 	character.flavor_texts["face"] = flavor_texts["face"]
