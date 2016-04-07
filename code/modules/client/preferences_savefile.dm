@@ -156,7 +156,6 @@
 	S["job_engsec_low"]		>> job_engsec_low
 
 	//Flavour Text
-	S["flavor_texts_preferences"]	>> flavor_texts["preferences"]
 	S["flavor_texts_general"]	>> flavor_texts["general"]
 	S["flavor_texts_head"]		>> flavor_texts["head"]
 	S["flavor_texts_face"]		>> flavor_texts["face"]
@@ -344,7 +343,6 @@
 	S["job_engsec_low"]		<< job_engsec_low
 
 	//Flavour Text
-	S["flavor_texts_preferences"]	<< flavor_texts["preferences"]
 	S["flavor_texts_general"]	<< flavor_texts["general"]
 	S["flavor_texts_head"]		<< flavor_texts["head"]
 	S["flavor_texts_face"]		<< flavor_texts["face"]
