@@ -24,7 +24,7 @@
 	var/list/formatted = list()
 	for(var/job in jobs)
 		formatted.Add(list(list(
-			"display_name" = replacetext(job, " ", "&nbsp"),
+			"display_name" = bayreplacetext(job, " ", "&nbsp"),
 			"target_rank" = get_target_rank(),
 			"job" = job)))
 
@@ -108,7 +108,7 @@
 		var/list/all_centcom_access = list()
 		for(var/access in get_all_centcom_access())
 			all_centcom_access.Add(list(list(
-				"desc" = replacetext(get_centcom_access_desc(access), " ", "&nbsp"),
+				"desc" = bayreplacetext(get_centcom_access_desc(access), " ", "&nbsp"),
 				"ref" = access,
 				"allowed" = (access in modify.access) ? 1 : 0)))
 
@@ -120,7 +120,7 @@
 			for(var/access in get_region_accesses(i))
 				if (get_access_desc(access))
 					accesses.Add(list(list(
-						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
+						"desc" = bayreplacetext(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in modify.access) ? 1 : 0)))
 
