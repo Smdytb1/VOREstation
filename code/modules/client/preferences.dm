@@ -1826,6 +1826,7 @@ datum/preferences
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
+	character.flavor_texts["preferences"] = flavor_texts["preferences"]
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
 	character.flavor_texts["face"] = flavor_texts["face"]
