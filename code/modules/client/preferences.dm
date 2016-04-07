@@ -278,7 +278,7 @@ datum/preferences
 
 	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
-	dat += "<b>Weight:</b> <a href='?_src_=prefs;preference=weight;task=input'>[weight]</a><br>"
+	dat += "<b>Relative Weight:</b> <a href='?_src_=prefs;preference=weight;task=input'>[weight]</a><br>"
 
 	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
@@ -287,8 +287,8 @@ datum/preferences
 	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
 
 	dat += "<br>"
-	dat += "<b>Gain Weight:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
-	dat += "<b>Lose Weight:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
+	dat += "<b>Weight Gain Rate:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
+	dat += "<b>Weight Loss Rate:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
 
 	dat += "<br>"
 	dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
@@ -1311,7 +1311,7 @@ datum/preferences
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
 
 				if("weight")
-					var/new_weight = input(user, "Choose your character's body weight.\nNote: This measurement should be set assuming they are the same size scale as a normal person.\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
+					var/new_weight = input(user, "Choose your character's relative body weight.\nThis measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\nIf you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\nswear to god I will find you and I will punch you for not reading these directions!\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
 					if(new_weight)
 						var/unit_of_measurement = alert(user, "Is that number in pounds (lbs) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
 						if(unit_of_measurement == "Pounds")
