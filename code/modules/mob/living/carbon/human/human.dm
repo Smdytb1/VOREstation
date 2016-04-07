@@ -1305,14 +1305,8 @@
 		if(C.body_parts_covered & FEET)
 			feet_exposed = 0
 
-	flavor_text = flavor_texts["preferences"]
-	flavor_text += "\n\n"
-	for (var/T in flavor_texts)
-		if(flavor_texts[T] && flavor_texts[T] != "")
-			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
-				flavor_text += flavor_texts[T]
-				flavor_text += "\n\n"
 	flavor_text = flavor_texts["general"]
+	flavor_text = flavor_texts["preferences"]
 	flavor_text += "\n\n"
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
