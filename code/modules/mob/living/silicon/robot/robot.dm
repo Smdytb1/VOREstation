@@ -317,6 +317,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Bloodhound"] = "bloodhound"
 			module_sprites["Bloodhound - Treaded"] = "secborg+tread"
 			module_sprites["Drone"] = "drone-sec"
+			module_sprites["Mister Gutsy"] = "mrgutsy"
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -351,7 +352,6 @@ var/list/robot_verbs_default = list(
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Destroyer Droid"] = "droid-combat"
-			module_sprites["Mister Gutsy"] = "mrgutsy"
 			module_sprites["Dog"] = "syndicatedog"
 			module.channels = list("Security" = 1)
 
