@@ -26,6 +26,7 @@
 		usr << "<span class='notice'>You're too skinny to risk losing any more weight!</span>"
 
 	else
+		usr << "<span class='notice'>You're unable to use the fitness lifter.</span>"
 		return //Something went wrong. They shouldn't see this.
 
 
@@ -62,6 +63,7 @@
 		usr << "<span class='notice'>You're too skinny to risk losing any more weight!</span>"
 
 	else
+		usr << "<span class='notice'>You're unable to use the punching bag.</span>"
 		return //Something went wrong. They shouldn't see this.
 
 
@@ -102,4 +104,5 @@
 		usr << "<span class='notice'>You're too skinny to risk losing any more weight!</span>"
 
 	else
+		usr << "<span class='notice'>You're unable to use the punching bag.</span>"
 		return //Something went wrong. They shouldn't see this.
