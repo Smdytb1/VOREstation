@@ -1,4 +1,4 @@
-/obj/machinery/button/workout
+/obj/machinery/button/workout //Yes. A subsection of a button. I know. It was the simplest thing I could think of.
 	name = "fitness lifter"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "fitnesslifter" //Sprites ripped from goon.
@@ -106,3 +106,21 @@
 	else
 		usr << "<span class='notice'>You're unable to use the punching bag.</span>"
 		return //Something went wrong. They shouldn't see this.
+
+
+
+
+/obj/machinery/button/scale
+	name = "scale"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "scale"
+	desc = "A scale used to measure ones weight."
+	anchored = 1.0
+	use_power = 0
+	idle_power_usage = 0
+	active_power_usage = 0
+
+/obj/machinery/button/scale/attack_hand(var/mob/user as mob)
+	if(usr.weight > 1) //Just in case.
+		usr << "<span class='notice'>You step on the scale and come up as [usr.weight] pounds!</span>"
+		usr.visible_message("<span class='warning'>[usr] steps onto the scale and comes up as [usr.weight] pounds!.</span>")
