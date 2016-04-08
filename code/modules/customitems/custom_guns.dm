@@ -66,7 +66,7 @@
 	icon_state = "tasaldrevolver"
 	item_state = "revolver"
 	fire_sound = 'sound/weapons/pistol.ogg'
-	ammo_type = /obj/item/ammo_casing/a38r // Nerfed until I fix the above version.
+	ammo_type = /obj/item/ammo_casing/c38r // Nerfed until I fix the above version.
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
