@@ -684,7 +684,7 @@
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
-				
+
 			if("preferences")
 				var/msg = input(usr,"Set your preferences here, Such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
@@ -1307,6 +1307,7 @@
 			feet_exposed = 0
 
 	flavor_text = flavor_texts["general"]
+	flavor_text += "\n\n"
 	flavor_text += flavor_texts["preferences"] //Not having this + is what made the other one break.
 	flavor_text += "\n\n"
 	for (var/T in flavor_texts)

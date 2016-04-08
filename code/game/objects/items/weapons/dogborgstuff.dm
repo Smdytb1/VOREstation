@@ -345,7 +345,11 @@
 			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
 			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
 			del(patient)
+			R.sleeper_r = 0 //Reset the sprite!
+			R.sleeper_g = 0 //Since they're just power by now.
 			R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+			src.occupied = 0 //Allow them to take more people in!
+			R.update_icons()
 	else
 		usr << "<span class='notice'>ERROR: Subject cannot metabolise chemicals.</span>"
 	updateUsrDialog()
