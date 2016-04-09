@@ -160,8 +160,8 @@
 	response_help = "pokes"
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
-	speak = list("HONK", "Honk!")
-	emote_hear = list("honks")
+//	speak = list("HONK", "Honk!")
+//	emote_hear = list("honks")
 	speak_chance = 1
 	a_intent = "harm"
 	var/corpse = /obj/effect/landmark/mobcorpse/tunnelclown
@@ -225,8 +225,8 @@
 	response_help = "pokes"
 	response_disarm = "gently pushes aside"
 	response_harm = "euthanizes"
-	speak = list("HONK!", "Honk!", "H-Honk...", "Honk... Please...","Kill me... Honk.", "It hurts to live... Honk...","The pain... HONK!")
-	emote_hear = list("honks", "wheeps","sobs","whimpers","honks uncontrollably")
+//	speak = list("HONK!", "Honk!", "H-Honk...", "Honk... Please...","Kill me... Honk.", "It hurts to live... Honk...","The pain... HONK!")
+//	emote_hear = list("honks", "wheeps","sobs","whimpers","honks uncontrollably")
 	a_intent = "harm"
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 10

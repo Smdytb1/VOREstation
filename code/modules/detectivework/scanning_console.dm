@@ -1,6 +1,6 @@
 /obj/machinery/computer/forensic_scanning
 	name = "high-res forensic scanning computer"
-	icon_state = "forensic"
+	icon_state = "frame-sec"
 
 	screenicon = "forensic"
 	keyboardicon = "kb15"

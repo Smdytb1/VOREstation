@@ -226,6 +226,18 @@
 	icon_state = "security_det"
 	circuit = null
 
+/obj/machinery/computer/security/wooden_tv/update_icon()
+	// Broken
+	if(stat & BROKEN)
+		icon_state = "security_detb"
+
+	// Unpowered
+	else if(stat & NOPOWER)
+		icon_state = "security_det0"
+
+	// Not Broken or Unpowered
+	else
+		icon_state = initial(icon_state)
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
