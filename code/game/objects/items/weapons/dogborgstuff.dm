@@ -209,24 +209,30 @@
 		return
 	user.visible_message("<span class='warning'>[user] is ingesting [target] into their [src].</span>", "<span class='notice'>You start ingesting [target] into your [src]...</span>")
 	if(!patient && ishuman(target) && !target.buckled && do_after (user, 50))
-		target.forceMove(src)
-		patient = target
-		hound = user
-		target.reset_view(src)
-		user << "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>"
-		user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>")
-		user.visible_message("[target] loaded. Life support functions engaged.")
-		src.occupied = 1
-		var/mob/living/silicon/robot.R = user
-		if(patient.stat < 2)
-			R.sleeper_r = 0
-			R.sleeper_g = 1
-			R.update_icons()
-		else
-			R.sleeper_g = 0
-			R.sleeper_r = 1
-			R.update_icons()
-		processing_objects |= src
+
+		if(!proximity) return //If they moved away, you can't eat them.
+
+		if(occupied == 1) return //If you try to eat two people at once, you can only eat one.
+
+		else if(occupied == 0) //If you don't have someone in you, proceed.
+			target.forceMove(src)
+			patient = target
+			hound = user
+			target.reset_view(src)
+			user << "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>"
+			user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>")
+			user.visible_message("[target] loaded. Life support functions engaged.")
+			src.occupied = 1
+			var/mob/living/silicon/robot.R = user
+			if(patient.stat < 2)
+				R.sleeper_r = 0
+				R.sleeper_g = 1
+				R.update_icons()
+			else
+				R.sleeper_g = 0
+				R.sleeper_r = 1
+				R.update_icons()
+			processing_objects |= src
 
 /obj/item/weapon/dogborg/sleeper/proc/go_out()
 	if(src.occupied == 0)
@@ -302,7 +308,6 @@
 		dat += text("[]\t-Toxin Content %: []</FONT><BR>", (patient.getToxLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), patient.getToxLoss())
 		dat += text("[]\t-Burn Severity %: []</FONT><BR>", (patient.getFireLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), patient.getFireLoss())
 		dat += text("<HR>Paralysis Summary %: [] ([] seconds left!)<BR>", patient.paralysis, round(patient.paralysis / 4))
-		dat += "<div class='line'><span class='average'>Subject appears to have cellular damage.</span></div><br>"
 
 		if(patient.getBrainLoss())
 			dat += "<div class='line'><span class='average'>Significant brain damage detected.</span></div><br>"
@@ -340,7 +345,11 @@
 			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
 			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
 			del(patient)
+			R.sleeper_r = 0 //Reset the sprite!
+			R.sleeper_g = 0 //Since they're just power by now.
 			R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+			src.occupied = 0 //Allow them to take more people in!
+			R.update_icons()
 	else
 		usr << "<span class='notice'>ERROR: Subject cannot metabolise chemicals.</span>"
 	updateUsrDialog()

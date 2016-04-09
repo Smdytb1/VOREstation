@@ -1592,6 +1592,9 @@
 			if("fedeng")
 				src.icon_state = "fedeng_open"
 				usr << "You unbutton the coat."
+			if("fedcapt")
+				src.icon_state = "fedcap_open"
+				usr << "You unbutton the coat."
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
 				return
@@ -2295,6 +2298,7 @@
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tasald(src)
 	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tas_coat(src)
+	new /obj/item/fluff/permit/tasald_corlethian(src)
 	..()
 	return
 

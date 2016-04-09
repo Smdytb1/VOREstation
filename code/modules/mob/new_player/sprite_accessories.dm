@@ -1090,9 +1090,14 @@
 	show_species_tail = 1
 
 /datum/sprite_accessory/tail/snag
-	name = "xenomorph bits"
+	name = "xenomorph tail w/ backplate"
 	desc = ""
 	icon_state = "snag"
+
+/datum/sprite_accessory/tail/xenotail
+	name = "xenomorph tail"
+	desc = ""
+	icon_state = "xenotail"
 
 /datum/sprite_accessory/tail/molenar_kitsune
 	name = "quintail kitsune tails (Molenar)"

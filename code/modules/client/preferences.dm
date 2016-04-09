@@ -82,12 +82,17 @@ datum/preferences
 	var/b_eyes = 0						//Eye color
 	var/ear_style = null				//Ear style
 	var/tail_style = null				//Tail style
-	var/playerscale = RESIZE_NORMAL					//Custom playerscale
+	var/playerscale = RESIZE_NORMAL		//Custom playerscale
 	var/species = "Human"               //Species datum to use.
 	var/custom_species = null			//Custom species text
 	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
+
+	// Body weight stuff.
+	var/weight = 137					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_gain = 100				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_loss = 50				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -273,11 +278,19 @@ datum/preferences
 
 	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
+	dat += "<b>Relative Weight:</b> <a href='?_src_=prefs;preference=weight;task=input'>[weight]</a><br>"
+
 	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
 	dat += "<br>"
 	dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
+
+	dat += "<br>"
+	dat += "<b>Weight Gain Rate:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
+	dat += "<b>Weight Loss Rate:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
+
+	dat += "<br>"
 	dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 	dat += "-Alpha(transparency): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 	dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -707,6 +720,9 @@ datum/preferences
 	HTML += "<tt><center>"
 	HTML += "<b>Set Flavour Text</b> <hr />"
 	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=preferences'>Preferences:</a> "
+	HTML += TextPreview(flavor_texts["preferences"])
+	HTML += "<br>"
 	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=general'>General:</a> "
 	HTML += TextPreview(flavor_texts["general"])
 	HTML += "<br>"
@@ -1235,6 +1251,8 @@ datum/preferences
 					real_name = random_name(gender,species)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
+				if("weight")
+					weight = rand(90,330)
 				if("hair")
 					r_hair = rand(0,255)
 					g_hair = rand(0,255)
@@ -1294,6 +1312,35 @@ datum/preferences
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				if("weight")
+					var/new_weight = input(user, "Choose your character's relative body weight.\nThis measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\nIf you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\nswear to god I will find you and I will punch you for not reading these directions!\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
+					if(new_weight)
+						var/unit_of_measurement = alert(user, "Is that number in pounds (lbs) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
+						if(unit_of_measurement == "Pounds")
+							weight = round(text2num(new_weight),4)
+						if(unit_of_measurement == "Kilograms")
+							weight = round(2.20462*text2num(new_weight),4)
+						if(weight > WEIGHT_MAX)
+							weight = WEIGHT_MAX
+						if(weight < WEIGHT_MIN)
+							weight = WEIGHT_MIN
+				if("weight_gain")
+					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n(Due to a small bug, if you want to disable weight gain, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_gain_rate)
+						if(weight_gain_rate > WEIGHT_CHANGE_MAX)
+							weight_gain_rate = WEIGHT_CHANGE_MAX
+						if(weight_gain_rate < WEIGHT_CHANGE_MIN)
+							weight_gain_rate = WEIGHT_CHANGE_MIN
+						weight_gain = round(text2num(weight_gain_rate),1)
+				if("weight_loss")
+					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n(Due to a small bug, if you want to disable weight loss, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_loss_rate)
+						if(weight_loss_rate > WEIGHT_CHANGE_MAX)
+							weight_loss_rate = WEIGHT_CHANGE_MAX
+						if(weight_loss_rate < WEIGHT_CHANGE_MIN)
+							weight_loss_rate = WEIGHT_CHANGE_MIN
+						weight_loss = round(text2num(weight_loss_rate),1)
 
 				if("species")
 					user << browse(null, "window=species")
@@ -1779,6 +1826,7 @@ datum/preferences
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
+	character.flavor_texts["preferences"] = flavor_texts["preferences"]
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
 	character.flavor_texts["face"] = flavor_texts["face"]
@@ -1803,6 +1851,10 @@ datum/preferences
 	character.age = age
 	character.b_type = b_type
 	character.custom_species = custom_species
+
+	character.weight = weight
+	character.weight_gain = weight_gain
+	character.weight_loss = weight_loss
 
 	character.r_eyes = r_eyes
 	character.g_eyes = g_eyes

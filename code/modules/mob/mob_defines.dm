@@ -108,7 +108,11 @@
 	var/is_floating = 0
 	var/floatiness = 0
 	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/nutrition = 400.0// Carbon
+	var/weight = 137 // Carbon. Average human body weight in pounds. Why pounds? Because I already did the math. VOREstation weight code.
+	var/weight_gain = 100 // 100% realistic weight gain by default. Player can set this value between 0 and 100 in character setup.
+	var/weight_loss = 50 // It's harder to lose weight than gain it so this is default.
+	var/metabolism = 0.0015 // Rate at which you gain/lose weight.
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0

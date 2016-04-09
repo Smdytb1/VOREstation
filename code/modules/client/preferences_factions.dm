@@ -12,42 +12,58 @@ var/global/list/seen_religions = list()
 		seen_religions    |= M.client.prefs.religion*/
 	return
 
-var/global/list/citizenship_choices = list(
+var/global/list/citizenship_choices = list( // Planets
 	"Earth",
 	"Mars",
-	"Moghes",
+	"Titan",
+	"Europa",
 	"Ahdomai",
-	"Qerrbalak"
+	"Moghes",
+	"Qerr'balak",
+	"Eltus",
+	"Tal",
+	"Virgo-Prime",
+	"Other"
 	)
 
-var/global/list/home_system_choices = list(
-	"Sol",
-	"Virgo Prime",
-	"Tau Ceti",
+var/global/list/home_system_choices = list( // Star systems
+	"Virgo-Erigone",
 	"Epsilon Ursae Majoris",
-	"S'randarr"
+	"Qerr'Vallis",
+	"S'randarr",
+	"Sol",
+	"Tau Ceti",
+	"Uueoa-Esa",
+	"Vilous",
+	"Other"
 	)
 
 var/global/list/faction_choices = list(
-	"Sol Central",
-	"Vey Med",
+	"NanoTrasen Systems Inc.",
+	"3rd Union of Soviet Socialist Republics",
+	"Aether Atmospherics",
 	"Einstein Engines",
 	"Free Trade Union",
-	"NanoTrasen",
-	"Ward-Takahashi GMB",
 	"Gilthari Exports",
 	"Grayson Manufactories Ltd.",
-	"Aether Atmospherics",
-	"Zeng-Hu Pharmaceuticals",
-	"Hesphaistos Industries"
+	"Hesphaistos Industries",
+	"Sol Central",
+	"Vey Med",
+	"Ward-Takahashi GMB",
+	"United Federation",
+	"Zeng-Hu Pharmaceuticals"
 	)
 
 var/global/list/religion_choices = list(
-	"Unitarianism",
-	"Hinduism",
-	"Buddhist",
-	"Islamic",
-	"Christian",
 	"Agnostic",
-	"Deist"
+	"Atheist",
+	"Buddhist",
+	"Christian",
+	"Deist",
+	"Hindu",
+	"Islamic",
+	"Pagan",
+	"Pastafarian",
+	"Unitarian",
+	"Other"
 	)

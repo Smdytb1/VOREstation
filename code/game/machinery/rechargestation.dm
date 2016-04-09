@@ -193,7 +193,8 @@
 
 /obj/machinery/recharge_station/verb/move_eject()
 	set category = "Object"
-	set src in oview(1)
+	set name = "Exit Charger"
+	set src in oview(0)
 	if(usr.stat != 0)
 		return
 	go_out()
@@ -202,6 +203,7 @@
 
 /obj/machinery/recharge_station/verb/move_inside()
 	set category = "Object"
+	set name = "Enter Charger"
 	set src in oview(1)
 	if(usr.stat == 2)
 		//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
