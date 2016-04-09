@@ -103,7 +103,7 @@
 
 
 /obj/item/borg/upgrade/tasercooler/action(var/mob/living/silicon/robot/R)
-	if(!istype(R.module, /obj/item/weapon/robot_module/security))
+	if(!istype(R.module, /obj/item/weapon/robot_module/security) || !istype(R.module, /obj/item/weapon/robot_module/k9))
 		R << "Upgrade mounting error!  No suitable hardpoint detected!"
 		usr << "There's no mounting point for the module!"
 		return 0
