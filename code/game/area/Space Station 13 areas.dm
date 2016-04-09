@@ -2052,7 +2052,7 @@ area/space/atmosalert()
 	lighting_use_dynamic = 0
 	requires_power = 0
 
-// Disabled because infinite loop bug.
+// Disabled because infinite sound loop bug.
 /*	var/sound/mysound = null
 
 	New()
