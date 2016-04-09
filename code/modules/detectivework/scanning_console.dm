@@ -2,6 +2,9 @@
 	name = "high-res forensic scanning computer"
 	icon_state = "forensic"
 
+	screenicon = "forensic"
+	keyboardicon = "kb15"
+
 	var/screen = "database"
 	var/authenticated = 0
 	req_access = list(access_forensics_lockers)

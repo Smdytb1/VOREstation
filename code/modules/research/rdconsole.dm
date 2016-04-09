@@ -29,7 +29,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole
 	name = "R&D control console"
-	icon_state = "rdcomp"
+	icon_state = "frame-rnd"
 	circuit = /obj/item/weapon/circuitboard/rdconsole
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/weapon/disk/tech_disk/t_disk = null	//Stores the technology disk.
@@ -45,6 +45,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/errored = 0		//Errored during item construction.
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
+
+	screenicon = "rdcomp"
+	keyboardicon = "kb8"
 
 /obj/machinery/computer/rdconsole/proc/CallTechName(var/ID) //A simple helper proc to find the name of a tech with a given ID.
 	var/datum/tech/check_tech

@@ -1,7 +1,6 @@
 /obj/machinery/computer/cloning
 	name = "cloning control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "dna"
+	icon_state = "frame-med"
 	circuit = "/obj/item/weapon/circuitboard/cloning"
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
@@ -13,6 +12,9 @@
 	var/datum/dna2/record/active_record = null
 	var/obj/item/weapon/disk/data/diskette = null //Mostly so the geneticist can steal everything.
 	var/loading = 0 // Nice loading text
+
+	screenicon = "cloning"
+	keyboardicon = "kb6"
 
 /obj/machinery/computer/cloning/New()
 	..()
@@ -396,6 +398,7 @@
 			break
 	return selected_record
 
+/* Handled by parent.
 /obj/machinery/computer/cloning/update_icon()
 
 	if(stat & BROKEN)
@@ -407,3 +410,5 @@
 		else
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
+
+*/

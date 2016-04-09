@@ -1,7 +1,6 @@
 /obj/machinery/computer/supplycomp
 	name = "supply control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "supply"
+	icon_state = "frame"
 	req_access = list(access_cargo)
 	circuit = "/obj/item/weapon/circuitboard/supplycomp"
 	var/temp = null
@@ -10,14 +9,19 @@
 	var/can_order_contraband = 0
 	var/last_viewed_group = "categories"
 
+	screenicon = "supply"
+	keyboardicon = "kb1"
+
 /obj/machinery/computer/ordercomp
 	name = "supply ordering console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "request"
+	icon_state = "frame"
 	circuit = "/obj/item/weapon/circuitboard/ordercomp"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/last_viewed_group = "categories"
+
+	screenicon = "request"
+	keyboardicon = "kb1"
 
 /obj/machinery/computer/ordercomp/attack_ai(var/mob/user as mob)
 	return attack_hand(user)

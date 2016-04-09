@@ -3,8 +3,8 @@
 /obj/machinery/computer/message_monitor
 	name = "messaging monitor console"
 	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
-	icon_state = "comm_logs"
-	var/hack_icon = "comm_logsc"
+	icon_state = "frame-server"
+	var/hack_icon = "command"
 	var/normal_icon = "comm_logs"
 	circuit = "/obj/item/weapon/circuitboard/message_monitor"
 	//Server linked to.
@@ -29,6 +29,9 @@
 	var/customjob		= "Admin"
 	var/custommessage 	= "This is a test, please ignore."
 
+	screenicon = "comm_logs"
+	keyboardicon = "kb1"
+
 
 /obj/machinery/computer/message_monitor/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))
@@ -41,7 +44,9 @@
 		// It'll take more time if there's more characters in the password..
 		if(!emag)
 			if(!isnull(src.linkedServer))
-				icon_state = hack_icon // An error screen I made in the computers.dmi
+				overlays.Cut()
+				overlays += keyboardicon
+				overlays += hack_icon
 				emag = 1
 				screen = 2
 				spark_system.set_up(5, 0, src)
@@ -67,9 +72,9 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(emag || hacking)
-		icon_state = hack_icon
-	else
-		icon_state = normal_icon
+		overlays.Cut()
+		overlays += hack_icon
+		overlays += keyboardicon
 
 /obj/machinery/computer/message_monitor/initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.

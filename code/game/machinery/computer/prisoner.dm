@@ -2,8 +2,7 @@
 
 /obj/machinery/computer/prisoner
 	name = "prisoner management console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "explosive"
+	icon_state = "frame-sec"
 	req_access = list(access_armory)
 	circuit = "/obj/item/weapon/circuitboard/prisoner"
 	var/id = 0.0
@@ -13,6 +12,8 @@
 	var/stop = 0.0
 	var/screen = 0 // 0 - No Access Denied, 1 - Access allowed
 
+	screenicon = "explosive"
+	keyboardicon = "kb11"
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
