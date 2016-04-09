@@ -1,10 +1,12 @@
 /obj/machinery/computer/shuttle
 	name = "Shuttle"
 	desc = "For shuttle control."
-	icon_state = "shuttle"
+	icon_state = "frame"
 	var/auth_need = 3.0
 	var/list/authorized = list(  )
 
+	screenicon = "escape"
+	keyboardicon = "kb3"
 
 	attackby(var/obj/item/weapon/card/W as obj, var/mob/user as mob)
 		if(stat & (BROKEN|NOPOWER))	return

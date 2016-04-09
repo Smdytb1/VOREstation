@@ -1,11 +1,12 @@
 /obj/machinery/computer/aifixer
 	name = "\improper AI system integrity restorer"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "ai-fixer"
+	icon_state = "frame-eng"
 	circuit = /obj/item/weapon/circuitboard/aifixer
 	req_one_access = list(access_robotics, access_heads)
 	var/mob/living/silicon/ai/occupant = null
 	var/active = 0
+	screenicon = "ai-fixer-empty"
+	keyboardicon = "kb3"
 
 /obj/machinery/computer/aifixer/New()
 	update_icon()
@@ -116,7 +117,7 @@
 		return 1
 	if (href_list["fix"])
 		src.active = 1
-		src.overlays += image('icons/obj/computer.dmi', "ai-fixer-on")
+		src.overlays += "ai-fixer-on"
 		while (src.occupant.health < 100)
 			src.occupant.adjustOxyLoss(-1)
 			src.occupant.adjustFireLoss(-1)
@@ -128,15 +129,11 @@
 				src.occupant.lying = 0
 				dead_mob_list -= src.occupant
 				living_mob_list += src.occupant
-				src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-404")
-				src.overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
 				src.occupant.add_ai_verbs()
 			src.updateUsrDialog()
 			sleep(10)
 		src.active = 0
-		src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-on")
-
-
+		src.update_icon()
 		src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return
@@ -145,15 +142,17 @@
 /obj/machinery/computer/aifixer/update_icon()
 	..()
 
-	overlays.Cut()
-
 	if((stat & BROKEN) || (stat & NOPOWER))
 		return
 
 	if(occupant)
 		if(occupant.stat)
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-404")
+			screenicon = "ai-fixer-404"
 		else
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
+			screenicon = "ai-fixer-full"
 	else
-		overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
+		screenicon = "ai-fixer-empty"
+
+	overlays.Cut()
+	overlays += screenicon
+	overlays += keyboardicon
