@@ -1316,7 +1316,7 @@ datum/preferences
 				if("weight")
 					var/new_weight = input(user, "Choose your character's relative body weight.\nThis measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\nIf you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\nswear to god I will find you and I will punch you for not reading these directions!\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
 					if(new_weight)
-						var/unit_of_measurement = alert(user, "Is that number in pounds (lbs) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
+						var/unit_of_measurement = alert(user, "Is that number in pounds (lb) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
 						if(unit_of_measurement == "Pounds")
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")

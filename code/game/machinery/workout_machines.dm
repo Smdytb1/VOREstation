@@ -8,8 +8,13 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
+// TODO: Make it so none of these works unless you're on the same location as the workout gear.
+
 /obj/machinery/button/workout/attack_hand(var/mob/user as mob)
 
+	if(usr.loc != src.loc)
+		usr << "<span class='notice'>For safety reasons, you need to be sitting in the fitness lifter for it to work!</span>"
+		return
 	if(usr.nutrition > 70 && usr.weight > 70) //If they have enough nutrition and body weight, they can exercise.
 		usr.nutrition = usr.nutrition - 70 //Working out burns a lot of calories!
 		usr.weight = usr.weight - 0.1 //Burn a bit of weight. Not much, but quite a bit. This can't be spammed, as they'll need nutrition to be able to work out.
@@ -114,13 +119,18 @@
 	name = "scale"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "scale"
-	desc = "A scale used to measure ones weight."
+	desc = "A scale used to measure ones weight relative to their size and species."
 	anchored = 1.0
 	use_power = 0
 	idle_power_usage = 0
 	active_power_usage = 0
+	var/kilograms
 
 /obj/machinery/button/scale/attack_hand(var/mob/user as mob)
-	if(usr.weight > 1) //Just in case.
-		usr << "<span class='notice'>You step on the scale and come up as [usr.weight] pounds!</span>"
-		usr.visible_message("<span class='warning'>[usr] steps onto the scale and comes up as [usr.weight] pounds!.</span>")
+	if(usr.loc != src.loc)
+		usr << "<span class='notice'>You need to be standing on top of the scale for it to work!</span>"
+		return
+	if(usr.weight) //Just in case.
+		kilograms = round(2.20462*text2num(usr.weight),4)
+		usr << "<span class='notice'>Your relative weight is [usr.weight]lb / [kilograms]kg.</span>"
+		usr.visible_message("<span class='warning'>[usr]'s relative weight is [usr.weight]lb / [kilograms]kg.</span>")
