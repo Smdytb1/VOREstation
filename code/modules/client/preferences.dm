@@ -1065,13 +1065,13 @@ datum/preferences
 			if("general")
 				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
 			else
 				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
