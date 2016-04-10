@@ -263,23 +263,23 @@
 			else if(isobserver(M))
 				M_job = "Ghost"
 
-			M_job = replacetext(M_job, "'", "")
-			M_job = replacetext(M_job, "\"", "")
-			M_job = replacetext(M_job, "\\", "")
+			M_job = bayreplacetext(M_job, "'", "")
+			M_job = bayreplacetext(M_job, "\"", "")
+			M_job = bayreplacetext(M_job, "\\", "")
 
 			var/M_name = M.name
-			M_name = replacetext(M_name, "'", "")
-			M_name = replacetext(M_name, "\"", "")
-			M_name = replacetext(M_name, "\\", "")
+			M_name = bayreplacetext(M_name, "'", "")
+			M_name = bayreplacetext(M_name, "\"", "")
+			M_name = bayreplacetext(M_name, "\\", "")
 			var/M_rname = M.real_name
-			M_rname = replacetext(M_rname, "'", "")
-			M_rname = replacetext(M_rname, "\"", "")
-			M_rname = replacetext(M_rname, "\\", "")
+			M_rname = bayreplacetext(M_rname, "'", "")
+			M_rname = bayreplacetext(M_rname, "\"", "")
+			M_rname = bayreplacetext(M_rname, "\\", "")
 
 			var/M_key = M.key
-			M_key = replacetext(M_key, "'", "")
-			M_key = replacetext(M_key, "\"", "")
-			M_key = replacetext(M_key, "\\", "")
+			M_key = bayreplacetext(M_key, "'", "")
+			M_key = bayreplacetext(M_key, "\"", "")
+			M_key = bayreplacetext(M_key, "\\", "")
 
 			//output for each mob
 			dat += {"

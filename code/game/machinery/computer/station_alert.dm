@@ -2,10 +2,13 @@
 /obj/machinery/computer/station_alert
 	name = "Station Alert Console"
 	desc = "Used to access the station's automated alert system."
-	icon_state = "alert:0"
+	icon_state = "frame-eng"
 	circuit = "/obj/item/weapon/circuitboard/stationalert"
 	var/alarms = list("Fire"=list(), "Atmosphere"=list(), "Power"=list())
 	var/obj/nano_module/alarm_monitor/engineering/alarm_monitor
+
+	screenicon = "alert:0" //Has others
+	keyboardicon = "kb4"
 
 /obj/machinery/computer/station_alert/New()
 	alarm_monitor = new(src)
@@ -40,7 +43,7 @@
 
 	var/list/alarms = alarm_monitor.major_alarms()
 	if(alarms.len)
-		icon_state = "alert:2"
-	else
-		icon_state = initial(icon_state)
-	return
+		overlays.Cut()
+		overlays += "alert:2"
+		overlays += keyboardicon
+		return

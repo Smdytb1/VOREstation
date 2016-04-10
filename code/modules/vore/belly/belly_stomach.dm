@@ -155,8 +155,16 @@
 								M << sound('sound/vore/digest12.ogg')
 						M.adjustBruteLoss(2)
 						M.adjustFireLoss(3)
-						var/difference = owner.playerscale / M.playerscale 	// LOOK HOW FUCKING CLEVER I AM.
-						owner.nutrition += 10/difference 					// I AM SO PROUD OF MYSELF. -Ace 	 PROUD OF YOU -NW.
+						var/offset
+						if (M.weight > 137)
+							offset = 1 + ((M.weight - 137) / 137)
+						if (M.weight < 137)
+							offset = (137 - M.weight) / 137
+						var/difference = owner.playerscale / M.playerscale
+						if(offset) // If any different than default weight, multiply the % of offset.
+							owner.nutrition += offset*(10/difference)
+						else
+							owner.nutrition += (10/difference)
 
 
 // @Override

@@ -582,6 +582,12 @@ var/list/be_special_flags = list(
 #define AGE_MIN 17
 #define AGE_MAX 85
 
+// Body weight limits on a character.
+#define WEIGHT_MIN 70
+#define WEIGHT_MAX 500
+#define WEIGHT_CHANGE_MIN 0
+#define WEIGHT_CHANGE_MAX 100
+
 // Languages.
 #define LANGUAGE_HUMAN  1
 #define LANGUAGE_ALIEN  2
@@ -757,6 +763,7 @@ var/list/be_special_flags = list(
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
 #define MAX_MESSAGE_LEN       1024
+#define MAX_PREF_LEN          3072 //As much as paper.
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
 #define MAX_NAME_LEN          26

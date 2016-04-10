@@ -13,14 +13,16 @@ var/specops_shuttle_timeleft = 0
 
 /obj/machinery/computer/specops_shuttle
 	name = "special operations shuttle control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_state = "frame-sec"
 	req_access = list(access_cent_specops)
 //	req_access = list(ACCESS_CENT_SPECOPS)
 	var/temp = null
 	var/hacked = 0
 	var/allowedtocall = 0
 	var/specops_shuttle_timereset = 0
+
+	screenicon = "shuttle"
+	keyboardicon = "kb3"
 
 /proc/specops_return()
 	var/obj/item/device/radio/intercom/announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.

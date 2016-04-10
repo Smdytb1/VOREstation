@@ -3,7 +3,7 @@
 /obj/machinery/computer/secure_data//TODO:SANITY
 	name = "security records console"
 	desc = "Used to view, edit and maintain security records"
-	icon_state = "security"
+	icon_state = "frame-sec"
 	req_one_access = list(access_security, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/secure_data"
 	var/obj/item/weapon/card/id/scan = null
@@ -21,6 +21,9 @@
 	//Sorting Variables
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
+
+	screenicon = "security"
+	keyboardicon = "kb14"
 
 /obj/machinery/computer/secure_data/verb/eject_id()
 	set category = "Object"
@@ -611,5 +614,21 @@ What a mess.*/
 	..(severity)
 
 /obj/machinery/computer/secure_data/detective_computer
-	icon = 'icons/obj/computer.dmi'
 	icon_state = "messyfiles"
+	screenicon = null
+	keyboardicon = null
+
+/obj/machinery/computer/secure_data/detective_computer/update_icon()
+	..()
+
+	// Broken
+	if(stat & BROKEN)
+		icon_state = "messyfilesb"
+
+	// Unpowered
+	else if(stat & NOPOWER)
+		icon_state = "messyfiles0"
+
+	// Not Broken or Unpowered
+	else
+		icon_state = initial(icon_state)

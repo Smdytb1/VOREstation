@@ -3,8 +3,7 @@
 /obj/machinery/computer/robotics
 	name = "robotics control console"
 	desc = "Used to remotely lockdown or detonate linked cyborgs."
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "robot"
+	icon_state = "frame-rnd"
 	req_access = list(access_robotics)
 	circuit = "/obj/item/weapon/circuitboard/robotics"
 
@@ -15,6 +14,8 @@
 	var/stop = 0.0
 	var/screen = 0 // 0 - Main Menu, 1 - Cyborg Status, 2 - Kill 'em All! -- In text
 
+	screenicon = "robot"
+	keyboardicon = "kb3"
 
 /obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)

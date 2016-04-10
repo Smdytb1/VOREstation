@@ -61,12 +61,12 @@
 // bwoincognito:Tasald Corlethian
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian
 	name = "Big Iron revolver"
-	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	desc = "A .38 revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .38 rubber. According to the CentCom Chief of Security, this revolver was more controversial than it needed to be."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "tasaldrevolver"
 	item_state = "revolver"
 	fire_sound = 'sound/weapons/pistol.ogg'
-	ammo_type = /obj/item/ammo_magazine/c38/rubber
+	ammo_type = /obj/item/ammo_casing/c38r // Nerfed until I fix the above version.
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas

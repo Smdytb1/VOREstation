@@ -12,12 +12,14 @@ var/syndicate_elite_shuttle_timeleft = 0
 
 /obj/machinery/computer/syndicate_elite_shuttle
 	name = "elite syndicate squad shuttle control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "syndishuttle"
+	icon_state = "frame-sec"
 	req_access = list(access_cent_specops)
 	var/temp = null
 	var/hacked = 0
 	var/allowedtocall = 0
+
+	screenicon = "syndishuttle"
+	keyboardicon = "kb10"
 
 /proc/syndicate_elite_process()
 	var/area/syndicate_mothership/control/syndicate_ship = locate()//To find announcer. This area should exist for this proc to work.

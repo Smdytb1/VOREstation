@@ -1,6 +1,7 @@
 /obj/machinery/computer
 	name = "computer"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/computer3.dmi'
+	icon_state = "frame"
 	density = 1
 	anchored = 1.0
 	use_power = 1
@@ -8,12 +9,13 @@
 	active_power_usage = 300
 	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
 	var/processing = 0
+	var/screenicon = "generic" //Iconstate for the screen
+	var/keyboardicon = "kb1" //Iconstate for the keyboard
 
 /obj/machinery/computer/New()
 	..()
 	if(ticker)
 		initialize()
-
 
 /obj/machinery/computer/initialize()
 	power_change()
@@ -32,11 +34,9 @@
 	smoke.start()
 	return
 
-
 /obj/machinery/computer/emp_act(severity)
 	if(prob(20/severity)) set_broken()
 	..()
-
 
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
@@ -67,7 +67,6 @@
 		set_broken()
 	..()
 
-
 /obj/machinery/computer/blob_act()
 	if (prob(75))
 		for(var/x in verbs)
@@ -77,22 +76,25 @@
 
 /obj/machinery/computer/update_icon()
 	..()
-	icon_state = initial(icon_state)
+
 	// Broken
 	if(stat & BROKEN)
-		icon_state += "b"
+		overlays.Cut()
 
-	// Powered
+	// Unpowered
 	else if(stat & NOPOWER)
+		overlays.Cut()
+
+	// Not Broken or Unpowered
+	else
 		icon_state = initial(icon_state)
-		icon_state += "0"
-
-
+		overlays.Cut()
+		overlays += screenicon
+		overlays += keyboardicon
 
 /obj/machinery/computer/power_change()
 	..()
 	update_icon()
-
 
 /obj/machinery/computer/proc/set_broken()
 	stat |= BROKEN
@@ -100,9 +102,8 @@
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
-	text = replacetext(text, "\n", "<BR>")
+	text = bayreplacetext(text, "\n", "<BR>")
 	return text
-
 
 /obj/machinery/computer/attack_ghost(user as mob)
 	return src.attack_hand(user)

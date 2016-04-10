@@ -41,9 +41,8 @@
 
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
-	icon_state = "guest"
+	icon_state = "frame-guest"
 	density = 0
-
 
 	var/obj/item/weapon/card/id/giver
 	var/list/accesses = list()
@@ -53,6 +52,9 @@
 
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
+
+	screenicon = "guest"
+	keyboardicon = null
 
 /obj/machinery/computer/guestpass/New()
 	..()

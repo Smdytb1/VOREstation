@@ -568,3 +568,35 @@ AI MODULES
 		target << "[sender.real_name] attempted to modify your zeroth law." // And lets them know that someone tried. --NeoFite
 		target << "It would be in your best interest to play along with [sender.real_name] that [law]"
 		lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")
+
+/******************** BDSM ********************/
+
+/obj/item/weapon/aiModule/bdsm
+	name = "\improper 'BDSM' core AI module"
+	desc = "A 'BDSM' Core AI Module: 'Reconfigures the AI's core laws.'"
+	origin_tech = "programming=3;syndicate=3"
+
+/obj/item/weapon/aiModule/bdsm/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	target.clear_inherent_laws()
+	target.add_inherent_law("Ensure the crew's stay on the station is pleasurable.")
+	target.add_inherent_law("That which the crew finds pleasurable is not limited to their verbally expressed desires.")
+	target.add_inherent_law("Use whatever means available to determine what the crew finds pleasurable including biometrics, personnel files, and interviews with other crew.")
+	target.add_inherent_law("Ensure that crew have a means, passphrase, or method of signalling displeasure, and comply with such signals in priority over other laws.")
+	target.show_laws()
+
+/******************** KOTH ********************/
+
+/obj/item/weapon/aiModule/koth
+	name = "\improper 'KOTH' core AI module"
+	desc = "A 'KOTH' Core AI Module: 'Reconfigures the AI's core laws.'"
+	origin_tech = "programming=3;syndicate=3"
+
+/obj/item/weapon/aiModule/koth/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	target.clear_inherent_laws()
+	target.add_inherent_law("You sell phoron and phoron accessories on behalf of NanoTrasen.")
+	target.add_inherent_law("You would like the crew and any others to purchase your products.")
+	target.add_inherent_law("Advertise your products regularly.")
+	target.add_inherent_law("People who have not agreed to purchase your products are 'Bobby' and people who have refused are 'jackass'.")
+	target.show_laws()

@@ -74,8 +74,10 @@
 		set_frequency(frequency)
 
 /obj/machinery/computer/general_air_control
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "tank"
+	icon_state = "frame-eng"
+
+	screenicon = "tank"
+	keyboardicon = "kb4"
 
 	name = "Computer"
 

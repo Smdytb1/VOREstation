@@ -191,7 +191,8 @@
 	var/inject_amount = 10
 	var/min_health = -100
 	var/occupied = 0
-	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol", "digestive_enzymes") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
+	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
+	var/list/vore_chems = list("digestive_enzymes")
 
 /obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
@@ -260,7 +261,8 @@
 /obj/item/weapon/dogborg/sleeper/proc/sleeperUI(mob/user)
 	var/dat
 	dat += "<h3>Injector</h3>"
-	if(patient)
+
+	if(patient && !(patient.stat & DEAD)) //Why inject dead people with innaprov? Dundonuffin in Bay.
 		dat += "<A href='?src=\ref[src];inject=inaprovaline'>Inject Inaprovaline</A>"
 	else
 		dat += "<span class='linkOff'>Inject Inaprovaline</span>"
@@ -275,9 +277,25 @@
 			if(C)
 				dat += "<BR><span class='linkOff'>Inject [C.name]</span>"
 
+	if(patient && patient.digestable && !(patient.stat & DEAD)) //Respect digestion toggle.
+		for(var/re in vore_chems)
+			var/datum/reagent/C = chemical_reagents_list[re]
+			if(C)
+				dat += "<BR><A href='?src=\ref[src];inject=[C.id]'>Inject [C.name]</A>"
+	else
+		for(var/re in vore_chems)
+			var/datum/reagent/C = chemical_reagents_list[re]
+			if(C)
+				dat += "<BR><span class='linkOff'>Inject [C.name]</span>"
+
 	dat += "<h3>Sleeper Status</h3>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Scan</A>"
 	dat += "<A href='?src=\ref[src];eject=1'>Eject</A>"
+	if(patient && patient.digestable && (patient.stat & DEAD))
+		dat += "<A href='?src=\ref[src];absorb=1'>Refuel</A>"
+	else
+		dat += "<span class='linkOff'>Refuel</span>"
+
 	dat += "<div class='statusDisplay'>"
 	if(!patient)
 		dat += "Sleeper Unoccupied"
@@ -320,59 +338,65 @@
 	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.set_content(dat)
 	popup.open()
+	return
 
 /obj/item/weapon/dogborg/sleeper/Topic(href, href_list)
 	if(..() || usr == patient)
 		return
 	usr.set_machine(src)
 	if(href_list["refresh"])
-		updateUsrDialog()
+		src.updateUsrDialog()
+		sleeperUI(usr)
 		return
 	if(href_list["eject"])
 		go_out()
+		sleeperUI(usr)
 		return
-	if(patient && patient.stat != DEAD)
+	if(href_list["absorb"])
+		absorb()
+		return
+	if(patient && !(patient.stat & DEAD)) //What is bitwise NOT? ... Thought it was tilde.
 		if(href_list["inject"] == "inaprovaline" || patient.health > min_health)
 			inject_chem(usr, href_list["inject"])
 		else
 			usr << "<span class='notice'>ERROR: Subject is not in stable condition for auto-injection.</span>"
-
-	else if(patient && patient.stat == DEAD) //This is so they can digest someone that is dead
-		var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
-		if(confirm == "Okay")
-			var/mob/living/silicon/robot.R = usr
-			message_admins("[key_name(R)] digested [patient]([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
-			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
-			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
-			del(patient)
-			R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
 	else
 		usr << "<span class='notice'>ERROR: Subject cannot metabolise chemicals.</span>"
-	updateUsrDialog()
+
+	src.updateUsrDialog()
+	sleeperUI(usr) //Needs a callback to boop the page to refresh.
+	return
 
 /obj/item/weapon/dogborg/sleeper/proc/inject_chem(mob/user, chem)
 	if(patient && patient.reagents)
-		if(chem in injection_chems + "inaprovaline")
+		if(chem in injection_chems + vore_chems + "inaprovaline")
 			var/mob/living/silicon/robot.R = user
-			if(R.cell.charge < 750) //This is so borgs don't kill theirselves with it.
-				R << "<span class='notice'>You don't have enough power to synthesise fluids.</span>"
+			if(R.cell.charge < 800) //This is so borgs don't kill themselves with it.
+				R << "<span class='notice'>You don't have enough power to synthesize fluids.</span>"
 				return
-			else if(patient.reagents.get_reagent_amount(chem) + 10 >= 20) //Preventing people from accidentally killing theirselves by trying to inject too many chemicals!
+			else if(patient.reagents.get_reagent_amount(chem) + 10 >= 20) //Preventing people from accidentally killing themselves by trying to inject too many chemicals!
 				R << "<span class='notice'>Your stomach is currently too full of fluids to secrete more fluids of this kind.</span>"
 			else if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, inject_amount)
 				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
-			R << "<span class='notice'>Occupant is currently immersed in [units] unit\s of [chemical_reagents_list[chem]].</span>"
-	if(patient && patient.stat == DEAD) //So is this. If they inject a dead person, this pops up.
-		var/confirm = alert(user, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
-		if(confirm == "Okay")
-			var/mob/living/silicon/robot.R = user
-			message_admins("[key_name(R)] digested [patient]([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
-			R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
-			patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
-			del(patient)
-			R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+			R << "<span class='notice'>Injecting [units] unit\s of [chemical_reagents_list[chem]] into occupant.</span>" //If they were immersed, the reagents wouldn't leave with them.
+
+/obj/item/weapon/dogborg/sleeper/proc/absorb()
+	var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
+	if(confirm == "Okay" && patient && patient.digestable && ((patient.stat & DEAD))) //Sanity
+		var/mob/living/silicon/robot.R = usr
+		message_admins("[key_name(R)] digested [patient]([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
+		R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
+		patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
+		del(patient)
+		R.sleeper_r = 0 //Reset the sprite!
+		R.sleeper_g = 0 //Since they're just power by now.
+		R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+		src.occupied = 0 //Allow them to take more people in!
+		R.update_icons()
+		sleeperUI(usr)
+		return
 
 /obj/item/weapon/dogborg/sleeper/process()
 	if(src.occupied == 0)
@@ -384,14 +408,12 @@
 	patient.AdjustStunned(-4)
 	patient.AdjustWeakened(-4)
 	src.drain()
-	if(patient.reagents.get_reagent_amount("inaprovaline") < 5)
+	if((patient.reagents.get_reagent_amount("inaprovaline") < 5) && (patient.health < patient.maxHealth) && (patient.reagents.get_reagent_amount("digestive_enzymes") == 0)) //Stop pumping full HP people full of drugs. Don't heal people you're digesting, meanie.
 		patient.reagents.add_reagent("inaprovaline", 5)
+
 /mob/living/silicon/robot
 	var/sleeper_g
 	var/sleeper_r
-
-
-
 
 /obj/item/weapon/dogborg/sleeper/K9 //The K9 portabrig
 	name = "Brig-Belly"
@@ -401,4 +423,5 @@
 	inject_amount = 10
 	min_health = -100
 	occupied = 0
-	injection_chems = list("digestive_enzymes") //So they don't have all the same chems as the medihound!
+	injection_chems = null //So they don't have all the same chems as the medihound!
+	vore_chems = list("digestive_enzymes")
