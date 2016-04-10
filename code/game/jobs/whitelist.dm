@@ -34,23 +34,17 @@ var/list/whitelist = list()
 
 /proc/is_job_whitelisted(mob/M, var/job)
 	if(!config.usejobwhitelist)
-		M << "whitelist.dm - Allowing [M.ckey] to play as [job] because whitelisting not enabled."
 		return 1
 	if(check_rights(R_ADMIN, 0))
-		M << "whitelist.dm - Allowing [M.ckey] to play as [job] because they are an admin."
 		return 1
 	if(!job_whitelist)
-		M << "whitelist.dm - Denying [M.ckey] to play as [job] because whitelist enabled but broken."
 		return 0
 	if(M && job)
 		for (var/s in job_whitelist)
 			if(findtext(s,"[M.ckey] - [job]"))
-				M << "whitelist.dm - Allowing [M.ckey] to play as [job] because whitelisted."
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
-				M << "whitelist.dm - Allowing [M.ckey] to play as [job] because whitelisted for 'All'."
 				return 1
-	M << "whitelist.dm - Denying [M.ckey] to play as [job] because not whitelisted."
 	return 0
 
 // Alien whitelist for flagged species.
