@@ -258,9 +258,10 @@
 
 /obj/item/weapon/card/id/syndicate_command
 	name = "syndicate ID card"
+	item_state = "syndie"
 	desc = "An ID straight from the Syndicate."
 	registered_name = "Syndicate"
-	assignment = "Syndicate Overlord"
+	assignment = "Syndicate Agent"
 	access = list(access_syndicate, access_external_airlocks)
 
 
