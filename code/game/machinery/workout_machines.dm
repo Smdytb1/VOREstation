@@ -70,7 +70,7 @@
 				usr << "<span class='notice'>You slam your fist into the punching bag.</span>"
 			if(2)
 				usr << "<span class='notice'>You jab the punching bag with your elbow.</span>"
-		playsound(src.loc, punch_sound, 50, 1)
+		playsound(src.loc, "punch", 50, 1)
 		sleep(50)
 		icon_state = "punchingbag"
 
@@ -113,8 +113,8 @@
 				usr << "<span class='notice'>You hammer the clown right in it's face with your fist.</span>"
 			if(4)
 				usr << "<span class='notice'>A honk emits from the punching bag as you hit it.</span>"
-		playsound(src.loc, punch_sound, 50, 1)
-		playsound(src.loc, clown_sound, 50, 1)
+		playsound(src.loc, "punch", 50, 1)
+		playsound(src.loc, "clownstep", 50, 1)
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 50, 1)
 		sleep(50)
 		icon_state = "bopbag"
@@ -149,6 +149,6 @@
 		usr << "<span class='notice'>You need to be standing on top of the scale for it to work!</span>"
 		return
 	if(usr.weight) //Just in case.
-		kilograms = round(2.20462*text2num(usr.weight),4)
+		kilograms = round(text2num(usr.weight),4) / 2.20463
 		usr << "<span class='notice'>Your relative weight is [usr.weight]lb / [kilograms]kg.</span>"
 		usr.visible_message("<span class='warning'>[usr]'s relative weight is [usr.weight]lb / [kilograms]kg.</span>")
