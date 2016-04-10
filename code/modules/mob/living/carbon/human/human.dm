@@ -688,7 +688,7 @@
 			if("preferences")
 				var/msg = input(usr,"Set your preferences here, Such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
