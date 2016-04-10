@@ -12,7 +12,7 @@
 	icon_state = "frame-eng"
 
 	screenicon = "comm_monitor"
-	keyboardicons = "kb1"
+	keyboardicon = "kb1"
 
 	var/screen = 0				// the screen number:
 	var/list/machinelist = list()	// the machines located by the computer

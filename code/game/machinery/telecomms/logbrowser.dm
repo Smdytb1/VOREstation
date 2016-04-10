@@ -5,7 +5,7 @@
 	icon_state = "frame-eng"
 
 	screenicon = "comm_logs"
-	kbicon = "kb1"
+	keyboardicon = "kb1"
 
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer
