@@ -14,6 +14,8 @@
 	fire_delay = 1 //rapid fire
 
 /obj/item/weapon/gun/energy/laser/mounted
+	name = "mounted laser"
+	fire_sound = 'sound/weapons/droideka.ogg'
 	self_recharge = 1
 	use_external_power = 1
 
