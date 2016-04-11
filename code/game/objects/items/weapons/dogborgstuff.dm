@@ -55,18 +55,64 @@
 		update_icon()
 
 
-//Boop
-
+//Boop //New and improved, now a simple reagent sniffer.
 /obj/item/weapon/boop_module
 	name = "boop module"
 	icon = 'icons/mob/dogborg.dmi'
 	icon_state = "nose"
-	desc = "The BOOP module"
+	desc = "The BOOP module, a simple reagent and atmosphere sniffer."
 	flags = CONDUCT
 	force = 0
 	throwforce = 0
 	attack_verb = list("nuzzled", "nosed", "booped")
 	w_class = 1
+
+/obj/item/weapon/boop_module/attack_self(mob/user)
+	if (!( istype(usr.loc, /turf) ))
+		return
+
+	var/datum/gas_mixture/environment = usr.loc.return_air()
+
+	var/pressure = environment.return_pressure()
+	var/total_moles = environment.total_moles
+
+	user.visible_message("[user] sniffs the air.", "<span class='notice'>You sniff the air...</span>")
+
+	src << "\blue <B>Smells like:</B>"
+	if(abs(pressure - ONE_ATMOSPHERE) < 10)
+		src << "\blue Pressure: [round(pressure,0.1)] kPa"
+	else
+		src << "\red Pressure: [round(pressure,0.1)] kPa"
+	if(total_moles)
+		for(var/g in environment.gas)
+			src << "\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]% ([round(environment.gas[g], 0.01)] moles)"
+		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C ([round(environment.temperature,0.1)]K)"
+		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
+
+/obj/item/weapon/boop_module/afterattack(obj/O, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	if (user.stat)
+		return
+	if(!istype(O))
+		return
+
+	user.visible_message("[user] sniffs at \the [O.name].", "<span class='notice'>You sniff \the [O.name]...</span>")
+
+	if(!isnull(O.reagents))
+		var/dat = ""
+		if(O.reagents.reagent_list.len > 0)
+			for (var/datum/reagent/R in O.reagents.reagent_list)
+				dat += "\n \t \blue [R]"
+
+		if(dat)
+			user << "\blue Your BOOP module indicates: [dat]"
+		else
+			user << "\blue No active chemical agents smelled in [O]."
+	else
+		user << "\blue No significant chemical agents smelled in [O]."
+
+	return
 
 
 //Delivery
@@ -86,7 +132,6 @@
 */
 
 //Tongue stuff
-
 /obj/item/weapon/soap/tongue
 	name = "synthetic tongue"
 	desc = "Useful for slurping mess off the floor before affectionally licking the crew members in the face."
@@ -249,9 +294,9 @@
 	src.occupied = 0
 	src.occupied = 0 //double check just in case
 
-/obj/item/weapon/dogborg/sleeper/proc/drain()
+/obj/item/weapon/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
 	var/mob/living/silicon/robot.R = hound
-	R.cell.charge = R.cell.charge - 5
+	R.cell.charge = R.cell.charge - amt
 
 /obj/item/weapon/dogborg/sleeper/attack_self(mob/user)
 	if(..())
