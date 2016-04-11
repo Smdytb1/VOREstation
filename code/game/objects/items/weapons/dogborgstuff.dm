@@ -146,12 +146,47 @@
 	attack_verb = list("batted", "pawed", "bopped", "whapped")
 	w_class = 1
 	var/charge = 0
+	var/charge_required = 1000
+	var/charge_per = 100
 	var/state = 0 //0 = Off, 1 = Charging, 2 = Ready
 
-	 //[round(((world.realtime - src.disconnect_time) / 10) / 60)]
+	//[round(((world.realtime - src.disconnect_time) / 10) / 60)]
 
-/obj/item/device/dogborg/dog_zapper/afterattack
+/obj/item/device/dogborg/dog_zapper/attack_self(mob/user)
+	switch(state)
+		if(0) // Was off when clicked
+			if(charge < charge_required) //Turned on and now charging
+				state = 1
+				//TODO Change Icon
+				//TODO Start charging
+				user << "<span class='notice'>[name] now charging.</span>"
+			else //Turned on and was already charged
+				state = 2
+				user << "<span class='notice'>[name] now READY.</span>"
+		if(1) // Was charging when clicked
+			state = 0
+			//TODO Change Icon
+			user << "<span class='notice'>[name] now turned off.</span>"
+		if(2) // Was ready when clicked
+			state = 0
+			//TODO Change Icon
+			user << "<span class='notice'>[name] now turned off (fully charged).</span>"
+/*
+/obj/item/device/dogborg/dog_zapper/proc/charge()
+	var/mob/living/silicon/robot.R = usr
 
+	do
+		R.cell.charge -= charge_per
+		charge += charge_per
+		sleep(1)
+	while(state = 1 && charge < charge_required && (R.cell.charge > (charge_required - charge)))
+
+	if(charge = charge_required)
+		usr << "<span class='notice'>[name] now READY.</span>"
+
+
+/obj/item/device/dogborg/dog_zapper/afterattack(mob/living/carbon/target, mob/living/silicon/user, proximity)
+*/
 //Tongue stuff
 /obj/item/device/dogborg/tongue
 	name = "synthetic tongue"
@@ -187,7 +222,7 @@
 	if(user.client && (target in user.client.screen))
 		user << "<span class='warning'>You need to take that [target.name] off before cleaning it!</span>"
 	else if(istype(target,/obj/effect/decal/cleanable))
-		user.visible_message("[user] begins to lick off \the [target.name].", "<span class='warning'>You begin to lick off \the [target.name]...</span>")
+		user.visible_message("[user] begins to lick off \the [target.name].", "<span class='notice'>You begin to lick off \the [target.name]...</span>")
 		if(do_after (user, 50))
 			user << "<span class='notice'>You finish licking off \the [target.name].</span>"
 			del(target)
@@ -195,7 +230,7 @@
 			R.cell.charge = R.cell.charge + 50
 	else if(istype(target,/obj/item))
 		if(istype(target,/obj/item/trash))
-			user.visible_message("[user] nibbles away at \the [target.name].", "<span class='warning'>You begin to nibble away at \the [target.name]...</span>")
+			user.visible_message("[user] nibbles away at \the [target.name].", "<span class='notice'>You begin to nibble away at \the [target.name]...</span>")
 			if(do_after (user, 50))
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				del(target)
@@ -203,7 +238,7 @@
 				R.cell.charge = R.cell.charge + 250
 			return
 		if(istype(target,/obj/item/weapon/cell))
-			user.visible_message("[user] begins cramming \the [target.name] down its throat.", "<span class='warning'>You begin cramming \the [target.name] down your throat...</span>")
+			user.visible_message("[user] begins cramming \the [target.name] down its throat.", "<span class='notice'>You begin cramming \the [target.name] down your throat...</span>")
 			if(do_after (user, 50))
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				var/mob/living/silicon/robot.R = user
@@ -231,7 +266,7 @@
 			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 			R.cell.charge = R.cell.charge - 666
 		else
-			user.visible_message("<span class='warning'>\the [user] affectionally licks all over \the [target]'s face!</span>", "<span class='notice'>You affectionally lick all over \the [target]'s face!</span>")
+			user.visible_message("<span class='notice'>\the [user] affectionally licks all over \the [target]'s face!</span>", "<span class='notice'>You affectionally lick all over \the [target]'s face!</span>")
 			playsound(src.loc, 'sound/effects/attackblob.ogg', 50, 1)
 			return
 	else if(istype(target, /obj/structure/window))
