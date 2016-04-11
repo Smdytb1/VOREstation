@@ -145,7 +145,7 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
+			if((client.prefs.species in whitelisted_species) && !check_rights(R_ADMIN, 0))
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
@@ -169,7 +169,7 @@
 				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
-			if(client.prefs.species != "Human")
+			if(client.prefs.species in whitelisted_species)
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
