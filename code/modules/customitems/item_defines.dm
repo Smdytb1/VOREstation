@@ -1592,6 +1592,9 @@
 			if("fedeng")
 				src.icon_state = "fedeng_open"
 				usr << "You unbutton the coat."
+			if("fedcapt")
+				src.icon_state = "fedcapt_open"
+				usr << "You unbutton the coat."
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
 				return
@@ -1614,6 +1617,15 @@
 	item_state = "fedeng"
 	item_color = "fedeng"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 30, rad = 35)
+
+/obj/item/clothing/suit/storage/fluff/fedcoat/fedcapt
+	name = "Federation Uniform Jacket"
+	desc = "A uniform jacket from the United Federation. Starfleet still uses this uniform and there are variations of it. You feel like a commanding officer of Starfleet."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "fedcapt"
+	item_state = "fedcapt"
+	item_color = "fedcapt"
+	armor = list(melee = 50, bullet = 5, laser = 15,energy = 10, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/glasses/fluff/yellow
 	name = "Yellow Goggles"
@@ -2295,6 +2307,7 @@
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tasald(src)
 	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tas_coat(src)
+	new /obj/item/fluff/permit/tasald_corlethian(src)
 	..()
 	return
 

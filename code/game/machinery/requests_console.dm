@@ -227,7 +227,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			dat += "[msg]<BR>"
 		var/obj/item/weapon/paper/R = new(src.loc)
 		R.name = "[department] Messages"
-		R.info = replacetext(dat, " href=", " nothref=") // Try and make links inoperative
+		R.info = bayreplacetext(dat, " href=", " nothref=") // Try and make links inoperative
 
 	if(reject_bad_text(href_list["write"]))
 		dpt = ckey(href_list["write"]) //write contains the string of the receiving department's name

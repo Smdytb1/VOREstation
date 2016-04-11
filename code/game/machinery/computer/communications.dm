@@ -4,7 +4,7 @@
 /obj/machinery/computer/communications
 	name = "command and communications console"
 	desc = "Used to command and control the station. Can relay long-range communications."
-	icon_state = "comm"
+	icon_state = "frame"
 	req_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/communications"
 	var/prints_intercept = 1
@@ -34,6 +34,9 @@
 	var/stat_msg2
 
 	var/datum/announcement/priority/crew_announcement = new
+
+	screenicon = "comm"
+	keyboardicon = "kb5"
 
 /obj/machinery/computer/communications/New()
 	..()

@@ -2234,10 +2234,10 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.nutrition = max(M.nutrition - nutriment_factor, 0)
+				M.weight = max(M.weight - nutriment_factor, 0)
 				M.overeatduration = 0
-				if(M.nutrition < 0)//Prevent from going into negatives.
-					M.nutrition = 0
+				if(M.nutrition < 70)//Prevent from going into negatives.
+					M.nutrition = 70
 				..()
 				return
 
@@ -2649,6 +2649,19 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				M.nutrition += nutriment_factor
+				..()
+				return
+
+		digestive_enzymes
+			name = "Digestive Enzymes"
+			id = "digestive_enzymes"
+			description = "Digestive enzymes are one of the most corrosive fluids known in the universe. Rapidly breaks down and digests anything it comes in contact with."
+			reagent_state = LIQUID
+			color = "#673910" // rgb: 103, 57, 16
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.adjustFireLoss(3) // 3 burn per tick. About as much as digestion.
 				..()
 				return
 

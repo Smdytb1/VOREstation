@@ -1,12 +1,14 @@
 /obj/machinery/computer/mecha
 	name = "Exosuit Control"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "mecha"
+	icon_state = "frame-rnd"
 	req_access = list(access_robotics)
 	circuit = "/obj/item/weapon/circuitboard/mecha_control"
 	var/list/located = list()
 	var/screen = 0
 	var/stored_data
+
+	screenicon = "mecha"
+	keyboardicon = "kb4"
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)

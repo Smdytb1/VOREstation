@@ -59,7 +59,8 @@
 	var/hostedby = null
 	var/respawn = 1
 	var/guest_jobban = 1
-	var/usewhitelist = 0
+	var/usewhitelist = 0				//Old-style job whitelist (covers specific jobs)
+	var/usejobwhitelist = 0				//This is the 'new' job whitelist
 	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
@@ -408,6 +409,9 @@
 
 				if ("usewhitelist")
 					config.usewhitelist = 1
+
+				if ("usejobwhitelist")
+					config.usejobwhitelist = 1
 
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1

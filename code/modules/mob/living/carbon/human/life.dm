@@ -333,6 +333,7 @@
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 		if(istype(loc, /obj/item/weapon/holder/micro)) return
 		if(ismob(loc))	return //otherwise return_air will return nothing and therefore immediately suffocate them
+		if(istype(src.loc, /obj/item/weapon/dogborg/sleeper)) return //If they're in a dog stomach, they don't need to breathe, as the stomach does it for them.
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
@@ -663,6 +664,8 @@
 		if(!environment)
 			return
 
+		if(istype(src.loc, /obj/item/weapon/dogborg/sleeper)) return //Dog stomachs are space proof, due to request.
+
 		//Stuff like the xenomorph's plasma regen happens here.
 		species.handle_environment_special(src)
 
@@ -979,9 +982,16 @@
 			else //heal in the dark
 				heal_overall_damage(1,1)
 
-		// nutrition decrease
+		// VOREstation weight code.
+		// Weight should be limited between 70 and 500 pounds min and max. Beyond that gets not believable because the person would more likely keel over and die or be immobile.
 		if (nutrition > 0 && stat != 2)
-			nutrition = max (0, nutrition - HUNGER_FACTOR)
+			nutrition = max (0, nutrition - HUNGER_FACTOR) // nutrition decrease
+			if (nutrition > 450 && weight < 500 && weight_gain)
+				weight += metabolism*(0.01*weight_gain)  // weight increase. WARNING: REALLY FUCKING HACKY.
+			//	If someone can come back to this later and un-fuck this, the goal is for each 1 nutriment removed to be worth 0.03 pounds added. This was a hacky fix.
+
+		else if (nutrition <= 50 && stat != 2 && weight > 70 && weight_loss)
+			weight -= metabolism*(0.01*weight_loss) // starvation weight loss
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat

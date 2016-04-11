@@ -270,8 +270,11 @@
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
 	desc = "Scand DNA."
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "scanner"
+	icon_state = "frame-med"
+
+	screenicon = "dna"
+	keyboardicon = "kb7"
+
 	density = 1
 	circuit = /obj/item/weapon/circuitboard/scan_consolenew
 	var/selected_ui_block = 1.0

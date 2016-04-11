@@ -287,6 +287,7 @@
 		if(!job.is_position_available()) return 0
 		if(jobban_isbanned(src,rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
+		if(job.job_whitelisted && !is_job_whitelisted(src,rank))	return 0
 		return 1
 
 
@@ -300,7 +301,7 @@
 			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
 			return 0
 		if(!IsJobAvailable(rank))
-			src << alert("[rank] is not available. Please try another.")
+			src << alert("[rank] is not available (whitelist, jobban, or no slots). Please try another.")
 			return 0
 
 		spawning = 1

@@ -101,12 +101,12 @@
 				temp_message[H] = ninjaspeak(temp_message[H])
 				pick_list -= H
 			message = list2text(temp_message, " ")
-			message = replacetext(message, "o", "¤")
-			message = replacetext(message, "p", "þ")
-			message = replacetext(message, "l", "£")
-			message = replacetext(message, "s", "§")
-			message = replacetext(message, "u", "µ")
-			message = replacetext(message, "b", "ß")
+			message = bayreplacetext(message, "o", "¤")
+			message = bayreplacetext(message, "p", "þ")
+			message = bayreplacetext(message, "l", "£")
+			message = bayreplacetext(message, "s", "§")
+			message = bayreplacetext(message, "u", "µ")
+			message = bayreplacetext(message, "b", "ß")
 
 	var/list/listening = get_mobs_in_view(message_range, src)
 	// listening |= src //Not needed with 'mobs_in_view' anymore.

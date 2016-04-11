@@ -3,7 +3,7 @@
 /obj/machinery/computer/med_data//TODO:SANITY
 	name = "medical records console"
 	desc = "Used to view, edit and maintain medical records."
-	icon_state = "medcomp"
+	icon_state = "frame-med"
 	req_one_access = list(access_medical, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/med_data"
 	var/obj/item/weapon/card/id/scan = null
@@ -15,6 +15,9 @@
 	var/a_id = null
 	var/temp = null
 	var/printing = null
+
+	screenicon = "medcomp"
+	keyboardicon = "kb7"
 
 /obj/machinery/computer/med_data/verb/eject_id()
 	set category = "Object"
@@ -551,4 +554,6 @@
 /obj/machinery/computer/med_data/laptop
 	name = "Medical Laptop"
 	desc = "Cheap Nanotrasen Laptop."
-	icon_state = "medlaptop"
+	icon_state = "laptop"
+	screenicon = "medcomp"
+	keyboardicon = null //Built into laptop

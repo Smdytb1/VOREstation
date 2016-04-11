@@ -317,6 +317,7 @@ var/list/robot_verbs_default = list(
 			module_sprites["Bloodhound"] = "bloodhound"
 			module_sprites["Bloodhound - Treaded"] = "secborg+tread"
 			module_sprites["Drone"] = "drone-sec"
+			module_sprites["Mister Gutsy"] = "mrgutsy"
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -351,7 +352,6 @@ var/list/robot_verbs_default = list(
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Destroyer Droid"] = "droid-combat"
-			module_sprites["Mister Gutsy"] = "mrgutsy"
 			module_sprites["Dog"] = "syndicatedog"
 			module.channels = list("Security" = 1)
 
@@ -362,6 +362,25 @@ var/list/robot_verbs_default = list(
 			module_sprites["Borgi"] = "corgi" //Give them another sprite. Why not?
 			module_sprites["Science"] = "sciborg" //Let's give them an actual science cyborg.
 			module.channels = list("Science" = 1) //Give em science comms, why not.
+
+		if("Medihound")
+			icon = 'icons/mob/widerobot.dmi'
+			icon_state = "medihound"
+			hands.icon_state = "medihound"
+			pixel_x = -16
+			module = new /obj/item/weapon/robot_module/medihound(src)
+			module_sprites["Medihound"] = "medihound" //This is the only sprite it can use.
+			module.channels = list("Medical" = 1) //They are medical bots, after all!
+
+		if("K9")
+			icon = 'icons/mob/widerobot.dmi'
+			icon_state = "k9"
+			hands.icon_state = "k9"
+			pixel_x = -16
+			module = new /obj/item/weapon/robot_module/k9(src)
+			module_sprites["K9 hound"] = "k9" //This is the only sprite it can use.
+			module.channels = list("Security" = 1) //It is a security borg.
+
 
 	//languages
 	module.add_languages(src)
@@ -961,6 +980,11 @@ var/list/robot_verbs_default = list(
 			icon_state = module_sprites[icontype]
 		return
 
+	if(sleeper_g == 1)
+		overlays += "sleeper_g"
+	if(sleeper_r == 1)
+		overlays += "sleeper_r"
+
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
 	if(!targeted_by && target_locked)
@@ -1209,6 +1233,11 @@ var/list/robot_verbs_default = list(
 		return
 
 	overlays -= "eyes"
+
+	if("k9")
+		overlays += "eyes-k9"
+	if("Medihound")
+		overlays += "eyes-medihound"
 	updateicon()
 
 	if (triesleft >= 1)
