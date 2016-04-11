@@ -65,6 +65,8 @@ var/list/whitelist = list()
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!config.usealienwhitelist)
 		return 1
+	if(!species in whitelisted_species)
+		return 1
 
 	/* This is done in preferences.dm, where it checks the flags on the species, why have this?
 	if(species in whitelisted_species)
