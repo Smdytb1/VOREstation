@@ -88,7 +88,7 @@
 			user << "\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%"
 		user << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C ([round(environment.temperature,0.1)]K)"
 
-/obj/item/weapon/boop_module/afterattack(obj/O, mob/user as mob, proximity)
+/obj/item/weapon/boop_module/attack(obj/O, mob/user as mob, proximity)
 	if(!proximity)
 		return
 	if (user.stat)
@@ -130,6 +130,24 @@
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 */
 
+/obj/item/weapon/dog_zapper //TODO
+	name = "paws of life"
+	icon = 'icons/mob/dogborg.dmi'
+	icon_state = "defibpaddles0"
+	desc = "Zappy paws. For fixing cardiac arrest."
+	flags = CONDUCT
+	force = 0
+	throwforce = 0
+	hitsound = 'sound/weapons/bite.ogg'
+	attack_verb = list("batted", "pawed", "bopped", "whapped")
+	w_class = 1
+	var/charge = 0
+	var/state = 0 //0 = Off, 1 = Charging, 2 = Ready
+
+	 //[round(((world.realtime - src.disconnect_time) / 10) / 60)]
+
+
+
 //Tongue stuff
 /obj/item/weapon/soap/tongue
 	name = "synthetic tongue"
@@ -155,7 +173,7 @@
 			icon_state = "synthtongue"
 		update_icon()
 
-/obj/item/weapon/soap/tongue/afterattack(atom/target, mob/user, proximity)
+/obj/item/weapon/soap/tongue/attack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
 	if(user.client && (target in user.client.screen))
@@ -241,7 +259,7 @@
 /obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
 
-/obj/item/weapon/dogborg/sleeper/afterattack(mob/living/carbon/target, mob/living/silicon/user, proximity)
+/obj/item/weapon/dogborg/sleeper/attack(mob/living/carbon/target, mob/living/silicon/user, proximity)
 	if(!proximity)
 		return
 	if(!ishuman(target))
@@ -422,7 +440,7 @@
 				R << "<span class='notice'>Your stomach is currently too full of fluids to secrete more fluids of this kind.</span>"
 			else if(patient.reagents.get_reagent_amount(chem) + 10 <= 20) //No overdoses for you
 				patient.reagents.add_reagent(chem, inject_amount)
-				R.cell.charge = R.cell.charge - 750 //-750 charge per injection
+				drain(750) //-750 charge per injection
 			var/units = round(patient.reagents.get_reagent_amount(chem))
 			R << "<span class='notice'>Injecting [units] unit\s of [chemical_reagents_list[chem]] into occupant.</span>" //If they were immersed, the reagents wouldn't leave with them.
 
@@ -436,7 +454,7 @@
 		del(patient)
 		R.sleeper_r = 0 //Reset the sprite!
 		R.sleeper_g = 0 //Since they're just power by now.
-		R.cell.charge = R.cell.charge + 30000 //As much as a hyper battery. You /are/ digesting an entire person, after all!
+		drain(-30000) //As much as a hyper battery. You /are/ digesting an entire person, after all!
 		src.occupied = 0 //Allow them to take more people in!
 		R.update_icons()
 		sleeperUI(usr)
