@@ -56,7 +56,7 @@
 
 
 //Boop //New and improved, now a simple reagent sniffer.
-/obj/item/weapon/boop_module
+/obj/item/device/dogborg/boop_module
 	name = "boop module"
 	icon = 'icons/mob/dogborg.dmi'
 	icon_state = "nose"
@@ -67,7 +67,11 @@
 	attack_verb = list("nuzzled", "nosed", "booped")
 	w_class = 1
 
-/obj/item/weapon/boop_module/attack_self(mob/user)
+/obj/item/device/dogborg/boop_module/New()
+	..()
+	flags |= NOBLUDGEON //No more attack messages
+
+/obj/item/device/dogborg/boop_module/attack_self(mob/user)
 	if (!( istype(user.loc, /turf) ))
 		return
 
@@ -88,7 +92,7 @@
 			user << "\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%"
 		user << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C ([round(environment.temperature,0.1)]K)"
 
-/obj/item/weapon/boop_module/attack(obj/O, mob/user as mob, proximity)
+/obj/item/device/dogborg/boop_module/afterattack(obj/O, mob/user as mob, proximity)
 	if(!proximity)
 		return
 	if (user.stat)
@@ -130,7 +134,7 @@
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
 */
 
-/obj/item/weapon/dog_zapper //TODO
+/obj/item/device/dogborg/dog_zapper //TODO
 	name = "paws of life"
 	icon = 'icons/mob/dogborg.dmi'
 	icon_state = "defibpaddles0"
@@ -146,10 +150,10 @@
 
 	 //[round(((world.realtime - src.disconnect_time) / 10) / 60)]
 
-
+/obj/item/device/dogborg/dog_zapper/afterattack
 
 //Tongue stuff
-/obj/item/weapon/soap/tongue
+/obj/item/device/dogborg/tongue
 	name = "synthetic tongue"
 	desc = "Useful for slurping mess off the floor before affectionally licking the crew members in the face."
 	icon = 'icons/mob/dogborg.dmi'
@@ -157,7 +161,11 @@
 	hitsound = 'sound/effects/attackblob.ogg'
 	var/emagged = 0
 
-/obj/item/weapon/soap/tongue/attack_self(mob/user)
+/obj/item/device/dogborg/tongue/New()
+	..()
+	flags |= NOBLUDGEON //No more attack messages
+
+/obj/item/device/dogborg/tongue/attack_self(mob/user)
 	var/mob/living/silicon/robot.R = user
 	if(R.emagged)
 		emagged = !emagged
@@ -173,7 +181,7 @@
 			icon_state = "synthtongue"
 		update_icon()
 
-/obj/item/weapon/soap/tongue/attack(atom/target, mob/user, proximity)
+/obj/item/device/dogborg/tongue/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
 	if(user.client && (target in user.client.screen))
@@ -242,8 +250,7 @@
 	return
 
 //Sleeper
-
-/obj/item/weapon/dogborg/sleeper
+/obj/item/device/dogborg/sleeper
 	name = "Medbelly"
 	desc = "Equipment for medical hound. A mounted sleeper that stabilizes patients and can inject reagents in the borg's reserves."
 	icon = 'icons/mob/dogborg.dmi'
@@ -253,13 +260,20 @@
 	var/inject_amount = 10
 	var/min_health = -100
 	var/occupied = 0
+	force = 0
+	throwforce = 0
+	w_class = 1
 	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
 	var/list/vore_chems = list("digestive_enzymes")
 
-/obj/item/weapon/dogborg/sleeper/Exit(atom/movable/O)
+/obj/item/device/dogborg/sleeper/New()
+	..()
+	flags |= NOBLUDGEON //No more attack messages
+
+/obj/item/device/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
 
-/obj/item/weapon/dogborg/sleeper/attack(mob/living/carbon/target, mob/living/silicon/user, proximity)
+/obj/item/device/dogborg/sleeper/afterattack(mob/living/carbon/target, mob/living/silicon/user, proximity)
 	if(!proximity)
 		return
 	if(!ishuman(target))
@@ -282,9 +296,7 @@
 			patient = target
 			hound = user
 			target.reset_view(src)
-			user << "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>"
-			user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>")
-			user.visible_message("[target] loaded. Life support functions engaged.")
+			user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>", "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>")
 			src.occupied = 1
 			var/mob/living/silicon/robot.R = user
 			if(patient.stat < 2)
@@ -297,7 +309,7 @@
 				R.update_icons()
 			processing_objects |= src
 
-/obj/item/weapon/dogborg/sleeper/proc/go_out()
+/obj/item/device/dogborg/sleeper/proc/go_out()
 	if(src.occupied == 0)
 		return
 	var/mob/living/silicon/robot.R = hound
@@ -311,16 +323,16 @@
 	src.occupied = 0
 	src.occupied = 0 //double check just in case
 
-/obj/item/weapon/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
+/obj/item/device/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
 	var/mob/living/silicon/robot.R = hound
 	R.cell.charge = R.cell.charge - amt
 
-/obj/item/weapon/dogborg/sleeper/attack_self(mob/user)
+/obj/item/device/dogborg/sleeper/attack_self(mob/user)
 	if(..())
 		return
 	sleeperUI(user)
 
-/obj/item/weapon/dogborg/sleeper/proc/sleeperUI(mob/user)
+/obj/item/device/dogborg/sleeper/proc/sleeperUI(mob/user)
 	var/dat
 	dat += "<h3>Injector</h3>"
 
@@ -402,7 +414,7 @@
 	popup.open()
 	return
 
-/obj/item/weapon/dogborg/sleeper/Topic(href, href_list)
+/obj/item/device/dogborg/sleeper/Topic(href, href_list)
 	if(..() || usr == patient)
 		return
 	usr.set_machine(src)
@@ -429,7 +441,7 @@
 	sleeperUI(usr) //Needs a callback to boop the page to refresh.
 	return
 
-/obj/item/weapon/dogborg/sleeper/proc/inject_chem(mob/user, chem)
+/obj/item/device/dogborg/sleeper/proc/inject_chem(mob/user, chem)
 	if(patient && patient.reagents)
 		if(chem in injection_chems + vore_chems + "inaprovaline")
 			var/mob/living/silicon/robot.R = user
@@ -444,7 +456,7 @@
 			var/units = round(patient.reagents.get_reagent_amount(chem))
 			R << "<span class='notice'>Injecting [units] unit\s of [chemical_reagents_list[chem]] into occupant.</span>" //If they were immersed, the reagents wouldn't leave with them.
 
-/obj/item/weapon/dogborg/sleeper/proc/absorb()
+/obj/item/device/dogborg/sleeper/proc/absorb()
 	var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
 	if(confirm == "Okay" && patient && patient.digestable && ((patient.stat & DEAD))) //Sanity
 		var/mob/living/silicon/robot.R = usr
@@ -460,7 +472,7 @@
 		sleeperUI(usr)
 		return
 
-/obj/item/weapon/dogborg/sleeper/process()
+/obj/item/device/dogborg/sleeper/process()
 	if(src.occupied == 0)
 		processing_objects.Remove(src)
 		return
@@ -477,7 +489,7 @@
 	var/sleeper_g
 	var/sleeper_r
 
-/obj/item/weapon/dogborg/sleeper/K9 //The K9 portabrig
+/obj/item/device/dogborg/sleeper/K9 //The K9 portabrig
 	name = "Brig-Belly"
 	desc = "Equipment for a K9 unit. A mounted portable-brig that holds criminals."
 	icon = 'icons/mob/dogborg.dmi'

@@ -167,7 +167,7 @@
 				CB.release_specific_contents(src)
 			message_admins("[key_name(src)] used the OOC escape button to get out of [pred] (PC) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 
-	else if(istype(src.loc, /obj/item/weapon/dogborg/sleeper))
+	else if(istype(src.loc, /obj/item/device/dogborg/sleeper))
 		var/confirm = alert(src, "You're in a player-character cyborg. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			forceMove(get_turf(src)) //Since they're not in a vore organ, you can't eject them "normally"
