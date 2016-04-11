@@ -11,7 +11,7 @@
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
-	if(istype(W, /obj/item/weapon/card) || istype(W, /obj/item/device/pda))
+	if(istype(W, /obj/item/weapon/card) || istype(W, /obj/item/device/pda) || istype(W, /obj/item/weapon/storage/wallet))
 
 		if(subverted)
 			locked = 0

@@ -702,15 +702,18 @@
 			else
 				user << "You were unable to attach [W] to [src]"
 		return
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
+	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/storage/wallet))
 		if(add_req_access || maint_access)
 			if(internals_access_allowed(usr))
 				var/obj/item/weapon/card/id/id_card
 				if(istype(W, /obj/item/weapon/card/id))
 					id_card = W
-				else
+				else if(istype(W, /obj/item/device/pda))
 					var/obj/item/device/pda/pda = W
 					id_card = pda.id
+				else if(istype(W, /obj/item/weapon/storage/wallet))
+					var/obj/item/weapon/storage/wallet/wallet = W
+					id_card = wallet.front_id
 				output_maintenance_dialog(id_card, user)
 				return
 			else
@@ -1249,6 +1252,9 @@
 	if(istype(I, /obj/item/device/pda))
 		var/obj/item/device/pda/pda = I
 		I = pda.id
+	if(istype(I, /obj/item/weapon/storage/wallet))
+		var/obj/item/weapon/storage/wallet/wallet = I
+		I = wallet.front_id
 	if(!istype(I) || !I.access) //not ID or no access
 		return 0
 	if(access_list==src.operation_req_access)
