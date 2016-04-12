@@ -1812,6 +1812,23 @@ var/list/all_supply_groups = list("Operations",/*"Extra-vehicular activity",*/"S
 	containername = "crate"
 	group = "Miscellaneous"
 
+/datum/supply_packs/workout
+	name = "Fitness crate"
+	contains = list(/obj/machinery/workout/shipped,
+					/obj/machinery/workout/shipped,
+					/obj/machinery/punching_clown,
+					/obj/machinery/punching_clown,
+					/obj/machinery/punching_clown,
+					/obj/machinery/punching_clown,
+					/obj/item/clothing/gloves/boxing,
+					/obj/item/clothing/gloves/boxing/green,
+					/obj/item/clothing/gloves/boxing/blue,
+					/obj/item/clothing/gloves/boxing/yellow)
+	cost = 60
+	containertype = /obj/structure/closet/crate
+	containername = "crate"
+	group = "Miscellaneous"
+
 /datum/supply_packs/medals
 	name = "Assorted medals"
 	contains = list(/obj/item/weapon/storage/lockbox/medals_low,

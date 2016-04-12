@@ -152,7 +152,7 @@ var/global/sent_strike_team = 0
 
 	equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(src), slot_l_store)
 	equip_to_slot_or_del(new /obj/item/weapon/grenade/flashbang(src), slot_r_store)
-	equip_to_slot_or_del(new /obj/item/weapon/tank/emergency_oxygen(src), slot_s_store)
+	equip_to_slot_or_del(new /obj/item/weapon/tank/emergency_oxygen/double(src), slot_s_store)
 	equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(src), slot_belt)
 
 	equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(src), slot_r_hand)
@@ -162,9 +162,9 @@ var/global/sent_strike_team = 0
 
 
 
-	var/obj/item/weapon/card/id/W = new(src)
+	var/obj/item/weapon/card/id/centcom/ERT/W = new(src)
 	W.name = "[real_name]'s ID Card"
-	W.icon_state = "centcom"
+	W.icon_state = "centcom_old"
 	W.access = get_all_accesses()//They get full station access.
 	W.access += list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)//Let's add their alloted CentCom access.
 	W.assignment = "SWAT Commando"

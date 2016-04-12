@@ -214,8 +214,8 @@
 	return A && A.turret_controls.len > 0
 
 /obj/machinery/porta_turret/Topic(href, href_list)
-	if(..())
-		return 1
+//	if(..()) //Not sure what this is for. Seems broken, though!
+//		return 1
 	if(!can_use(usr))
 		return 1
 

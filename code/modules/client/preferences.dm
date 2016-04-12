@@ -118,6 +118,10 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
+	var/job_unique_high = 0
+	var/job_unique_med = 0
+	var/job_unique_low = 0
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
@@ -210,9 +214,9 @@ datum/preferences
 		if(15 to 18)
 			return "Exceptional"
 		if(19 to 24)
-			return "Genius"
+			return "Overpowered"
 		if(24 to 1000)
-			return "God"
+			return "Bullshit"
 
 /datum/preferences/proc/SetSkills(mob/user)
 	if(SKILLS == null)
@@ -485,7 +489,7 @@ datum/preferences
 
 	user << browse(dat, "window=preferences;size=560x736")
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
+/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 600, height = 660)
 	if(!job_master)
 		return
 
@@ -527,6 +531,9 @@ datum/preferences
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			continue
+		if(job.job_whitelisted && !is_job_whitelisted(user, rank))
+			HTML += "<del>[rank]</del></td><td> \[WHITELIST]</td></tr>"
 			continue
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
@@ -856,6 +863,10 @@ datum/preferences
 	job_engsec_med = 0
 	job_engsec_low = 0
 
+	job_unique_high = 0
+	job_unique_med = 0
+	job_unique_low = 0
+
 
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
@@ -884,6 +895,14 @@ datum/preferences
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+		if(UNIQUE)
+			switch(level)
+				if(1)
+					return job_unique_high
+				if(2)
+					return job_unique_med
+				if(3)
+					return job_unique_low
 	return 0
 
 /datum/preferences/proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -893,14 +912,17 @@ datum/preferences
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
 			job_civilian_med |= job_civilian_high
 			job_medsci_med |= job_medsci_high
 			job_engsec_med |= job_engsec_high
+			job_unique_med |= job_unique_high
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -933,6 +955,16 @@ datum/preferences
 					job_engsec_low &= ~job.flag
 				else
 					job_engsec_low |= job.flag
+		if(UNIQUE)
+			switch(level)
+				if(2)
+					job_unique_high = job.flag
+					job_unique_med &= ~job.flag
+				if(3)
+					job_unique_med |= job.flag
+					job_unique_low &= ~job.flag
+				else
+					job_unique_low |= job.flag
 	return 1
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
@@ -1063,15 +1095,22 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["task"]] = msg
+				return
 			else
 				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
@@ -1316,7 +1355,7 @@ datum/preferences
 				if("weight")
 					var/new_weight = input(user, "Choose your character's relative body weight.\nThis measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\nIf you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\nswear to god I will find you and I will punch you for not reading these directions!\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
 					if(new_weight)
-						var/unit_of_measurement = alert(user, "Is that number in pounds (lbs) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
+						var/unit_of_measurement = alert(user, "Is that number in pounds (lb) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
 						if(unit_of_measurement == "Pounds")
 							weight = round(text2num(new_weight),4)
 						if(unit_of_measurement == "Kilograms")

@@ -92,6 +92,21 @@ LINEN BINS
 	icon_state = "sheetbrown"
 	item_color = "brown"
 
+/obj/item/weapon/bedsheet/centcom
+	icon_state = "sheetcentcom"
+	item_color = "centcom"
+
+/obj/item/weapon/bedsheet/usa
+	icon_state = "sheetUSA"
+	item_color = "flag"
+
+/obj/item/weapon/bedsheet/cmo
+	icon_state = "sheetcmo"
+	item_color = "cmo"
+
+/obj/item/weapon/bedsheet/wiz
+	icon_state = "sheetwiz"
+	item_color = "wiz"
 
 /obj/structure/bedsheetbin
 	name = "linen bin"

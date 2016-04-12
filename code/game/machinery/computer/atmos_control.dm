@@ -4,8 +4,7 @@
 
 /obj/machinery/computer/atmoscontrol
 	name = "\improper Central Atmospherics Computer"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "computer_generic"
+	icon_state = "frame-eng"
 	density = 1
 	anchored = 1.0
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
@@ -14,6 +13,9 @@
 	var/list/monitored_alarm_ids = null
 	var/list/monitored_alarms = null
 	var/ui_ref
+
+	screenicon = "atmos"
+	keyboardicon = "kb4"
 
 /obj/machinery/computer/atmoscontrol/laptop
 	name = "Atmospherics Laptop"

@@ -82,6 +82,9 @@ var/global/datum/controller/occupations/job_master
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
+			if(job.job_whitelisted && !is_job_whitelisted(player, job.title))
+				Debug("FOC player not whitelisted, Player: [player], Title: [job.title]")
+				continue
 			if(flag && (!player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
@@ -108,6 +111,10 @@ var/global/datum/controller/occupations/job_master
 
 			if(!job.player_old_enough(player.client))
 				Debug("GRJ player not old enough, Player: [player]")
+				continue
+
+			if(job.job_whitelisted && !is_job_whitelisted(player, job.title))
+				Debug("GRJ player not whitelisted, Player: [player], Title: [job.title]")
 				continue
 
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -292,6 +299,10 @@ var/global/datum/controller/occupations/job_master
 
 					if(!job.player_old_enough(player.client))
 						Debug("DO player not old enough, Player: [player], Job:[job.title]")
+						continue
+
+					if(job.job_whitelisted && !is_job_whitelisted(player, job.title))
+						Debug("DO player not whitelisted, Player: [player], Title: [job.title]")
 						continue
 
 					// If the player wants that job on this level, then try give it to him.

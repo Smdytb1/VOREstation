@@ -3,13 +3,15 @@
 /obj/machinery/computer/card
 	name = "\improper ID card modification console"
 	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
-	icon_state = "id"
+	icon_state = "frame"
 	req_access = list(access_change_ids)
 	circuit = "/obj/item/weapon/circuitboard/card"
 	var/obj/item/weapon/card/id/scan = null
 	var/obj/item/weapon/card/id/modify = null
 	var/mode = 0.0
 	var/printing = null
+	screenicon = "id"
+	keyboardicon = "kb12"
 
 /obj/machinery/computer/card/proc/is_centcom()
 	return 0
