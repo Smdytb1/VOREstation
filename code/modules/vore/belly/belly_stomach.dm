@@ -20,7 +20,7 @@
 
 // @Override
 /datum/belly/stomach/process_Life()
-	if(length(internal_contents) && air_master.current_cycle%3==1)
+	if(length(internal_contents) && air_master.current_cycle%3==1 && digest_mode == DM_DIGEST)
 		var/churnsound = pick(
 			'sound/vore/digest1.ogg',
 			'sound/vore/digest2.ogg',
