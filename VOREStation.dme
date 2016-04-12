@@ -1629,6 +1629,7 @@
 #include "maps\exodus-4.dmm"
 #include "maps\exodus-5.dmm"
 #include "maps\exodus-6.dmm"
+#include "maps\RandomZLevels\beach.dm"
 #include "maps\RandomZLevels\carpfarm.dm"
 #include "maps\RandomZLevels\labyrinth.dm"
 #include "maps\RandomZLevels\listeningpost.dm"
