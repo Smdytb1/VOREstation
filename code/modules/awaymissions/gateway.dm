@@ -8,9 +8,14 @@
 	var/active = 0
 
 
-/obj/machinery/gateway/initialize()
+/obj/machinery/gateway/initialize() // Only happens at round start.
 	update_icon()
-	if(dir == 2)
+	if(dir == 2 || dir == 6 || dir == 10)
+		density = 0
+
+/obj/machinery/gateway/New() // Doesn't initialize in generated maps which is bad.
+	update_icon()
+	if(dir == 2 || dir == 6 || dir == 10)
 		density = 0
 
 
@@ -45,6 +50,9 @@
 		icon_state = "oncenter"
 		return
 	icon_state = "offcenter"
+
+/obj/machinery/gateway/centerstation/New()
+	density = 1
 
 
 
@@ -166,6 +174,9 @@ obj/machinery/gateway/centerstation/process()
 		icon_state = "oncenter"
 		return
 	icon_state = "offcenter"
+
+/obj/machinery/gateway/centeraway/New()
+	density = 1
 
 
 /obj/machinery/gateway/centeraway/proc/detect()
