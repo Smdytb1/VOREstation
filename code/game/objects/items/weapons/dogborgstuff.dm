@@ -327,22 +327,23 @@
 		if(occupied == 1) return //If you try to eat two people at once, you can only eat one.
 
 		else if(occupied == 0) //If you don't have someone in you, proceed.
+			var/mob/living/silicon/robot.R = user
 			target.forceMove(src)
 			patient = target
 			hound = user
 			target.reset_view(src)
 			user.visible_message("<span class='warning'>[user]'s medical pod lights up as [target] slips inside into their [src].</span>", "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>")
+			message_admins("[key_name(R)] has eaten [key_name(patient)] as a dogborg. ([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
 			src.occupied = 1
-			var/mob/living/silicon/robot.R = user
-			if(patient.stat < 2)
-				R.sleeper_r = 0
-				R.sleeper_g = 1
+			if(patient.stat & DEAD)
+				R.sleeper_r = 1
+				R.sleeper_g = 0
 				R.update_icons()
 			else
-				R.sleeper_g = 0
-				R.sleeper_r = 1
+				R.sleeper_g = 1
+				R.sleeper_r = 0
 				R.update_icons()
-			processing_objects |= src
+			processing_objects.Add(src)
 
 /obj/item/device/dogborg/sleeper/proc/go_out()
 	if(src.occupied == 0)
@@ -357,6 +358,7 @@
 	patient = null
 	src.occupied = 0
 	src.occupied = 0 //double check just in case
+	processing_objects.Remove(src)
 
 /obj/item/device/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
 	var/mob/living/silicon/robot.R = hound
@@ -492,10 +494,10 @@
 			R << "<span class='notice'>Injecting [units] unit\s of [chemical_reagents_list[chem]] into occupant.</span>" //If they were immersed, the reagents wouldn't leave with them.
 
 /obj/item/device/dogborg/sleeper/proc/absorb()
-	var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them alive. Do not digest them unless you have their consent, please!", "Confirmation", "Okay", "Cancel")
+	var/confirm = alert(usr, "Your patient is currently dead! You can digest them to charge your battery, or leave them as-is.", "Confirmation", "Okay", "Cancel")
 	if(confirm == "Okay" && patient && patient.digestable && ((patient.stat & DEAD))) //Sanity
 		var/mob/living/silicon/robot.R = usr
-		message_admins("[key_name(R)] digested [patient]([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
+		message_admins("[key_name(R)] has digested [key_name(patient)] as a dogborg. ([R ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[R.x];Y=[R.y];Z=[R.z]'>JMP</a>" : "null"])")
 		R << "<span class='notice'>You feel your stomach slowly churn around [patient], breaking them down into a soft slurry to be used as power for your systems.</span>"
 		patient << "<span class='notice'>You feel [R]'s stomach slowly churn around your form, breaking you down into a soft slurry to be used as power for [R]'s systems.</span>"
 		del(patient)
