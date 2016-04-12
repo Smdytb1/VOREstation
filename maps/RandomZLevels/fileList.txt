@@ -7,4 +7,5 @@
 maps/RandomZLevels/beach.dmm
 maps/RandomZLevels/blackmarketpackers.dmm
 maps/RandomZLevels/labyrinth.dmm
+maps/RandomZLevels/carpfarm.dmm
 maps/RandomZLevels/listeningpost.dmm
