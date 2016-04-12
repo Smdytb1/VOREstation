@@ -25,8 +25,8 @@
 		return
 	if(usr.nutrition > 70 && usr.weight > 70) //If they have enough nutrition and body weight, they can exercise.
 		usr.dir = src.dir
-		usr.nutrition = usr.nutrition - 70 //Working out burns a lot of calories!
-		usr.weight = usr.weight - 0.1 //Burn a bit of weight. Not much, but quite a bit. This can't be spammed, as they'll need nutrition to be able to work out.
+		usr.nutrition = usr.nutrition - 20 //Working out burns a lot of calories!
+		usr.weight = usr.weight - 0.05 //Burn a bit of weight. Not much, but quite a bit. This can't be spammed, as they'll need nutrition to be able to work out.
 		icon_state = "fitnesslifter2"
 		usr << "<span class='notice'>You lift some weights.</span>"
 		sleep(50)
@@ -62,8 +62,8 @@
 
 	if(usr.nutrition > 35 && usr.weight > 70) //If they have enough nutrition and body weight, they can exercise.
 		var/workout = rand(1,2)
-		usr.nutrition = usr.nutrition - 35 //A punching bag uses less calories.
-		usr.weight = usr.weight - 0.05 //And burns less weight.
+		usr.nutrition = usr.nutrition - 10 //A punching bag uses less calories.
+		usr.weight = usr.weight - 0.025 //And burns less weight.
 		icon_state = "punchingbag2"
 		switch(workout)
 			if(1)
@@ -101,8 +101,8 @@
 
 	if(usr.nutrition > 35 && usr.weight > 70) //If they have enough nutrition and body weight, they can exercise.
 		var/workout = rand(1,4)
-		usr.nutrition = usr.nutrition - 35 //A punching bag uses less calories.
-		usr.weight = usr.weight - 0.1 //The hatred of the clown causes you to burn more weight.
+		usr.nutrition = usr.nutrition - 10
+		usr.weight = usr.weight - 0.025
 		icon_state = "bopbag2"
 		switch(workout)
 			if(1)
