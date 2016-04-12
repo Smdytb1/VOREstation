@@ -283,6 +283,25 @@
 		update_patient()
 		return
 
+	if(prob(10))
+		var/churnsound = pick(
+			'sound/vore/digest1.ogg',
+			'sound/vore/digest2.ogg',
+			'sound/vore/digest3.ogg',
+			'sound/vore/digest4.ogg',
+			'sound/vore/digest5.ogg',
+			'sound/vore/digest6.ogg',
+			'sound/vore/digest7.ogg',
+			'sound/vore/digest8.ogg',
+			'sound/vore/digest9.ogg',
+			'sound/vore/digest10.ogg',
+			'sound/vore/digest11.ogg',
+			'sound/vore/digest12.ogg')
+		for(var/mob/outhearer in range(1,hound))
+			outhearer << sound(churnsound,volume=80)
+		for(var/mob/inhearer in contents)
+			inhearer << sound(churnsound,volume=80)
+
 	//Stomach has contents, going forward
 	if(air_master.current_cycle%2==1) //This is how the vore code times it, so I'm using that
 		var/atom/target = pick(contents)
@@ -305,6 +324,20 @@
 				hound << "<span class='notice'>You feel your belly slowly churn around [T], breaking them down into a soft slurry to be used as power for your systems.</span>"
 				T << "<span class='notice'>You feel [hound]'s belly slowly churn around your form, breaking you down into a soft slurry to be used as power for [hound]'s systems.</span>"
 				drain(-30000) //Fueeeeellll
+				var/deathsound = pick(
+					'sound/vore/death1.ogg',
+					'sound/vore/death2.ogg',
+					'sound/vore/death3.ogg',
+					'sound/vore/death4.ogg',
+					'sound/vore/death5.ogg',
+					'sound/vore/death6.ogg',
+					'sound/vore/death7.ogg',
+					'sound/vore/death8.ogg',
+					'sound/vore/death9.ogg',
+					'sound/vore/death10.ogg')
+				for(var/mob/hearer in range(1,hound))
+					hearer << deathsound
+				T << deathsound
 				Spill(T)
 				T.Del()
 				update_patient()
