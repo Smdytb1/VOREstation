@@ -229,6 +229,7 @@
 		if(istype(target,/obj/item/trash))
 			user.visible_message("[user] nibbles away at \the [target.name].", "<span class='notice'>You begin to nibble away at \the [target.name]...</span>")
 			if(do_after (user, 50))
+				user.visible_message("[user] finishes eating \the [target.name].", "<span class='notice'>You finish eating \the [target.name].</span>")
 				user << "<span class='notice'>You finish off \the [target.name].</span>"
 				del(target)
 				var/mob/living/silicon/robot.R = user
@@ -237,7 +238,8 @@
 		if(istype(target,/obj/item/weapon/cell))
 			user.visible_message("[user] begins cramming \the [target.name] down its throat.", "<span class='notice'>You begin cramming \the [target.name] down your throat...</span>")
 			if(do_after (user, 50))
-				user << "<span class='notice'>You finish off \the [target.name].</span>"
+				user.visible_message("[user] finishes gulping down \the [target.name].", "<span class='notice'>You finish swallowing \the [target.name].</span>")
+				user << "<span class='notice'>You finish off \the [target.name], and gain some charge!</span>"
 				var/mob/living/silicon/robot.R = user
 				var/obj/item/weapon/cell.C = target
 				R.cell.charge = R.cell.charge + (C.maxcharge / 3)

@@ -51,15 +51,17 @@
 			message_admins("[key_name(hound)] has eaten [key_name(patient)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 
 /obj/item/device/dogborg/sleeper/proc/go_out()
-	if(length(contents) != 0)
+	hound = src.loc
+	if(length(contents) > 0)
 		hound.visible_message("<span class='warning'>[hound.name] empties out their contents via their [eject_port] port.</span>", "<span class='notice'>You empty your contents via your [eject_port] port.</span>")
-		for(var/obj/C in contents)
+		for(var/C in contents)
 			if(istype(C, /mob/living/carbon/human))
 				var/mob/living/carbon/human/person = C
 				person.forceMove(get_turf(src))
 				person.reset_view()
 			else
-				C.loc = hound.loc
+				var/obj/T = C
+				T.loc = hound.loc
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		update_patient()
 
@@ -106,13 +108,17 @@
 	dat += "<h3>Sleeper Status</h3>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<A href='?src=\ref[src];eject=1'>Eject All</A>"
-	dat += "<A href='?src=\ref[src];port=1'>Eject port:[eject_port]</A>"
-	if(!cleaning && length(contents))
+	dat += "<A href='?src=\ref[src];port=1'>Eject port: [eject_port]</A>"
+	if(!cleaning)
 		dat += "<A href='?src=\ref[src];clean=1'>Self-Clean</A>"
 	else
 		dat += "<span class='linkOff'>Self-Clean</span>"
 
 	dat += "<div class='statusDisplay'>"
+
+	if(cleaning)
+		dat+= "<font color='red'><B>Self-cleaning mode.</B> [length(contents)] object(s) remaining.</font><BR>"
+
 	if(!patient)
 		dat += "Sleeper Unoccupied"
 	else
@@ -127,15 +133,13 @@
 				dat += "<span class='bad'>DEAD</span>"
 
 		dat += text("[]\t-Pulse, bpm: []</FONT><BR>", (patient.pulse == PULSE_NONE || patient.pulse == PULSE_THREADY ? "<font color='red'>" : "<font color='white'>"), patient.get_pulse(GETPULSE_TOOL))
-		dat += text("[]\t-Overall Health %: []</FONT><BR>", (patient.health > 0 ? "<font color='white'>" : "<font color='red'>"), patient.health)
+		dat += text("[]\t-Overall Health %: []</FONT><BR>", (patient.health > 0 ? "<font color='white'>" : "<font color='red'>"), round(patient.health))
 		dat += text("[]\t-Brute Damage %: []</FONT><BR>", (patient.getBruteLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getBruteLoss())
 		dat += text("[]\t-Respiratory Damage %: []</FONT><BR>", (patient.getOxyLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getOxyLoss())
 		dat += text("[]\t-Toxin Content %: []</FONT><BR>", (patient.getToxLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getToxLoss())
 		dat += text("[]\t-Burn Severity %: []</FONT><BR>", (patient.getFireLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getFireLoss())
 
-		if(cleaning)
-			dat+= "<font color='red'>Self-cleaning mode. [length(contents)] objects remain.</font>"
-		if(patient.paralysis)
+		if(round(patient.paralysis / 4) >= 1)
 			dat += text("<HR>Patient paralyzed for: []<BR>", round(patient.paralysis / 4) >= 1 ? "[round(patient.paralysis / 4)] seconds" : "None")
 		if(patient.getBrainLoss())
 			dat += "<div class='line'><span class='average'>Significant brain damage detected.</span></div><br>"
@@ -167,11 +171,17 @@
 		return
 	if(href_list["clean"])
 		if(!cleaning)
-			var/confirm = alert(usr, "You are about to engage self-cleaning mode. This will fill your [src] with caustic enzymes to remove any objects or biomatter. Are you sure?", "Confirmation", "Self-Clean", "Cancel")
+			var/confirm = alert(usr, "You are about to engage self-cleaning mode. This will fill your [src] with caustic enzymes to remove any objects or biomatter, and convert them into energy. Anything that can't be broken down will be ejected. Are you sure?", "Confirmation", "Self-Clean", "Cancel")
 			if(confirm == "Self-Clean")
 				cleaning = 1
+				drain(500)
+				processing_objects.Add(src)
+				sleeperUI(usr)
+				if(patient)
+					patient << "<span class='danger'>[hound.name]'s [src.name] fills with caustic enzymes around you!</span>"
 				return
 		if(cleaning)
+			sleeperUI(usr)
 			return
 	if(href_list["port"])
 		switch(eject_port)
@@ -179,12 +189,11 @@
 				eject_port = "disposal"
 			if("disposal")
 				eject_port = "ingestion"
+		sleeperUI(usr)
 		return
 
 	if(patient && !(patient.stat & DEAD)) //What is bitwise NOT? ... Thought it was tilde.
-		hound << "DEBUG: Don't think you can inject"
 		if(href_list["inject"] == "inaprovaline" || patient.health > min_health)
-			hound << "DEBUG: Okay, got inject"
 			inject_chem(usr, href_list["inject"])
 		else
 			usr << "<span class='notice'>ERROR: Subject is not in stable condition for injections.</span>"
@@ -196,11 +205,8 @@
 	return
 
 /obj/item/device/dogborg/sleeper/proc/inject_chem(mob/user, chem)
-	hound << "DEBUG: in inject_chem"
 	if(patient && patient.reagents)
-		hound << "DEBUG: in first if"
 		if(chem in injection_chems + vore_chems + "inaprovaline")
-			hound << "DEBUG: Found the chem you wanted"
 			if(hound.cell.charge < 800) //This is so borgs don't kill themselves with it.
 				hound << "<span class='notice'>You don't have enough power to synthesize fluids.</span>"
 				return
@@ -271,13 +277,14 @@
 
 	//Belly is empty but cleaning is still on
 	if(length(contents) == 0)
+		sleep(10) //Just so you can show off a full belly if you want, full of enzymes, with nothing in it
 		hound << "<span class='notice'>Your [src.name] is now clean. Ending self-cleaning cycle.</span>"
 		cleaning = 0
 		update_patient()
 		return
 
 	//Stomach has contents, going forward
-	if(air_master.current_cycle%3==1) //This is how the vore code times it, so I'm using that
+	if(air_master.current_cycle%2==1) //This is how the vore code times it, so I'm using that
 		var/atom/target = pick(contents)
 
 		//Handle the target being a /mob/living/carbon/human
@@ -288,12 +295,12 @@
 			if((T.status_flags & GODMODE) || !T.digestable)
 				T.loc = hound.loc
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>[T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>[T.name] spills out of your [eject_port] port.</span>")
+				hound.visible_message("<span class='notice'>[T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>[T.name] spills out of your [eject_port] port because it could not be broken down.</span>")
 				update_patient()
 				return
 
 			//Mob is now dead
-			if(T.stat & DEAD) //DEBUG: THIS should check if they are dead
+			if(T.stat & DEAD)
 				message_admins("[key_name(hound)] has digested [key_name(T)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 				hound << "<span class='notice'>You feel your belly slowly churn around [T], breaking them down into a soft slurry to be used as power for your systems.</span>"
 				T << "<span class='notice'>You feel [hound]'s belly slowly churn around your form, breaking you down into a soft slurry to be used as power for [hound]'s systems.</span>"
@@ -304,26 +311,23 @@
 				return
 
 			//Do digestion damage
-			hound << "DEBUG: Doing damage to [T.name]"
-			T.adjustBruteLoss(5)
-			T.adjustFireLoss(5)
+			T.adjustBruteLoss(2)
+			T.adjustFireLoss(3)
 			update_patient()
 			return
 
 		//Handle the target being anything but a /mob/living/carbon/human
 		else
 			var/obj/T = target
-			hound << "DEBUG: Deleting [T.name]"
 			if(T in important_items) //Preserved item
-				hound << "DEBUG: Wait, no I'm not, it's important!"
 				T.loc = hound.loc
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>\The [T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>\The [T.name] spills out of your [eject_port] port.</span>")
+				hound.visible_message("<span class='notice'>\The [T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>\The [T.name] spills out of your [eject_port] port because it could not be broken down.</span>")
 			else //Normal item
-				hound << "DEBUG: [T] had [Spill(T)] items"
+				Spill(T)
 				T.Del()
 				update_patient()
-			//R.cell.charge += 100 //Ace says no charge from digested items
+			hound.cell.charge += 10
 			return
 	return
 
