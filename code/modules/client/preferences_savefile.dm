@@ -154,9 +154,6 @@
 	S["job_engsec_high"]	>> job_engsec_high
 	S["job_engsec_med"]		>> job_engsec_med
 	S["job_engsec_low"]		>> job_engsec_low
-	S["job_unique_high"]	>> job_unique_high
-	S["job_unique_med"]		>> job_unique_med
-	S["job_unique_low"]		>> job_unique_low
 
 	//Flavour Text
 	S["flavor_texts_preferences"]	>> flavor_texts["preferences"]
@@ -271,9 +268,6 @@
 	job_engsec_high = sanitize_integer(job_engsec_high, 0, 65535, initial(job_engsec_high))
 	job_engsec_med = sanitize_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
 	job_engsec_low = sanitize_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
-	job_unique_high = sanitize_integer(job_unique_high, 0, 65535, initial(job_unique_high))
-	job_unique_med = sanitize_integer(job_unique_med, 0, 65535, initial(job_unique_med))
-	job_unique_low = sanitize_integer(job_unique_low, 0, 65535, initial(job_unique_low))
 
 	if(!skills) skills = list()
 	if(!used_skillpoints) used_skillpoints= 0
@@ -348,9 +342,6 @@
 	S["job_engsec_high"]	<< job_engsec_high
 	S["job_engsec_med"]		<< job_engsec_med
 	S["job_engsec_low"]		<< job_engsec_low
-	S["job_unique_high"]	<< job_unique_high
-	S["job_unique_med"]		<< job_unique_med
-	S["job_unique_low"]		<< job_unique_low
 
 	//Flavour Text
 	S["flavor_texts_preferences"]	<< flavor_texts["preferences"]

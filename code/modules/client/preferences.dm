@@ -214,9 +214,9 @@ datum/preferences
 		if(15 to 18)
 			return "Exceptional"
 		if(19 to 24)
-			return "Genius"
+			return "Overpowered"
 		if(24 to 1000)
-			return "God"
+			return "Bullshit"
 
 /datum/preferences/proc/SetSkills(mob/user)
 	if(SKILLS == null)
@@ -1095,11 +1095,18 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
 					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["task"]] = msg
+				return
 			else
 				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
