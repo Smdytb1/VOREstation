@@ -500,6 +500,7 @@ datum/projectile_data
 //Spills the contents of a target up one level.
 /proc/Spill(var/atom/target)
 	var/howmany = length(target.contents)
-	for(var/obj/C in target.contents)
-		C.loc = target.loc
+	for(var/C in target.contents)
+		var/obj/T = C
+		T.loc = target.loc
 	return howmany

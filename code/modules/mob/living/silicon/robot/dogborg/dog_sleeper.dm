@@ -9,23 +9,22 @@
 	var/mob/living/silicon/robot/hound = null
 	var/inject_amount = 10
 	var/min_health = -100
-	var/occupied = 0
 	var/cleaning = 0
 	var/patient_laststat = null
 	var/mob_energy = 30000 //Energy gained from digesting mobs (including PCs)
 	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
 	var/list/vore_chems = list("digestive_enzymes")
-	var/eject_port = "ingestion port"
+	var/eject_port = "ingestion"
 
 /obj/item/device/dogborg/sleeper/New()
 	..()
 	flags |= NOBLUDGEON //No more attack messages
-	hound = loc
 
 /obj/item/device/dogborg/sleeper/Exit(atom/movable/O)
 	return 0
 
 /obj/item/device/dogborg/sleeper/afterattack(mob/living/carbon/target, mob/living/silicon/user, proximity)
+	hound = loc
 	if(!proximity)
 		return
 	if(!ishuman(target))
@@ -41,9 +40,9 @@
 
 		if(!proximity) return //If they moved away, you can't eat them.
 
-		if(occupied == 1) return //If you try to eat two people at once, you can only eat one.
+		if(patient) return //If you try to eat two people at once, you can only eat one.
 
-		else if(occupied == 0) //If you don't have someone in you, proceed.
+		else //If you don't have someone in you, proceed.
 			target.forceMove(src)
 			target.reset_view(src)
 			update_patient()
@@ -52,12 +51,17 @@
 			message_admins("[key_name(hound)] has eaten [key_name(patient)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 
 /obj/item/device/dogborg/sleeper/proc/go_out()
-	if(src.occupied == 0)
-		return
-	hound << "<span class='notice'>[patient] ejected. Life support functions disabled.</span>"
-	patient.forceMove(get_turf(src))
-	patient.reset_view()
-	update_patient()
+	if(length(contents) != 0)
+		hound.visible_message("<span class='warning'>[hound.name] empties out their contents via their [eject_port] port.</span>", "<span class='notice'>You empty your contents via your [eject_port] port.</span>")
+		for(var/obj/C in contents)
+			if(istype(C, /mob/living/carbon/human))
+				var/mob/living/carbon/human/person = C
+				person.forceMove(get_turf(src))
+				person.reset_view()
+			else
+				C.loc = hound.loc
+		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+		update_patient()
 
 /obj/item/device/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
 	hound.cell.charge = hound.cell.charge - amt
@@ -86,6 +90,7 @@
 			if(C)
 				dat += "<BR><span class='linkOff'>Inject [C.name]</span>"
 
+/* Old injection vore code
 	if(patient && patient.digestable && !(patient.stat & DEAD)) //Respect digestion toggle.
 		for(var/re in vore_chems)
 			var/datum/reagent/C = chemical_reagents_list[re]
@@ -96,10 +101,16 @@
 			var/datum/reagent/C = chemical_reagents_list[re]
 			if(C)
 				dat += "<BR><span class='linkOff'>Inject [C.name]</span>"
+*/
 
 	dat += "<h3>Sleeper Status</h3>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Scan</A>"
-	dat += "<A href='?src=\ref[src];eject=1'>Eject</A>"
+	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A>"
+	dat += "<A href='?src=\ref[src];eject=1'>Eject All</A>"
+	dat += "<A href='?src=\ref[src];port=1'>Eject port:[eject_port]</A>"
+	if(!cleaning && length(contents))
+		dat += "<A href='?src=\ref[src];clean=1'>Self-Clean</A>"
+	else
+		dat += "<span class='linkOff'>Self-Clean</span>"
 
 	dat += "<div class='statusDisplay'>"
 	if(!patient)
@@ -121,8 +132,11 @@
 		dat += text("[]\t-Respiratory Damage %: []</FONT><BR>", (patient.getOxyLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getOxyLoss())
 		dat += text("[]\t-Toxin Content %: []</FONT><BR>", (patient.getToxLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getToxLoss())
 		dat += text("[]\t-Burn Severity %: []</FONT><BR>", (patient.getFireLoss() < 60 ? "<font color='gray'>" : "<font color='red'>"), patient.getFireLoss())
-		dat += text("<HR>Paralysis: []<BR>", round(patient.paralysis / 4) >= 1 ? "[round(patient.paralysis / 4)] seconds" : "None")
 
+		if(cleaning)
+			dat+= "<font color='red'>Self-cleaning mode. [length(contents)] objects remain.</font>"
+		if(patient.paralysis)
+			dat += text("<HR>Patient paralyzed for: []<BR>", round(patient.paralysis / 4) >= 1 ? "[round(patient.paralysis / 4)] seconds" : "None")
 		if(patient.getBrainLoss())
 			dat += "<div class='line'><span class='average'>Significant brain damage detected.</span></div><br>"
 		if(patient.getCloneLoss())
@@ -143,6 +157,7 @@
 		return
 	usr.set_machine(src)
 	if(href_list["refresh"])
+		update_patient()
 		src.updateUsrDialog()
 		sleeperUI(usr)
 		return
@@ -150,8 +165,26 @@
 		go_out()
 		sleeperUI(usr)
 		return
+	if(href_list["clean"])
+		if(!cleaning)
+			var/confirm = alert(usr, "You are about to engage self-cleaning mode. This will fill your [src] with caustic enzymes to remove any objects or biomatter. Are you sure?", "Confirmation", "Self-Clean", "Cancel")
+			if(confirm == "Self-Clean")
+				cleaning = 1
+				return
+		if(cleaning)
+			return
+	if(href_list["port"])
+		switch(eject_port)
+			if("ingestion")
+				eject_port = "disposal"
+			if("disposal")
+				eject_port = "ingestion"
+		return
+
 	if(patient && !(patient.stat & DEAD)) //What is bitwise NOT? ... Thought it was tilde.
+		hound << "DEBUG: Don't think you can inject"
 		if(href_list["inject"] == "inaprovaline" || patient.health > min_health)
+			hound << "DEBUG: Okay, got inject"
 			inject_chem(usr, href_list["inject"])
 		else
 			usr << "<span class='notice'>ERROR: Subject is not in stable condition for injections.</span>"
@@ -163,8 +196,11 @@
 	return
 
 /obj/item/device/dogborg/sleeper/proc/inject_chem(mob/user, chem)
+	hound << "DEBUG: in inject_chem"
 	if(patient && patient.reagents)
+		hound << "DEBUG: in first if"
 		if(chem in injection_chems + vore_chems + "inaprovaline")
+			hound << "DEBUG: Found the chem you wanted"
 			if(hound.cell.charge < 800) //This is so borgs don't kill themselves with it.
 				hound << "<span class='notice'>You don't have enough power to synthesize fluids.</span>"
 				return
@@ -198,10 +234,10 @@
 //For if the dogborg's existing patient uh, doesn't make it.
 /obj/item/device/dogborg/sleeper/proc/update_patient()
 
+	//Check for a patient
 	for(var/C in contents)
 		if(istype(C,/mob/living/carbon/human))
 			patient = C
-			occupied = 1
 			if(patient.stat & DEAD)
 				hound.sleeper_r = 1
 				hound.sleeper_g = 0
@@ -210,13 +246,21 @@
 				hound.sleeper_r = 0
 				hound.sleeper_g = 1
 				patient_laststat = patient.stat
+			hound.updateicon()
+			return(C)
+
+	//Cleaning looks better with red on, even with nobody in it
+	if(cleaning)
+		patient = null
+		patient_laststat = null
+		hound.sleeper_r = 1
+		hound.sleeper_g = 0
 		hound.updateicon()
-		return(C)
+		return 0
 
 	//Couldn't find anyone.
 	patient = null
 	patient_laststat = null
-	occupied = 0
 	hound.sleeper_r = 0
 	hound.sleeper_g = 0
 	hound.updateicon()
@@ -227,7 +271,7 @@
 
 	//Belly is empty but cleaning is still on
 	if(length(contents) == 0)
-		hound << "<span class='notice'>Your sleeper is now clean. Ending self-cleaning cycle.</span>"
+		hound << "<span class='notice'>Your [src.name] is now clean. Ending self-cleaning cycle.</span>"
 		cleaning = 0
 		update_patient()
 		return
@@ -235,7 +279,6 @@
 	//Stomach has contents, going forward
 	if(air_master.current_cycle%3==1) //This is how the vore code times it, so I'm using that
 		var/atom/target = pick(contents)
-		hound << "DEBUG: Now targeting [target.name]"
 
 		//Handle the target being a /mob/living/carbon/human
 		if(istype(target, /mob/living/carbon/human))
@@ -245,24 +288,25 @@
 			if((T.status_flags & GODMODE) || !T.digestable)
 				T.loc = hound.loc
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>[T.name] spills out of [hound.name]'s [eject_port].</span>", "<span class='notice'>[T.name] spills out of your [eject_port].</span>")
+				hound.visible_message("<span class='notice'>[T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>[T.name] spills out of your [eject_port] port.</span>")
 				update_patient()
+				return
 
 			//Mob is now dead
-			if(T.stat & DEAD)
-				hound << "DEBUG: [T.name] is dead, cleaning up."
+			if(T.stat & DEAD) //DEBUG: THIS should check if they are dead
 				message_admins("[key_name(hound)] has digested [key_name(T)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 				hound << "<span class='notice'>You feel your belly slowly churn around [T], breaking them down into a soft slurry to be used as power for your systems.</span>"
 				T << "<span class='notice'>You feel [hound]'s belly slowly churn around your form, breaking you down into a soft slurry to be used as power for [hound]'s systems.</span>"
 				drain(-30000) //Fueeeeellll
-				hound << "DEBUG: [T] had [Spill(T)] items"
+				Spill(T)
 				T.Del()
+				update_patient()
 				return
 
 			//Do digestion damage
 			hound << "DEBUG: Doing damage to [T.name]"
-			T.adjustBruteLoss(3)
-			T.adjustFireLoss(3)
+			T.adjustBruteLoss(5)
+			T.adjustFireLoss(5)
 			update_patient()
 			return
 
@@ -274,31 +318,38 @@
 				hound << "DEBUG: Wait, no I'm not, it's important!"
 				T.loc = hound.loc
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>\The [T.name] spills out of [hound.name]'s [eject_port].</span>", "<span class='notice'>\The [T.name] spills out of your [eject_port].</span>")
+				hound.visible_message("<span class='notice'>\The [T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>\The [T.name] spills out of your [eject_port] port.</span>")
 			else //Normal item
 				hound << "DEBUG: [T] had [Spill(T)] items"
 				T.Del()
+				update_patient()
 			//R.cell.charge += 100 //Ace says no charge from digested items
 			return
 	return
 
 /obj/item/device/dogborg/sleeper/process()
-	if(!src.occupied && !src.cleaning)
+
+	if(cleaning) //We're cleaning, return early after calling this as we don't care about the patient.
+		clean_cycle()
+		return
+
+	if(patient)	//We're caring for the patient. Medical emergency! Or endo scene.
+		if(patient.health < 0)
+			patient.adjustOxyLoss(-1) //Heal some oxygen damage if they're in critical condition
+			patient.updatehealth()
+		patient.AdjustStunned(-4)
+		patient.AdjustWeakened(-4)
+		src.drain()
+		if((patient.reagents.get_reagent_amount("inaprovaline") < 5) && (patient.health < patient.maxHealth)) //Stop pumping full HP people full of drugs. Don't heal people you're digesting, meanie.
+			patient.reagents.add_reagent("inaprovaline", 5)
+		if(patient_laststat != patient.stat)
+			update_patient()
+		return
+
+	if(!patient && !cleaning) //We think we're done working.
 		if(!update_patient()) //One last try to find someone
 			processing_objects.Remove(src)
 			return
-	if(src.cleaning)
-		clean_cycle()
-	if(patient.health < 0)
-		patient.adjustOxyLoss(-1) //Heal some oxygen damage if they're in critical condition
-		patient.updatehealth()
-	patient.AdjustStunned(-4)
-	patient.AdjustWeakened(-4)
-	src.drain()
-	if((patient.reagents.get_reagent_amount("inaprovaline") < 5) && (patient.health < patient.maxHealth) && !cleaning) //Stop pumping full HP people full of drugs. Don't heal people you're digesting, meanie.
-		patient.reagents.add_reagent("inaprovaline", 5)
-	if(patient_laststat != patient.stat)
-		update_patient()
 
 
 /mob/living/silicon/robot
@@ -312,6 +363,5 @@
 	icon_state = "sleeper"
 	inject_amount = 10
 	min_health = -100
-	occupied = 0
 	injection_chems = null //So they don't have all the same chems as the medihound!
 	vore_chems = list("digestive_enzymes")
