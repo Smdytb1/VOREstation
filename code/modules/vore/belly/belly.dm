@@ -28,25 +28,14 @@
 	var/list/internal_contents = list();	// People/Things you've eaten into this belly!
 
 	// These items are preserved when prey are digested.
-	var/list/preserve_items = list(
-		/obj/item/weapon/hand_tele,
-		/obj/item/weapon/card/id/captains_spare,
-		/obj/item/device/aicard,
-		/obj/item/device/mmi,
-		/obj/item/device/paicard,
-		/obj/item/weapon/gun,
-		/obj/item/weapon/pinpointer,
-		/obj/item/clothing/suit,
-		/obj/item/clothing/shoes/magboots,
-		/obj/item/blueprints,
-		/obj/item/clothing/head/helmet/space,
-		/obj/item/weapon/storage/internal
-	)
+	var/list/preserve_items = list()
+
 
 // Constructor that sets the owning mob
 // @Override
 /datum/belly/New(var/mob/owning_mob)
 	owner = owning_mob
+	preserve_items += important_items
 
 // Toggle digestion on/off and notify user of the new setting.
 // If multiple digestion modes are avaliable (i.e. unbirth) then user should be prompted.

@@ -19,6 +19,8 @@ var/global/list/side_effects = list()				//list of all medical sideeffects types
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
+var/global/list/important_items = list()			//list of items to preserve through cryo/digestion/etc
+
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
@@ -148,6 +150,22 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 			playable_species += S.name
 		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
+
+	//Important items
+	important_items += list(
+		/obj/item/weapon/hand_tele,
+		/obj/item/weapon/card/id/captains_spare,
+		/obj/item/device/aicard,
+		/obj/item/device/mmi,
+		/obj/item/device/paicard,
+		/obj/item/weapon/gun,
+		/obj/item/weapon/pinpointer,
+		/obj/item/clothing/suit,
+		/obj/item/clothing/shoes/magboots,
+		/obj/item/blueprints,
+		/obj/item/clothing/head/helmet/space,
+		/obj/item/weapon/storage/internal
+	)
 
 	//Posters
 	paths = typesof(/datum/poster) - /datum/poster
