@@ -5,7 +5,7 @@
 "ae" = (/obj/effect/decal/mecha_wreckage/hoverpod,/turf/space,/area/space)
 "af" = (/obj/effect/gibspawner/human,/turf/space,/area/space)
 "ag" = (/turf/unsimulated/wall,/area/awaymission/carpfarm/base)
-"ah" = (/obj/machinery/power/fractal_reactor/fluff/smes,/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
+"ah" = (/obj/machinery/power/fractal_reactor/fluff/smes{mapped_in = 1},/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
 "ai" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 1},/obj/machinery/light{dir = 1},/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
 "aj" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 1},/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
 "ak" = (/obj/machinery/gateway{dir = 9},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/awaymission/carpfarm/base)
