@@ -373,22 +373,28 @@
 		else
 			var/obj/T = target
 
-			if(T.type in important_items) //Preserved item
+			//If the object is in the items_preserved global list
+			if(T.type in important_items)
 				src.items_preserved += T
 
-			else //Normal item
-				if (istype(T, /obj/item/device/pda)) //Stupid special PDA handling
+			//If the object is not one to preserve
+			else
+
+				//Special case for PDAs as they are dumb. TODO fix Del on PDAs to be less dumb.
+				if (istype(T, /obj/item/device/pda))
 					var/obj/item/device/pda/PDA = T
 					if (PDA.id)
 						PDA.id.loc = src
 						PDA.id = null
 					T.Del()
 
-				else if (istype(T, /obj/item/weapon/card/id)) //Gurgle IDs
+				//Special case for IDs to make them digested
+				else if (istype(T, /obj/item/weapon/card/id))
 					var/obj/item/weapon/card/id/ID = T
-					var/obj/DID = ID.digest()
+					ID.digest()
 
-				else //Normal item, not ID or PDA
+				//Anything not perserved, PDA, or ID
+				else
 					Spill(T)
 					T.Del()
 					src.update_patient()
