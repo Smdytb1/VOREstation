@@ -165,7 +165,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		/obj/item/blueprints,
 		/obj/item/clothing/head/helmet/space,
 		/obj/item/weapon/storage/internal,
-		/obj/item/weapon/disk/nuclear
+		/obj/item/weapon/disk/nuclear,
+		/obj/item/weapon/card/id/digested
 	)
 
 	//Posters

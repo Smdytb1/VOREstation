@@ -13,8 +13,8 @@
 	var/patient_laststat = null
 	var/mob_energy = 30000 //Energy gained from digesting mobs (including PCs)
 	var/list/injection_chems = list("dexalin", "bicaridine", "kelotane","anti_toxin", "alkysine", "imidazoline", "spaceacillin", "paracetamol") //The borg is able to heal every damage type. As a nerf, they use 750 charge per injection.
-	var/list/vore_chems = list("digestive_enzymes")
 	var/eject_port = "ingestion"
+	var/list/items_preserved = list()
 
 /obj/item/device/dogborg/sleeper/New()
 	..()
@@ -49,20 +49,27 @@
 			processing_objects.Add(src)
 			user.visible_message("<span class='warning'>[hound.name]'s medical pod lights up as [target.name] slips inside into their [src.name].</span>", "<span class='notice'>Your medical pod lights up as [target] slips into your [src]. Life support functions engaged.</span>")
 			message_admins("[key_name(hound)] has eaten [key_name(patient)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
+			playsound(hound, 'sound/vore/gulp.ogg', 100, 1)
 
 /obj/item/device/dogborg/sleeper/proc/go_out()
 	hound = src.loc
 	if(length(contents) > 0)
 		hound.visible_message("<span class='warning'>[hound.name] empties out their contents via their [eject_port] port.</span>", "<span class='notice'>You empty your contents via your [eject_port] port.</span>")
 		for(var/C in contents)
-			if(istype(C, /mob/living/carbon/human))
+			if(ishuman(C))
 				var/mob/living/carbon/human/person = C
 				person.forceMove(get_turf(src))
 				person.reset_view()
 			else
 				var/obj/T = C
 				T.loc = hound.loc
+		items_preserved.Cut()
+		cleaning = 0
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+		update_patient()
+	else //You clicked eject with nothing in you, let's just reset stuff to be sure.
+		items_preserved.Cut()
+		cleaning = 0
 		update_patient()
 
 /obj/item/device/dogborg/sleeper/proc/drain(var/amt = 3) //Slightly reduced cost (before, it was always injecting inaprov)
@@ -116,8 +123,21 @@
 
 	dat += "<div class='statusDisplay'>"
 
+	//Self-cleaning mode is on
 	if(cleaning)
-		dat+= "<font color='red'><B>Self-cleaning mode.</B> [length(contents)] object(s) remaining.</font><BR>"
+		dat += "<font color='red'><B>Self-cleaning mode.</B></font>"
+
+	//The case when there are still un-preserved items
+	if(cleaning && length(contents - items_preserved))
+		dat += "<font color='red'> [length(contents - items_preserved)] object(s) remaining.</font><BR>"
+
+	//There are no items to be processed other than un-preserved items
+	else if(cleaning && length(items_preserved))
+		dat += "<font color='red'><B> Eject remaining objects now.</B></font><BR>"
+
+	//Preserved items count when the list is populated
+	if(length(items_preserved))
+		dat += "<font color='red'>[length(items_preserved)] uncleanable object(s).</font><BR>"
 
 	if(!patient)
 		dat += "Sleeper Unoccupied"
@@ -171,7 +191,7 @@
 		return
 	if(href_list["clean"])
 		if(!cleaning)
-			var/confirm = alert(usr, "You are about to engage self-cleaning mode. This will fill your [src] with caustic enzymes to remove any objects or biomatter, and convert them into energy. Anything that can't be broken down will be ejected. Are you sure?", "Confirmation", "Self-Clean", "Cancel")
+			var/confirm = alert(usr, "You are about to engage self-cleaning mode. This will fill your [src] with caustic enzymes to remove any objects or biomatter, and convert them into energy. Are you sure?", "Confirmation", "Self-Clean", "Cancel")
 			if(confirm == "Self-Clean")
 				cleaning = 1
 				drain(500)
@@ -206,7 +226,7 @@
 
 /obj/item/device/dogborg/sleeper/proc/inject_chem(mob/user, chem)
 	if(patient && patient.reagents)
-		if(chem in injection_chems + vore_chems + "inaprovaline")
+		if(chem in injection_chems + "inaprovaline")
 			if(hound.cell.charge < 800) //This is so borgs don't kill themselves with it.
 				hound << "<span class='notice'>You don't have enough power to synthesize fluids.</span>"
 				return
@@ -242,7 +262,7 @@
 
 	//Check for a patient
 	for(var/C in contents)
-		if(istype(C,/mob/living/carbon/human))
+		if(ishuman(C))
 			patient = C
 			if(patient.stat & DEAD)
 				hound.sleeper_r = 1
@@ -257,27 +277,31 @@
 
 	//Cleaning looks better with red on, even with nobody in it
 	if(cleaning)
-		patient = null
-		patient_laststat = null
 		hound.sleeper_r = 1
 		hound.sleeper_g = 0
-		hound.updateicon()
-		return 0
 
-	//Couldn't find anyone.
-	patient = null
+	//Couldn't find anyone, and not cleaning
+	else
+		hound.sleeper_r = 0
+		hound.sleeper_g = 0
+
 	patient_laststat = null
-	hound.sleeper_r = 0
-	hound.sleeper_g = 0
+	patient = null
 	hound.updateicon()
-	return 0
+	return
 
 //Gurgleborg process
 /obj/item/device/dogborg/sleeper/proc/clean_cycle()
 
-	//Belly is empty but cleaning is still on
-	if(length(contents) == 0)
-		sleep(10) //Just so you can show off a full belly if you want, full of enzymes, with nothing in it
+	//Sanity? Maybe not required. More like if indigestible person OOC escapes.
+	for(var/I in items_preserved)
+		if(!(I in contents))
+			items_preserved -= I
+
+	var/list/touchable_items = contents - items_preserved
+
+	//Belly is entirely empty
+	if(!length(contents))
 		hound << "<span class='notice'>Your [src.name] is now clean. Ending self-cleaning cycle.</span>"
 		cleaning = 0
 		update_patient()
@@ -298,32 +322,35 @@
 			'sound/vore/digest11.ogg',
 			'sound/vore/digest12.ogg')
 		for(var/mob/outhearer in range(1,hound))
-			outhearer << sound(churnsound,volume=80)
+			outhearer << sound(churnsound)
 		for(var/mob/inhearer in contents)
-			inhearer << sound(churnsound,volume=80)
+			inhearer << sound(churnsound)
 
-	//Stomach has contents, going forward
-	if(air_master.current_cycle%2==1) //This is how the vore code times it, so I'm using that
-		var/atom/target = pick(contents)
+	//If the timing is right, and there are items to be touched
+	if(air_master.current_cycle%2==1 && length(touchable_items))
 
-		//Handle the target being a /mob/living/carbon/human
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/T = target
-
-			//Mob can't be digested (godmode or prefs)
+		//Burn all the mobs or add them to the exclusion list
+		for(var/mob/living/carbon/human/T in (touchable_items))
 			if((T.status_flags & GODMODE) || !T.digestable)
-				T.loc = hound.loc
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>[T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>[T.name] spills out of your [eject_port] port because it could not be broken down.</span>")
-				update_patient()
-				return
+				src.items_preserved += T
+			else
+				T.adjustBruteLoss(2)
+				T.adjustFireLoss(3)
+				src.update_patient()
+
+		//Pick a random item to deal with (if there are any)
+		var/atom/target = pick(touchable_items)
+
+		//Handle the target being a mob
+		if(ishuman(target))
+			var/mob/living/carbon/human/T = target
 
 			//Mob is now dead
 			if(T.stat & DEAD)
 				message_admins("[key_name(hound)] has digested [key_name(T)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 				hound << "<span class='notice'>You feel your belly slowly churn around [T], breaking them down into a soft slurry to be used as power for your systems.</span>"
 				T << "<span class='notice'>You feel [hound]'s belly slowly churn around your form, breaking you down into a soft slurry to be used as power for [hound]'s systems.</span>"
-				drain(-30000) //Fueeeeellll
+				src.drain(-30000) //Fueeeeellll
 				var/deathsound = pick(
 					'sound/vore/death1.ogg',
 					'sound/vore/death2.ogg',
@@ -335,39 +362,43 @@
 					'sound/vore/death8.ogg',
 					'sound/vore/death9.ogg',
 					'sound/vore/death10.ogg')
-				for(var/mob/hearer in range(1,hound))
+				for(var/mob/hearer in range(1,src.hound))
 					hearer << deathsound
 				T << deathsound
 				Spill(T)
 				T.Del()
-				update_patient()
-				return
-
-			//Do digestion damage
-			T.adjustBruteLoss(2)
-			T.adjustFireLoss(3)
-			update_patient()
-			return
+				src.update_patient()
 
 		//Handle the target being anything but a /mob/living/carbon/human
 		else
 			var/obj/T = target
-			if(T in important_items) //Preserved item
-				T.loc = hound.loc
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-				hound.visible_message("<span class='notice'>\The [T.name] spills out of [hound.name]'s [eject_port] port.</span>", "<span class='notice'>\The [T.name] spills out of your [eject_port] port because it could not be broken down.</span>")
+
+			if(T.type in important_items) //Preserved item
+				src.items_preserved += T
+
 			else //Normal item
-				Spill(T)
-				T.Del()
-				update_patient()
-			hound.cell.charge += 10
-			return
-	return
+				if (istype(T, /obj/item/device/pda)) //Stupid special PDA handling
+					var/obj/item/device/pda/PDA = T
+					if (PDA.id)
+						PDA.id.loc = src
+						PDA.id = null
+					T.Del()
+
+				else if (istype(T, /obj/item/weapon/card/id)) //Gurgle IDs
+					var/obj/item/weapon/card/id/ID = T
+					var/obj/DID = ID.digest()
+
+				else //Normal item, not ID or PDA
+					Spill(T)
+					T.Del()
+					src.update_patient()
+					src.hound.cell.charge += 10
+		return
 
 /obj/item/device/dogborg/sleeper/process()
 
 	if(cleaning) //We're cleaning, return early after calling this as we don't care about the patient.
-		clean_cycle()
+		src.clean_cycle()
 		return
 
 	if(patient)	//We're caring for the patient. Medical emergency! Or endo scene.
@@ -388,7 +419,6 @@
 			processing_objects.Remove(src)
 			return
 
-
 /mob/living/silicon/robot
 	var/sleeper_g
 	var/sleeper_r
@@ -401,4 +431,3 @@
 	inject_amount = 10
 	min_health = -100
 	injection_chems = null //So they don't have all the same chems as the medihound!
-	vore_chems = list("digestive_enzymes")
