@@ -333,7 +333,7 @@
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 		if(istype(loc, /obj/item/weapon/holder/micro)) return
 		if(ismob(loc))	return //otherwise return_air will return nothing and therefore immediately suffocate them
-		if(istype(src.loc, /obj/item/weapon/dogborg/sleeper)) return //If they're in a dog stomach, they don't need to breathe, as the stomach does it for them.
+		if(istype(src.loc, /obj/item/device/dogborg/sleeper)) return //If they're in a dog stomach, they don't need to breathe, as the stomach does it for them.
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
@@ -664,7 +664,7 @@
 		if(!environment)
 			return
 
-		if(istype(src.loc, /obj/item/weapon/dogborg/sleeper)) return //Dog stomachs are space proof, due to request.
+		if(istype(src.loc, /obj/item/device/dogborg/sleeper)) return //Dog stomachs are space proof, due to request.
 
 		//Stuff like the xenomorph's plasma regen happens here.
 		species.handle_environment_special(src)
