@@ -123,17 +123,13 @@
 
 	dat += "<div class='statusDisplay'>"
 
-	//Self-cleaning mode is on
-	if(cleaning)
-		dat += "<font color='red'><B>Self-cleaning mode.</B></font>"
-
-	//The case when there are still un-preserved items
+	//Cleaning and there are still un-preserved items
 	if(cleaning && length(contents - items_preserved))
-		dat += "<font color='red'> [length(contents - items_preserved)] object(s) remaining.</font><BR>"
+		dat += "<font color='red'><B>Self-cleaning mode.</B> [length(contents - items_preserved)] object(s) remaining.</font><BR>"
 
 	//There are no items to be processed other than un-preserved items
 	else if(cleaning && length(items_preserved))
-		dat += "<font color='red'><B> Eject remaining objects now.</B></font><BR>"
+		dat += "<font color='red'><B>Self-cleaning done. Eject remaining objects now.</B></font><BR>"
 
 	//Preserved items count when the list is populated
 	if(length(items_preserved))
