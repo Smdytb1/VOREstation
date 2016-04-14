@@ -6,6 +6,10 @@
 	var/code = "electronic"
 	origin_tech = "bluespace=1"
 
+/obj/item/device/radio/beacon/New()
+	..()
+	flags |= NOBLUDGEON
+
 /obj/item/device/radio/beacon/hear_talk()
 	return
 
@@ -26,6 +30,18 @@
 	src.add_fingerprint(usr)
 	return
 
+/obj/item/device/radio/beacon/afterattack(var/mob/living/carbon/target, var/mob/user, var/proximity)
+	if (!ishuman(target) || !proximity) return
+
+	var/confirm = alert(usr, "Feed the [src] to [target]?", "Confirmation", "Yes!", "Cancel")
+	if(confirm == "Yes!")
+		var/obj/item/device/radio/beacon/NB = new() //I don't know how to remove it from a hand if fed to self
+		var/datum/belly/B = target.internal_contents["Stomach"]
+		NB.loc = target
+		B.internal_contents += NB
+		target.visible_message("<span class='warning'>[target] gulps down the [src]!</span>")
+		playsound(target, 'sound/vore/gulp.ogg', 100, 1)
+		src.Del()
 
 /obj/item/device/radio/beacon/bacon //Probably a better way of doing this, I'm lazy.
 	proc/digest_delay()
