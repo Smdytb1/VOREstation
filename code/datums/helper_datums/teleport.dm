@@ -95,6 +95,7 @@
 	proc/doTeleport()
 
 		var/turf/destturf
+		var/turf/aimturf = get_turf(destination)
 		var/turf/curturf = get_turf(teleatom)
 		var/area/destarea = get_area(destination)
 		if(precision)
@@ -108,21 +109,44 @@
 
 		playSpecials(curturf,effectin,soundin)
 
-		var/obj/structure/bed/chair/C = null
-		if(isliving(teleatom))
-			var/mob/living/L = teleatom
-			if(L.buckled)
-				C = L.buckled
-		if(force_teleport)
-			teleatom.forceMove(destturf)
-			playSpecials(destturf,effectout,soundout)
-		else
-			if(teleatom.Move(destturf))
-				playSpecials(destturf,effectout,soundout)
-		if(C)
-			C.forceMove(destturf)
+		//Try to teleport into someone on the beacon
+		for(var/mob/living/carbon/human/targetmob in aimturf.contents)
+			var/datum/belly/B = targetmob.internal_contents["Stomach"]
+			teleatom.loc = targetmob
+			B.internal_contents += teleatom
+			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
+			targetmob.visible_message("<span class='warning'>[targetmob]'s belly swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
+			message_admins("[key_name(teleatom)] has been telenommed by [key_name(targetmob)]. ([targetmob ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[targetmob.x];Y=[targetmob.y];Z=[targetmob.z]'>JMP</a>" : "null"])")
+			return 1
 
-		destarea.Entered(teleatom)
+		//Teleporting into a mob
+		if(ishuman(destination.loc))
+			var/mob/living/carbon/human/targetmob = destination.loc
+			var/datum/belly/B = targetmob.internal_contents["Stomach"]
+			teleatom.loc = targetmob
+			B.internal_contents += teleatom
+			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
+			targetmob.visible_message("<span class='warning'>[targetmob]'s belly swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
+			message_admins("[key_name(teleatom)] has been telenommed by [key_name(targetmob)]. ([targetmob ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[targetmob.x];Y=[targetmob.y];Z=[targetmob.z]'>JMP</a>" : "null"])")
+			return 1
+
+		//Normal old teleport
+		else
+			var/obj/structure/bed/chair/C = null
+			if(isliving(teleatom))
+				var/mob/living/L = teleatom
+				if(L.buckled)
+					C = L.buckled
+			if(force_teleport)
+				teleatom.forceMove(destturf)
+				playSpecials(destturf,effectout,soundout)
+			else
+				if(teleatom.Move(destturf))
+					playSpecials(destturf,effectout,soundout)
+			if(C)
+				C.forceMove(destturf)
+
+			destarea.Entered(teleatom)
 
 		return 1
 
