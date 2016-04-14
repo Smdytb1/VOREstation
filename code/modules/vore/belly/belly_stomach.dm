@@ -131,50 +131,54 @@
 
 // @Override
 /datum/belly/stomach/relay_struggle(var/mob/user, var/direction)
-	if (!(user in internal_contents))
-		return  // User is not in this belly!
+	if (!(user in internal_contents) || recent_struggle)
+		return  // User is not in this belly, or struggle too soon.
 
-	if(prob(80))
-		var/struggle_outer_message
-		var/struggle_user_message
-		var/stomach_noun = pick("stomach","gut","tummy","belly") // To randomize the word for 'stomach'
+	recent_struggle = 1
+	spawn(25)
+		recent_struggle = 0
 
-		switch(rand(1,8)) // Increase this number per emote.
-			if(1)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] wobbles with a squirming meal.</span>"
-				struggle_user_message = "<span class='alert'>You squirm inside of [owner]'s [stomach_noun], making it wobble around.</span>"
-			if(2)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] jostles with movement.</span>"
-				struggle_user_message = "<span class='alert'>You jostle [owner]'s [stomach_noun] with movement.</span>"
-			if(3)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] briefly swells outward as someone pushes from inside.</span>"
-				struggle_user_message = "<span class='alert'>You shove against the walls of [owner]'s [stomach_noun], making it briefly swell outward.</span>"
-			if(4)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] fidgets with a trapped victim.</span>"
-				struggle_user_message = "<span class='alert'>You fidget around inside of [owner]'s [stomach_noun].</span>"
-			if(5)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] jiggles with motion from inside.</span>"
-				struggle_user_message = "<span class='alert'>Your motion causes [owner]'s [stomach_noun] to jiggle.</span>"
-			if(6)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] sloshes around.</span>"
-				struggle_user_message = "<span class='alert'>Your movement only causes [owner]'s [stomach_noun] to slosh around you.</span>"
-			if(7)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] gushes softly.</span>"
-				struggle_user_message = "<span class='alert'>Your struggles only cause [owner]'s [stomach_noun] to gush softly around you.</span>"
-			if(8)
-				struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] lets out a wet squelch.</span>"
-				struggle_user_message = "<span class='alert'>Your useless squirming only causes [owner]'s slimy [stomach_noun] to squelch over your body.</span>"
+	//if(prob(80)) //Using the cooldown above to prevent spam instead
+	var/struggle_outer_message
+	var/struggle_user_message
+	var/stomach_noun = pick("stomach","gut","tummy","belly") // To randomize the word for 'stomach'
 
-		for(var/mob/M in hearers(4, owner))
-			M.show_message(struggle_outer_message, 2) // hearable
-		user << struggle_user_message
+	switch(rand(1,8)) // Increase this number per emote.
+		if(1)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] wobbles with a squirming meal.</span>"
+			struggle_user_message = "<span class='alert'>You squirm inside of [owner]'s [stomach_noun], making it wobble around.</span>"
+		if(2)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] jostles with movement.</span>"
+			struggle_user_message = "<span class='alert'>You jostle [owner]'s [stomach_noun] with movement.</span>"
+		if(3)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] briefly swells outward as someone pushes from inside.</span>"
+			struggle_user_message = "<span class='alert'>You shove against the walls of [owner]'s [stomach_noun], making it briefly swell outward.</span>"
+		if(4)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] fidgets with a trapped victim.</span>"
+			struggle_user_message = "<span class='alert'>You fidget around inside of [owner]'s [stomach_noun].</span>"
+		if(5)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] jiggles with motion from inside.</span>"
+			struggle_user_message = "<span class='alert'>Your motion causes [owner]'s [stomach_noun] to jiggle.</span>"
+		if(6)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] sloshes around.</span>"
+			struggle_user_message = "<span class='alert'>Your movement only causes [owner]'s [stomach_noun] to slosh around you.</span>"
+		if(7)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] gushes softly.</span>"
+			struggle_user_message = "<span class='alert'>Your struggles only cause [owner]'s [stomach_noun] to gush softly around you.</span>"
+		if(8)
+			struggle_outer_message = "<span class='alert'>[owner]'s [stomach_noun] lets out a wet squelch.</span>"
+			struggle_user_message = "<span class='alert'>Your useless squirming only causes [owner]'s slimy [stomach_noun] to squelch over your body.</span>"
 
-		switch(rand(1,4))
-			if(1)
-				playsound(user.loc, 'sound/vore/squish1.ogg', 50, 1)
-			if(2)
-				playsound(user.loc, 'sound/vore/squish2.ogg', 50, 1)
-			if(3)
-				playsound(user.loc, 'sound/vore/squish3.ogg', 50, 1)
-			if(4)
-				playsound(user.loc, 'sound/vore/squish4.ogg', 50, 1)
+	for(var/mob/M in hearers(4, owner))
+		M.show_message(struggle_outer_message, 2) // hearable
+	user << struggle_user_message
+
+	switch(rand(1,4))
+		if(1)
+			playsound(user.loc, 'sound/vore/squish1.ogg', 50, 1)
+		if(2)
+			playsound(user.loc, 'sound/vore/squish2.ogg', 50, 1)
+		if(3)
+			playsound(user.loc, 'sound/vore/squish3.ogg', 50, 1)
+		if(4)
+			playsound(user.loc, 'sound/vore/squish4.ogg', 50, 1)
