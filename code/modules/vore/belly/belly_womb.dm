@@ -14,7 +14,7 @@
 
 // @Override
 /datum/belly/womb/toggle_digestion()
-	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)", "Digest", "Transform (Change Species) (EGG)", "Transform (Keep Gender) (EGG)", "Transform (Male) (EGG)", "Transform (Female) (EGG)")
+	digest_mode = input("Womb Mode") in list("Hold", "Heal", "Transform (Male)", "Transform (Female)", "Transform (Keep Gender)", "Transform (Change Species)", "Digest", "Transform (Change Species) (EGG)", "Transform (Keep Gender) (EGG)", "Transform (Male) (EGG)", "Transform (Female) (EGG)", "Absorb")
 	switch (digest_mode)
 		if("Heal")
 			owner << "<span class='notice'>You will now heal people you've unbirthed.</span>"
@@ -38,6 +38,8 @@
 			owner << "<span class='notice'>You will now transform people you've unbirthed into your son, and will surround them with an egg.</span>"
 		if("Transform (Female) (EGG)")
 			owner << "<span class='notice'>You will now transform people you've unbirthed into your daughter.</span>"
+		if("Absorb")
+			owner << "<span class='notice'>You will now absorb people and make them part of you..</span>"
 // @Override
 /datum/belly/womb/process_Life()
 	for(var/mob/living/M in internal_contents)
@@ -264,7 +266,7 @@
 							P.g_taur = O.g_taur
 							P.b_taur = O.b_taur
 							P.h_style = "Bedhead"
-							P.species = O.species 
+							P.species = O.species
 							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... </span>"
 							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.</span>"
 							P.update_hair()
@@ -278,8 +280,6 @@
 						O.nutrition -= 2
 					if(P.nutrition < 400)
 						P.nutrition += 1
-						
-						
 		//WOMB TRANSFORM (EGG) Credit to Verkister with helping me out, and credit to Nightwing! Also, additional credit to Ace for providing support and suggestions, and helping me persevere through coding this masterpeice (see: Horrid mess) mess! ~CK
 		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
 			var/mob/living/carbon/human/P = M

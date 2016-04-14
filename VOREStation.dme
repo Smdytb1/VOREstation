@@ -1585,6 +1585,7 @@
 #include "code\modules\vore\spiderTaurPowers.dm"
 #include "code\modules\vore\vore.dm"
 #include "code\modules\vore\belly\belly.dm"
+#include "code\modules\vore\belly\belly_absorbed.dm"
 #include "code\modules\vore\belly\belly_balls.dm"
 #include "code\modules\vore\belly\belly_boobs.dm"
 #include "code\modules\vore\belly\belly_simple.dm"
