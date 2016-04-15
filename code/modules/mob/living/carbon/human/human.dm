@@ -49,6 +49,7 @@
 	internal_contents["Womb"] = new /datum/belly/womb(src)
 	internal_contents["Boob"] = new /datum/belly/boob(src)
 	internal_contents["Tail"] = new /datum/belly/tail(src)
+	internal_contents["Absorbed"] = new /datum/belly/absorbed(src)
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
 	// Vore Code End
 

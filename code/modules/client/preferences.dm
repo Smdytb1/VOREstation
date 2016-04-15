@@ -784,6 +784,9 @@ datum/preferences
 	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
 	HTML += TextPreview(inside_flavour_texts["Tail"])
 	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Absorbed'>Absorbed:</a> "
+	HTML += TextPreview(inside_flavour_texts["Absorbed"])
+	HTML += "<br>"
 	HTML += "<hr />"
 	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
 	HTML += "<tt>"

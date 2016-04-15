@@ -83,7 +83,7 @@
 /mob/living/carbon/human/proc/vore_release()
 	set name = "Release"
 	set category = "Vore"
-	var/releaseorifice = input("Choose Orifice") in list("Stomach (by Mouth)", "Stomach (by Anus)", "Womb", "Cock", "Breasts", "Tail")
+	var/releaseorifice = input("Choose Orifice") in list("Stomach (by Mouth)", "Stomach (by Anus)", "Womb", "Cock", "Breasts", "Tail", "Absorbed")
 
 	// TODO LESHANA - This should all be refactored into procs on voretype that are overriden...
 	switch(releaseorifice)
@@ -136,6 +136,16 @@
 			else if (belly.is_full)
 				belly.is_full = 0
 				visible_message("<span class='danger'>[src] releases a few things from their tail!</span>")
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+
+		if("Absorbed")
+			var/datum/belly/belly = internal_contents["Absorbed"]
+			if (belly.release_all_contents())
+				visible_message("<font color='green'><b>[src] releases something from ther body!</b></font>")
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+			else if (belly.is_full)
+				belly.is_full = 0
+				visible_message("<span class='danger'>[src] releases something from their body!</span>") //They should never see this. Can't digest someone in you.
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 /////////////////////////////

@@ -15,8 +15,14 @@
 
 // @Override
 /datum/belly/stomach/toggle_digestion()
-	digest_mode = (digest_mode == DM_DIGEST) ? DM_HOLD : DM_DIGEST
-	owner << "<span class='notice'>You will [digest_mode == DM_DIGEST ? "now" : "no longer"] digest people in your stomach.</span>"
+	digest_mode = input("Stomach Mode") in list("Hold", "Digest", "Absorb")
+	switch (digest_mode)
+		if("Digest")
+			owner << "<span class='notice'>You will now digest people.</span>"
+		if("Hold")
+			owner << "<span class='notice'>You will now harmlessly hold people.</span>"
+		if("Absorb")
+			owner << "<span class='notice'>You will now absorb people and make them part of you..</span>"
 
 // @Override
 /datum/belly/stomach/process_Life()
@@ -127,6 +133,19 @@
 							owner.nutrition += offset*(10/difference)
 						else
 							owner.nutrition += (10/difference)
+
+		if(iscarbon(M) && owner.stat != DEAD && digest_mode == DM_ABSORB && M.stat != DEAD)
+			if(M.nutrition > 2) //Drain them until there's no nutrients left. Slowly "absorb" them.
+				M.nutrition -= 2
+				owner.nutrition += 2
+			else if(M.nutrition < 2) //When they're finally drained.
+				var/mob/living/O = owner
+				var/datum/belly/B = O.internal_contents["Absorbed"]
+				M << "<span class='notice'>[owner]'s stomach absorbs your body, making you part of them.</span>"
+				owner << "<span class='notice'>Your stomach absorbs [M]'s body, making them part of you.</span>"
+				src.internal_contents -= M //Removes them from vore organ when absorbed.
+				B.internal_contents   += M
+				M.loc = owner //Moves them.
 
 
 // @Override
