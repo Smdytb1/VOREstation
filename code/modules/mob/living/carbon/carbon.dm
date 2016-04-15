@@ -66,11 +66,14 @@
 
 //Vore code, struggle stuff
 /mob/living/carbon/relaymove(var/mob/user, var/direction)
+
+/* This stuff is on bellies. 'recent_struggle' is not defined on carbons.
 	if(recent_struggle) return
 
 	recent_struggle = 1
 	spawn(20)
 		recent_struggle = 0
+*/
 
 	for (var/bellytype in src.internal_contents)
 		var/datum/belly/belly = src.internal_contents[bellytype]

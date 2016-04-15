@@ -42,13 +42,13 @@
 		if(Adjacent(M))
 			UpdateFeed(M)
 
-			if(istype(M, /mob/living/carbon))
+			if(istype(M, /mob/living/carbon) && !is_mechanical(M))
 				Victim.adjustCloneLoss(rand(5,6))
 				Victim.adjustToxLoss(rand(1,2))
 				if(Victim.health <= 0)
 					Victim.adjustToxLoss(rand(2,4))
 
-			else if(istype(M, /mob/living/simple_animal))
+			else if(istype(M, /mob/living/simple_animal) || is_mechanical(M))
 				Victim.adjustBruteLoss(is_adult ? rand(7, 15) : rand(4, 12))
 
 			else
