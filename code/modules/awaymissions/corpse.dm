@@ -25,7 +25,7 @@
 	var/corpseidicon = null //For setting it to be a gold, silver, CentCom etc ID
 	var/species = "Human"
 
-/obj/effect/landmark/corpse/initialize()
+/obj/effect/landmark/corpse/New() //initialize() // Won't work in randomly generated gateway maps.
 	createCorpse()
 
 /obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
