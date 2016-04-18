@@ -580,7 +580,7 @@ var/list/be_special_flags = list(
 
 // Age limits on a character.
 #define AGE_MIN 17
-#define AGE_MAX 85
+#define AGE_MAX 200
 
 // Body weight limits on a character.
 #define WEIGHT_MIN 70
