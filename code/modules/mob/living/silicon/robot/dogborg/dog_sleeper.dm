@@ -256,9 +256,25 @@
 //For if the dogborg's existing patient uh, doesn't make it.
 /obj/item/device/dogborg/sleeper/proc/update_patient()
 
-	//Check for a patient
-	for(var/C in contents)
-		if(ishuman(C))
+	//Well, we HAD one, what happened to them?
+	if(patient in contents)
+		if(patient_laststat != patient.stat)
+			if(patient.stat & DEAD)
+				hound.sleeper_r = 1
+				hound.sleeper_g = 0
+				patient_laststat = patient.stat
+			else
+				hound.sleeper_r = 0
+				hound.sleeper_g = 1
+				patient_laststat = patient.stat
+			//Update icon
+			hound.updateicon()
+		//Return original patient
+		return(patient)
+
+	//Check for a new patient
+	else
+		for(var/mob/living/carbon/human/C in contents)
 			patient = C
 			if(patient.stat & DEAD)
 				hound.sleeper_r = 1
@@ -268,16 +284,17 @@
 				hound.sleeper_r = 0
 				hound.sleeper_g = 1
 				patient_laststat = patient.stat
+			//Update icon and return new patient
 			hound.updateicon()
 			return(C)
 
 	//Cleaning looks better with red on, even with nobody in it
-	if(cleaning)
+	if(cleaning && !patient)
 		hound.sleeper_r = 1
 		hound.sleeper_g = 0
 
 	//Couldn't find anyone, and not cleaning
-	else
+	else if(!cleaning && !patient)
 		hound.sleeper_r = 0
 		hound.sleeper_g = 0
 

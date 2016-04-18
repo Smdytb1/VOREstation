@@ -393,7 +393,8 @@ var/list/robot_verbs_default = list(
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
 
-	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
+	//Legged bots and heavy ones can't be pushed
+	if(modtype == "Medical" || modtype == "Medihound" || modtype == "Security" || modtype == "Combat" || modtype == "K9")
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
@@ -956,10 +957,15 @@ var/list/robot_verbs_default = list(
 	return 0
 
 /mob/living/silicon/robot/updateicon()
-
 	overlays.Cut()
 	if(stat == 0)
-		overlays += "eyes-[module_sprites[icontype]]"
+		if(!lights_on)
+			overlays += "eyes-[module_sprites[icontype]]"
+		else
+			overlays += "eyes-[module_sprites[icontype]]-lights"
+
+	if(typing)
+		overlays += typing_indicator
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"
@@ -1234,10 +1240,13 @@ var/list/robot_verbs_default = list(
 
 	overlays -= "eyes"
 
+/* Done automatically by updateicon
 	if("k9")
 		overlays += "eyes-k9"
 	if("Medihound")
 		overlays += "eyes-medihound"
+*/
+
 	updateicon()
 
 	if (triesleft >= 1)
