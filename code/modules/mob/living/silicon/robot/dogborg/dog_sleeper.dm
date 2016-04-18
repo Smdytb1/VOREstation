@@ -421,6 +421,7 @@
 		return
 
 	if(patient)	//We're caring for the patient. Medical emergency! Or endo scene.
+		update_patient()
 		if(patient.health < 0)
 			patient.adjustOxyLoss(-1) //Heal some oxygen damage if they're in critical condition
 			patient.updatehealth()
@@ -429,8 +430,6 @@
 		src.drain()
 		if((patient.reagents.get_reagent_amount("inaprovaline") < 5) && (patient.health < patient.maxHealth)) //Stop pumping full HP people full of drugs. Don't heal people you're digesting, meanie.
 			patient.reagents.add_reagent("inaprovaline", 5)
-		if(patient_laststat != patient.stat)
-			update_patient()
 		return
 
 	if(!patient && !cleaning) //We think we're done working.
