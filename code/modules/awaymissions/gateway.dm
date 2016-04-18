@@ -136,6 +136,8 @@ obj/machinery/gateway/centerstation/process()
 			M.loc = dest.loc
 			M.set_dir(SOUTH)
 			use_power(5000)
+			M << 'sound/effects/phasein.ogg'
+			playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 		return
 
 
