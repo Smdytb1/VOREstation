@@ -1,7 +1,7 @@
 /obj/machinery/r_n_d/server
 	name = "R&D Server"
-	icon = 'icons/obj/machines/research.dmi'
-	icon_state = "server"
+	icon = 'icons/obj/computer3.dmi'
+	icon_state = "frame-rack"
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()		//List of R&D consoles with upload to server access.
@@ -23,6 +23,8 @@
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 	src.initialize(); //Agouri
+	overlays += "rack-on"
+	overlays += "rack-working"
 
 /obj/machinery/r_n_d/server/Del()
 	griefProtection()
@@ -131,11 +133,14 @@
 	if (istype(O, /obj/item/weapon/screwdriver))
 		if (!panel_open)
 			panel_open = 1
-			icon_state = "server_o"
+			overlays.Cut()
+			overlays += "rack-open"
 			user << "You open the maintenance hatch of [src]."
 		else
 			panel_open = 0
-			icon_state = "server"
+			overlays.Cut()
+			overlays += "rack-on"
+			overlays += "rack-working"
 			user << "You close the maintenance hatch of [src]."
 		return
 	if (panel_open)
@@ -195,13 +200,16 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	icon_state = "rdcomp"
+	icon_state = "frame-rnd"
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()
 	var/list/consoles = list()
 	var/badmin = 0
+
+	screenicon = "rdcomp"
+	keyboardicon = "kb8"
 
 /obj/machinery/computer/rdservercontrol/Topic(href, href_list)
 	if(..())

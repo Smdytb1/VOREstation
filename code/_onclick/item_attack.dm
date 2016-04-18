@@ -29,9 +29,9 @@
 	user.lastattacked = M
 	M.lastattacker = user
 
-	if(!no_attack_log)
-		if(name == "boop module") return //Prevents admin log spam.
-		if(name == "synthetic tongue") return //Hotfix to prevent admin spam
+	if(!no_attack_log && !(flags & NOBLUDGEON))
+		//if(name == "boop module") return //Prevents admin log spam.
+		//if(name == "synthetic tongue") return //Hotfix to prevent admin spam
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
 		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
 		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )

@@ -4,10 +4,13 @@
 	name = "patient monitoring console"
 	density = 1
 	anchored = 1.0
-	icon_state = "operating"
+	icon_state = "frame-med"
 	circuit = "/obj/item/weapon/circuitboard/operating"
 	var/mob/living/carbon/human/victim = null
 	var/obj/machinery/optable/table = null
+
+	screenicon = "operating"
+	keyboardicon = "kb7"
 
 /obj/machinery/computer/operating/New()
 	..()

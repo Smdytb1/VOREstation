@@ -137,13 +137,15 @@
 	name = "Mech Bay Power Control Console"
 	density = 1
 	anchored = 1
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "recharge_comp"
+	icon_state = "frame-rnd"
 	circuit = "/obj/item/weapon/circuitboard/mech_bay_power_console"
 	var/autostart = 1
 	var/voltage = 45
 	var/turf/simulated/floor/mech_bay_recharge_floor/recharge_floor
 	var/obj/machinery/mech_bay_recharge_port/recharge_port
+
+	screenicon = "recharge_comp"
+	keyboardicon = "kb6"
 
 /obj/machinery/computer/mech_bay_power_console/proc/mecha_in(var/obj/mecha/mecha)
 	if(stat&(NOPOWER|BROKEN))
@@ -153,7 +155,8 @@
 		var/answer = recharge_port.start_charge(mecha)
 		if(answer)
 			recharge_port.set_voltage(voltage)
-			src.icon_state = initial(src.icon_state)+"_on"
+			overlays -= "recharge_comp"
+			overlays += "recharge_comp_on"
 	return
 
 /obj/machinery/computer/mech_bay_power_console/proc/mecha_out()
@@ -164,21 +167,23 @@
 
 /obj/machinery/computer/mech_bay_power_console/power_change()
 	if(stat & BROKEN)
-		icon_state = initial(icon_state)+"_broken"
+		overlays.Cut()
 		if(recharge_port)
 			recharge_port.stop_charge()
 	else if(powered())
-		icon_state = initial(icon_state)
+		overlays.Cut()
+		overlays += screenicon
+		overlays += keyboardicon
 		stat &= ~NOPOWER
 	else
 		spawn(rand(0, 15))
-			icon_state = initial(icon_state)+"_nopower"
+			overlays.Cut()
 			stat |= NOPOWER
 			if(recharge_port)
 				recharge_port.stop_charge()
 
 /obj/machinery/computer/mech_bay_power_console/set_broken()
-	icon_state = initial(icon_state)+"_broken"
+	overlays.Cut()
 	stat |= BROKEN
 	if(recharge_port)
 		recharge_port.stop_charge()

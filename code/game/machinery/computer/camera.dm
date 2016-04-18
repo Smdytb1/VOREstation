@@ -9,13 +9,16 @@
 /obj/machinery/computer/security
 	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
-	icon_state = "cameras"
+	icon_state = "frame-sec"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
 	var/list/network = list("SS13")
 	var/mapping = 0//For the overview file, interesting bit of code.
 	circuit = /obj/item/weapon/circuitboard/security
 	var/camera_cache = null
+
+	screenicon = "cameras"
+	keyboardicon = "kb10"
 
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
@@ -223,20 +226,37 @@
 	icon_state = "security_det"
 	circuit = null
 
+/obj/machinery/computer/security/wooden_tv/update_icon()
+	// Broken
+	if(stat & BROKEN)
+		icon_state = "security_detb"
+
+	// Unpowered
+	else if(stat & NOPOWER)
+		icon_state = "security_det0"
+
+	// Not Broken or Unpowered
+	else
+		icon_state = initial(icon_state)
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."
-	icon_state = "miningcameras"
+	icon_state = "frame"
+	screenicon = "miningcameras"
+	keyboardicon = "kb1"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
 
 /obj/machinery/computer/security/engineering
 	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
-	icon_state = "engineeringcameras"
+	icon_state = "frame-eng"
+	screenicon = "engineeringcameras"
+	keyboardicon = "kb12"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	circuit = /obj/item/weapon/circuitboard/security/engineering
+
 
 /obj/machinery/computer/security/nuclear
 	name = "head mounted camera monitor"

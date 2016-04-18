@@ -31,14 +31,14 @@
 		dat = "[src.temp]<BR><BR><A href='byond://?src=\ref[src];temp=1'>Clear</A>"
 	else
 		dat = {"
-<B>Persistent Signal Locator</B><HR>
-Frequency:
-<A href='byond://?src=\ref[src];freq=-10'>-</A>
-<A href='byond://?src=\ref[src];freq=-2'>-</A> [format_frequency(src.frequency)]
-<A href='byond://?src=\ref[src];freq=2'>+</A>
-<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
+			<B>Persistent Signal Locator</B><HR>
+			Frequency:
+			<A href='byond://?src=\ref[src];freq=-10'>-</A>
+			<A href='byond://?src=\ref[src];freq=-2'>-</A> [format_frequency(src.frequency)]
+			<A href='byond://?src=\ref[src];freq=2'>+</A>
+			<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 
-<A href='?src=\ref[src];refresh=1'>Refresh</A>"}
+			<A href='?src=\ref[src];refresh=1'>Refresh</A>"}
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
@@ -167,8 +167,26 @@ Frequency:
 	var/T = L[t1]
 	for(var/mob/O in hearers(user, null))
 		O.show_message("<span class='notice'>Locked In.</span>", 2)
-	var/obj/effect/portal/P = new /obj/effect/portal( get_turf(src) )
-	P.target = T
-	P.creator = src
+
+	//Inside-a-thing teleport
+	if(!isfloor(user.loc))
+
+		//Scrape you out of vars if you were ated
+		if(hasvar(user.loc,"internal_contents"))
+			var/mob/living/M = user.loc
+			for(var/datum/belly/B in M.internal_contents)
+				B.internal_contents -= user
+
+		if(prob(5)) //oh dear a problem, put em in deep space
+			do_teleport(user, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), 3), 0)
+		else
+			do_teleport(user, T, 1) ///You will appear adjacent to the beacon
+
+	//Normal portal creation instead
+	else
+		var/obj/effect/portal/P = new /obj/effect/portal( get_turf(src) )
+		P.target = T
+		P.creator = src
+
 	src.add_fingerprint(user)
 	return

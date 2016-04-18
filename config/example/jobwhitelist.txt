@@ -1,0 +1,4 @@
+# File for whitelisted job access
+# Use the 'title' var from jobs and lowercase ckeys please, 'All' works for all titles.
+# Syntax:
+# ckey - Title

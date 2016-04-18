@@ -8,9 +8,14 @@
 	var/active = 0
 
 
-/obj/machinery/gateway/initialize()
+/obj/machinery/gateway/initialize() // Only happens at round start.
 	update_icon()
-	if(dir == 2)
+	if(dir == 2 || dir == 6 || dir == 10)
+		density = 0
+
+/obj/machinery/gateway/New() // Doesn't initialize in generated maps which is bad.
+	update_icon()
+	if(dir == 2 || dir == 6 || dir == 10)
 		density = 0
 
 
@@ -45,6 +50,9 @@
 		icon_state = "oncenter"
 		return
 	icon_state = "offcenter"
+
+/obj/machinery/gateway/centerstation/New()
+	density = 1
 
 
 
@@ -82,7 +90,7 @@ obj/machinery/gateway/centerstation/process()
 	if(linked.len != 8)	return
 	if(!powered())		return
 	if(!awaygate)
-		user << "<span class='notice'>Error: No destination found.</span>"
+		user << "<span class='notice'>Error: No destination found. Please calibrate gateway.</span>"
 		return
 	if(world.time < wait)
 		user << "<span class='notice'>Error: Warpspace triangulation in progress. Estimated time to completion: [round(((wait - world.time) / 10) / 60)] minutes.</span>"
@@ -133,8 +141,15 @@ obj/machinery/gateway/centerstation/process()
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))
-		user << "\black The gate is already calibrated, there is no work for you to do here."
-		return
+		if(!awaygate)
+			awaygate = locate(/obj/machinery/gateway/centeraway)
+			if(!awaygate) // We still can't find the damn thing because there is no destination.
+				user << "<span class='notice'>Error: Calibration failed. No destination found.</span>"
+				return
+			user << "\blue <b>Startup calibration successful!</b>: \black A destination in another point of space and time has been detected."
+		else
+			user << "\black The gate is already calibrated, there is no work for you to do here."
+			return
 
 /////////////////////////////////////Away////////////////////////
 
@@ -159,6 +174,9 @@ obj/machinery/gateway/centerstation/process()
 		icon_state = "oncenter"
 		return
 	icon_state = "offcenter"
+
+/obj/machinery/gateway/centeraway/New()
+	density = 1
 
 
 /obj/machinery/gateway/centeraway/proc/detect()
@@ -185,7 +203,7 @@ obj/machinery/gateway/centerstation/process()
 	if(!ready)			return
 	if(linked.len != 8)	return
 	if(!stationgate)
-		user << "<span class='notice'>Error: No destination found.</span>"
+		user << "<span class='notice'>Error: No destination found. Please calibrate gateway.</span>"
 		return
 
 	for(var/obj/machinery/gateway/G in linked)
@@ -227,10 +245,15 @@ obj/machinery/gateway/centerstation/process()
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))
-		if(calibrated)
+		if(calibrated && stationgate)
 			user << "\black The gate is already calibrated, there is no work for you to do here."
 			return
 		else
-			user << "\blue <b>Recalibration successful!</b>: \black This gate's systems have been fine tuned.  Travel to this gate will now be on target."
-			calibrated = 1
-			return
+			stationgate = locate(/obj/machinery/gateway/centerstation)
+			if(!stationgate)
+				user << "<span class='notice'>Error: Recalibration failed. No destination found... That can't be good.</span>"
+				return
+			else
+				user << "\blue <b>Recalibration successful!</b>: \black This gate's systems have been fine tuned. Travel to this gate will now be on target."
+				calibrated = 1
+				return

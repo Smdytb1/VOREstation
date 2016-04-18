@@ -9,6 +9,7 @@
 
 /obj/item/weapon/holder/New()
 	item_state = icon_state
+	flags |= NOBLUDGEON
 	..()
 	processing_objects.Add(src)
 

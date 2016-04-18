@@ -288,8 +288,8 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control
 	name = "solar panel control"
 	desc = "A controller for solar panel arrays."
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "solar"
+	icon = 'icons/obj/computer3.dmi'
+	icon_state = "frame-eng"
 	anchored = 1
 	density = 1
 	use_power = 1
@@ -371,18 +371,15 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar_control/update_icon()
 	if(stat & BROKEN)
-		icon_state = "broken"
 		overlays.Cut()
 		return
-	if(stat & NOPOWER)
-		icon_state = "c_unpowered"
+	else if(stat & NOPOWER)
 		overlays.Cut()
 		return
-	icon_state = "solar"
-	overlays.Cut()
-	if(cdir > -1)
-		overlays += image('icons/obj/computer.dmi', "solcon-o", FLY_LAYER, angle2dir(cdir))
-	return
+	else
+		overlays.Cut()
+		overlays += image('icons/obj/computer3.dmi', "solar", FLY_LAYER, angle2dir(cdir))
+		overlays += "kb5"
 
 /obj/machinery/power/solar_control/attack_hand(mob/user)
 	if(!..())
