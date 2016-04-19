@@ -1216,6 +1216,7 @@
 #include "code\modules\mob\living\silicon\robot\robot_modules.dm"
 #include "code\modules\mob\living\silicon\robot\robot_movement.dm"
 #include "code\modules\mob\living\silicon\robot\subsystems.dm"
+#include "code\modules\mob\living\silicon\robot\whisper.dm"
 #include "code\modules\mob\living\silicon\robot\dogborg\dog_modules.dm"
 #include "code\modules\mob\living\silicon\robot\dogborg\dog_sleeper.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone.dm"
