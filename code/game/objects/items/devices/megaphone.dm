@@ -32,13 +32,13 @@
 	if ((src.loc == user && usr.stat == 0))
 		if(emagged)
 			if(insults)
-				for(var/mob/O in (viewers(user)))
+				for(var/mob/O in range(15))
 					O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[pick(insultmsg)]\"</FONT>",2) // 2 stands for hearable message
 				insults--
 			else
 				user << "\red *BZZZZzzzzzt*"
-		else
-			for(var/mob/O in (viewers(user)))
+		else //This goes through space and stuff. That's how bay had it. Maybe someone should fix it.
+			for(var/mob/O in range(15))
 				O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[message]\"</FONT>",2) // 2 stands for hearable message
 
 		spamcheck = 1
