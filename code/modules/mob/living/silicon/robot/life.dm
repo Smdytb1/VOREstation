@@ -96,6 +96,7 @@
 			else
 				src.blinded = 0
 			lights_on = 0
+			SetLuminosity(0)
 
 		else	//Not stunned.
 			src.stat = 0
