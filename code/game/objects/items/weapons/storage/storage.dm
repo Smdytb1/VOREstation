@@ -263,11 +263,11 @@
 		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/crossbow))
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
-					usr << "<span class='notice'>You put \the [W] into [src].</span>"
+					usr << "<span class='notice'>\icon[W] You put \the [W] into [src].</span>"
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\icon[W] [usr] puts \the [W] into [src].</span>")
 				else if (W && W.w_class >= 3.0) //Otherwise they can only see large or normal items from a distance...
-					M.show_message("<span class='notice'>[usr] puts [W] into [src].</span>")
+					M.show_message("<span class='notice'>\icon[W] [usr] puts \the [W] into [src].</span>")
 
 		src.orient2hud(usr)
 		if(usr.s_active)
