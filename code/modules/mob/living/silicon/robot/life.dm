@@ -62,6 +62,8 @@
 
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 
+	var/stat_previous = stat
+
 	if(src.camera && !scrambledcodes)
 		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
 			src.camera.status = 0
@@ -70,6 +72,7 @@
 
 	updatehealth()
 
+	//We're going to do some special stuff for these.
 	if(src.sleeping)
 		Paralyse(3)
 		src.sleeping--
@@ -92,6 +95,8 @@
 				src.blinded = 1
 			else
 				src.blinded = 0
+			lights_on = 0
+			SetLuminosity(0)
 
 		else	//Not stunned.
 			src.stat = 0
@@ -140,6 +145,9 @@
 		src.blinded = 0
 	else
 		src.blinded = 1
+
+	if(stat_previous != stat)
+		updateicon()
 
 	return 1
 
@@ -305,7 +313,7 @@
 		src.module_state_2:screen_loc = ui_inv2
 	if(src.module_state_3)
 		src.module_state_3:screen_loc = ui_inv3
-	updateicon()
+	//updateicon() //Doesn't seem necessary
 
 /mob/living/silicon/robot/proc/process_killswitch()
 	if(killswitch)

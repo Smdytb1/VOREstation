@@ -214,9 +214,9 @@ datum/preferences
 		if(15 to 18)
 			return "Exceptional"
 		if(19 to 24)
-			return "Genius"
+			return "Overpowered"
 		if(24 to 1000)
-			return "God"
+			return "Bullshit"
 
 /datum/preferences/proc/SetSkills(mob/user)
 	if(SKILLS == null)
@@ -784,6 +784,9 @@ datum/preferences
 	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
 	HTML += TextPreview(inside_flavour_texts["Tail"])
 	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Absorbed'>Absorbed:</a> "
+	HTML += TextPreview(inside_flavour_texts["Absorbed"])
+	HTML += "<br>"
 	HTML += "<hr />"
 	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
 	HTML += "<tt>"
@@ -1095,11 +1098,18 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
 					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["task"]] = msg
+				return
 			else
 				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
@@ -1140,13 +1150,13 @@ datum/preferences
 			if("Default")
 				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
 				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)

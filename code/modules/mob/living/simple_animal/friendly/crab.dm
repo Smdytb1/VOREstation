@@ -32,6 +32,12 @@
 				turns_since_move = 0
 	regenerate_icons()
 
+/mob/living/simple_animal/crab/small
+	icon_state = "crab_small"
+	icon_living = "crab_small"
+	icon_dead = "crab_small_dead"
+	mob_size = 1
+
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee
 	name = "Coffee"

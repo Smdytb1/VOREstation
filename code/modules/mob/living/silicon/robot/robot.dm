@@ -13,20 +13,23 @@ var/list/robot_verbs_default = list(
 	maxHealth = 200
 	health = 200
 
-	var/lights_on = 0 // Is our integrated light on?
+	var/lights_on = 0					// Is our integrated light on?
+	var/eye_lights = 0					// Does this have eye-light sprites?
+	var/suspend_sprites = 0				// Does this have special suspend-mode sprites?
+	var/wreck_sprites = 0				// Does this have special 'dead' sprites?
 	var/used_power_this_tick = 0
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
-	var/crisis //Admin-settable for combat module use.
+	var/custom_sprite = 0				//Due to all the sprites involved, a var for our custom borgs may be best
+	var/crisis							//Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 6
 	var/datum/wires/robot/wires
 
 //Icon stuff
 
-	var/icontype //Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
+	var/icontype 						//Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0]				//Used to store the associations between sprite names and sprite index.
 
 //Hud stuff
 
@@ -35,7 +38,7 @@ var/list/robot_verbs_default = list(
 	var/obj/screen/inv2 = null
 	var/obj/screen/inv3 = null
 
-	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
+	var/shown_robot_modules = 0 		//Used to determine whether they have the module menu shown or not
 	var/obj/screen/robot_modules_background
 
 //3 Modules can be activated at any one time.
@@ -72,18 +75,18 @@ var/list/robot_verbs_default = list(
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
-	var/datum/effect/effect/system/spark_spread/spark_system//So they can initialize sparks whenever/N
+	var/datum/effect/effect/system/spark_spread/spark_system //So they can initialize sparks whenever/N
 	var/jeton = 0
-	var/borgwires = 31 // 0b11111
+	var/borgwires = 31 				// 0b11111
 	var/killswitch = 0
 	var/killswitch_time = 60
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
-	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
-	var/lockcharge //Used when locking down a borg to preserve cell charge
-	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
-	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
-	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
+	var/lawupdate = 1				//Cyborgs will sync their laws with their AI by default
+	var/lockcharge					//Used when locking down a borg to preserve cell charge
+	var/speed = 0					//Cause sec borgs gotta go fast //No they dont!
+	var/scrambledcodes = 0			// Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
+	var/tracking_entities = 0		//The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 
 /mob/living/silicon/robot/syndicate
@@ -238,6 +241,7 @@ var/list/robot_verbs_default = list(
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
+	eye_lights = initial(eye_lights)
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	if(module)
@@ -367,6 +371,9 @@ var/list/robot_verbs_default = list(
 			icon = 'icons/mob/widerobot.dmi'
 			icon_state = "medihound"
 			hands.icon_state = "medihound"
+			eye_lights = 1
+			suspend_sprites = 1
+			wreck_sprites = 1
 			pixel_x = -16
 			module = new /obj/item/weapon/robot_module/medihound(src)
 			module_sprites["Medihound"] = "medihound" //This is the only sprite it can use.
@@ -376,6 +383,9 @@ var/list/robot_verbs_default = list(
 			icon = 'icons/mob/widerobot.dmi'
 			icon_state = "k9"
 			hands.icon_state = "k9"
+			eye_lights = 1
+			suspend_sprites = 1
+			wreck_sprites = 1
 			pixel_x = -16
 			module = new /obj/item/weapon/robot_module/k9(src)
 			module_sprites["K9 hound"] = "k9" //This is the only sprite it can use.
@@ -393,7 +403,8 @@ var/list/robot_verbs_default = list(
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
 
-	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
+	//Legged bots and heavy ones can't be pushed
+	if(modtype == "Medical" || modtype == "Medihound" || modtype == "Security" || modtype == "Combat" || modtype == "K9")
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
@@ -497,6 +508,7 @@ var/list/robot_verbs_default = list(
 		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
 	else
 		SetLuminosity(0)
+	updateicon()
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -797,7 +809,7 @@ var/list/robot_verbs_default = list(
 		else
 			user << "Unable to locate a radio."
 
-	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
+	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/storage/wallet))	// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
 			user << "The interface seems slightly damaged"
 		if(opened)
@@ -890,7 +902,7 @@ var/list/robot_verbs_default = list(
 
 
 	else
-		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
+		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) || (W.flags & NOBLUDGEON))
 			spark_system.start()
 		return ..()
 
@@ -956,10 +968,21 @@ var/list/robot_verbs_default = list(
 	return 0
 
 /mob/living/silicon/robot/updateicon()
-
 	overlays.Cut()
 	if(stat == 0)
-		overlays += "eyes-[module_sprites[icontype]]"
+		icon_state = "[module_sprites[icontype]]"
+		if(lights_on && eye_lights)
+			overlays += "eyes-[module_sprites[icontype]]-lights"
+		else
+			overlays += "eyes-[module_sprites[icontype]]"
+
+		if(sleeper_g == 1)
+			overlays += "sleeper_g"
+		if(sleeper_r == 1)
+			overlays += "sleeper_r"
+
+	if(typing)
+		overlays += typing_indicator
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"
@@ -980,10 +1003,12 @@ var/list/robot_verbs_default = list(
 			icon_state = module_sprites[icontype]
 		return
 
-	if(sleeper_g == 1)
-		overlays += "sleeper_g"
-	if(sleeper_r == 1)
-		overlays += "sleeper_r"
+	if(stat == 1 && suspend_sprites)
+		icon_state = "[module_sprites[icontype]]-rest"
+
+	if(stat == 2 && wreck_sprites)
+		icon_state = "[module_sprites[icontype]]-wreck"
+		overlays += "wreck-overlay"
 
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
@@ -1232,12 +1257,6 @@ var/list/robot_verbs_default = list(
 		icon_state = module_sprites[1]
 		return
 
-	overlays -= "eyes"
-
-	if("k9")
-		overlays += "eyes-k9"
-	if("Medihound")
-		overlays += "eyes-medihound"
 	updateicon()
 
 	if (triesleft >= 1)
