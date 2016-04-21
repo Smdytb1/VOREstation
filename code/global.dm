@@ -86,8 +86,8 @@ var/blobevent   = 0
 
 var/diary          = null
 var/href_logfile   = null
-var/station_name   = "NSS Virgo Orbital Research Establishment"
-var/game_version   = "Baystation12"
+var/station_name   = "NSS Adephagia"
+var/game_version   = "Vorestation"
 var/changelog_hash = ""
 var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
 

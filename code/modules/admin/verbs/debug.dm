@@ -781,7 +781,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/c20r(M), slot_r_hand)
 			M.equip_to_slot_or_del(new /obj/item/weapon/rig/merc(M), slot_back)
 
-			var/obj/item/weapon/card/id/syndicate/W = new(M)
+			var/obj/item/weapon/card/id/syndicate_command/W = new(M)
 			W.name = "[M.real_name]'s ID Card"
 			W.access = list(access_syndicate)
 			W.assignment = "Syndicate Shocktrooper"

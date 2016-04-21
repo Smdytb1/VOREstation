@@ -45,6 +45,9 @@ var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
 
+var/const/UNIQUE			=(1<<3)
+
+var/const/CCOBSERVER		=(1<<0)
 
 var/list/assistant_occupations = list(
 )
@@ -114,6 +117,10 @@ var/list/nonhuman_positions = list(
 	"AI",
 	"Cyborg",
 	"pAI"
+)
+
+var/list/unique_positions = list(
+	"CentCom Observer"
 )
 
 

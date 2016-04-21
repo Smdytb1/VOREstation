@@ -118,6 +118,10 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
+	var/job_unique_high = 0
+	var/job_unique_med = 0
+	var/job_unique_low = 0
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
@@ -485,7 +489,7 @@ datum/preferences
 
 	user << browse(dat, "window=preferences;size=560x736")
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
+/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 600, height = 660)
 	if(!job_master)
 		return
 
@@ -527,6 +531,9 @@ datum/preferences
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			continue
+		if(job.job_whitelisted && !is_job_whitelisted(user, rank))
+			HTML += "<del>[rank]</del></td><td> \[WHITELIST]</td></tr>"
 			continue
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
@@ -856,6 +863,10 @@ datum/preferences
 	job_engsec_med = 0
 	job_engsec_low = 0
 
+	job_unique_high = 0
+	job_unique_med = 0
+	job_unique_low = 0
+
 
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
@@ -884,6 +895,14 @@ datum/preferences
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+		if(UNIQUE)
+			switch(level)
+				if(1)
+					return job_unique_high
+				if(2)
+					return job_unique_med
+				if(3)
+					return job_unique_low
 	return 0
 
 /datum/preferences/proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -893,14 +912,17 @@ datum/preferences
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
 			job_civilian_med |= job_civilian_high
 			job_medsci_med |= job_medsci_high
 			job_engsec_med |= job_engsec_high
+			job_unique_med |= job_unique_high
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -933,6 +955,16 @@ datum/preferences
 					job_engsec_low &= ~job.flag
 				else
 					job_engsec_low |= job.flag
+		if(UNIQUE)
+			switch(level)
+				if(2)
+					job_unique_high = job.flag
+					job_unique_med &= ~job.flag
+				if(3)
+					job_unique_med |= job.flag
+					job_unique_low &= ~job.flag
+				else
+					job_unique_low |= job.flag
 	return 1
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
