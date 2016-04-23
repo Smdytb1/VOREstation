@@ -9,10 +9,6 @@
 #define DM_HEAL "Heal"
 #define DM_ABSORB "Absorb"
 
-#define VORE_BRUTEDAM 2
-#define VORE_BURNDAM 3
-#define VORE_TICKRATE 3
-
 #define VORE_STRUGGLE_EMOTE_CHANCE 40
 
 /**
@@ -28,9 +24,13 @@
 	var/recent_struggle = 0					// Flag to prevent struggle emote spam
 	var/list/internal_contents = list()		// People/Things you've eaten into this belly!
 	var/vore_sound = 'sound/vore/gulp.ogg'	// Sound when ingesting someone
-	var/vore_verb = "ingest"
-	var/human_prey_swallow_time = 100
-	var/nonhuman_prey_swallow_time = 30
+	var/vore_verb = "ingest"				// Verb for eating with this in messages
+	var/human_prey_swallow_time = 100		// Time in deciseconds to swallow /mob/living/carbon/human
+	var/nonhuman_prey_swallow_time = 30		// Time in deciseconds to swallow anything else
+	var/digest_brute = 2					// Brute damage per tick in digestion mode
+	var/digest_burn = 3						// Burn damage per tick in digestion mode
+	var/digest_tickrate = 3					// Modulus this of air controller tick number to iterate gurgles on
+	var/immutable = 0						// Prevents this belly from being deleted
 
 
 // Constructor that sets the owning mob

@@ -55,9 +55,18 @@
 			setup.inside_flavor = "The slimy inside of [setup.owner]'s stomach!"
 			setup.vore_sound = 'sound/vore/gulp.ogg'
 			setup.vore_verb = "swallow"
+			setup.immutable = 1
+
+		vore_organs["Tail"] = new /datum/belly(src)
+		if(vore_organs["Tail"])
+			var/datum/belly/setup = vore_organs["Tail"]
+			setup.name = "Tail"
+			setup.inside_flavor = "The slippery insides of [setup.owner]'s tail!"
+			setup.vore_sound = 'sound/vore/gulp.ogg'
+			setup.vore_verb = "snap up"
 
 			//Set the stomach as the selected one since it's the ONLY one
-			src.vore_selected = vore_organs["Stomach"]
+			src.vore_selected = "Stomach"
 
 	/* Old, when predefined datums were real.
 	vore_organs["Stomach"] = new /datum/belly/stomach(src)

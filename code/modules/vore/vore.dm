@@ -59,7 +59,7 @@
 //	For now this is just simple_animals and carbons
 //
 /proc/is_vore_predator(var/mob/living/O)
-	return (O != null && (istype(O, /mob/living)) && O:vore_selected)
+	return (O != null && O.vore_selected)
 
 //
 //	Verb for toggling which orifice you eat people with!
@@ -68,9 +68,8 @@
 	set name = "Choose Belly"
 	set category = "Vore"
 
-	var/type = input("Choose Belly") in vore_organs
-	vore_selected = type
-	src << "<span class='notice'>[vore_selected.name] selected.</span>"
+	vore_selected = input("Choose Belly") in vore_organs
+	src << "<span class='notice'>[vore_selected] selected.</span>"
 
 //
 //	Verb for toggling which orifice you eat people with!
@@ -78,7 +77,13 @@
 /mob/living/proc/vore_release()
 	set name = "Release"
 	set category = "Vore"
-	var/releaseorifice = input("Choose Orifice") in vore_organs
+	var/release_organ = input("Choose Belly") in vore_organs
+
+	if(release_organ) //Sanity
+		var/datum/belly/belly = vore_organs[release_organ]
+		if (belly.release_all_contents())
+			visible_message("<font color='green'><b>[src] releases the contents of their [lowertext(belly)]!</b></font>")
+			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 	/*Sacrificed for generic message but also generic customizable bellies.
 	switch(releaseorifice)
@@ -315,35 +320,44 @@
 /// Actual eating procs
 ///
 
-/mob/living/proc/eat_held_mob(var/mob/user, var/mob/living/prey, var/mob/living/pred)
-	return perform_the_nom(user, prey, pred)
+/mob/living/proc/feed_grabbed_to_self(var/mob/living/user, var/mob/living/prey)
+	var/belly = user.vore_selected
+	return perform_the_nom(user, prey, user, belly)
 
-/mob/living/proc/feed_self_to_grabbed(var/mob/living/carbon/human/user, var/vore/pred_capable/pred)
-	return perform_the_nom(user, user, pred)
+/mob/living/proc/eat_held_mob(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+	var/belly
+	if(user != pred)
+		belly = input("Choose Belly") in pred.vore_organs
+	else
+		belly = pred.vore_selected
+	return perform_the_nom(user, prey, pred, belly)
 
-/mob/living/proc/feed_grabbed_to_self(var/mob/living/carbon/human/user, var/mob/prey)
-	return perform_the_nom(user, prey, user)
+/mob/living/proc/feed_self_to_grabbed(var/mob/living/user, var/mob/living/pred)
+	var/belly = input("Choose Belly") in pred.vore_organs
+	return perform_the_nom(user, user, pred, belly)
 
-/mob/living/proc/feed_grabbed_to_other(var/mob/living/carbon/human/user, var/mob/prey, var/vore/pred_capable/pred)
-	return perform_the_nom(user, prey, pred)
+/mob/living/proc/feed_grabbed_to_other(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+	var/belly = input("Choose Belly") in pred.vore_organs
+	return perform_the_nom(user, prey, pred, belly)
 
-/mob/living/proc/perform_the_nom(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+/mob/living/proc/perform_the_nom(var/mob/living/user, var/mob/living/prey, var/mob/living/pred, var/belly)
 	//Sanity
-	if(!user || !prey || !pred || !pred.vore_selected)
+	if(!user || !prey || !pred || !belly || !(belly in pred.vore_organs))
+		log_debug("[user] attempted to feed [prey] to [pred], via [belly] but it went wrong.")
 		return
 
 	// The belly selected at the time of noms
-	var/datum/belly/belly_target = pred.vore_organs[pred.vore_selected]
+	var/datum/belly/belly_target = pred.vore_organs[belly]
 	var/attempt_msg = "ERROR: Vore message couldn't be created. Notify a dev. (at)"
 	var/success_msg = "ERROR: Vore message couldn't be created. Notify a dev. (sc)"
 
 	// Prepare messages
 	if(user == pred) //Feeding someone to yourself
-		attempt_msg = text("[] is attemping to [] [] into their []!",pred,belly_target.vore_verb,prey,belly_target)
-		success_msg = text("[] manages to [] [] into their []!",pred,belly_target.vore_verb,prey,belly_target)
+		attempt_msg = text("<span class='warning'>[] is attemping to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
 	else //Feeding someone to another person
-		attempt_msg = text("[] is attempting to [] [] into []'s []!",user,belly_target.vore_verb,prey,pred,belly_target)
-		success_msg = text("[] manages to [] [] into []'s []!",user,belly_target.vore_verb,prey,pred,belly_target)
+		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
 
 	// Announce that we start the attempt!
 	for (var/mob/O in get_mobs_in_view(world.view,user))
