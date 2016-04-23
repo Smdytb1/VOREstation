@@ -85,70 +85,6 @@
 			visible_message("<font color='green'><b>[src] releases the contents of their [lowertext(belly)]!</b></font>")
 			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
-	/*Sacrificed for generic message but also generic customizable bellies.
-	switch(releaseorifice)
-		if("Stomach (by Mouth)")
-			var/datum/belly/belly = vore_organs["Stomach"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] hurls out the contents of their stomach!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		if("Stomach (by Anus)")
-			var/datum/belly/belly = vore_organs["Stomach"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] releases their stomach contents out of their rear!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		if("Womb")
-			var/datum/belly/belly = vore_organs["Womb"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] gushes out the contents of their womb!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-			else if (belly.is_full)
-				belly.is_full = 0
-				visible_message("<span class='danger'>[src] gushes out a puddle of liquid from their folds!</span>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		if("Cock")
-			var/datum/belly/belly = vore_organs["Cock"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] splurts out the contents of their cock!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-			else if (belly.is_full)
-				belly.is_full = 0
-				visible_message("<span class='danger'>[src] gushes out a puddle of cum from their cock!</span>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		if("Breasts")
-			var/datum/belly/belly = vore_organs["Boob"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] squirts out the contents of their breasts!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-			else if(belly.is_full)
-				belly.is_full = 0
-				visible_message("<span class='danger'>[src] squirts out a puddle of milk from their breasts!</span>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		if("Tail")
-			var/datum/belly/belly = vore_organs["Tail"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] releases a few things from their tail!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-			else if (belly.is_full)
-				belly.is_full = 0
-				visible_message("<span class='danger'>[src] releases a few things from their tail!</span>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		if("Absorbed")
-			var/datum/belly/belly = vore_organs["Absorbed"]
-			if (belly.release_all_contents())
-				visible_message("<font color='green'><b>[src] releases something from ther body!</b></font>")
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-			else if (belly.is_full)
-				belly.is_full = 0
-				visible_message("<span class='danger'>[src] releases something from their body!</span>") //They should never see this. Can't digest someone in you.
-				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-	*/
-
 /////////////////////////////
 ////   OOC Escape Code	 ////
 /////////////////////////////
@@ -186,7 +122,7 @@
 		var/confirm = alert(src, "You're in a player-character cyborg. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (BORG) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
-			belly.go_out() //Just force-ejects from the borg as if they'd clicked the eject button.
+			belly.go_out(src) //Just force-ejects from the borg as if they'd clicked the eject button.
 
 			/* Use native code to avoid leaving vars all set wrong on the borg
 			forceMove(get_turf(src)) //Since they're not in a vore organ, you can't eject them "normally"
@@ -297,12 +233,12 @@
 	if(href_list["set_description"])
 		var/datum/belly/B = locate(href_list["set_description"])
 		B.inside_flavor = input(usr, "Input a new flavor text!", "[B] flavor text", B.inside_flavor) as message
-		return 1 // TODO Will this make it refresh the ui?
+		return 1
 
 	if (href_list["toggle_digestion"])
 		var/datum/belly/B = locate(href_list["toggle_digestion"])
 		B.toggle_digestion()
-		return 1 // TODO Will this make it refresh the ui?
+		return 1
 
 	if (href_list["close"])
 		del(src)  // Cleanup

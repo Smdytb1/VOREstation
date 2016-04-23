@@ -167,14 +167,6 @@
 	S["flavor_texts_legs"]		>> flavor_texts["legs"]
 	S["flavor_texts_feet"]		>> flavor_texts["feet"]
 
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	>> inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		>> inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		>> inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		>> inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		>> inside_flavour_texts["Tail"]
-	S["inside_flavour_texts_absorbed"]	>> inside_flavour_texts["Absorbed"]
-
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
 	for(var/module in robot_module_types)
@@ -356,14 +348,6 @@
 	S["flavor_texts_legs"]		<< flavor_texts["legs"]
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
 
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	<< inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		<< inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		<< inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		<< inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		<< inside_flavour_texts["Tail"]
-	S["inside_flavour_texts_absorbed"]	<< inside_flavour_texts["Absorbed"]
-
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
 	for(var/module in robot_module_types)
@@ -396,7 +380,6 @@
 	S["UI_style_alpha"]		<< UI_style_alpha
 
 	return 1
-
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

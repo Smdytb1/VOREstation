@@ -51,18 +51,27 @@
 			message_admins("[key_name(hound)] has eaten [key_name(patient)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 			playsound(hound, 'sound/vore/gulp.ogg', 100, 1)
 
-/obj/item/device/dogborg/sleeper/proc/go_out()
+/obj/item/device/dogborg/sleeper/proc/go_out(var/target)
 	hound = src.loc
 	if(length(contents) > 0)
 		hound.visible_message("<span class='warning'>[hound.name] empties out their contents via their [eject_port] port.</span>", "<span class='notice'>You empty your contents via your [eject_port] port.</span>")
-		for(var/C in contents)
-			if(ishuman(C))
-				var/mob/living/carbon/human/person = C
+		if(target)
+			if(ishuman(target))
+				var/mob/living/carbon/human/person = target
 				person.forceMove(get_turf(src))
 				person.reset_view()
 			else
-				var/obj/T = C
+				var/obj/T = target
 				T.loc = hound.loc
+		else
+			for(var/C in contents)
+				if(ishuman(C))
+					var/mob/living/carbon/human/person = C
+					person.forceMove(get_turf(src))
+					person.reset_view()
+				else
+					var/obj/T = C
+					T.loc = hound.loc
 		items_preserved.Cut()
 		cleaning = 0
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
