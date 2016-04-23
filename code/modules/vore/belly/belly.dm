@@ -60,8 +60,8 @@
 
 		if (iscarbon(owner.loc)) // This makes sure that the mob behaves properly if released into another mob
 			var/mob/living/carbon/loc_mob = owner.loc
-			for (var/bellytype in loc_mob.internal_contents)
-				var/datum/belly/belly = loc_mob.internal_contents[bellytype]
+			for (var/bellytype in loc_mob.vore_organs)
+				var/datum/belly/belly = loc_mob.vore_organs[bellytype]
 				if (owner in belly.internal_contents)
 					belly.internal_contents += M
 		tick++
@@ -78,8 +78,8 @@
 
 	if (iscarbon(owner.loc)) // This makes sure that the mob behaves properly if released into another mob
 		var/mob/living/carbon/loc_mob = owner.loc
-		for (var/bellytype in loc_mob.internal_contents)
-			var/datum/belly/belly = loc_mob.internal_contents[bellytype]
+		for (var/bellytype in loc_mob.vore_organs)
+			var/datum/belly/belly = loc_mob.vore_organs[bellytype]
 			if (owner in belly.internal_contents)
 				belly.internal_contents += M
 	return 1
@@ -129,8 +129,8 @@
 	// If digested prey is also a pred... anyone inside their bellies gets moved up.
 	if (is_vore_predator(M))
 		var/vore/pred_capable/P = M
-		for (var/bellytype in P.internal_contents)
-			var/datum/belly/belly = P.internal_contents[bellytype]
+		for (var/bellytype in P.vore_organs)
+			var/datum/belly/belly = P.vore_organs[bellytype]
 			for (var/obj/SubPrey in belly.internal_contents)
 				SubPrey.loc = src.owner
 				internal_contents += SubPrey

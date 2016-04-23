@@ -61,7 +61,7 @@
 	// Setup the types of bellies present
 
 	insides = new /datum/belly/simple(src)
-	internal_contents["Stomach"] = insides
+	vore_organs["Stomach"] = insides
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
 	// Vore Code End
 
@@ -107,8 +107,8 @@
 
 	// Start vore code. Digestion code is handled here.
 	// For each belly type
-	for (var/bellytype in internal_contents)
-		var/datum/belly/B = internal_contents[bellytype]
+	for (var/bellytype in vore_organs)
+		var/datum/belly/B = vore_organs[bellytype]
 		for(var/mob/living/M in B.internal_contents)
 			if(M.loc != src)
 				B.internal_contents -= M

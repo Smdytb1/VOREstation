@@ -201,7 +201,7 @@
 	set category = "Abilities"
 
 	// Vore Code Begin
-	var/datum/belly/B = internal_contents["Stomach"]
+	var/datum/belly/B = vore_organs["Stomach"]
 	if (B.release_all_contents())
 		src.visible_message("\red <B>[src] hurls out the contents of their stomach!</B>")
 	// Vore Code End

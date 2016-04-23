@@ -75,8 +75,8 @@
 		recent_struggle = 0
 */
 
-	for (var/bellytype in src.internal_contents)
-		var/datum/belly/belly = src.internal_contents[bellytype]
+	for (var/bellytype in src.vore_organs)
+		var/datum/belly/belly = src.vore_organs[bellytype]
 		if (user in belly.internal_contents)
 			belly.relay_struggle(user, direction)
 

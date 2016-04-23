@@ -2,11 +2,9 @@
 // Cross-defined vars to keep vore code isolated.
 
 /mob/living
-	var/digestable = 1					//Can the mob be digested inside a belly?
+	var/digestable = 1					// Can the mob be digested inside a belly?
 	var/datum/voretype/vorifice = null	// Default to no vore capability.
-
-	// TODO - Rename this! It is too conflicty with belly.internal_contents
-	var/list/internal_contents = list()
+	var/list/vore_organs = list()		// List of vore containers inside a mob
 
 /mob/living/simple_animal
 	var/isPredator = 0 					//Are they capable of performing and pre-defined vore actions for their species?
@@ -53,7 +51,7 @@
 //	This is an "interface" type.  No instances of this type will exist, but any type which is supposed
 //  to be vore capable should implement the vars and procs defined here to be vore-compatible!
 /vore/pred_capable
-	var/list/internal_contents
+	var/list/vore_organs
 	var/datum/voretype/vorifice
 
 //
@@ -88,19 +86,19 @@
 	// TODO LESHANA - This should all be refactored into procs on voretype that are overriden...
 	switch(releaseorifice)
 		if("Stomach (by Mouth)")
-			var/datum/belly/belly = internal_contents["Stomach"]
+			var/datum/belly/belly = vore_organs["Stomach"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] hurls out the contents of their stomach!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		if("Stomach (by Anus)")
-			var/datum/belly/belly = internal_contents["Stomach"]
+			var/datum/belly/belly = vore_organs["Stomach"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] releases their stomach contents out of their rear!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		if("Womb")
-			var/datum/belly/belly = internal_contents["Womb"]
+			var/datum/belly/belly = vore_organs["Womb"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] gushes out the contents of their womb!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -110,7 +108,7 @@
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		if("Cock")
-			var/datum/belly/belly = internal_contents["Cock"]
+			var/datum/belly/belly = vore_organs["Cock"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] splurts out the contents of their cock!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -120,7 +118,7 @@
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		if("Breasts")
-			var/datum/belly/belly = internal_contents["Boob"]
+			var/datum/belly/belly = vore_organs["Boob"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] squirts out the contents of their breasts!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -129,7 +127,7 @@
 				visible_message("<span class='danger'>[src] squirts out a puddle of milk from their breasts!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		if("Tail")
-			var/datum/belly/belly = internal_contents["Tail"]
+			var/datum/belly/belly = vore_organs["Tail"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] releases a few things from their tail!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -139,7 +137,7 @@
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		if("Absorbed")
-			var/datum/belly/belly = internal_contents["Absorbed"]
+			var/datum/belly/belly = vore_organs["Absorbed"]
 			if (belly.release_all_contents())
 				visible_message("<font color='green'><b>[src] releases something from ther body!</b></font>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -172,8 +170,8 @@
 		var/mob/living/carbon/pred = src.loc
 		var/confirm = alert(src, "You're in a player-character. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If you are in more than one pred, use this more than once. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
-			for(var/O in pred.internal_contents)
-				var/datum/belly/CB = pred.internal_contents[O]
+			for(var/O in pred.vore_organs)
+				var/datum/belly/CB = pred.vore_organs[O]
 				CB.release_specific_contents(src)
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (PC) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 
@@ -230,8 +228,8 @@
 		var/datum/belly/inside_belly		// Which of predator's bellies are we inside?
 
 		//This big block here figures out where the prey is
-		for (var/bellytype in eater.internal_contents)
-			var/datum/belly/B = eater.internal_contents[bellytype]
+		for (var/bellytype in eater.vore_organs)
+			var/datum/belly/B = eater.vore_organs[bellytype]
 			for (var/mob/living/M in B.internal_contents)
 				if (M == user)
 					inside_belly = B
@@ -250,8 +248,8 @@
 
 	// List people inside you
 	dat += "<font color = 'purple'><b><center>Contents</center></b></font><br>"
-	for (var/bellytype in user.internal_contents)
-		var/datum/belly/belly = user.internal_contents[bellytype]
+	for (var/bellytype in user.vore_organs)
+		var/datum/belly/belly = user.vore_organs[bellytype]
 		var/inside_count = 0
 		dat += "<font color = 'green'>[belly.belly_type] </font> <a href='?src=\ref[src];toggle_digestion=\ref[belly]'>Digestion: [belly.digest_mode]</a><br>"
 		for (var/atom/movable/M in belly.internal_contents)
@@ -262,8 +260,8 @@
 
 	// Offer flavor text customization options
 	dat += "<font color = 'purple'><b><center>Customisation options</center></b></font><br><br>"
-	for (var/bellytype in user.internal_contents)
-		var/datum/belly/belly = user.internal_contents[bellytype]
+	for (var/bellytype in user.vore_organs)
+		var/datum/belly/belly = user.vore_organs[bellytype]
 		dat += "<b>[belly.belly_type]</b><br>[belly.inside_flavor] <a href='?src=\ref[src];set_description=\ref[belly]'>Change text</a><br>"
 
 	return dat;

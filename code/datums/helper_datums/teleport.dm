@@ -111,7 +111,7 @@
 
 		//Try to teleport into someone on the beacon
 		for(var/mob/living/carbon/human/targetmob in aimturf.contents)
-			var/datum/belly/B = targetmob.internal_contents["Stomach"]
+			var/datum/belly/B = targetmob.vore_organs["Stomach"]
 			teleatom.loc = targetmob
 			B.internal_contents += teleatom
 			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
@@ -122,7 +122,7 @@
 		//Teleporting into a mob
 		if(ishuman(destination.loc))
 			var/mob/living/carbon/human/targetmob = destination.loc
-			var/datum/belly/B = targetmob.internal_contents["Stomach"]
+			var/datum/belly/B = targetmob.vore_organs["Stomach"]
 			teleatom.loc = targetmob
 			B.internal_contents += teleatom
 			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)

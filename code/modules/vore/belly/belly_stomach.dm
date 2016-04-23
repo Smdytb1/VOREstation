@@ -140,7 +140,7 @@
 				owner.nutrition += 2
 			else if(M.nutrition < 2) //When they're finally drained.
 				var/mob/living/O = owner
-				var/datum/belly/B = O.internal_contents["Absorbed"]
+				var/datum/belly/B = O.vore_organs["Absorbed"]
 				M << "<span class='notice'>[owner]'s stomach absorbs your body, making you part of them.</span>"
 				owner << "<span class='notice'>Your stomach absorbs [M]'s body, making them part of you.</span>"
 				src.internal_contents -= M //Removes them from vore organ when absorbed.

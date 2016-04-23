@@ -1472,8 +1472,8 @@
 	// Start vore code. Digestion code is handled here.
 	proc/handle_internal_contents()
 		// For each belly type
-		for (var/bellytype in internal_contents)
-			var/datum/belly/B = internal_contents[bellytype]
+		for (var/bellytype in vore_organs)
+			var/datum/belly/B = vore_organs[bellytype]
 			for(var/atom/movable/M in B.internal_contents)
 				if(M.loc != src)
 					B.internal_contents -= M
