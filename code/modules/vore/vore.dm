@@ -3,7 +3,7 @@
 
 /mob/living
 	var/digestable = 1					// Can the mob be digested inside a belly?
-	var/datum/voretype/vorifice = null	// Default to no vore capability.
+	var/datum/belly/vore_selected		// Default to no vore capability.
 	var/list/vore_organs = list()		// List of vore containers inside a mob
 
 /mob/living/simple_animal
@@ -58,32 +58,29 @@
 //	Check if an object is capable of eating things.
 //	For now this is just simple_animals and carbons
 //
-/proc/is_vore_predator(var/mob/O)
-	return (O != null && (istype(O, /mob/living/simple_animal) || istype(O, /mob/living/carbon)) && O:vorifice)
+/proc/is_vore_predator(var/mob/living/O)
+	return (O != null && (istype(O, /mob/living)) && O:vore_selected)
 
 //
 //	Verb for toggling which orifice you eat people with!
 //
-/mob/living/carbon/human/proc/orifice_toggle()
-	set name = "Choose Vore Mode"
+/mob/living/proc/belly_select()
+	set name = "Choose Belly"
 	set category = "Vore"
 
-	var/type = input("Choose Vore Mode") in list("Oral Vore", "Unbirth", "Anal Vore", "Cock Vore", "Breast Vore", "Tail Vore")
-	// This is hard coded for now, but should be fixed later!
-	vorifice = SINGLETON_VORETYPE_INSTANCES[type];
+	var/type = input("Choose Belly") in vore_organs
+	vore_selected = type
+	src << "<span class='notice'>[vore_selected.name] selected.</span>"
 
-	// TODO LESHANA - This is bad!
-	// Vorifice objects have no member vars, so are effectively immutable!
-	// Given this, we shouldn't be creating new instances for every mob!  Instead we should have global singletons.
-	// TODO - Implement this.  even better would be function pointers, but eh.
-	src << "<span class='notice'>[vorifice.name] selected.</span>"
-
-/mob/living/carbon/human/proc/vore_release()
+//
+//	Verb for toggling which orifice you eat people with!
+// VTODO: Make this part of the inside panel (or whatever) instead
+/mob/living/proc/vore_release()
 	set name = "Release"
 	set category = "Vore"
-	var/releaseorifice = input("Choose Orifice") in list("Stomach (by Mouth)", "Stomach (by Anus)", "Womb", "Cock", "Breasts", "Tail", "Absorbed")
+	var/releaseorifice = input("Choose Orifice") in vore_organs
 
-	// TODO LESHANA - This should all be refactored into procs on voretype that are overriden...
+	/*Sacrificed for generic message but also generic customizable bellies.
 	switch(releaseorifice)
 		if("Stomach (by Mouth)")
 			var/datum/belly/belly = vore_organs["Stomach"]
@@ -145,6 +142,7 @@
 				belly.is_full = 0
 				visible_message("<span class='danger'>[src] releases something from their body!</span>") //They should never see this. Can't digest someone in you.
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	*/
 
 /////////////////////////////
 ////   OOC Escape Code	 ////
@@ -236,7 +234,7 @@
 					break
 		// ASSERT(inside_belly != null) // Make sure we actually found ourselves.
 
-		dat += "<font color = 'green'>You are currently inside</font> <font color = 'yellow'>[eater]'s</font> <font color = 'red'>[inside_belly.belly_name]</font>!<br><br>"
+		dat += "<font color = 'green'>You are currently inside</font> <font color = 'yellow'>[eater]'s</font> <font color = 'red'>[inside_belly]</font>!<br><br>"
 		dat += "[inside_belly.inside_flavor]<br><br>"
 		if (inside_belly.internal_contents.len > 0)
 			dat += "<font color = 'green'>You can see the following around you:</font><br>"
@@ -251,7 +249,7 @@
 	for (var/bellytype in user.vore_organs)
 		var/datum/belly/belly = user.vore_organs[bellytype]
 		var/inside_count = 0
-		dat += "<font color = 'green'>[belly.belly_type] </font> <a href='?src=\ref[src];toggle_digestion=\ref[belly]'>Digestion: [belly.digest_mode]</a><br>"
+		dat += "<font color = 'green'>[belly] </font> <a href='?src=\ref[src];toggle_digestion=\ref[belly]'>Digestion: [belly.digest_mode]</a><br>"
 		for (var/atom/movable/M in belly.internal_contents)
 			dat += "[M] <a href='?src=\ref[src];look=\ref[M]'>Examine</a> <br>"
 			inside_count += 1
@@ -262,7 +260,7 @@
 	dat += "<font color = 'purple'><b><center>Customisation options</center></b></font><br><br>"
 	for (var/bellytype in user.vore_organs)
 		var/datum/belly/belly = user.vore_organs[bellytype]
-		dat += "<b>[belly.belly_type]</b><br>[belly.inside_flavor] <a href='?src=\ref[src];set_description=\ref[belly]'>Change text</a><br>"
+		dat += "<b>[belly]</b><br>[belly.inside_flavor] <a href='?src=\ref[src];set_description=\ref[belly]'>Change text</a><br>"
 
 	return dat;
 
@@ -293,7 +291,7 @@
 
 	if(href_list["set_description"])
 		var/datum/belly/B = locate(href_list["set_description"])
-		B.inside_flavor = input(usr, "Input a new flavor text!", "[B.belly_type] flavor text", B.inside_flavor) as message
+		B.inside_flavor = input(usr, "Input a new flavor text!", "[B] flavor text", B.inside_flavor) as message
 		return 1 // TODO Will this make it refresh the ui?
 
 	if (href_list["toggle_digestion"])
@@ -304,7 +302,7 @@
 	if (href_list["close"])
 		del(src)  // Cleanup
 
-/mob/living/carbon/human/proc/I_am_not_mad()
+/mob/living/carbon/human/proc/toggle_digestability()
 	set name = "Toggle digestability"
 	set category = "Vore"
 
@@ -312,3 +310,64 @@
 		digestable = !digestable
 		usr << "<span class='alert'>You are [digestable ?  "now" : "no longer"] digestable.</span>"
 		message_admins("[key_name(src)] toggled their digestability to [digestable] ([loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>" : "null"])")
+
+///
+/// Actual eating procs
+///
+
+/mob/living/proc/eat_held_mob(var/mob/user, var/mob/living/prey, var/mob/living/pred)
+	return perform_the_nom(user, prey, pred)
+
+/mob/living/proc/feed_self_to_grabbed(var/mob/living/carbon/human/user, var/vore/pred_capable/pred)
+	return perform_the_nom(user, user, pred)
+
+/mob/living/proc/feed_grabbed_to_self(var/mob/living/carbon/human/user, var/mob/prey)
+	return perform_the_nom(user, prey, user)
+
+/mob/living/proc/feed_grabbed_to_other(var/mob/living/carbon/human/user, var/mob/prey, var/vore/pred_capable/pred)
+	return perform_the_nom(user, prey, pred)
+
+/mob/living/proc/perform_the_nom(var/mob/living/user, var/mob/living/prey, var/mob/living/pred)
+	//Sanity
+	if(!user || !prey || !pred || !pred.vore_selected)
+		return
+
+	// The belly selected at the time of noms
+	var/datum/belly/belly_target = pred.vore_organs[pred.vore_selected]
+	var/attempt_msg = "ERROR: Vore message couldn't be created. Notify a dev. (at)"
+	var/success_msg = "ERROR: Vore message couldn't be created. Notify a dev. (sc)"
+
+	// Prepare messages
+	if(user == pred) //Feeding someone to yourself
+		attempt_msg = text("[] is attemping to [] [] into their []!",pred,belly_target.vore_verb,prey,belly_target)
+		success_msg = text("[] manages to [] [] into their []!",pred,belly_target.vore_verb,prey,belly_target)
+	else //Feeding someone to another person
+		attempt_msg = text("[] is attempting to [] [] into []'s []!",user,belly_target.vore_verb,prey,pred,belly_target)
+		success_msg = text("[] manages to [] [] into []'s []!",user,belly_target.vore_verb,prey,pred,belly_target)
+
+	// Announce that we start the attempt!
+	for (var/mob/O in get_mobs_in_view(world.view,user))
+		O.show_message(attempt_msg)
+
+	// Now give the prey time to escape... return if they did
+	var/swallow_time = istype(prey, /mob/living/carbon/human) ? belly_target.human_prey_swallow_time : belly_target.nonhuman_prey_swallow_time
+	if (!do_mob(user, prey))
+		return 0; // User is not able to act upon prey
+	if(!do_after(user, swallow_time))
+		return 0 // Prey escpaed (or user disabled) before timer expired.
+
+	// If we got this far, nom successful! Announce it!
+	for (var/mob/O in get_mobs_in_view(world.view,user))
+		O.show_message(success_msg)
+
+	playsound(user, belly_target.vore_sound, 100, 1)
+
+	// Actually shove prey into the belly.
+	belly_target.nom_mob(prey, user)
+
+	// Inform Admins
+	if (pred == user)
+		msg_admin_attack("[key_name(pred)] ate [key_name(prey)]. ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+	else
+		msg_admin_attack("[key_name(user)] forced [key_name(pred)] to eat [key_name(prey)]. ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+	return 1

@@ -44,6 +44,22 @@
 
 	// Vore Code Start
 	// Setup the types of bellies present.
+
+	// VTODO: If someone has ZERO bellies, give them the default.
+	if(length(vore_organs) == 0)
+		//Give them a stomach as default so they aren't helpless.
+		vore_organs["Stomach"] = new /datum/belly(src)
+		if(vore_organs["Stomach"])
+			var/datum/belly/setup = vore_organs["Stomach"]
+			setup.name = "Stomach"
+			setup.inside_flavor = "The slimy inside of [setup.owner]'s stomach!"
+			setup.vore_sound = 'sound/vore/gulp.ogg'
+			setup.vore_verb = "swallow"
+
+			//Set the stomach as the selected one since it's the ONLY one
+			src.vore_selected = vore_organs["Stomach"]
+
+	/* Old, when predefined datums were real.
 	vore_organs["Stomach"] = new /datum/belly/stomach(src)
 	vore_organs["Cock"] = new /datum/belly/cock(src)
 	vore_organs["Womb"] = new /datum/belly/womb(src)
@@ -51,18 +67,20 @@
 	vore_organs["Tail"] = new /datum/belly/tail(src)
 	vore_organs["Absorbed"] = new /datum/belly/absorbed(src)
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
-	// Vore Code End
+	*/
+
+
 
 	//Non-default verbs go here.
 	verbs += /mob/living/proc/set_size
-	verbs += /mob/living/carbon/human/proc/orifice_toggle
-	verbs += /mob/living/carbon/human/proc/vore_release
+	verbs += /mob/living/proc/belly_select
+	verbs += /mob/living/proc/vore_release
 	verbs += /mob/living/proc/escapeOOC //NW WOZ ERE 2. OOC escape verb.
 	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	verbs += /mob/living/carbon/human/proc/insidePanel
-	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
+	verbs += /mob/living/carbon/human/proc/toggle_digestability // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
 
-
+	// Vore Code End
 
 /mob/living/carbon/human/Stat()
 	..()

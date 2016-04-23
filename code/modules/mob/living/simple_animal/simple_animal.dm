@@ -60,9 +60,13 @@
 	// Vore Code Start
 	// Setup the types of bellies present
 
+	// VTODO: Give animals a simple inside.
+
+	/*Old, when predefined datums were real.
 	insides = new /datum/belly/simple(src)
 	vore_organs["Stomach"] = insides
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
+	*/
 	// Vore Code End
 
 /mob/living/simple_animal/Login()

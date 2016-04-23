@@ -1882,7 +1882,7 @@ datum/preferences
 	// This is gonna be interesting. Let's see if I can figure out inside flavour texts -Nightwing
 	for (var/bellytype in character.vore_organs)
 		var/datum/belly/belly = character.vore_organs[bellytype]
-		belly.inside_flavor = inside_flavour_texts[belly.belly_type]
+		belly.inside_flavor = inside_flavour_texts[belly.name]
 
 	character.med_record = med_record
 	character.sec_record = sec_record

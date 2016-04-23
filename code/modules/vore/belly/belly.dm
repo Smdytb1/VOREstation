@@ -9,34 +9,34 @@
 #define DM_HEAL "Heal"
 #define DM_ABSORB "Absorb"
 
+#define VORE_BRUTEDAM 2
+#define VORE_BURNDAM 3
+#define VORE_TICKRATE 3
+
 #define VORE_STRUGGLE_EMOTE_CHANCE 40
 
 /**
 * Parent type of all the various "belly" varieties.
 */
 /datum/belly
-	// Instance Variables
-	var/belly_type					// Stomach/Cock/Womb/Boob
-	var/belly_name					// stomach/balls/womb/breast
-	// TODO - Unify belly_type and belly_name shall we?
-	var/mob/owner					// The mob whose belly this is.
-	var/digest_mode = DM_HOLD		// Whether or not to digest. Default to not digest.
-	var/list/digest_modes = list(DM_HOLD, DM_DIGEST)	// Possible digest modes
-	var/is_full						// Flag for if digested remeans are present. (for disposal messages)
-	var/inside_flavor				// Flavor text description of inside sight/sound/smells/feels.
-	var/recent_struggle = 0			// Flag to prevent struggle emote spam
-
-	var/list/internal_contents = list();	// People/Things you've eaten into this belly!
-
-	// These items are preserved when prey are digested.
-	var/list/preserve_items = list()
+	var/name								// Name of this location
+	var/mob/living/owner					// The mob whose belly this is.
+	var/digest_mode = DM_HOLD				// Whether or not to digest. Default to not digest.
+	var/list/digest_modes = list(DM_HOLD,DM_DIGEST)	// Possible digest modes
+	var/is_full								// Flag for if digested remeans are present. (for disposal messages)
+	var/inside_flavor						// Flavor text description of inside sight/sound/smells/feels.
+	var/recent_struggle = 0					// Flag to prevent struggle emote spam
+	var/list/internal_contents = list()		// People/Things you've eaten into this belly!
+	var/vore_sound = 'sound/vore/gulp.ogg'	// Sound when ingesting someone
+	var/vore_verb = "ingest"
+	var/human_prey_swallow_time = 100
+	var/nonhuman_prey_swallow_time = 30
 
 
 // Constructor that sets the owning mob
 // @Override
-/datum/belly/New(var/mob/owning_mob)
+/datum/belly/New(var/mob/living/owning_mob)
 	owner = owning_mob
-	preserve_items += important_items
 
 // Toggle digestion on/off and notify user of the new setting.
 // If multiple digestion modes are avaliable (i.e. unbirth) then user should be prompted.
@@ -47,7 +47,6 @@
 // @return True if the belly is empty.
 /datum/belly/proc/is_empty()
 	return internal_contents.len == 0
-
 
 // Release all contents of this belly into the owning mob's location.
 // If that location is another mob, contents are transferred into whichever of its bellies the owning mob is in.
@@ -84,7 +83,6 @@
 				belly.internal_contents += M
 	return 1
 
-//
 // Actually perform the mechanics of devouring the tasty prey.
 // The purpose of this method is to avoid duplicate code, and ensure that all necessary
 // steps are taken.
@@ -106,7 +104,7 @@
 	return
 
 // Get the line that should show up in Examine message if the owner of this belly
-// is eaxmined.   By making this a proc, we not only take advantage of polymorphism,
+// is examined.   By making this a proc, we not only take advantage of polymorphism,
 // but can easily make the message vary based on how many people are inside, etc.
 // Returns a string which shoul be appended to the Examine output.
 /datum/belly/proc/get_examine_msg(t_He, t_his, t_him, t_has, t_is)
@@ -135,7 +133,7 @@
 				SubPrey.loc = src.owner
 				internal_contents += SubPrey
 				if (istype(SubPrey, /mob))
-					SubPrey << "As [M] melts away around you, you find yourself in [src.owner]'s [belly_name]"
+					SubPrey << "As [M] melts away around you, you find yourself in [src.owner]'s [name]"
 					// TODO - If SubPrey is digestable, tell them its their turn to die horribly
 
 	//Drop all items into the belly.
@@ -173,7 +171,7 @@
 		del(W)
 
 /datum/belly/proc/_is_digestable(var/obj/item/I)
-	for (var/T in preserve_items)
+	for (var/T in important_items)
 		if(istype(I, T))
 			return 0
 	return 1
