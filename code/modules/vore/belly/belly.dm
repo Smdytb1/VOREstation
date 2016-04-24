@@ -48,64 +48,10 @@ belly_prefs["immutable"] = BOOLEAN
 	var/tmp/is_full								// Flag for if digested remeans are present. (for disposal messages)
 	var/tmp/recent_struggle = 0					// Flag to prevent struggle emote spam
 
-// Provides all the important settings to the requester
-// Mostly for use in saving the prefs elsewhere
-/datum/belly/proc/get_preferences()
-	var/list/belly_prefs = list()
-	belly_prefs["name"] = name
-	belly_prefs["digest_mode"] = digest_mode
-	belly_prefs["digest_modes"] = digest_modes
-	belly_prefs["inside_flavor"] = inside_flavor
-	belly_prefs["vore_sound"] = vore_sound
-	belly_prefs["vore_verb"] = vore_verb
-	belly_prefs["human_prey_swallow_time"] = human_prey_swallow_time
-	belly_prefs["nonhuman_prey_swallow_time"] = nonhuman_prey_swallow_time
-	belly_prefs["digest_brute"] = digest_brute
-	belly_prefs["digest_burn"] = digest_burn
-	belly_prefs["digest_tickrate"] = digest_tickrate
-	belly_prefs["immutable"] = immutable
-
-	return belly_prefs
-
-// Configures the belly based on the provided list
-// Mostly for use in loading the prefs from elsewhere
-/datum/belly/proc/set_preferences(var/list/belly_prefs)
-	if(!belly_prefs || belly_prefs.len == 0)
-		return 0
-
-	if(belly_prefs["name"])
-		name = belly_prefs["name"]
-	if(belly_prefs["digest_mode"])
-		digest_mode = belly_prefs["digest_mode"]
-	if(belly_prefs["digest_modes"])
-		digest_modes = belly_prefs["digest_modes"]
-	if(belly_prefs["inside_flavor"])
-		inside_flavor = belly_prefs["inside_flavor"]
-	if(belly_prefs["vore_sound"])
-		vore_sound = belly_prefs["vore_sound"]
-	if(belly_prefs["vore_verb"])
-		vore_verb = belly_prefs["vore_verb"]
-	if(belly_prefs["human_prey_swallow_time"])
-		human_prey_swallow_time = belly_prefs["human_prey_swallow_time"]
-	if(belly_prefs["nonhuman_prey_swallow_time"])
-		nonhuman_prey_swallow_time = belly_prefs["nonhuman_prey_swallow_time"]
-	if(belly_prefs["digest_brute"])
-		digest_brute = belly_prefs["digest_brute"]
-	if(belly_prefs["digest_burn"])
-		digest_burn = belly_prefs["digest_burn"]
-	if(belly_prefs["digest_tickrate"])
-		digest_tickrate = belly_prefs["digest_tickrate"]
-	if(belly_prefs["immutable"])
-		immutable = belly_prefs["immutable"]
-
-	return 1
-
 // Constructor that sets the owning mob
 // @Override
-/datum/belly/New(var/mob/living/owning_mob, var/list/belly_prefs)
+/datum/belly/New(var/mob/living/owning_mob)
 	owner = owning_mob
-	if(belly_prefs)
-		set_preferences(belly_prefs)
 
 // Toggle digestion on/off and notify user of the new setting.
 // If multiple digestion modes are avaliable (i.e. unbirth) then user should be prompted.

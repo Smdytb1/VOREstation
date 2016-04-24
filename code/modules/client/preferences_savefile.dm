@@ -396,6 +396,9 @@
 
 	S["belly_prefs"]	>> belly_prefs
 
+	if(!belly_prefs)
+		belly_prefs = list()
+
 	return 1
 
 /datum/preferences/proc/save_vore_preferences()

@@ -1906,16 +1906,13 @@ datum/preferences
 				else if(status == "mechanical")
 					I.mechanize()
 
-	if(!belly_prefs || !length(belly_prefs))
+	if(!length(belly_prefs))
 		log_debug("Newvore: Giving default stomach to [character] since belly_prefs is empty")
-		var/datum/belly/stomach = new/datum/belly
-		var/list/bsetup = list()
-		bsetup.Add("name")
-		bsetup.Add("immutable")
-		bsetup["name"] = "Stomach"
-		bsetup["immutable"] = 1
-		stomach.set_preferences(bsetup)
-		//belly_prefs["Stomach"] = new/datum/belly(character,list("name" = "Stomach","immutable" = 1))
+		var/datum/belly/stomach = new/datum/belly(src)
+		stomach.name = "Stomach"
+		stomach.inside_flavor = "Just the slimy inside of [character]'s stomach!"
+		stomach.immutable = 1
+		belly_prefs["Stomach"] = stomach
 
 	log_debug("Newvore: About to character.vore_organs = belly_prefs")
 	character.vore_organs = belly_prefs
