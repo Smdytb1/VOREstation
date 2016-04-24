@@ -72,6 +72,27 @@
 	src << "<span class='notice'>[vore_selected] selected.</span>"
 
 //
+//	Verb for saving vore preferences to save file
+//
+/mob/living/proc/save_vore_prefs()
+	set name = "Save Vore Prefs"
+	set category = "Vore"
+
+	if(client.prefs)
+		client.prefs.belly_prefs = vore_organs
+		client.prefs.save_vore_preferences()
+	else
+		src << "<span class='warning'>You attempted to save your vore prefs but somehow you're in this character without a client.prefs variable. Tell a dev.</span>"
+		log_debug("[src] tried to save vore prefs but lacks a client.prefs var.")
+
+//
+//	Proc for applying vore preferences, given bellies
+//
+/mob/living/proc/apply_vore_prefs(var/list/bellies)
+	if(!bellies || bellies.len == 0)
+		log_debug("Tried to apply bellies to [src] and failed.")
+
+//
 //	Verb for toggling which orifice you eat people with!
 // VTODO: Make this part of the inside panel (or whatever) instead
 /mob/living/proc/vore_release()

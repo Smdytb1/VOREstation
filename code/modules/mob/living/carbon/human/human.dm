@@ -84,6 +84,7 @@
 	verbs += /mob/living/proc/set_size
 	verbs += /mob/living/proc/belly_select
 	verbs += /mob/living/proc/vore_release
+	verbs += /mob/living/proc/save_vore_prefs
 	verbs += /mob/living/proc/escapeOOC //NW WOZ ERE 2. OOC escape verb.
 	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	verbs += /mob/living/carbon/human/proc/insidePanel

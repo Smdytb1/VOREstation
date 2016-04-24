@@ -381,5 +381,51 @@
 
 	return 1
 
+/datum/preferences/proc/load_vore_preferences(slot)
+	if(!path)				return 0
+	if(!fexists(path))		return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/"
+	if(!slot)	slot = default_slot
+	slot = sanitize_integer(slot, 1, config.character_slots, initial(default_slot))
+	if(slot != default_slot)
+		default_slot = slot
+		S["default_slot"] << slot
+	S.cd = "/character[slot]"
+
+	var/list/belly_raw = list()
+
+	S["belly0"]	>>	belly_raw["belly0"]
+	S["belly1"]	>>	belly_raw["belly1"]
+	S["belly2"]	>>	belly_raw["belly2"]
+	S["belly3"]	>>	belly_raw["belly3"]
+	S["belly4"]	>>	belly_raw["belly4"]
+	S["belly5"]	>>	belly_raw["belly5"]
+	S["belly6"]	>>	belly_raw["belly6"]
+	S["belly7"]	>>	belly_raw["belly7"]
+	S["belly8"]	>>	belly_raw["belly8"]
+	S["belly9"]	>>	belly_raw["belly9"]
+
+	for(var/C in belly_holder)
+		var/datum/belly/B = belly_holder["C"]
+
+
+	belly_prefs_debug = belly_holder
+
+	return 1
+
+/datum/preferences/proc/save_vore_preferences()
+	if(!path)				return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/character[default_slot]"
+
+	for(var/i = 0, i<=9, i++)
+		S["belly[i]"]	<<	belly_prefs[i]
+		log_debug("Newvore: Saving [i] belly, which is [belly_prefs[i]]")
+
+	return 1
+
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN
