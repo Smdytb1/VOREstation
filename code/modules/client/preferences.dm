@@ -1908,7 +1908,14 @@ datum/preferences
 
 	if(!belly_prefs || !length(belly_prefs))
 		log_debug("Newvore: Giving default stomach to [character] since belly_prefs is empty")
-		belly_prefs["Stomach"] = new/datum/belly(character,list("name" = "Stomach","immutable" = 1))
+		var/datum/belly/stomach = new/datum/belly
+		var/list/bsetup = list()
+		bsetup.Add("name")
+		bsetup.Add("immutable")
+		bsetup["name"] = "Stomach"
+		bsetup["immutable"] = 1
+		stomach.set_preferences(bsetup)
+		//belly_prefs["Stomach"] = new/datum/belly(character,list("name" = "Stomach","immutable" = 1))
 
 	log_debug("Newvore: About to character.vore_organs = belly_prefs")
 	character.vore_organs = belly_prefs
