@@ -1906,15 +1906,14 @@ datum/preferences
 				else if(status == "mechanical")
 					I.mechanize()
 
-	log_debug("Newvore: About to copy_to")
-	for(var/B in belly_prefs)
-		log_debug("Newvore: belly_prefs item: [B]")
+	if(!belly_prefs || !length(belly_prefs))
+		log_debug("Newvore: Giving default stomach to [character] since belly_prefs is empty")
+		belly_prefs["Stomach"] = new/datum/belly(character,list("name" = "Stomach","immutable" = 1))
 
+	log_debug("Newvore: About to character.vore_organs = belly_prefs")
 	character.vore_organs = belly_prefs
 
 	log_debug("Newvore: Copied to vore_organs")
-	for(var/B in character.vore_organs)
-		log_debug("Newvore: vore_organs item: [B]")
 
 	for(var/datum/belly/B in character.vore_organs)
 		B.owner = character

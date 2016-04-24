@@ -46,6 +46,7 @@
 	// Setup the types of bellies present.
 
 	// VTODO: If someone has ZERO bellies, give them the default.
+/*
 	if(length(vore_organs) == 0)
 		//Give them a stomach as default so they aren't helpless.
 		vore_organs["Stomach"] = new /datum/belly(src)
@@ -67,6 +68,7 @@
 
 			//Set the stomach as the selected one since it's the ONLY one
 			src.vore_selected = "Stomach"
+*/
 
 	/* Old, when predefined datums were real.
 	vore_organs["Stomach"] = new /datum/belly/stomach(src)

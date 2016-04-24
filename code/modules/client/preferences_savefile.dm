@@ -394,36 +394,7 @@
 		S["default_slot"] << slot
 	S.cd = "/character[slot]"
 
-	var/list/belly_holder = list()
-
-	S["belly0"]	>>	belly_holder["belly0"]
-	S["belly1"]	>>	belly_holder["belly1"]
-	S["belly2"]	>>	belly_holder["belly2"]
-	S["belly3"]	>>	belly_holder["belly3"]
-	S["belly4"]	>>	belly_holder["belly4"]
-	S["belly5"]	>>	belly_holder["belly5"]
-	S["belly6"]	>>	belly_holder["belly6"]
-	S["belly7"]	>>	belly_holder["belly7"]
-	S["belly8"]	>>	belly_holder["belly8"]
-	S["belly9"]	>>	belly_holder["belly9"]
-
-	for(var/B in belly_holder)
-		log_debug("Newvore: Loaded belly_holder: [B]")
-
-	if(!belly_holder["belly0"])
-		log_debug("Newvore: Generating default stomach")
-		belly_holder["belly0"] = new /datum/belly(null,list("name" = "Stomach", "immutable" = 1))
-		log_debug("Newvore: belly0 now: [belly_holder["belly0"]]")
-
-	log_debug("Newvore: b_h.len [belly_holder.len]")
-
-	for(var/datum/belly/B in belly_holder)
-		belly_prefs["[B.name]"] = B
-		log_debug("Newvore: belly_holder to belly_prefs: [B]")
-
-	belly_prefs
-
-	log_debug("Newvore: b_p.len [belly_prefs.len]")
+	S["belly_prefs"]	>> belly_prefs
 
 	return 1
 
@@ -433,9 +404,7 @@
 	if(!S)					return 0
 	S.cd = "/character[default_slot]"
 
-	for(var/i = 0, i<=9, i++)
-		S["belly[i]"]	<<	belly_prefs[i]
-		log_debug("Newvore: Saving [i] belly, which is [belly_prefs[i]]")
+	S["belly_prefs"]	<< belly_prefs
 
 	return 1
 
