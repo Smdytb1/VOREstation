@@ -394,24 +394,36 @@
 		S["default_slot"] << slot
 	S.cd = "/character[slot]"
 
-	var/list/belly_raw = list()
+	var/list/belly_holder = list()
 
-	S["belly0"]	>>	belly_raw["belly0"]
-	S["belly1"]	>>	belly_raw["belly1"]
-	S["belly2"]	>>	belly_raw["belly2"]
-	S["belly3"]	>>	belly_raw["belly3"]
-	S["belly4"]	>>	belly_raw["belly4"]
-	S["belly5"]	>>	belly_raw["belly5"]
-	S["belly6"]	>>	belly_raw["belly6"]
-	S["belly7"]	>>	belly_raw["belly7"]
-	S["belly8"]	>>	belly_raw["belly8"]
-	S["belly9"]	>>	belly_raw["belly9"]
+	S["belly0"]	>>	belly_holder["belly0"]
+	S["belly1"]	>>	belly_holder["belly1"]
+	S["belly2"]	>>	belly_holder["belly2"]
+	S["belly3"]	>>	belly_holder["belly3"]
+	S["belly4"]	>>	belly_holder["belly4"]
+	S["belly5"]	>>	belly_holder["belly5"]
+	S["belly6"]	>>	belly_holder["belly6"]
+	S["belly7"]	>>	belly_holder["belly7"]
+	S["belly8"]	>>	belly_holder["belly8"]
+	S["belly9"]	>>	belly_holder["belly9"]
 
-	for(var/C in belly_holder)
-		var/datum/belly/B = belly_holder["C"]
+	for(var/B in belly_holder)
+		log_debug("Newvore: Loaded belly_holder: [B]")
 
+	if(!belly_holder["belly0"])
+		log_debug("Newvore: Generating default stomach")
+		belly_holder["belly0"] = new /datum/belly(null,list("name" = "Stomach", "immutable" = 1))
+		log_debug("Newvore: belly0 now: [belly_holder["belly0"]]")
 
-	belly_prefs_debug = belly_holder
+	log_debug("Newvore: b_h.len [belly_holder.len]")
+
+	for(var/datum/belly/B in belly_holder)
+		belly_prefs["[B.name]"] = B
+		log_debug("Newvore: belly_holder to belly_prefs: [B]")
+
+	belly_prefs
+
+	log_debug("Newvore: b_p.len [belly_prefs.len]")
 
 	return 1
 
