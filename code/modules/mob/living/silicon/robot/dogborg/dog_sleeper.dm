@@ -177,7 +177,7 @@
 
 	var/datum/browser/popup = new(user, "sleeper", "Sleeper Console", 520, 540)	//Set up the popup browser window
 	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
-	popup.set_content(dat
+	popup.set_content(dat)
 	popup.open()
 	return
 
