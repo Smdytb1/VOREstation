@@ -122,7 +122,7 @@
 */
 
 	dat += "<h3>Sleeper Status</h3>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A>"
+	dat += "<A id='refbutton' href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<A href='?src=\ref[src];eject=1'>Eject All</A>"
 	dat += "<A href='?src=\ref[src];port=1'>Eject port: [eject_port]</A>"
 	if(!cleaning)
@@ -177,7 +177,7 @@
 
 	var/datum/browser/popup = new(user, "sleeper", "Sleeper Console", 520, 540)	//Set up the popup browser window
 	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
-	popup.set_content(dat)
+	popup.set_content(dat
 	popup.open()
 	return
 
