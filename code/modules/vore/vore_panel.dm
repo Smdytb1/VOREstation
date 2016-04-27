@@ -197,6 +197,14 @@
 		user.vore_organs[new_name] = NB
 		selected = NB
 
+		var/healing = alert(user, "Can this belly heal?", "Confirmation", "Yes", "No")
+		var/absorbing = alert(user, "Can this belly absorb?", "Confirmation", "Yes", "No")
+
+		if(healing)
+			selected.digest_modes += DM_HEAL
+		if(absorbing)
+			selected.digest_modes += DM_ABSORB
+
 	if(href_list["bellypick"])
 		user << "href_list'bellypick'= [href_list["bellypick"]]"
 		selected = locate(href_list["bellypick"])
@@ -217,14 +225,7 @@
 		selected.name = new_name
 
 	if(href_list["b_mode"])
-		var/index = selected.digest_modes.Find(selected.digest_mode)
-		var/length = selected.digest_modes.len
-
-		if(index == length) //End of list
-			selected.digest_mode = selected.digest_modes[1]
-		else
-			index++
-			selected.digest_mode = selected.digest_modes[index]
+		selected.digest_mode = input("Choose Mode (currently [selected.digest_mode]") in selected.digest_modes
 
 	if(href_list["b_desc"])
 		var/new_desc = html_encode(input(usr,"Belly Description (1024 char limit):","New Description") as message|null)
