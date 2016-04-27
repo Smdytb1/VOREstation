@@ -82,16 +82,9 @@
 
 
 
-	//Non-default verbs go here.
-	verbs += /mob/living/proc/set_size
-	verbs += /mob/living/proc/belly_select
-	verbs += /mob/living/proc/vore_release
-	verbs += /mob/living/proc/save_vore_prefs
-	verbs += /mob/living/proc/escapeOOC //NW WOZ ERE 2. OOC escape verb.
-	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
-	verbs += /mob/living/carbon/human/proc/insidePanel
-	verbs += /mob/living/carbon/human/proc/toggle_digestability // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
+	//Non-default verbs go here
 
+	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
 	// Vore Code End
 
 /mob/living/carbon/human/Stat()

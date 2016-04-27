@@ -59,8 +59,11 @@
 //	For now this is just simple_animals and carbons
 //
 /proc/is_vore_predator(var/mob/living/O)
-	return (O != null && O.vore_selected)
+	if(istype(O,/mob/living))
+		if(O.vore_organs.len > 0)
+			return 1
 
+	return 0
 //
 //	Verb for toggling which orifice you eat people with!
 //
@@ -78,12 +81,15 @@
 	set name = "Save Vore Prefs"
 	set category = "Vore"
 
+	var/result
+
 	if(client.prefs)
-		client.prefs.belly_prefs = vore_organs
-		client.prefs.save_vore_preferences()
+		result = client.prefs.save_vore_preferences()
 	else
 		src << "<span class='warning'>You attempted to save your vore prefs but somehow you're in this character without a client.prefs variable. Tell a dev.</span>"
 		log_debug("[src] tried to save vore prefs but lacks a client.prefs var.")
+
+	return result
 
 //
 //	Proc for applying vore preferences, given bellies
@@ -106,9 +112,14 @@
 			visible_message("<font color='green'><b>[src] releases the contents of their [lowertext(belly)]!</b></font>")
 			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
-/////////////////////////////
-////   OOC Escape Code	 ////
-/////////////////////////////
+/mob/living/proc/toggle_digestability()
+	set name = "Toggle digestability"
+	set category = "Vore"
+
+	if(alert(src, "This button is for those who don't like being digested. It will make you undigestable. Don't abuse this button by toggling it back and forth to extend a scene or whatever, or you'll make the admins cry. Note that this cannot be toggled inside someone's belly.", "", "Okay", "Cancel") == "Okay")
+		digestable = !digestable
+		usr << "<span class='alert'>You are [digestable ?  "now" : "no longer"] digestable.</span>"
+		message_admins("[key_name(src)] toggled their digestability to [digestable] ([loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>" : "null"])")
 
 /mob/living/proc/escapeOOC()
 	set name = "OOC escape"

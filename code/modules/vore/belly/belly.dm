@@ -19,16 +19,10 @@ belly_prefs["digest_tickrate"] = INTEGER
 belly_prefs["immutable"] = BOOLEAN
 */
 
-#define DM_HOLD "Hold"
-#define DM_DIGEST "Digest"
-#define DM_HEAL "Heal"
-#define DM_ABSORB "Absorb"
-
-#define VORE_STRUGGLE_EMOTE_CHANCE 40
-
-/**
+/*
 * Parent type of all the various "belly" varieties.
 */
+
 /datum/belly
 	var/name								// Name of this location
 	var/list/digest_modes = list(DM_HOLD,DM_DIGEST)	// Possible digest modes

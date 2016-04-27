@@ -1,3 +1,13 @@
+/mob/living/New()
+	..()
+	verbs += /mob/living/proc/set_size
+	verbs += /mob/living/proc/belly_select
+	verbs += /mob/living/proc/vore_release
+	verbs += /mob/living/proc/save_vore_prefs
+	verbs += /mob/living/proc/insidePanel
+	verbs += /mob/living/proc/escapeOOC
+	verbs += /mob/living/proc/toggle_digestability
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
