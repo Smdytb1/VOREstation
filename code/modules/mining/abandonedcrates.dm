@@ -189,18 +189,20 @@
 				user << "<span class='notice'>* Anti-Tamper Bomb will activate after [src.attempts] failed access attempts.</span>"
 			if (lastattempt != null)
 				var/list/guess = list()
+				var/list/answer = list()
 				var/bulls = 0
 				var/cows = 0
-				for(var/i = 1, i < codelen + 1, i++)
-					var/a = copytext(lastattempt, i, i+1) // Stuff the code into the list
-					guess += a
-					guess[a] = i
-				for(var/i in guess) // Go through list and count matches
-					var/a = findtext(code, i)
-					if(a == guess[i])
-						++bulls
-					else if(a)
+				for(var/i=1,i<=length(lastattempt),i++)
+					guess += text2num(copytext(lastattempt,i,i+1))
+				for(var/i=1,i<=length(lastattempt),i++)
+					answer += text2num(copytext(code,i,i+1))
+				for(var/i = 1, i < codelen + 1, i++) // Go through list and count matches
+					if( answer.Find(guess[i],1,codelen+1))
 						++cows
+					if( answer[i] == guess[i])
+						++bulls
+						--cows
+
 				user << "<span class='notice'>Last code attempt, [lastattempt], had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
 		else ..()
 	else ..()
