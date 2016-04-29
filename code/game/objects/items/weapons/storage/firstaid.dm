@@ -148,6 +148,21 @@
 	new /obj/item/stack/medical/advanced/bruise_pack(src)
 	return
 
+/obj/item/weapon/storage/firstaid/crashkit
+	name = "crash kit"
+	desc = "Useful for saving lives, or shouting 'STAT' a lot."
+	//icon_state = ""
+	//item_state = ""
+	storage_slots = 5
+
+/obj/item/weapon/storage/firstaid/crashkit/New()
+	..()
+	if (empty) return
+
+
+
+	return
+
 /*
  * Pill Bottles
  */
