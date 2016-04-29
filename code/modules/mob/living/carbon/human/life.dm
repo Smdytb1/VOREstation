@@ -1402,6 +1402,10 @@
 
 			if(config.welder_vision)
 				var/found_welder
+
+				if(absorbed) //Okay I'm cheating, so what
+					found_welder = 1
+
 				if(istype(glasses, /obj/item/clothing/glasses/welding))
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
