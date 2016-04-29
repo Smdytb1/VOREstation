@@ -97,7 +97,7 @@
 		dat += " ([B.internal_contents.len])</span></a>"
 
 	if(user.vore_organs.len < 10)
-		dat += "<a href='?src=\ref[src];newbelly=1'>New +</a>"
+		dat += "<a href='?src=\ref[src];newbelly=1'>New+</a>"
 
 	dat += "<HR>"
 
