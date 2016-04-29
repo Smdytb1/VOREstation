@@ -53,7 +53,7 @@
 				owner.nutrition += 2
 			else if(M.nutrition < 2) //When they're finally drained.
 				var/mob/living/O = owner
-				var/datum/belly/B = O.internal_contents["Absorbed"]
+				var/datum/belly/B = O.vore_organs["Absorbed"]
 				M << "<span class='notice'>[owner]'s stomach absorbs your body, making you part of them.</span>"
 				owner << "<span class='notice'>Your stomach absorbs [M]'s body, making them part of you.</span>"
 				src.internal_contents -= M //Removes them from vore organ when absorbed.
@@ -62,7 +62,7 @@
 
 		if(iscarbon(M) && owner.stat != DEAD && digest_mode == "Move from tail" && M.stat != DEAD)
 			var/mob/living/O = owner
-			var/datum/belly/B = O.internal_contents["Stomach"]
+			var/datum/belly/B = O.vore_organs["Stomach"]
 			M << "<span class='notice'>You move through [owner]'s tail and drop into their stomach.</span>"
 			owner << "<span class='notice'>You feel [M] move through your tail and drop into your stomach.</span>"
 			src.internal_contents -= M //Removes them from vore organ when absorbed.

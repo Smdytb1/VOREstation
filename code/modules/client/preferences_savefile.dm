@@ -167,14 +167,6 @@
 	S["flavor_texts_legs"]		>> flavor_texts["legs"]
 	S["flavor_texts_feet"]		>> flavor_texts["feet"]
 
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	>> inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		>> inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		>> inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		>> inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		>> inside_flavour_texts["Tail"]
-	S["inside_flavour_texts_absorbed"]	>> inside_flavour_texts["Absorbed"]
-
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
 	for(var/module in robot_module_types)
@@ -356,14 +348,6 @@
 	S["flavor_texts_legs"]		<< flavor_texts["legs"]
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
 
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	<< inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		<< inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		<< inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		<< inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		<< inside_flavour_texts["Tail"]
-	S["inside_flavour_texts_absorbed"]	<< inside_flavour_texts["Absorbed"]
-
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
 	for(var/module in robot_module_types)
@@ -397,6 +381,36 @@
 
 	return 1
 
+/datum/preferences/proc/load_vore_preferences(slot)
+	if(!path)				return 0
+	if(!fexists(path))		return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/"
+	if(!slot)	slot = default_slot
+	slot = sanitize_integer(slot, 1, config.character_slots, initial(default_slot))
+	if(slot != default_slot)
+		default_slot = slot
+		S["default_slot"] << slot
+	S.cd = "/character[slot]"
+
+	S["belly_prefs"]	>> belly_prefs
+
+	if(!belly_prefs)
+		belly_prefs = list()
+
+	return 1
+
+/datum/preferences/proc/save_vore_preferences()
+	if(!path)				return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/character[default_slot]"
+
+	S["belly_prefs"]	<< belly_prefs
+	S["digestable"]	<< digestable
+
+	return 1
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

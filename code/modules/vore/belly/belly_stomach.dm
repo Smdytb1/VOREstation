@@ -27,19 +27,7 @@
 // @Override
 /datum/belly/stomach/process_Life()
 	if(length(internal_contents) && air_master.current_cycle%3==1 && digest_mode == DM_DIGEST)
-		var/churnsound = pick(
-			'sound/vore/digest1.ogg',
-			'sound/vore/digest2.ogg',
-			'sound/vore/digest3.ogg',
-			'sound/vore/digest4.ogg',
-			'sound/vore/digest5.ogg',
-			'sound/vore/digest6.ogg',
-			'sound/vore/digest7.ogg',
-			'sound/vore/digest8.ogg',
-			'sound/vore/digest9.ogg',
-			'sound/vore/digest10.ogg',
-			'sound/vore/digest11.ogg',
-			'sound/vore/digest12.ogg')
+		var/churnsound = pick(digestion_sounds)
 		for(var/mob/hearer in range(1,owner))
 			hearer << sound(churnsound,volume=80)
 
@@ -102,17 +90,7 @@
 							owner << "<span class='notice'>You feel a rush of warmth as [M]'s now-liquified remains start pumping through your intestines.</span>"
 							M << "<span class='notice'>Your now-liquified remains start pumping through [owner]'s intestines, filling their body with a rush of warmth.</span>"
 					owner.nutrition += 20 // so eating dead mobs gives you *something*.
-					var/deathsound = pick(
-						'sound/vore/death1.ogg',
-						'sound/vore/death2.ogg',
-						'sound/vore/death3.ogg',
-						'sound/vore/death4.ogg',
-						'sound/vore/death5.ogg',
-						'sound/vore/death6.ogg',
-						'sound/vore/death7.ogg',
-						'sound/vore/death8.ogg',
-						'sound/vore/death9.ogg',
-						'sound/vore/death10.ogg')
+					var/deathsound = pick(death_sounds)
 					for(var/mob/hearer in range(1,owner))
 						hearer << deathsound
 					digestion_death(M)
@@ -140,7 +118,7 @@
 				owner.nutrition += 2
 			else if(M.nutrition < 2) //When they're finally drained.
 				var/mob/living/O = owner
-				var/datum/belly/B = O.internal_contents["Absorbed"]
+				var/datum/belly/B = O.vore_organs["Absorbed"]
 				M << "<span class='notice'>[owner]'s stomach absorbs your body, making you part of them.</span>"
 				owner << "<span class='notice'>Your stomach absorbs [M]'s body, making them part of you.</span>"
 				src.internal_contents -= M //Removes them from vore organ when absorbed.

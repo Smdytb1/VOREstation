@@ -145,7 +145,7 @@
 		M.help_shake_act(user)
 
 //This should most likely be preattack. Check whenever possible (doing a straight port)
-/obj/item/weapon/holder/micro/afterattack(var/mob/living/carbon/target, var/mob/user, var/proximity)
+/obj/item/weapon/holder/micro/afterattack(var/mob/living/target, var/mob/living/user, var/proximity)
 	if(!proximity) return
 
 	// Note! In old code, when feeding to an animal, the animals attackby() proc fired first, and this second.
@@ -163,7 +163,7 @@
 
 		// NOTE! Which belly the micro goes into is based on the TARGET's vore setting
 		// 	not the attacker's vore setting! This is the same behavior as old code. Keeping it for now -Leshana
-		var/datum/voretype/target_voretype = target.vorifice
-		if (target_voretype)
-			target_voretype.eat_held_mob(user, M, target)
+		var/datum/belly/target_belly = target.vore_selected
+		if (target_belly)
+			user.eat_held_mob(user, M, target)
 

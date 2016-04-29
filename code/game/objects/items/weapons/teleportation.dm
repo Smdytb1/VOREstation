@@ -172,9 +172,9 @@
 	if(!isfloor(user.loc))
 
 		//Scrape you out of vars if you were ated
-		if(hasvar(user.loc,"internal_contents"))
+		if(hasvar(user.loc,"vore_organs"))
 			var/mob/living/M = user.loc
-			for(var/datum/belly/B in M.internal_contents)
+			for(var/datum/belly/B in M.vore_organs)
 				B.internal_contents -= user
 
 		if(prob(5)) //oh dear a problem, put em in deep space
