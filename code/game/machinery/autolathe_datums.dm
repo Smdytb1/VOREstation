@@ -72,6 +72,12 @@
 	path = /obj/item/weapon/wirecutters
 	category = "Tools"
 
+/datum/autolathe/recipe/cable
+	name = "cable coil"
+	path = /obj/item/stack/cable_coil
+	category = "Tools"
+	is_stack = 1
+
 /datum/autolathe/recipe/wrench
 	name = "wrench"
 	path = /obj/item/weapon/wrench
