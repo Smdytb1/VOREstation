@@ -418,7 +418,8 @@
 							sleep(swallowTime)
 							if(istype(held_item,/obj/item/weapon/holder/micro))
 								custom_emote(1, "swallows [held_item] alive, a little lump sliding into its gut!")
-								src.insides.nom_mob(held_item)
+								var/datum/belly/B = vore_organs[vore_selected]
+								B.nom_mob(held_item)
 								msg_admin_attack("[key_name(M)] got eaten by [src]!")
 								playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 			parrot_state = PARROT_SWOOP | PARROT_RETURN

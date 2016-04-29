@@ -57,7 +57,7 @@
 	playsound(user, sound, 100, 1)
 
 	// Actually shove prey into the belly.
-	var/datum/belly/target_belly = pred.internal_contents[belly_target]
+	var/datum/belly/target_belly = pred.vore_organs[belly_target]
 	target_belly.nom_mob(prey, user)
 
 	// Inform Admins

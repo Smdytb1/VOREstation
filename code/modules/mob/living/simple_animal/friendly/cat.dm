@@ -36,7 +36,8 @@
 					sleep(30)
 					if(M in oview(1, src))
 						custom_emote(1, "swallows down [M] into their hungry gut!")
-						src.insides.nom_mob(M)
+						var/datum/belly/B = vore_organs[vore_selected]
+						B.nom_mob(M)
 						playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 					else
 						M << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
@@ -80,7 +81,8 @@
 				sleep(swallowTime)
 				if(bellyfiller in oview(1, src))
 					custom_emote(1, "swallows down [bellyfiller] with a happy purr!")
-					src.insides.nom_mob(bellyfiller)
+					var/datum/belly/B = vore_organs[vore_selected]
+					B.nom_mob(bellyfiller)
 					msg_admin_attack("[key_name(bellyfiller)] got eaten by [src]!")
 					playsound(src, 'sound/vore/gulp.ogg', 100, 1)
 				else
