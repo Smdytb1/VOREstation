@@ -102,7 +102,7 @@
 
 		for (var/mob/living/M in internal_contents)
 			if(M.stat != DEAD)
-				if(owner.nutrition > 90)
+				if(owner.nutrition > 90 && (M.health < M.maxHealth))
 					M.adjustBruteLoss(-5)
 					M.adjustFireLoss(-5)
 					owner.nutrition -= 2
