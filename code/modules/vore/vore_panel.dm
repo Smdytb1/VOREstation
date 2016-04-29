@@ -189,7 +189,7 @@
 					M.examine(user)
 
 				if("Help Out") //Help the inside-mob out
-					if(user.stat)
+					if(user.stat || user.absorbed || tgt.absorbed)
 						user << "<span class='warning'>You can't do that in your state!</span>"
 						return 1
 
