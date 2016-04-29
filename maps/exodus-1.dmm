@@ -40,7 +40,7 @@
 "aaN" = (/obj/machinery/power/solar{id = "auxsolarnorth"; name = "Fore Solar Array"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/airless{icon_state = "solarpanel"},/area/solar/fore)
 "aaO" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating/airless,/area/solar/fore)
 "aaP" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/solar{id = "auxsolarnorth"; name = "Fore Solar Array"},/turf/simulated/floor/airless{icon_state = "solarpanel"},/area/solar/fore)
-"aaQ" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/space)
+"aaQ" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/airless{icon_state = "circuit"},/area/space)
 "aaR" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor,/area/security/range)
 "aaS" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/camera{c_tag = "Firing Range"; dir = 8; network = list("SS13")},/turf/simulated/floor,/area/security/range)
 "aaT" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/security/range)
