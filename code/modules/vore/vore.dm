@@ -1,17 +1,36 @@
 
-// Cross-defined vars to keep vore code isolated.
+/*
+VVVVVVVV           VVVVVVVV     OOOOOOOOO     RRRRRRRRRRRRRRRRR   EEEEEEEEEEEEEEEEEEEEEE
+V::::::V           V::::::V   OO:::::::::OO   R::::::::::::::::R  E::::::::::::::::::::E
+V::::::V           V::::::V OO:::::::::::::OO R::::::RRRRRR:::::R E::::::::::::::::::::E
+V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEEEEE::::E
+ V:::::V           V:::::V O::::::O   O::::::O  R::::R     R:::::R  E:::::E       EEEEEE
+  V:::::V         V:::::V  O:::::O     O:::::O  R::::R     R:::::R  E:::::E
+   V:::::V       V:::::V   O:::::O     O:::::O  R::::RRRRRR:::::R   E::::::EEEEEEEEEE
+    V:::::V     V:::::V    O:::::O     O:::::O  R:::::::::::::RR    E:::::::::::::::E
+     V:::::V   V:::::V     O:::::O     O:::::O  R::::RRRRRR:::::R   E:::::::::::::::E
+      V:::::V V:::::V      O:::::O     O:::::O  R::::R     R:::::R  E::::::EEEEEEEEEE
+       V:::::V:::::V       O:::::O     O:::::O  R::::R     R:::::R  E:::::E
+        V:::::::::V        O::::::O   O::::::O  R::::R     R:::::R  E:::::E       EEEEEE
+         V:::::::V         O:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEEEE:::::E
+          V:::::V           OO:::::::::::::OO R::::::R     R:::::RE::::::::::::::::::::E
+           V:::V              OO:::::::::OO   R::::::R     R:::::RE::::::::::::::::::::E
+            VVV                 OOOOOOOOO     RRRRRRRR     RRRRRRREEEEEEEEEEEEEEEEEEEEEE
 
+-Aro <3 */
+
+// Cross-defined vars to keep vore code isolated. //Somewhat. -Aro
 /mob/living
 	var/digestable = 1					// Can the mob be digested inside a belly?
 	var/datum/belly/vore_selected		// Default to no vore capability.
 	var/list/vore_organs = list()		// List of vore containers inside a mob
+	var/absorbed = 0					// If a mob is absorbed into another
 
 /mob/living/simple_animal
 	var/isPredator = 0 					//Are they capable of performing and pre-defined vore actions for their species?
 	var/swallowTime = 30 				//How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
 	var/backoffTime = 50 				//How long to exclude an escaped mob from being re-eaten.
 	var/gurgleTime = 600				//How long between stomach emotes at prey
-	var/datum/belly/insides				//The place where food goes. Just one on mobs.
 	var/list/prey_excludes = list()		//For excluding people from being eaten.
 
 	//We have some default emotes for mobs to do to their prey.
@@ -37,16 +56,27 @@
 	set category = "Vore"
 	set src in oview(1)
 
-	if(insides.digest_mode == "Hold")
+	var/datum/belly/B = vore_organs[vore_selected]
+
+	if(B.digest_mode == "Hold")
 		var/confirm = alert(usr, "Enabling digestion on [name] will cause it to digest all stomach contents. Using this to break OOC prefs is against the rules. Digestion will disable itself after 20 minutes.", "Enabling [name]'s Digestion", "Enable", "Cancel")
 		if(confirm == "Enable")
-			insides.digest_mode = "Digest"
+			B.digest_mode = "Digest"
 			spawn(12000) //12000=20 minutes
-				if(src)	insides.digest_mode = "Hold"
+				if(src)	B.digest_mode = "Hold"
 	else
 		var/confirm = alert(usr, "This mob is currently set to digest all stomach contents. Do you want to disable this?", "Disabling [name]'s Digestion", "Disable", "Cancel")
 		if(confirm == "Disable")
-			insides.digest_mode = "Hold"
+			B.digest_mode = "Hold"
+
+// Simple animal nom proc for if you get ckey'd into a simple_animal mob!
+// Should be fine? Doesn't require grabbing.
+/mob/living/proc/animal_nom(var/mob/living/T in view(1))
+	set name = "Animal Nom"
+	set category = "Vore"
+	set desc = "Since you can't grab, you get a verb!"
+
+	feed_grabbed_to_self(src,T)
 
 //	This is an "interface" type.  No instances of this type will exist, but any type which is supposed
 //  to be vore capable should implement the vars and procs defined here to be vore-compatible!
@@ -98,6 +128,19 @@
 	if(!bellies || bellies.len == 0)
 		log_debug("Tried to apply bellies to [src] and failed.")
 
+
+//
+//	Proc for updating vore organs and digestion/healing/absorbing
+//
+/mob/living/proc/handle_internal_contents()
+	for (var/bellytype in vore_organs)
+		var/datum/belly/B = vore_organs[bellytype]
+		for(var/atom/movable/M in B.internal_contents)
+			if(M.loc != src)
+				B.internal_contents -= M
+				log_debug("Had to remove [M] from belly [B] in [src]")
+		B.process_Life()
+
 //
 //	Verb for toggling which orifice you eat people with!
 // VTODO: Make this part of the inside panel (or whatever) instead
@@ -116,10 +159,12 @@
 	set name = "Toggle digestability"
 	set category = "Vore"
 
-	if(alert(src, "This button is for those who don't like being digested. It will make you undigestable. Don't abuse this button by toggling it back and forth to extend a scene or whatever, or you'll make the admins cry. Note that this cannot be toggled inside someone's belly.", "", "Okay", "Cancel") == "Okay")
+	if(alert(src, "This button is for those who don't like being digested. It will make you undigestable. Don't abuse this button by toggling it back and forth to extend a scene or whatever, or you'll make the admins cry.", "", "Okay", "Cancel") == "Okay")
 		digestable = !digestable
 		usr << "<span class='alert'>You are [digestable ?  "now" : "no longer"] digestable.</span>"
 		message_admins("[key_name(src)] toggled their digestability to [digestable] ([loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>" : "null"])")
+		if(client.prefs)
+			client.prefs.digestable = digestable
 
 /mob/living/proc/escapeOOC()
 	set name = "OOC escape"
@@ -133,11 +178,12 @@
 			pred.prey_excludes += src
 			spawn(pred.backoffTime)
 				if(pred)	pred.prey_excludes -= src
-			pred.insides.release_specific_contents(src)
+			var/datum/belly/B = vore_organs[vore_selected]
+			B.release_specific_contents(src)
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 
 	//You're in a PC!
-	else if(istype(src.loc,/mob/living/carbon))
+	else if(istype(src.loc,/mob/living))
 		var/mob/living/carbon/pred = src.loc
 		var/confirm = alert(src, "You're in a player-character. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If you are in more than one pred, use this more than once. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
@@ -151,7 +197,7 @@
 		var/mob/living/silicon/pred = src.loc.loc //Thing holding the belly!
 		var/obj/item/device/dogborg/sleeper/belly = src.loc //The belly!
 
-		var/confirm = alert(src, "You're in a player-character cyborg. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
+		var/confirm = alert(src, "You're in a dogborg sleeper. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (BORG) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 			belly.go_out(src) //Just force-ejects from the borg as if they'd clicked the eject button.
@@ -163,6 +209,9 @@
 			*/
 	else
 		src << "<span class='alert'>You aren't inside anyone, you clod.</span>"
+
+
+
 
 
 ///

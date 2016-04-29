@@ -408,6 +408,7 @@
 	S.cd = "/character[default_slot]"
 
 	S["belly_prefs"]	<< belly_prefs
+	S["digestable"]	<< digestable
 
 	return 1
 

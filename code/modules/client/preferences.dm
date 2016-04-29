@@ -152,7 +152,7 @@ datum/preferences
 	var/slot_name = ""
 
 	var/list/belly_prefs = list()
-	var/list/belly_prefs_debug = list()
+	var/digestable = 1
 
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
@@ -1914,14 +1914,15 @@ datum/preferences
 		stomach.immutable = 1
 		belly_prefs["Stomach"] = stomach
 
-	log_debug("Newvore: About to character.vore_organs = belly_prefs")
 	character.vore_organs = belly_prefs
 
-	log_debug("Newvore: Copied to vore_organs")
+	character.vore_selected = character.vore_organs[1]
 
-	for(var/datum/belly/B in character.vore_organs)
+	for(var/O in character.vore_organs)
+		var/datum/belly/B = character.vore_organs[O]
 		B.owner = character
-		log_debug("Newvore: [B] owner set")
+
+	character.digestable = digestable
 
 	character.underwear = underwear
 

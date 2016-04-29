@@ -1588,6 +1588,7 @@
 #include "code\modules\vore\vore.dm"
 #include "code\modules\vore\vore_panel.dm"
 #include "code\modules\vore\belly\belly.dm"
+#include "code\modules\vore\belly\belly_modes.dm"
 #include "code\TriDimension\controller.dm"
 #include "code\TriDimension\controller_presets.dm"
 #include "code\TriDimension\Movement.dm"

@@ -153,7 +153,7 @@
 		else
 			user.u_equip(src)
 	else
-		if(isliving(src.loc))
+		if(isliving(src.loc) && src.loc != user.loc)
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
 	user.put_in_active_hand(src)
