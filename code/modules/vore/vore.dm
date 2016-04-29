@@ -71,7 +71,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 
 // Simple animal nom proc for if you get ckey'd into a simple_animal mob!
 // Should be fine? Doesn't require grabbing.
-/mob/living/proc/animal_nom(var/mob/living/T in view(1))
+/mob/living/proc/animal_nom(var/mob/living/T in oview(1))
 	set name = "Animal Nom"
 	set category = "Vore"
 	set desc = "Since you can't grab, you get a verb!"

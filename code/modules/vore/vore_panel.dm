@@ -47,8 +47,11 @@
 		//Don't display this part if we couldn't find the belly since could be held in hand.
 		if(inside_belly)
 			dat += "<font color = 'green'>You are currently [user.absorbed ? "absorbed into " : "inside "]</font> <font color = 'yellow'>[eater]'s</font> <font color = 'red'>[inside_belly]</font>!<br><br>"
-			dat += "[inside_belly.inside_flavor]<br><br>"
-			if (inside_belly.internal_contents.len)
+
+			if(inside_belly.inside_flavor)
+				dat += "[inside_belly.inside_flavor]<br><br>"
+
+			if (inside_belly.internal_contents.len > 1)
 				dat += "You can see the following around you:<br>"
 				for (var/atom/movable/O in inside_belly.internal_contents)
 					if(istype(O,/mob/living))
