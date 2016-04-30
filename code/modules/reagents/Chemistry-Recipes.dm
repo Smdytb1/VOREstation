@@ -1151,7 +1151,11 @@ datum
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
-					/mob/living/simple_animal/hostile/vore/mimic/crate
+					/mob/living/simple_animal/hostile/vore/mimic/crate,
+					/mob/living/simple_animal/hostile/mimic, // old
+					/mob/living/simple_animal/hostile/mimic/copy, // old
+					/mob/living/simple_animal/hostile/mimic/crate, // old
+					/mob/living/simple_animal/hostile/creature // old
 					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
 
@@ -1202,6 +1206,7 @@ datum
 					/mob/living/simple_animal/hostile/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp,
+					/mob/living/simple_animal/hostile/vore/carp,
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
@@ -1211,7 +1216,7 @@ datum
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
-					/*/mob/living/simple_animal/hostile/wizard, // None of these are re-added yet.
+					/*/mob/living/simple_animal/hostile/wizard,
 					/mob/living/simple_animal/hostile/wizard/red,
 					/mob/living/simple_animal/hostile/wizard/marisa,
 					/mob/living/simple_animal/hostile/tribesman, // bugged
