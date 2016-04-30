@@ -54,6 +54,8 @@
 	var/friendly = "nuzzles"
 	var/wall_smash = 0
 
+	var/list/prey_exclusions = list()
+
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
