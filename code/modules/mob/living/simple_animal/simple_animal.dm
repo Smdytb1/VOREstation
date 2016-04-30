@@ -57,7 +57,6 @@
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
-	verbs += /mob/living/proc/animal_nom
 
 /mob/living/simple_animal/Login()
 	if(src && src.client)
