@@ -156,3 +156,26 @@
 	body_parts_covered = 0
 	species_restricted = null
 
+/obj/item/clothing/shoes/cuffs
+	desc = "Ankle coverings for digitigrade creatures. Gilded!"
+	name = "gilded cuffs"
+	icon_state = "gildedcuffs"
+	item_color = "gildedcuffs"
+	body_parts_covered = 0
+	species_restricted = null
+
+/obj/item/clothing/shoes/cuffs/blue
+	desc = "Ankle coverings for digitigrade creatures. Blue!"
+	name = "blue cuffs"
+	icon_state = "bluecuffs"
+	item_color = "bluecuffs"
+	body_parts_covered = 0
+	species_restricted = null
+
+/obj/item/clothing/shoes/cuffs/red
+	desc = "Ankle coverings for digitigrade creatures. Red!"
+	name = "red cuffs"
+	icon_state = "redcuffs"
+	item_color = "redcuffs"
+	body_parts_covered = 0
+	species_restricted = null
