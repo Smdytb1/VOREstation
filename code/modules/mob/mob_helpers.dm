@@ -66,7 +66,7 @@
 	return 0
 
 /proc/iscarp(A)
-	if(istype(A, /mob/living/simple_animal/hostile/carp))
+	if(istype(A, /mob/living/simple_animal/hostile/carp) || istype(A, /mob/living/simple_animal/hostile/vore/carp))
 		return 1
 	return 0
 

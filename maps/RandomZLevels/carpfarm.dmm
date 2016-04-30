@@ -1,7 +1,7 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/turf/space{density = 1; desc = "You can't go there!"; name = "The 4th Wall"},/area)
 "ac" = (/turf/simulated/mineral,/area/space)
-"ad" = (/mob/living/simple_animal/hostile/carp,/turf/space,/area/space)
+"ad" = (/mob/living/simple_animal/hostile/vore/carp,/turf/space,/area/space)
 "ae" = (/obj/effect/decal/mecha_wreckage/hoverpod,/turf/space,/area/space)
 "af" = (/obj/effect/gibspawner/human,/turf/space,/area/space)
 "ag" = (/turf/unsimulated/wall,/area/awaymission/carpfarm/base)

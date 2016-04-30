@@ -1,8 +1,7 @@
-// Legacy mob. Please use the new vore mob.
-
-/mob/living/simple_animal/hostile/carp
+/mob/living/simple_animal/hostile/vore/carp
 	name = "space carp"
-	desc = "A ferocious, fang-bearing creature that resembles a fish."
+	desc = "A voracious, fang-bearing creature that resembles a fish."
+	icon = 'icons/mob/animal.dmi'
 	icon_state = "carp"
 	icon_living = "carp"
 	icon_dead = "carp_dead"
@@ -23,6 +22,9 @@
 	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
+	capacity = 0
+	max_size = 0.5
+
 	//Space carp aren't affected by atmos.
 	min_oxy = 0
 	max_oxy = 0
@@ -38,15 +40,15 @@
 
 	faction = "carp"
 
-/mob/living/simple_animal/hostile/carp/Process_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/vore/carp/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
 
-/mob/living/simple_animal/hostile/carp/FindTarget()
+/mob/living/simple_animal/hostile/vore/carp/FindTarget()
 	. = ..()
 	if(.)
 		custom_emote(1,"nashes at [.]")
 
-/mob/living/simple_animal/hostile/carp/AttackingTarget()
+/mob/living/simple_animal/hostile/vore/carp/AttackingTarget()
 	. =..()
 	var/mob/living/L = .
 	if(istype(L))

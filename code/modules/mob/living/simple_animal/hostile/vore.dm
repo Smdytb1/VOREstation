@@ -9,13 +9,12 @@
 	var/min_size = 0.25 // Min: 0.25
 	var/picky = 1 // Won't eat undigestable prey by default
 	var/fullness = 0
-	swallowTime = 10 // Hungry little bastards.
+	swallowTime = 1 // Hungry little bastards.
 
 /*
 --------------
 NOTES FOR DEVS
 --------------
-
 If your predator has a limited capacity, it should have sprites for every interval of its size, rounded to the nearest whole number.
 Example: If I have a snake predator who has a capacity of 3, I need sprites for snake-1, snake-2, and snake-3.
 
