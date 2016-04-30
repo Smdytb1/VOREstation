@@ -62,7 +62,6 @@
 				if(isPredator) //If the fox is a predator,
 					movement_target = null
 					custom_emote(1, "greedily stuffs [M] into their gaping maw!")
-					sleep(30)
 					if(M in oview(1, src))
 						animal_nom(M)
 					else
@@ -104,7 +103,6 @@
 				custom_emote(1, pick("slurps [bellyfiller] with their slimey tongue.","looms over [bellyfiller] with their maw agape.","sniffs at [bellyfiller], their belly grumbling hungrily."))
 				sleep(10)
 				custom_emote(1, "starts to scoop [bellyfiller] into their maw!")
-				sleep(swallowTime)
 				if(bellyfiller in oview(1, src))
 					animal_nom(bellyfiller)
 				else
