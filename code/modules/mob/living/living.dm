@@ -1,3 +1,24 @@
+/mob/living/New()
+	..()
+	verbs += /mob/living/proc/set_size
+	verbs += /mob/living/proc/insidePanel
+	verbs += /mob/living/proc/escapeOOC
+
+	//Creates at least the typical 'stomach' on every mob.
+	spawn(20) //Wait a couple of seconds to make sure copy_to or whatever has gone
+		if(vore_organs.len == 0)
+			var/datum/belly/B = new /datum/belly(src)
+			B.immutable = 1
+			B.name = "Stomach"
+			B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
+			vore_organs[B.name] = B
+			vore_selected = B.name
+
+/mob/living/Life()
+	..()
+	//stuff in the internal contents
+	handle_internal_contents()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -263,8 +284,6 @@
 /mob/living/proc/restore_all_organs()
 	return
 
-
-
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
@@ -337,7 +356,6 @@
 
 /mob/living/proc/UpdateDamageIcon()
 	return
-
 
 /mob/living/proc/Examine_OOC()
 	set name = "Examine Meta-Info (OOC)"

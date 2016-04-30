@@ -137,8 +137,6 @@ datum/preferences
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
 
-	var/list/inside_flavour_texts = list()
-
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -153,6 +151,9 @@ datum/preferences
 	var/metadata = ""
 	var/slot_name = ""
 
+	var/list/belly_prefs = list()
+	var/digestable = 1
+
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
@@ -160,7 +161,8 @@ datum/preferences
 			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
-					return
+					if(load_vore_preferences())
+						return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 
@@ -438,8 +440,6 @@ datum/preferences
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
-
-	dat += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=open'><b>Set Inside Flavour Texts</b></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
@@ -762,36 +762,6 @@ datum/preferences
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=flavor_text;size=430x300")
-	return
-
-/datum/preferences/proc/SetInsideFlavourText(mob/user)
-	var/HTML = "<body>"
-	HTML += "<tt><center>"
-	HTML += "<b>Set Inside Flavour Text</b> <hr />"
-	HTML += "<br></center>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Stomach'>Stomach:</a> "
-	HTML += TextPreview(inside_flavour_texts["Stomach"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Cock'>Balls:</a> "
-	HTML += TextPreview(inside_flavour_texts["Cock"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Womb'>Womb:</a> "
-	HTML += TextPreview(inside_flavour_texts["Womb"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Boob'>Boobs:</a> "
-	HTML += TextPreview(inside_flavour_texts["Boob"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
-	HTML += TextPreview(inside_flavour_texts["Tail"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Absorbed'>Absorbed:</a> "
-	HTML += TextPreview(inside_flavour_texts["Absorbed"])
-	HTML += "<br>"
-	HTML += "<hr />"
-	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
-	HTML += "<tt>"
-	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=inside_flavour_text;size=430x300")
 	return
 
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
@@ -1118,25 +1088,6 @@ datum/preferences
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
-
-	else if(href_list["preference"] == "inside_flavour_text")
-		switch(href_list["task"])
-			if("open")
-				SetInsideFlavourText(user)
-				return
-			if("done")
-				user << browse(null, "window=inside_flavour_text")
-				ShowChoices(user)
-				return
-			else
-				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Inside Flavour Text",html_decode(inside_flavour_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
-				inside_flavour_texts[href_list["task"]] = msg
-		SetInsideFlavourText(user)
-		return
-
 
 	else if(href_list["preference"] == "flavour_text_robot")
 		switch(href_list["task"])
@@ -1836,6 +1787,7 @@ datum/preferences
 				if("reload")
 					load_preferences()
 					load_character()
+					load_vore_preferences()
 
 				if("open_load_dialog")
 					if(!IsGuestKey(user.key))
@@ -1846,6 +1798,7 @@ datum/preferences
 
 				if("changeslot")
 					load_character(text2num(href_list["num"]))
+					load_vore_preferences(text2num(href_list["num"]))
 					close_load_dialog(user)
 
 	ShowChoices(user)
@@ -1878,11 +1831,6 @@ datum/preferences
 	character.flavor_texts["hands"] = flavor_texts["hands"]
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
-
-	// This is gonna be interesting. Let's see if I can figure out inside flavour texts -Nightwing
-	for (var/bellytype in character.internal_contents)
-		var/datum/belly/belly = character.internal_contents[bellytype]
-		belly.inside_flavor = inside_flavour_texts[belly.belly_type]
 
 	character.med_record = med_record
 	character.sec_record = sec_record
@@ -1957,6 +1905,23 @@ datum/preferences
 					I.mechassist()
 				else if(status == "mechanical")
 					I.mechanize()
+
+	if(!length(belly_prefs))
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [character]."
+		belly_prefs[B.name] = B
+
+	character.vore_organs = belly_prefs
+
+	character.vore_selected = character.vore_organs[1]
+
+	for(var/O in character.vore_organs)
+		var/datum/belly/B = character.vore_organs[O]
+		B.owner = character
+
+	character.digestable = digestable
 
 	character.underwear = underwear
 

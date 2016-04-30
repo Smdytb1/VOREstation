@@ -570,10 +570,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for (var/obj/machinery/computer/communications/C in machines)
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
-			P.name = "'[command_name()] Update.'"
+			P.name = "[command_name()] Update ([worldtime2text()])"
 			P.info = input
 			P.update_icon()
-			C.messagetitle.Add("[command_name()] Update")
+			C.messagetitle.Add("[command_name()] Update ([worldtime2text()])")
 			C.messagetext.Add(P.info)
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
