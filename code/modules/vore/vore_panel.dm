@@ -373,7 +373,8 @@
 
 	if(href_list["b_mode"])
 		var/list/menu_list = selected.digest_modes
-		if(ishuman(user))
+		if(istype(usr,/mob/living/carbon/human))
+			world << "I think you're human"
 			menu_list += selected.transform_modes
 
 		if(selected.digest_modes.len == 1) // Don't do anything
@@ -386,7 +387,7 @@
 				if(2)
 					selected.digest_mode = selected.digest_modes[1]
 		else
-			selected.digest_mode = input("Choose Mode (currently [selected.digest_mode]") in menu_list
+			selected.digest_mode = input("Choose Mode (currently [selected.digest_mode])") in menu_list
 
 	if(href_list["b_desc"])
 		var/new_desc = html_encode(input(usr,"Belly Description (1024 char limit):","New Description") as message|null)
