@@ -11,8 +11,8 @@
 			B.immutable = 1
 			B.name = "Stomach"
 			B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
-			vore_organs["Stomach"] = B
-			vore_selected = "Stomach"
+			vore_organs[B.name] = B
+			vore_selected = B.name
 
 /mob/living/Life()
 	..()
