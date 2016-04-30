@@ -1907,12 +1907,11 @@ datum/preferences
 					I.mechanize()
 
 	if(!length(belly_prefs))
-		log_debug("Newvore: Giving default stomach to [character] since belly_prefs is empty")
-		var/datum/belly/stomach = new/datum/belly(src)
-		stomach.name = "Stomach"
-		stomach.inside_flavor = "Just the slimy inside of [character]'s stomach!"
-		stomach.immutable = 1
-		belly_prefs["Stomach"] = stomach
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [character]."
+		belly_prefs[B.name] = B
 
 	character.vore_organs = belly_prefs
 

@@ -444,13 +444,13 @@
 		user << selected.vore_sound
 
 	if(href_list["b_del"])
-		if(selected.internal_contents.len > 0)
+		if(selected.internal_contents.len)
 			usr << "<span class='warning'>Can't delete bellies with contents!</span>"
 		else if(selected.immutable)
 			usr << "<span class='warning'>This belly is marked as undeletable.</span>"
 		else
 			var/alert = alert("Are you sure you want to delete [selected]?","Confirmation","Delete","Cancel")
-			if(alert == "Delete")
+			if(alert == "Delete" && !selected.internal_contents.len)
 				user.vore_organs -= selected.name
 				user.vore_organs.Remove(selected)
 				selected = null

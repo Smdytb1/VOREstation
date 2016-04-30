@@ -148,6 +148,26 @@
 	new /obj/item/stack/medical/advanced/bruise_pack(src)
 	return
 
+/obj/item/weapon/storage/firstaid/crashkit
+	name = "crash kit"
+	desc = "Useful for saving lives, or shouting 'STAT' a lot."
+	icon_state = "purplefirstaid"
+	item_state = "firstaid-advanced" //TODO a real purple medkit in-hand sprite
+	storage_slots = 3
+	max_w_class = 3
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/clothing/under/aed_vest
+	)
+
+/obj/item/weapon/storage/firstaid/crashkit/New()
+	..()
+	if (empty) return
+	new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
+	new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
+	new /obj/item/clothing/under/aed_vest(src)
+	return
+
 /*
  * Pill Bottles
  */
