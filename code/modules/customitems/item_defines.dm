@@ -1764,6 +1764,13 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
+/obj/item/clothing/shoes/cuffs/octavious //Octavious Ward, tasald's char
+	desc = "Dark leather leg wraps with sliver clasps on the sides. Stylish and functional."
+	name = "silvered leg wraps"
+	icon_state = "silvergildedcuffs"
+	item_color = "silvergildedcuffs"
+	body_parts_covered = 0
+	species_restricted = null
 
 /obj/item/clothing/head/squirrel/joan //Because I hate the ears matching hair color -Joan
 	name = "squirrel ears"
@@ -2301,13 +2308,15 @@
 /obj/item/weapon/storage/box/fluff/tasaldkit // bwoincognito:Tasald Corlethian
 	name = "Tasald's Kit"
 	desc = "A kit containing Talsald's clothes."
-	storage_slots = 2
+	storage_slots = 7
 
 /obj/item/weapon/storage/box/fluff/tasaldkit/New()
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tasald(src)
-	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tas_coat(src)
+	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/fluff/permit/tasald_corlethian(src)
+	new /obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian(src)
+	new /obj/item/weapon/implanter/loyalty
 	..()
 	return
 

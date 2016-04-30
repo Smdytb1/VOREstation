@@ -91,6 +91,23 @@
 				dat += "<span style='color:green;'>"
 			if(DM_ABSORB)
 				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_MALE)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_FEMALE)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_KEEP_GENDER)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_CHANGE_SPECIES)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_CHANGE_SPECIES_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_KEEP_GENDER_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_MALE_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_FEMALE_EGG)
+				dat += "<span style='color:purple;'>"
+
 			else
 				dat += "<span>"
 
@@ -355,6 +372,11 @@
 		selected.name = new_name
 
 	if(href_list["b_mode"])
+		var/list/menu_list = selected.digest_modes
+		if(istype(usr,/mob/living/carbon/human))
+			world << "I think you're human"
+			menu_list += selected.transform_modes
+
 		if(selected.digest_modes.len == 1) // Don't do anything
 			return 1
 		if(selected.digest_modes.len == 2) // Just toggle... there's probably a more elegant way to do this...
@@ -365,7 +387,7 @@
 				if(2)
 					selected.digest_mode = selected.digest_modes[1]
 		else
-			selected.digest_mode = input("Choose Mode (currently [selected.digest_mode]") in selected.digest_modes
+			selected.digest_mode = input("Choose Mode (currently [selected.digest_mode])") in menu_list
 
 	if(href_list["b_desc"])
 		var/new_desc = html_encode(input(usr,"Belly Description (1024 char limit):","New Description") as message|null)
