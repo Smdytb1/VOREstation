@@ -6,7 +6,6 @@
 
 	//Creates at least the typical 'stomach' on every mob.
 	spawn(20) //Wait a couple of seconds to make sure copy_to or whatever has gone
-		world << "In Living new Spawn for [src], and vore_organs.len is [vore_organs.len] which I think is [vore_organs.len ? "true" : "false"]"
 		if(!vore_organs.len)
 			var/datum/belly/B = new /datum/belly(src)
 			B.immutable = 1

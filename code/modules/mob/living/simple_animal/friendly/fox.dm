@@ -24,8 +24,6 @@
 	mob_size = 5
 
 /mob/living/simple_animal/fox/New()
-
-	world << "In Fox new, and vore_organs.len is [vore_organs.len] which I think is [vore_organs.len ? "true" : "false"]"
 	if(!vore_organs.len)
 		var/datum/belly/B = new /datum/belly(src)
 		B.immutable = 1
@@ -281,8 +279,6 @@
 	befriend_job = "Captain"
 
 /mob/living/simple_animal/fox/fluff/Renault/New()
-
-	world << "In Renault new, and vore_organs.len is [vore_organs.len] which I think is [vore_organs.len ? "true" : "false"]"
 	if(!vore_organs.len)
 		var/datum/belly/B = new /datum/belly(src)
 		B.immutable = 1
