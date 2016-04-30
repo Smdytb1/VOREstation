@@ -30,25 +30,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 	var/isPredator = 0 					//Are they capable of performing and pre-defined vore actions for their species?
 	var/swallowTime = 30 				//How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
 	var/backoffTime = 50 				//How long to exclude an escaped mob from being re-eaten.
-	var/gurgleTime = 600				//How long between stomach emotes at prey
 	var/list/prey_excludes = list()		//For excluding people from being eaten.
-
-	//We have some default emotes for mobs to do to their prey.
-	var/list/stomach_emotes = list(
-									"The insides knead at you gently for a moment.",
-									"The guts glorp wetly around you as some air shifts.",
-									"Your predator takes a deep breath and sighs, shifting you somewhat.",
-									"The stomach squeezes you tight for a moment, then relaxes.",
-									"During a moment of quiet, breathing becomes the most audible thing.",
-									"The warm slickness surrounds and kneads on you.")
-	var/list/stomach_emotes_d = list(
-									"The caustic acids eat away at your form.",
-									"The acrid air burns at your lungs.",
-									"Without a thought for you, the stomach grinds inwards painfully.",
-									"The guts treat you like food, squeezing to press more acids against you.",
-									"The onslaught against your body doesn't seem to be letting up; you're food now.",
-									"The insides work on you like they would any other food.")
-	var/list/digest_emotes = list()		//To send when digestion finishes
 
 /mob/living/simple_animal/verb/toggle_digestion()
 	set name = "Toggle Animal's Digestion"

@@ -6,16 +6,24 @@
 	if(!internal_contents.len || air_master.current_cycle%3 != 1 || owner.stat == DEAD)
 		return
 
+/////////////////////////// Auto-Emotes ///////////////////////////
+	if((digest_mode in emote_lists) && !emotePend)
+		emotePend = 1
+
+		spawn(emoteTime)
+			var/list/EL = emote_lists[digest_mode]
+			for(var/mob/living/M in internal_contents)
+				M << "<span class='notice'>[pick(EL)]</span>"
+			src.emotePend = 0
+
 //////////////////////// Absorbed Handling ////////////////////////
-	if(internal_contents.len)
-		for(var/mob/living/M in internal_contents)
-			if(M.absorbed)
-				M.Weaken(5)
+	for(var/mob/living/M in internal_contents)
+		if(M.absorbed)
+			M.Weaken(5)
 
 ///////////////////////////// DM_HOLD /////////////////////////////
 	if(digest_mode == DM_HOLD)
 		return //Pretty boring, huh
-
 
 //////////////////////////// DM_DIGEST ////////////////////////////
 	if(digest_mode == DM_DIGEST)

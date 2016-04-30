@@ -32,6 +32,7 @@ belly_prefs["immutable"] = BOOLEAN
 	var/vore_verb = "ingest"				// Verb for eating with this in messages
 	var/human_prey_swallow_time = 100		// Time in deciseconds to swallow /mob/living/carbon/human
 	var/nonhuman_prey_swallow_time = 30		// Time in deciseconds to swallow anything else
+	var/emoteTime = 600						// How long between stomach emotes at prey
 	var/digest_brute = 2					// Brute damage per tick in digestion mode
 	var/digest_burn = 3						// Burn damage per tick in digestion mode
 	var/digest_tickrate = 3					// Modulus this of air controller tick number to iterate gurgles on
@@ -42,6 +43,8 @@ belly_prefs["immutable"] = BOOLEAN
 	var/tmp/list/internal_contents = list()		// People/Things you've eaten into this belly!
 	var/tmp/is_full								// Flag for if digested remeans are present. (for disposal messages)
 	var/tmp/recent_struggle = 0					// Flag to prevent struggle emote spam
+	var/tmp/emotePend = 0						// If there's already a spawned thing counting for the next emote
+
 
 	// Don't forget to watch your commas at the end of each line if you change these.
 	var/list/struggle_messages_outside = list(
@@ -52,8 +55,7 @@ belly_prefs["immutable"] = BOOLEAN
 		"%pred's %belly jiggles with motion from inside.",
 		"%pred's %belly sloshes around.",
 		"%pred's %belly gushes softly.",
-		"%pred's %belly lets out a wet squelch."
-	)
+		"%pred's %belly lets out a wet squelch.")
 
 	var/list/struggle_messages_inside = list(
 		"Your useless squirming only causes %pred's slimy %belly to squelch over your body.",
@@ -63,8 +65,7 @@ belly_prefs["immutable"] = BOOLEAN
 		"You fidget around inside of %pred's %belly.",
 		"You shove against the walls of %pred's %belly, making it briefly swell outward.",
 		"You jostle %pred's %belly with movement.",
-		"You squirm inside of %pred's %belly, making it wobble around."
-	)
+		"You squirm inside of %pred's %belly, making it wobble around.")
 
 	var/list/digest_messages_owner = list(
 		"You feel %prey's body succumb to your digestive system, which breaks it apart into soft slurry.",
@@ -76,8 +77,7 @@ belly_prefs["immutable"] = BOOLEAN
 		"Your %belly begins gushing %prey's remains through your system, adding some extra weight to your belly.",
 		"Your %belly groans as %prey falls apart into a thick soup. You can feel their remains soon flowing deeper into your body to be absorbed.",
 		"Your %belly kneads on every fiber of %prey, softening them down into mush to fuel your next hunt.",
-		"Your %belly churns %prey down into a hot slush. You can feel the nutrients coursing through your digestive track with a series of long, wet glorps."
-	)
+		"Your %belly churns %prey down into a hot slush. You can feel the nutrients coursing through your digestive track with a series of long, wet glorps.")
 
 	var/list/digest_messages_prey = list(
 		"Your body succumbs to %pred's digestive system, which breaks you apart into soft slurry.",
@@ -89,8 +89,7 @@ belly_prefs["immutable"] = BOOLEAN
 		"%pred's %belly begins gushing your remains through their system, adding some extra weight to %pred's belly.",
 		"%pred's %belly groans as you fall apart into a thick soup. Your remains soon flow deeper into %pred's body to be absorbed.",
 		"%pred's %belly kneads on every fiber of your body, softening you down into mush to fuel their next hunt.",
-		"%pred's %belly churns you down into a hot slush. Your nutrient-rich remains course through their digestive track with a series of long, wet glorps."
-	)
+		"%pred's %belly churns you down into a hot slush. Your nutrient-rich remains course through their digestive track with a series of long, wet glorps.")
 
 	var/list/vore_sounds = list(
 		"Gulp" = 'sound/vore/gulp.ogg',
@@ -102,8 +101,11 @@ belly_prefs["immutable"] = BOOLEAN
 		"Squish1" = 'sound/vore/squish1.ogg',
 		"Squish2" = 'sound/vore/squish2.ogg',
 		"Squish3" = 'sound/vore/squish3.ogg',
-		"Squish4" = 'sound/vore/squish4.ogg'
-	)
+		"Squish4" = 'sound/vore/squish4.ogg')
+
+	//Mostly for being overridden on precreated bellies on mobs. Could be VV'd into
+	//a carbon's belly if someone really wanted. No UI for carbons to adjust this.
+	var/list/emote_lists = list()
 
 // Constructor that sets the owning mob
 // @Override
