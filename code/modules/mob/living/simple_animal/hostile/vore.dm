@@ -47,7 +47,7 @@ Don't use ranged mobs for vore mobs.
 	B.immutable = 1
 	B.name = "stomach"
 	B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
-	if (B.owner.faction != neutral)
+	if (faction != "neutral")
 		B.digest_mode = "Hold" // Friendly slime-spawned mobs are neutral faction.
 	else
 		B.digest_mode = "Digest" // Though this usually doesn't happen.
