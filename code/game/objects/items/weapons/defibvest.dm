@@ -6,92 +6,77 @@
 /obj/item/clothing/under/aed_vest
 	name = "aed vest"
 	desc = "Automated external defibrillator. In a vest! Turn on, apply to patient."
-	//icon = '' //TODO
-	//icon_state = "" //TODO
+	icon_state = "aedvest"
+	item_state = "bl_suit"
+	item_color = "aedvest"
 
 	var/obj/item/weapon/cell/power_supply
-	var/obj/item/weapon/cell/capacitor
 	var/cell_type = /obj/item/weapon/cell
 
-	var/charge_req = 500 		//Charge required per shock
+	var/charge_req = 1000 		//Charge required per shock
+	var/max_charge = 3000		//Starting max powercell charge
 	var/state = 0 				//The current state. 0=off, 1=on, 2=working
-	var/work_time = 50 			//How long to perform an EKG
-	var/charge_speed = 5 		//Deciseconds between charge pulses
-	var/charge_amt = 100 		//Amount to charge per pulse
-	var/high_chance_time = 1200	//Good chance of working, after this, low.
+	var/work_time = 100			//How long to perform an EKG
+	var/high_chance_time = 1800	//Good chance of working, after this, low.
 	var/low_chance_time = 3600	//Lower chance of working. After this, no.
 
 //////////////////////////// New Proc ////////////////////////////
 /obj/item/clothing/under/aed_vest/New()
 	..()
 	power_supply = new cell_type(src)
-	capacitor = new cell_type(src)
+	power_supply.maxcharge = max_charge
 	power_supply.give(power_supply.maxcharge)
-	capacitor.charge = 0
 
 ///////////////////////////// Click /////////////////////////////
 /obj/item/clothing/under/aed_vest/attack_self()
 	..()
-	usr << "Attack_self called"
-	if(!power_supply || !power_supply.charge || !capacitor)
+	if(!power_supply || !power_supply.charge)
 		usr << "The vest seems to lack power. Check the battery?"
 		state = 0
 		return
-
 	switch(state)
-
 		if(0) //Off to on
+			if(!power_supply.check_charge(charge_req))
+				talk("Battery level insufficient. Replace battery.")
+				state = 0
+				return
 			state = 1
-			visible_message("[src] buzzes: <I>[src] online. Remove patient clothes, then fit vest to patient.</I>")
+			talk("AED online. Remove patient clothes, then fit vest to patient.",1)
+			icon_state = "[initial(icon_state)]1"
+			item_color = "[initial(item_color)]1"
 			processing_objects.Add(src)
 			idle_timeout()
-			if(power_supply.charge < (charge_req - capacitor.charge))
-				visible_message("[src] buzzes: <I>Battery level insufficient. Replace battery. Powering off.</I>")
-				state = 0
-
-		if(1) //On to off
+		if(1,2) //On/Working to off
 			state = 0
-			processing_objects.Remove(src)
-
-		if(2) //Working to off
-			state = 0
-			processing_objects.Remove(src)
+			process() //Rightnao!
+	return
 
 //////////////////////////// Process ////////////////////////////
 /obj/item/clothing/under/aed_vest/process()
-	..()
-	if(!power_supply || !capacitor)
-		visible_message("[src] buzzes: <I>Critical components missing. Powering off.</I>")
-		state = 0
-
-	if(power_supply.charge < charge_amt)
-		visible_message("[src] buzzes: <I>Battery charge too low. Replace battery. Powering off.</I>")
+	if(!power_supply)
+		talk("Critical components missing.")
 		state = 0
 
 	switch(state)
 		if(0) //We're off but running process anyway. Clean it up.
+			talk("Powering off.[power_supply.charge < power_supply.maxcharge ? " Please recharge battery." : null]")
+			icon_state = initial(icon_state)
+			item_color = initial(item_color)
 			processing_objects.Remove(src)
-			return
 		if(1) //We're looking for a valid patient to wear us.
 			if(istype(loc,/mob/living/carbon/human)) //We're on/held by a person
 				var/mob/living/carbon/human/H = loc
 				if(H.w_uniform == src) //We're being worn by someone
-					visible_message("[src] buzzes: <I>Found patient. Vest is [capacitor.charge < charge_req ? "charging now." : "fully charged."]</I>")
 					state = 2
 					do_work(H)
 		if(2) //We're in use on a patient.
 			return //Let do_work do it
 
-
 //////////////////////////// Worker ////////////////////////////
 /obj/item/clothing/under/aed_vest/proc/do_work(var/mob/living/carbon/human/P)
 	ASSERT(P.w_uniform == src) //Sanity
 
-	if(capacitor.charge < charge_req)
-		spawn() //Sneaky multithreaded charging.
-			charge()
-
-	visible_message("[src] buzzes: <I>Performing EKG. <B>DO NOT MOVE PATIENT!</B></I>")
+	talk("Performing EKG. Do not move patient!",1,P)
 
 	sleep(30) //We'll give them some time to realize they should stop moving.
 
@@ -100,60 +85,110 @@
 
 	while(countdown) //"Doing" an EKG
 		countdown--
-		if(!P.loc == original_loc || !P.w_uniform == src)
-			visible_message("[src] buzzes: <I>Lost patient signal. Restarting!</I>")
+		if(!(P.loc == original_loc) || !(P.w_uniform == src))
+			talk("Lost patient signal. Restarting!")
 			state = 1
 			return
 		sleep(1)
 
 	if(P.stat == 0 || P.stat == 1)
-		visible_message("[src] buzzes: <I>Patient does not need defib. Powering off.</I>")
+		talk("<span style='color:green;'>Patient has a pulse!</span>",1,P)
 		state = 0
+		process()
+		P.regenerate_icons()
+		return
+
+	if(!power_supply.check_charge(charge_req))
+		state = 0
+		process()
+		P.regenerate_icons()
 		return
 
 	if(P.stat == DEAD) //Uhoh.
 		var/timedead = world.time - P.timeofdeath
 
-		//No chance
 		if(timedead > low_chance_time)
-			visible_message("[src] buzzes: <I>Patient has cardiac decay, unable to revive. Powering off.</I>")
+			talk("Patient has cardiac decay, unable to revive.")
 			state = 0
-			return
-
-		//Low chance
-		if(timedead < low_chance_time && timedead > high_chance_time)
-			visible_message("[src] buzzes: <I><span style='color:red'>Patient has flatlined! Administering shock!</span></I>")
-			shock(P,30)
-
-		//Good chance
+		if((timedead > high_chance_time) && (timedead < low_chance_time))
+			talk("<span style='color:red'>Patient has flatlined! Administering shock!</span>",1,P)
+			shock(P,20)
 		if(timedead < high_chance_time)
-			visible_message("[src] buzzes: <I><span style='color:red'>Patient in v-fib! Administering shock!</span></I>")
-			shock(P,60)
+			talk("<span style='color:red'>Patient in v-fib! Administering shock!</span>",1,P)
+			shock(P,50)
 
-/////////////////////////// Charging ///////////////////////////
-/obj/item/clothing/under/aed_vest/proc/charge()
-	while((capacitor.charge < charge_req) && state)
-		power_supply.charge -= charge_amt
-		capacitor.charge += charge_amt
-		sleep(charge_speed)
 
 //////////////////////////// SHOCK ////////////////////////////
-/obj/item/clothing/under/aed_vest/proc/shock(var/mob/living/carbon/human/P, var/chance)
+/obj/item/clothing/under/aed_vest/proc/shock(var/mob/living/carbon/human/P, var/chance = 0)
 	sleep(20) //For dramatic effect, of course
 
-	if(!P || !P.w_uniform == src) //How did we get here?
+	if(!P || !(P.w_uniform == src) || !power_supply.check_charge(charge_req)) //How did we get here?
 		state = 1
 		return
 
-	//TODO Some sound
+	for(var/mob/M in range(4,P))
+		M << sound('sound/effects/sparks2.ogg',volume=120)
 
+	P.visible_message("<B>[P]</B> convulses!")
+
+	if(prob(chance))
+		P.adjustBruteLoss(-10)
+		P.adjustFireLoss(-10)
+		P.adjustOxyLoss(-25)
+		P.stat = 0
+		P.tod = null
+		P.timeofdeath = 0
+		dead_mob_list -= P
+		living_mob_list += P
+
+		BITSET(P.hud_updateflag, HEALTH_HUD)
+		BITSET(P.hud_updateflag, STATUS_HUD)
+
+		P.regenerate_icons()
+
+	//TODO Some sound
+	power_supply.use(charge_req)
+	sleep(20)
+	do_work(P)
+
+///////////////////////////// Voice /////////////////////////////
+/obj/item/clothing/under/aed_vest/proc/talk(var/message,var/beep = 0,var/atom/movable/source = src)
+
+	source.audible_message("<B>[src] buzzes</B>: <I>[message]</I>")
+
+	if(beep)
+		for(var/mob/M in range(4,source))
+			M << sound('sound/machines/twobeep.ogg',volume=15)
 
 
 //////////////////////////// Timeout ////////////////////////////
 /obj/item/clothing/under/aed_vest/proc/idle_timeout()
 	spawn(300)
 		if(!istype(loc,/mob/living/carbon/human) && state)
-			visible_message("[src] buzzes: <I>[src] turning off due to idle timeout.</I>")
+			talk("[src] turning off due to idle timeout.")
 			state = 0
 		else
 			idle_timeout()
+
+///////////////////////////// Maint /////////////////////////////
+/obj/item/clothing/under/aed_vest/attackby(obj/item/W, mob/user)
+	if (istype(W, /obj/item/weapon/screwdriver))
+		if(state)
+			user << "Not while it's turned on!"
+		if(power_supply)
+			playsound(user.loc, 'sound/items/screwdriver.ogg', 60, 1)
+			power_supply.loc = user.loc
+			power_supply = null
+			user << "You remove the power cell from the AED vest."
+		else
+			user << "The power cell is missing!"
+
+	if (istype(W, /obj/item/weapon/cell))
+		if(power_supply)
+			user << "There's already a power cell inside!"
+		else
+			power_supply = W
+			W.loc = src
+			user << "You insert the power cell."
+
+	src.add_fingerprint(user)
