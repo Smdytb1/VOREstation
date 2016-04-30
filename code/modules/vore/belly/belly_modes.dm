@@ -112,228 +112,214 @@
 
 
 ///////////////////////////// DM_TRANSFORM_MALE /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_MALE && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
-			if(air_master.current_cycle%3==1)
-				if(!(M.status_flags & GODMODE))
+			var/TFchance = prob(10)
+			if(TFchance == 1)
 
-					var/TFchance = prob(10)
-					if(TFchance == 1)
+				var/TFmodify = rand(1,3)
+				if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
+					P.r_eyes = O.r_eyes
+					P.g_eyes = O.g_eyes
+					P.b_eyes = O.b_eyes
+					P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
+					owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
+					P.update_body()
 
-						var/TFmodify = rand(1,3)
-						if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
-							P.r_eyes = O.r_eyes
-							P.g_eyes = O.g_eyes
-							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
-							P.update_body()
+				if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
 
-						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
+				if(TFmodify == 3 && P.gender != MALE)
+					P.gender = MALE
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_body()
 
-						if(TFmodify == 3 && P.gender != MALE)
-							P.gender = MALE
-							P << "<span class='notice'>Your body feels very strange...</span>"
-							owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-							P.update_body()
-
-					M.adjustBruteLoss(-1)
-					M.adjustFireLoss(-1)
-
-					if(O.nutrition > 0)
-						O.nutrition -= 2
-					if(P.nutrition < 400)
-						P.nutrition += 1
+			if(O.nutrition > 0)
+				O.nutrition -= 2
+			if(P.nutrition < 400)
+				P.nutrition += 1
+		return
 
 
 ///////////////////////////// DM_TRANSFORM_FEMALE /////////////////////////////
+	if(digest_mode == DM_TRANSFORM_FEMALE && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
 
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 
-			if(air_master.current_cycle%3==1)
-				if(!(M.status_flags & GODMODE))
+			var/TFchance = prob(10)
+			if(TFchance == 1)
+				var/TFmodify = rand(1,3)
+				if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
+					P.r_eyes = O.r_eyes
+					P.g_eyes = O.g_eyes
+					P.b_eyes = O.b_eyes
+					P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
+					owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
+					P.update_body()
 
-					var/TFchance = prob(10)
-					if(TFchance == 1)
-						var/TFmodify = rand(1,3)
-						if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
-							P.r_eyes = O.r_eyes
-							P.g_eyes = O.g_eyes
-							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
-							P.update_body()
+				if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
+					P.r_hair = O.r_hair
+					P.g_hair = O.g_hair
+					P.b_hair = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
 
-						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
-							P.r_hair = O.r_hair
-							P.g_hair = O.g_hair
-							P.b_hair = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
+				if(TFmodify == 3 && P.gender != FEMALE)
+					P.f_style = "Shaved"
+					P.gender = FEMALE
+					P << "<span class='notice'>Your body feels very strange...</span>"
+					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
+					P.update_body()
 
-						if(TFmodify == 3 && P.gender != FEMALE)
-							P.f_style = "Shaved"
-							P.gender = FEMALE
-							P << "<span class='notice'>Your body feels very strange...</span>"
-							owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
-							P.update_body()
-
-					M.adjustBruteLoss(-1)
-					M.adjustFireLoss(-1)
-
-					if(O.nutrition > 0)
-						O.nutrition -= 2
-					if(P.nutrition < 400)
-						P.nutrition += 1
-
+			if(O.nutrition > 0)
+				O.nutrition -= 2
+			if(P.nutrition < 400)
+				P.nutrition += 1
+		return
 
 ///////////////////////////// DM_TRANSFORM_KEEP_GENDER  /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_KEEP_GENDER && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
-			if(air_master.current_cycle%3==1)
-				if(!(M.status_flags & GODMODE))
+			var/TFchance = prob(10)
+			if(TFchance == 1)
 
-					var/TFchance = prob(10)
-					if(TFchance == 1)
+				var/TFmodify = rand(1,2)
+				if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
+					P.r_eyes = O.r_eyes
+					P.g_eyes = O.g_eyes
+					P.b_eyes = O.b_eyes
+					P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
+					owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
+					P.update_body()
 
-						var/TFmodify = rand(1,2)
-						if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
-							P.r_eyes = O.r_eyes
-							P.g_eyes = O.g_eyes
-							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
-							P.update_body()
+				if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
 
-						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
-
-					M.adjustBruteLoss(-1)
-					M.adjustFireLoss(-1)
-
-					if(O.nutrition > 0)
-						O.nutrition -= 2
-					if(P.nutrition < 400)
-						P.nutrition += 1
-
+			if(O.nutrition > 0)
+				O.nutrition -= 2
+			if(P.nutrition < 400)
+				P.nutrition += 1
+		return
 
 ///////////////////////////// DM_TRANSFORM_CHANGE_SPECIES  /////////////////////////////
+	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
 
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
 			var/mob/living/carbon/human/O = owner
 
-			if(air_master.current_cycle%3==1)
-				if(!(M.status_flags & GODMODE))
+			var/TFchance = prob(10)
+			if(TFchance == 1)
+				var/TFmodify = rand(1,3)
+				if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
+					P.r_eyes = O.r_eyes
+					P.g_eyes = O.g_eyes
+					P.b_eyes = O.b_eyes
+					P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
+					owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
+					P.update_body()
 
-					var/TFchance = prob(10)
-					if(TFchance == 1)
-						var/TFmodify = rand(1,3)
-						if(TFmodify == 1 && P.r_eyes != O.r_eyes || P.g_eyes != O.g_eyes || P.b_eyes != O.b_eyes)
-							P.r_eyes = O.r_eyes
-							P.g_eyes = O.g_eyes
-							P.b_eyes = O.b_eyes
-							P << "<span class='notice'>You feel lightheaded and drowsy...</span>"
-							owner << "<span class='notice'>Your belly feels warm as your womb makes subtle changes to your captive's body.</span>"
-							P.update_body()
+				if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.h_style = "Bedhead"
+					P << "<span class='notice'>Your body tingles all over...</span>"
+					owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					//Omitted clause : P.race_icon != O.race_icon
+					//No idea how to work with that one, species system got changed a lot
+					//Also this makes it similar to the previous one until fixed
 
-						if(TFmodify == 2 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.h_style = "Bedhead"
-							P << "<span class='notice'>Your body tingles all over...</span>"
-							owner << "<span class='notice'>Your belly tingles as your womb makes noticeable changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
-							//Omitted clause : P.race_icon != O.race_icon
-							//No idea how to work with that one, species system got changed a lot
-							//Also this makes it similar to the previous one until fixed
+				if(TFmodify == 3 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin || P.taur != O.taur || P.r_taur != O.r_taur || P.g_taur != O.g_taur || P.b_taur != O.b_taur)
+					P.r_hair = O.r_hair
+					P.r_facial = O.r_hair
+					P.g_hair = O.g_hair
+					P.g_facial = O.g_hair
+					P.b_hair = O.b_hair
+					P.b_facial = O.b_hair
+					P.r_skin = O.r_skin
+					P.g_skin = O.g_skin
+					P.b_skin = O.b_skin
+					P.taur = O.taur
+					P.r_taur = O.r_taur
+					P.g_taur = O.g_taur
+					P.b_taur = O.b_taur
+					P.h_style = "Bedhead"
+					P.species = O.species
+					P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... </span>"
+					owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.</span>"
+					P.update_hair()
+					P.update_body()
+					P.update_tail_showing()
 
-						if(TFmodify == 3 && P.r_hair != O.r_hair || P.g_hair != O.g_hair || P.b_hair != O.b_hair || P.r_skin != O.r_skin || P.g_skin != O.g_skin || P.b_skin != O.b_skin || P.taur != O.taur || P.r_taur != O.r_taur || P.g_taur != O.g_taur || P.b_taur != O.b_taur)
-							P.r_hair = O.r_hair
-							P.r_facial = O.r_hair
-							P.g_hair = O.g_hair
-							P.g_facial = O.g_hair
-							P.b_hair = O.b_hair
-							P.b_facial = O.b_hair
-							P.r_skin = O.r_skin
-							P.g_skin = O.g_skin
-							P.b_skin = O.b_skin
-							P.taur = O.taur
-							P.r_taur = O.r_taur
-							P.g_taur = O.g_taur
-							P.b_taur = O.b_taur
-							P.h_style = "Bedhead"
-							P.species = O.species
-							P << "<span class='notice'>You lose sensation of your body, feeling only the warmth of the womb... </span>"
-							owner << "<span class='notice'>Your belly shifts as your womb makes dramatic changes to your captive's body.</span>"
-							P.update_hair()
-							P.update_body()
-							P.update_tail_showing()
-
-					M.adjustBruteLoss(-1)
-					M.adjustFireLoss(-1)
-
-					if(O.nutrition > 0)
-						O.nutrition -= 2
-					if(P.nutrition < 400)
-						P.nutrition += 1
+			if(O.nutrition > 0)
+				O.nutrition -= 2
+			if(P.nutrition < 400)
+				P.nutrition += 1
+		return
 
 
 ///////////////////////////// DM_TRANSFORM_CHANGE_SPECIES_EGG /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Change Species) (EGG)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES_EGG && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
 			if(O.species.name == "Unathi")
@@ -769,12 +755,14 @@
 					P.update_tail_showing()
 					P.loc = J
 					J.name = "[defined_species] egg"
-
+		return
 
 ///////////////////////////// DM_TRANSFORM_KEEP_GENDER_EGG  /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Keep Gender) (EGG)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_KEEP_GENDER_EGG && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
 			if(O.species.name == "Unathi")
@@ -1097,12 +1085,14 @@
 					P.update_body()
 					P.loc = J
 					J.name = "[defined_species] egg"
-
+		return
 
 ///////////////////////////// DM_TRANSFORM_MALE_EGG /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Male) (EGG)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_MALE_EGG && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
 			if(O.species.name == "Unathi")
@@ -1440,12 +1430,14 @@
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
 					P.update_body()
-
+		return
 
 ///////////////////////////// DM_TRANSFORM_FEMALE_EGG /////////////////////////////
-	for (var/mob/living/M in internal_contents)
-		if(ishuman(M) && ishuman(owner) && owner.stat != DEAD && digest_mode == "Transform (Female) (EGG)" && M.stat != DEAD)
-			var/mob/living/carbon/human/P = M
+	if(digest_mode == DM_TRANSFORM_FEMALE_EGG && ishuman(owner))
+		for (var/mob/living/carbon/human/P in internal_contents)
+			if(P.stat)
+				continue
+
 			var/mob/living/carbon/human/O = owner
 
 			if(O.species.name == "Unathi")
@@ -1783,6 +1775,7 @@
 					owner << "<span class='notice'>Your belly feels strange as your womb alters your captive's gender.</span>"
 					P.update_hair()
 					P.update_body()
+		return
 
 
 // @Override
