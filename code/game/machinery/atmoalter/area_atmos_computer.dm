@@ -9,7 +9,7 @@
 
 	var/range = 25
 
-	screenicon = "area-atmos2"
+	screenicon = "area_atmos2"
 	keyboardicon = "kb4"
 
 	//Simple variable to prevent me from doing attack_hand in both this and the child computer
