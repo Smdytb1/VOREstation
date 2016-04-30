@@ -59,7 +59,7 @@ Don't use ranged mobs for vore mobs.
 			animal_nom(target_mob)
 		if(capacity)
 			var/check_size = target_mob.playerscale + fullness
-			if(check_size < capacity)
+			if(check_size <= capacity)
 				animal_nom(target_mob)
 				update_icons()
 	..()
