@@ -9,6 +9,7 @@
 	var/min_size = 0.25 // Min: 0.25
 	var/picky = 1 // Won't eat undigestable prey by default
 	var/fullness = 0
+	swallowTime = 10 // Hungry little bastards.
 
 /*
 --------------
@@ -44,11 +45,15 @@ Don't use ranged mobs for vore mobs.
 	//Create the 'stomach' immediately.
 	var/datum/belly/B = new /datum/belly(src)
 	B.immutable = 1
-	B.name = "Stomach"
+	B.name = "stomach"
 	B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
-	B.digest_mode = "Digest"
+	if (B.owner.faction != neutral)
+		B.digest_mode = "Hold" // Friendly slime-spawned mobs are neutral faction.
+	else
+		B.digest_mode = "Digest" // Though this usually doesn't happen.
 	vore_organs[B.name] = B
-	vore_selected = "Stomach"
+	vore_selected = "stomach"
+	B.vore_verb = "swallow"
 
 /mob/living/simple_animal/hostile/vore/AttackingTarget()
 	if(picky && !target_mob.digestable)

@@ -245,10 +245,11 @@
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
 
+	if(!isturf(M.loc))
+		M << "\red You can't do that from here!"
+		return
+
 	switch(M.a_intent)
-		if(!M.isturf(loc))
-			M << "\red You can't do that from here!"
-			return
 
 		if("help")
 			if (health > 0)
@@ -281,7 +282,7 @@
 	return
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
-	if(!user.isturf(loc))
+	if(!isturf(user.loc))
 		user << "\red You can't do that from here!"
 		return
 

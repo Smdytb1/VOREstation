@@ -57,7 +57,8 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 	set src in oview(1)
 
 	var/datum/belly/B = vore_organs[vore_selected]
-
+	if(faction != neutral)
+		usr << "\red You can't use this on a non-neutral mob!"
 	if(B.digest_mode == "Hold")
 		var/confirm = alert(usr, "Enabling digestion on [name] will cause it to digest all stomach contents. Using this to break OOC prefs is against the rules. Digestion will disable itself after 20 minutes.", "Enabling [name]'s Digestion", "Enable", "Cancel")
 		if(confirm == "Enable")

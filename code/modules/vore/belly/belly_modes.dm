@@ -47,6 +47,7 @@
 				//Send messages
 				owner << "<span class='notice'>" + digest_alert_owner + "</span>"
 				M << "<span class='notice'>" + digest_alert_prey + "</span>"
+				owner.update_icons()
 
 				owner.nutrition += 20 // so eating dead mobs gives you *something*.
 				var/deathsound = pick(death_sounds)
