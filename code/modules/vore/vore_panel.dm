@@ -91,6 +91,23 @@
 				dat += "<span style='color:green;'>"
 			if(DM_ABSORB)
 				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_MALE)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_FEMALE)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_KEEP_GENDER)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_CHANGE_SPECIES)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_CHANGE_SPECIES_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_KEEP_GENDER_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_MALE_EGG)
+				dat += "<span style='color:purple;'>"
+			if(DM_TRANSFORM_FEMALE_EGG)
+				dat += "<span style='color:purple;'>"
+
 			else
 				dat += "<span>"
 
