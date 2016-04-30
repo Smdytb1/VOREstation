@@ -1,6 +1,8 @@
 /mob/living/simple_animal/hostile/vore
 //	name = ""
-//	icon_state = ""
+//	icon_dead = "snake-dead"
+//	icon_living = "snake"
+//	icon_state = "snake"
 	icon = 'icons/mob/vore.dmi'
 	var/capacity = 1 // Zero is infinite. Do not set higher than you have icons to update.
 	var/max_size = 1 // Max: 2
@@ -74,7 +76,8 @@ Don't use ranged mobs for vore mobs.
 /mob/living/simple_animal/hostile/vore/large
 	name = "giant snake"
 	desc = "Snakes. Why did it have to be snakes?"
-	icon_state = "snake"
 	icon = 'icons/mob/vore64x64.dmi'
+	icon_dead = "snake-dead"
+	icon_living = "snake"
+	icon_state = "snake"
 	pixel_x = -16
-	pixel_y = -16
