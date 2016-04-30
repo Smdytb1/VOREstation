@@ -1148,9 +1148,9 @@ datum
 					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
-					/mob/living/simple_animal/hostile/mimic,
-					/mob/living/simple_animal/hostile/mimic/copy,
-					/mob/living/simple_animal/hostile/mimic/crate
+					/mob/living/simple_animal/hostile/vore/mimic,
+					/mob/living/simple_animal/hostile/vore/mimic/copy,
+					/mob/living/simple_animal/hostile/vore/mimic/crate
 					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
 
@@ -1225,9 +1225,9 @@ datum
 					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
 					/mob/living/simple_animal/hostile/tree,
-					/mob/living/simple_animal/hostile/mimic,
-					/mob/living/simple_animal/hostile/mimic/copy,
-					/mob/living/simple_animal/hostile/mimic/crate,
+					/mob/living/simple_animal/hostile/vore/mimic,
+					/mob/living/simple_animal/hostile/vore/mimic/copy,
+					/mob/living/simple_animal/hostile/vore/mimic/crate,
 					/mob/living/simple_animal/bee,
 					/mob/living/simple_animal/borer,
 					/mob/living/simple_animal/borer/roundstart,

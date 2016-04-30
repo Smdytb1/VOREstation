@@ -161,6 +161,7 @@ belly_prefs["immutable"] = BOOLEAN
 			var/datum/belly/belly = loc_mob.vore_organs[bellytype]
 			if (owner in belly.internal_contents)
 				belly.internal_contents += M
+	owner.update_icons()
 	return 1
 
 // Actually perform the mechanics of devouring the tasty prey.

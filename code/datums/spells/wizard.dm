@@ -177,7 +177,7 @@
 	summon_amt = 10
 	range = 3
 
-	summon_type = list(/mob/living/simple_animal/hostile/creature)
+	summon_type = list(/mob/living/simple_animal/hostile/vore/creature)
 
 /obj/effect/proc_holder/spell/targeted/trigger/blind
 	name = "Blind"

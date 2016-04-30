@@ -1,6 +1,4 @@
-// Legacy mob. Please use the new vore version.
-
-/mob/living/simple_animal/hostile/creature
+/mob/living/simple_animal/hostile/vore/creature
 	name = "creature"
 	desc = "A sanity-destroying otherthing."
 	icon = 'icons/mob/critter.dmi'
@@ -16,3 +14,6 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	faction = "creature"
 	speed = 4
+	capacity = 0
+	max_size = 2 // Max: 2
+	min_size = 0.25 // Min: 0.25
