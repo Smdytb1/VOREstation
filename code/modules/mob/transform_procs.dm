@@ -340,7 +340,7 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/crab))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+	if(ispath(MP, /mob/living/simple_animal/hostile/vore/carp))
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/mushroom))
 		return 1

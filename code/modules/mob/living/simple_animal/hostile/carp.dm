@@ -1,4 +1,4 @@
-
+// Legacy mob. Please use the new vore mob.
 
 /mob/living/simple_animal/hostile/carp
 	name = "space carp"
