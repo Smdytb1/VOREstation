@@ -1765,8 +1765,8 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/shoes/cuffs/octavious //Octavious Ward, tasald's char
-	desc = "Ankle coverings for digitigrade creatures. Oooo shiny!"
-	name = "silver gilded cuffs"
+	desc = "Dark leather leg wraps with sliver clasps on the sides. Stylish and functional."
+	name = "silvered leg wraps"
 	icon_state = "silvergildedcuffs"
 	item_color = "silvergildedcuffs"
 	body_parts_covered = 0
