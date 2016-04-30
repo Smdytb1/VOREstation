@@ -54,10 +54,11 @@
 	var/friendly = "nuzzles"
 	var/wall_smash = 0
 
+	var/list/prey_exclusions = list()
+
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
-	verbs += /mob/living/proc/animal_nom
 
 /mob/living/simple_animal/Login()
 	if(src && src.client)
