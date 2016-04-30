@@ -246,6 +246,9 @@
 	..()
 
 	switch(M.a_intent)
+		if(!M.isturf(loc))
+			M << "\red You can't do that from here!"
+			return
 
 		if("help")
 			if (health > 0)
@@ -278,6 +281,9 @@
 	return
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
+	if(!user.isturf(loc))
+		user << "\red You can't do that from here!"
+		return
 
 	if(istype(O, /obj/item/stack/medical))
 
