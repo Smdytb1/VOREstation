@@ -164,7 +164,7 @@
 	body_parts_covered = 0
 	species_restricted = null
 
-/obj/item/clothing/shoes/cuffs/red
+/obj/item/clothing/shoes/cuffs/blue
 	desc = "Ankle coverings for digitigrade creatures. Blue!"
 	name = "blue cuffs"
 	icon_state = "bluecuffs"
@@ -172,7 +172,7 @@
 	body_parts_covered = 0
 	species_restricted = null
 
-/obj/item/clothing/shoes/cuffs/blue
+/obj/item/clothing/shoes/cuffs/red
 	desc = "Ankle coverings for digitigrade creatures. Red!"
 	name = "red cuffs"
 	icon_state = "redcuffs"
