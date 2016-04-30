@@ -76,5 +76,5 @@ Don't use ranged mobs for vore mobs.
 	desc = "Snakes. Why did it have to be snakes?"
 	icon_state = "snake"
 	icon = 'icons/mob/vore64x64.dmi'
-	pixel_x = -32
-	pixel_y = -32
+	pixel_x = -16
+	pixel_y = -16
