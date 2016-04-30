@@ -67,6 +67,34 @@
 	item_state = "revolver"
 	fire_sound = 'sound/weapons/pistol.ogg'
 	ammo_type = /obj/item/ammo_casing/c38r // Nerfed until I fix the above version.
+	var/recentpump = 0
+	var/cocksound = 'sound/weapons/revolvercock.ogg'
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/consume_next_projectile()
+	if(chambered)
+		return chambered.BB
+	usr << "\red It's a single action revolver, pull the hammer back!"
+	return null
+
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/attack_self(mob/living/user as mob)
+	if(world.time >= recentpump + 10)
+		pump(user)
+		recentpump = world.time
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/proc/pump(mob/M as mob)
+	playsound(M, cocksound, 60, 1)
+
+	if(chambered)//We have a shell in the chamber
+		chambered.loc = get_turf(src)//Eject casing
+		chambered = null
+
+	if(loaded.len)
+		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
+		loaded -= AC //Remove casing from loaded list.
+		chambered = AC
+
+	update_icon()
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
