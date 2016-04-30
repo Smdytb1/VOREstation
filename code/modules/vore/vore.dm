@@ -181,7 +181,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 			var/datum/belly/B = vore_organs[vore_selected]
 			B.release_specific_contents(src)
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
-			for(var/mob/living/simple_animal/SA in range(10)
+			for(var/mob/living/simple_animal/SA in range(10))
 				SA.prey_exclusions += src
 				spawn(18000)
 					if(src && SA)
