@@ -341,7 +341,7 @@
 					new /obj/effect/decal/remains/xeno(src)
 			if("mimic")
 				//a guardian of the tomb!
-				var/mob/living/simple_animal/hostile/mimic/crate/mimic = new(src.loc)
+				var/mob/living/simple_animal/hostile/vore/mimic/crate/mimic = new(src.loc)
 				mimic.faction = spawned_faction
 			if("viscerator")
 				//more tomb guardians!
