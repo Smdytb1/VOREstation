@@ -25,7 +25,8 @@
 		spawn_type = pick(\
 		/mob/living/simple_animal/hostile/giant_spider/nurse,\
 		/mob/living/simple_animal/hostile/alien,\
-		/mob/living/simple_animal/hostile/bear,\
+		/mob/living/simple_animal/hostile/vore/bear,\
+		/mob/living/simple_animal/hostile/vore/carp,\
 		/mob/living/simple_animal/hostile/vore/creature\
 		)
 	else

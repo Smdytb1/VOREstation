@@ -1128,9 +1128,6 @@ datum
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
-					/mob/living/simple_animal/hostile/bear,  // broken
-					/mob/living/simple_animal/hostile/bear/Hudson,  // broken
-					/mob/living/simple_animal/hostile/hivebot/tele,  // broken
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
@@ -1147,7 +1144,7 @@ datum
 					/mob/living/simple_animal/hostile/nazi/stormtrooper,
 					/mob/living/simple_animal/hostile/nazi/stormtrooper/heavy,
 					/mob/living/simple_animal/hostile/nazi/melee,*/
-					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
+					/mob/living/simple_animal/hostile/giant_spider/nurse, // fuck that
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
@@ -1155,6 +1152,9 @@ datum
 					/mob/living/simple_animal/hostile/mimic, // old
 					/mob/living/simple_animal/hostile/mimic/copy, // old
 					/mob/living/simple_animal/hostile/mimic/crate, // old
+					/mob/living/simple_animal/hostile/bear,  // old
+					/mob/living/simple_animal/hostile/bear/Hudson,  // old
+					/mob/living/simple_animal/hostile/hivebot/tele,  // old
 					/mob/living/simple_animal/hostile/creature // old
 					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
@@ -1210,8 +1210,10 @@ datum
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
-					/mob/living/simple_animal/hostile/bear, // bugged
-					/mob/living/simple_animal/hostile/bear/Hudson, // bugged
+					/mob/living/simple_animal/hostile/bear,
+					/mob/living/simple_animal/hostile/bear/Hudson,
+					/mob/living/simple_animal/hostile/vore/bear,
+					/mob/living/simple_animal/hostile/vore/bear/Hudson,
 					/mob/living/simple_animal/hostile/hivebot/tele, // bugged
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,

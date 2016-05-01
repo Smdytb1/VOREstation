@@ -61,7 +61,7 @@
 	return 0
 
 /proc/isbear(A)
-	if(istype(A, /mob/living/simple_animal/hostile/bear))
+	if(istype(A, /mob/living/simple_animal/hostile/bear) || istype(A, /mob/living/simple_animal/hostile/vore/bear))
 		return 1
 	return 0
 

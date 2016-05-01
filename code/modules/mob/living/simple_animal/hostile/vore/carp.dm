@@ -55,3 +55,19 @@
 		if(prob(15))
 			L.Weaken(3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+
+// ---------- Great White Carp ---------- //
+/mob/living/simple_animal/hostile/vore/large/carp
+	name = "great white carp"
+	desc = "You're going to need a bigger ship."
+	icon_dead = "megacarp-dead"
+	icon_living = "megacarp"
+	icon_state = "megacarp"
+	pixel_y = -16 // Center this completely since it's in space.
+	maxHealth = 600 // Boss
+	health = 600
+	speed = 3
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
+	meat_amount = 10
+	faction = "carp"
