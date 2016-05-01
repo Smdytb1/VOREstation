@@ -162,7 +162,7 @@
 	response_harm = "hits"
 //	speak = list("HONK", "Honk!")
 //	emote_hear = list("honks")
-	speak_chance = 1
+//	speak_chance = 1
 	a_intent = "harm"
 	var/corpse = /obj/effect/landmark/mobcorpse/tunnelclown
 	var/weapon1 = /obj/item/weapon/twohanded/fireaxe
