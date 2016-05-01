@@ -29,7 +29,6 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 /mob/living/simple_animal
 	var/isPredator = 0 					//Are they capable of performing and pre-defined vore actions for their species?
 	var/swallowTime = 30 				//How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
-	var/backoffTime = 50 				//How long to exclude an escaped mob from being re-eaten.
 	var/list/prey_excludes = list()		//For excluding people from being eaten.
 
 /mob/living/simple_animal/verb/toggle_digestion()
@@ -159,18 +158,18 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 		var/mob/living/simple_animal/pred = src.loc
 		var/confirm = alert(src, "You're in a mob. Don't use this as a trick to get out of hostile animals. This is for escaping from preference-breaking and if you're otherwise unable to escape from endo. If you are in more than one pred, use this more than once.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
-			pred.prey_excludes += src
-			spawn(pred.backoffTime)
-				if(pred)	pred.prey_excludes -= src
-			var/datum/belly/B = vore_organs[vore_selected]
-			B.release_specific_contents(src)
-			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+			for(var/I in pred.vore_organs)
+				var/datum/belly/B = pred.vore_organs[I]
+				B.release_specific_contents(src)
+
 			for(var/mob/living/simple_animal/SA in range(10))
 				SA.prey_exclusions += src
 				spawn(18000)
 					if(src && SA)
 						SA.prey_exclusions -= src
-		pred.update_icons()
+
+			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+			pred.update_icons()
 
 	//You're in a PC!
 	else if(istype(src.loc,/mob/living))
@@ -241,11 +240,11 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 
 	// Prepare messages
 	if(user == pred) //Feeding someone to yourself
-		attempt_msg = text("<span class='warning'>[] is attemping to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
-		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		attempt_msg = text("<span class='warning'>[] is attemping to [] [] into their []!</span>",pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
+		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
 	else //Feeding someone to another person
-		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
-		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
+		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
 
 	// Announce that we start the attempt!
 	for (var/mob/O in get_mobs_in_view(world.view,user))

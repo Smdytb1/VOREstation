@@ -70,14 +70,14 @@ Don't use ranged mobs for vore mobs.
 	if(!vore_organs.len)
 		var/datum/belly/B = new /datum/belly(src)
 		B.immutable = 1
-		B.name = "stomach"
+		B.name = "Stomach"
 		B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
 		if (faction == "neutral")
 			B.digest_mode = "Hold" // Friendly slime-spawned mobs are neutral faction.
 		else
 			B.digest_mode = "Digest" // Though this usually doesn't happen.
 		vore_organs[B.name] = B
-		vore_selected = "stomach"
+		vore_selected = "Stomach"
 		B.vore_verb = "swallow"
 		B.emote_lists[DM_HOLD] = list(
 			"The insides knead at you gently for a moment.",
@@ -97,17 +97,20 @@ Don't use ranged mobs for vore mobs.
 	..()
 
 /mob/living/simple_animal/hostile/vore/AttackingTarget()
+	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
+		return
 	if(picky && !target_mob.digestable)
 		..()
 		return
-	if(target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size)
-		if(!capacity)
-			animal_nom(target_mob)
+	if(target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
 		if(capacity)
 			var/check_size = target_mob.playerscale + fullness
 			if(check_size <= capacity)
 				animal_nom(target_mob)
 				update_icons()
+		else
+			animal_nom(target_mob)
+
 	..()
 
 /mob/living/simple_animal/hostile/vore/death()
