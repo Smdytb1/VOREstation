@@ -265,6 +265,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 
 	// Actually shove prey into the belly.
 	belly_target.nom_mob(prey, user)
+	user.update_icons()
 
 	// Inform Admins
 	if (pred == user)
