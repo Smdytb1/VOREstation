@@ -1526,6 +1526,67 @@ datum
 				..()
 				return
 
+
+////////////////////////// Anti-Noms Drugs //////////////////////////
+
+		ickypak
+			name = "Ickypak"
+			id = "ickypak"
+			description = "A foul-smelling green liquid, for inducing muscle contractions to expel accidentally ingested things."
+			reagent_state = LIQUID
+			color = "#0E900E"
+			overdose = REAGENTS_OVERDOSE
+
+			on_mob_life(var/mob/living/M as mob)
+				M.make_dizzy(1)
+				M.adjustHalLoss(2)
+
+				for(var/I in M.vore_organs)
+					var/datum/belly/B = M.vore_organs[I]
+					for(var/atom/movable/A in B.internal_contents)
+						if(isliving(A))
+							var/mob/living/P = A
+							if(P.absorbed)
+								continue
+						if(prob(5))
+							playsound(M, 'sound/effects/splat.ogg', 50, 1)
+							B.release_specific_contents(A)
+				..()
+				return
+
+		unsorbitol
+			name = "Unsorbitol"
+			id = "unsorbitol"
+			description = "A frothy pink liquid, for causing cellular-level hetrogenous structure separation."
+			reagent_state = LIQUID
+			color = "#EF77E5"
+			overdose = REAGENTS_OVERDOSE
+
+			on_mob_life(var/mob/living/M as mob)
+				M.make_dizzy(1)
+				M.adjustHalLoss(1)
+				if(!M.confused) M.confused = 1
+				M.confused = max(M.confused, 20)
+				M.hallucination += 15
+
+				for(var/I in M.vore_organs)
+					var/datum/belly/B = M.vore_organs[I]
+
+					if(B.digest_mode == DM_ABSORB) //Turn off absorbing on bellies
+						B.digest_mode = DM_HOLD
+
+					for(var/mob/living/P in B.internal_contents)
+						if(!P.absorbed)
+							continue
+
+						else if(prob(1))
+							playsound(M, 'sound/vore/schlorp.ogg', 50, 1)
+							P.absorbed = 0
+							M.visible_message("<font color='green'><b>Something spills into [M]'s [lowertext(B.name)]!</b></font>")
+						else
+				..()
+				return
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		nanites
