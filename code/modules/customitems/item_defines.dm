@@ -1598,7 +1598,7 @@
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
 				return
-		usr.update_inv_wear_suit()	//so our overlays update
+		usr.update_clothing_icon()	//so our overlays update
 
 /obj/item/clothing/suit/storage/fluff/fedcoat/fedblue
 	name = "Federation Uniform Jacket"
