@@ -35,7 +35,7 @@
 
 		for (var/mob/living/M in internal_contents)
 			//Pref protection!
-			if (!M.digestable)
+			if (!M.digestable || M.absorbed)
 				continue
 
 			//Person just died in guts!
