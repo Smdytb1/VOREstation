@@ -84,7 +84,7 @@
 
 	//Non-default verbs go here
 
-	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
+	//verbs += /mob/proc/fixtaur //Leaving this so I can remember what it looks like -Aro
 	// Vore Code End
 
 /mob/living/carbon/human/Stat()
