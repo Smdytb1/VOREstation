@@ -374,7 +374,6 @@
 	if(href_list["b_mode"])
 		var/list/menu_list = selected.digest_modes
 		if(istype(usr,/mob/living/carbon/human))
-			world << "I think you're human"
 			menu_list += selected.transform_modes
 
 		if(selected.digest_modes.len == 1) // Don't do anything
