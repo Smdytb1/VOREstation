@@ -99,9 +99,15 @@ Don't use ranged mobs for vore mobs.
 /mob/living/simple_animal/hostile/vore/AttackingTarget()
 	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
 		return
-	if(picky && !target_mob.digestable)
+
+	if(!isliving(target_mob)) //Can't eat 'em if they ain't alive. Prevents eating borgs/bots.
 		..()
 		return
+
+	if(picky && !target_mob.digestable) //Don't eat people with nogurgle prefs
+		..()
+		return
+
 	if(target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
 		if(capacity)
 			var/check_size = target_mob.playerscale + fullness
