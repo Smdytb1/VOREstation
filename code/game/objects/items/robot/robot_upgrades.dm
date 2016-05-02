@@ -30,6 +30,9 @@
 	R.uneq_all()
 	R.hands.icon_state = "nomod"
 	R.icon_state = "robot"
+	R.icon = 'icons/mob/robots.dmi' //There are two files that has the "/obj/item/borg/upgrade/reset/" path.
+	R.pixel_x = initial(pixel_x) //This is the correct one. Don't make the mistake I made. ~CK
+	R.pixel_y = initial(pixel_y)
 	//world << R.custom_sprite
 	if(R.custom_sprite == 1)
 		//world << R.icon_state
