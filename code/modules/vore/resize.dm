@@ -31,9 +31,11 @@ var/const/RESIZE_A_SMALLTINY = (RESIZE_SMALL + RESIZE_TINY) / 2
 
 // Ace was here! Redid this a little so we'd use math for shrinking characters. This is the old code.
 /mob/living/proc/set_size()
-	set name = "Set character size"
-	set category = "Resize"
-	var/playersize = input("Size") in list("Macro", "Big", "Normal", "Small", "Tiny")
+	set name = "Set Character Size"
+	set category = "Vore"
+	var/nagmessage = "DO NOT ABUSE THESE COMMANDS. They are not here for you to play with. We were originally going to remove them but kept them for popular demand. \
+			Do not abuse their existence outside of ERP scenes where they apply, or reverting OOCly unwanted changes like someone lolshooting the crew with a shrink ray. -Ace"
+	var/playersize = input(nagmessage,"Pick a Size") in list("Macro", "Big", "Normal", "Small", "Tiny")
 	switch(playersize)
 		if("Macro")
 			resize(RESIZE_HUGE)
@@ -53,10 +55,11 @@ var/const/RESIZE_A_SMALLTINY = (RESIZE_SMALL + RESIZE_TINY) / 2
 /* When we add this to character customization, "short" will set you a little smaller basesize than normal, or "tall" for one that's a little larger than normal.
 If a player choses "Small" "Tiny" "Big" or "Macro" and not "tall" or "short", they will be set as that size. Not change their basesize which will be 1.
 If we change the basesize with other options it will cause bad results. "Tall" and "Short" will be purely within humanoid size ranges.
--Ace */
+-Ace
 
 /mob/verb/resize_Readme()
-	set name = "READ ME!!"
-	set category = "Resize"
+	set name = "READ"
+	set category = "Vore"
 	usr << "<span class='alert'>DO NOT ABUSE THESE COMMANDS. They are not here for you to play with. We were originally going to remove them but kept them for popular demand. \
 			Do not abuse their existence outside of ERP scenes where they apply, or reverting OOCly unwanted changes like someone lolshooting the crew with a shrink ray. -Ace</span>"
+*/
