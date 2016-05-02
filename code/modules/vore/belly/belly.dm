@@ -143,6 +143,7 @@ belly_prefs["immutable"] = BOOLEAN
 				if (owner in belly.internal_contents)
 					belly.internal_contents += M
 		tick++
+	owner.visible_message("<font color='green'><b>[owner] expels everything from their [lowertext(name)]!</b></font>")
 	return tick
 
 // Release a specific atom from the contents of this belly into the owning mob's location.
@@ -164,6 +165,8 @@ belly_prefs["immutable"] = BOOLEAN
 			var/datum/belly/belly = loc_mob.vore_organs[bellytype]
 			if (owner in belly.internal_contents)
 				belly.internal_contents += M
+
+	owner.visible_message("<font color='green'><b>[owner] expels [M] from their [lowertext(name)]!</b></font>")
 	owner.update_icons()
 	return 1
 

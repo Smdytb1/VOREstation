@@ -108,7 +108,23 @@ datum
 				holder.clear_reagents()
 
 ///////////////////////////////////////////////////////////////////////////////////
+/// Vore Drugs
 
+		ickypak
+			name = "Ickypak"
+			id = "ickypak"
+			result = "ickypak"
+			required_reagents = list("hyperzine" = 4, "fluorosurfactant" = 1)
+			result_amount = 5
+
+		unsorbitol
+			name = "Unsorbitol"
+			id = "unsorbitol"
+			result = "unsorbitol"
+			required_reagents = list("mutagen" = 3, "lipozine" = 2)
+			result_amount = 5
+
+///////////////////////////////////////////////////////////////////////////////////
 		silicate
 			name = "Silicate"
 			id = "silicate"

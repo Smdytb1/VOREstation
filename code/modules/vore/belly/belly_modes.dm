@@ -46,11 +46,11 @@
 				//Replace placeholder vars
 				digest_alert_owner = bayreplacetext(digest_alert_owner,"%pred",owner)
 				digest_alert_owner = bayreplacetext(digest_alert_owner,"%prey",M)
-				digest_alert_owner = bayreplacetext(digest_alert_owner,"%belly",name)
+				digest_alert_owner = bayreplacetext(digest_alert_owner,"%belly",lowertext(name))
 
 				digest_alert_prey = bayreplacetext(digest_alert_prey,"%pred",owner)
 				digest_alert_prey = bayreplacetext(digest_alert_prey,"%prey",M)
-				digest_alert_prey = bayreplacetext(digest_alert_prey,"%belly",name)
+				digest_alert_prey = bayreplacetext(digest_alert_prey,"%belly",lowertext(name))
 
 				//Send messages
 				owner << "<span class='notice'>" + digest_alert_owner + "</span>"
@@ -1802,11 +1802,11 @@
 
 	struggle_outer_message = bayreplacetext(struggle_outer_message,"%pred",owner)
 	struggle_outer_message = bayreplacetext(struggle_outer_message,"%prey",user)
-	struggle_outer_message = bayreplacetext(struggle_outer_message,"%belly",name)
+	struggle_outer_message = bayreplacetext(struggle_outer_message,"%belly",lowertext(name))
 
 	struggle_user_message = bayreplacetext(struggle_user_message,"%pred",owner)
 	struggle_user_message = bayreplacetext(struggle_user_message,"%prey",user)
-	struggle_user_message = bayreplacetext(struggle_user_message,"%belly",name)
+	struggle_user_message = bayreplacetext(struggle_user_message,"%belly",lowertext(name))
 
 	struggle_outer_message = "<span class='alert'>" + struggle_outer_message + "</span>"
 	struggle_user_message = "<span class='alert'>" + struggle_user_message + "</span>"
