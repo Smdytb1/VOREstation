@@ -52,6 +52,9 @@ Don't use ranged mobs for vore mobs.
 */
 
 /mob/living/simple_animal/hostile/vore/update_icons()
+	if(stat == DEAD)
+		return
+
 	if(capacity)
 		fullness = 0
 		for(var/I in vore_organs)
