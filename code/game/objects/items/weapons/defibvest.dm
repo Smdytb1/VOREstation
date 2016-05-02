@@ -112,10 +112,10 @@
 			state = 0
 		if((timedead > high_chance_time) && (timedead < low_chance_time))
 			talk("<span style='color:red'>Patient has flatlined! Administering shock!</span>",1,P)
-			shock(P,20)
+			shock(P,10)
 		if(timedead < high_chance_time)
 			talk("<span style='color:red'>Patient in v-fib! Administering shock!</span>",1,P)
-			shock(P,50)
+			shock(P,20)
 
 
 //////////////////////////// SHOCK ////////////////////////////
@@ -187,8 +187,9 @@
 		if(power_supply)
 			user << "There's already a power cell inside!"
 		else
-			power_supply = W
+			user.drop_item()
 			W.loc = src
+			power_supply = W
 			user << "You insert the power cell."
 
 	src.add_fingerprint(user)
