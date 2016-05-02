@@ -381,14 +381,20 @@ var/global/datum/controller/gameticker/ticker
 	for(var/mob/Player in player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
+				// If player has persistence turned on and is still a human
+					// If weight gain, calculate the amount of weight they should gain according to their final nutrition value, and add it to their current weight. I can do this. -Spades
+					// Save player stats such as weight, scale, flavortext, and physical appearance.
 				var/turf/playerTurf = get_turf(Player)
 				if(emergency_shuttle.departed && emergency_shuttle.evac)
 					if(isNotAdminLevel(playerTurf.z))
 						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
+						// Save player to spawn at Cryo next time they join.
 					else
 						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
+						// Save player to spawn at Arrival Shuttle next time they join.
 				else if(isAdminLevel(playerTurf.z))
 					Player << "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
+					// Save player to spawn at Arrival Shuttle next time they join.
 				else if(issilicon(Player))
 					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"
 				else
