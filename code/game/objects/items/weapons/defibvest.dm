@@ -115,7 +115,7 @@
 			shock(P,10)
 		if(timedead < high_chance_time)
 			talk("<span style='color:red'>Patient in v-fib! Administering shock!</span>",1,P)
-			shock(P,20)
+			shock(P,25)
 
 
 //////////////////////////// SHOCK ////////////////////////////
