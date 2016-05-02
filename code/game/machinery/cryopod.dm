@@ -6,7 +6,7 @@
  * ~ Zuhayr
  */
 
-// TODO somewhere in this code later
+// TODO somewhere in this code when a player enters a cryopod
 	// If (player has persistence turned on)
 		// If (weight gain), calculate the amount of weight they should gain according to their final nutrition value, and add it to their current weight. I can do this. -Spades
 		// Save player stats such as weight, scale, flavortext, and physical appearance.
