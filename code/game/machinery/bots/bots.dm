@@ -80,6 +80,15 @@
 		else
 			..()
 
+/obj/machinery/bot/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return 0
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	src.healthcheck()
+	..()
+
 /obj/machinery/bot/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
