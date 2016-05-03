@@ -6,16 +6,24 @@
 	if(!internal_contents.len || air_master.current_cycle%3 != 1 || owner.stat == DEAD)
 		return
 
+/////////////////////////// Auto-Emotes ///////////////////////////
+	if((digest_mode in emote_lists) && !emotePend)
+		emotePend = 1
+
+		spawn(emoteTime)
+			var/list/EL = emote_lists[digest_mode]
+			for(var/mob/living/M in internal_contents)
+				M << "<span class='notice'>[pick(EL)]</span>"
+			src.emotePend = 0
+
 //////////////////////// Absorbed Handling ////////////////////////
-	if(internal_contents.len)
-		for(var/mob/living/M in internal_contents)
-			if(M.absorbed)
-				M.Weaken(5)
+	for(var/mob/living/M in internal_contents)
+		if(M.absorbed)
+			M.Weaken(5)
 
 ///////////////////////////// DM_HOLD /////////////////////////////
 	if(digest_mode == DM_HOLD)
 		return //Pretty boring, huh
-
 
 //////////////////////////// DM_DIGEST ////////////////////////////
 	if(digest_mode == DM_DIGEST)
@@ -27,7 +35,7 @@
 
 		for (var/mob/living/M in internal_contents)
 			//Pref protection!
-			if (!M.digestable)
+			if (!M.digestable || M.absorbed)
 				continue
 
 			//Person just died in guts!
@@ -38,11 +46,11 @@
 				//Replace placeholder vars
 				digest_alert_owner = bayreplacetext(digest_alert_owner,"%pred",owner)
 				digest_alert_owner = bayreplacetext(digest_alert_owner,"%prey",M)
-				digest_alert_owner = bayreplacetext(digest_alert_owner,"%belly",name)
+				digest_alert_owner = bayreplacetext(digest_alert_owner,"%belly",lowertext(name))
 
 				digest_alert_prey = bayreplacetext(digest_alert_prey,"%pred",owner)
 				digest_alert_prey = bayreplacetext(digest_alert_prey,"%prey",M)
-				digest_alert_prey = bayreplacetext(digest_alert_prey,"%belly",name)
+				digest_alert_prey = bayreplacetext(digest_alert_prey,"%belly",lowertext(name))
 
 				//Send messages
 				owner << "<span class='notice'>" + digest_alert_owner + "</span>"
@@ -53,6 +61,7 @@
 				for(var/mob/hearer in range(1,owner))
 					hearer << deathsound
 				digestion_death(M)
+				owner.update_icons()
 				continue
 
 			// Deal digestion damage (and feed the pred)
@@ -1793,11 +1802,11 @@
 
 	struggle_outer_message = bayreplacetext(struggle_outer_message,"%pred",owner)
 	struggle_outer_message = bayreplacetext(struggle_outer_message,"%prey",user)
-	struggle_outer_message = bayreplacetext(struggle_outer_message,"%belly",name)
+	struggle_outer_message = bayreplacetext(struggle_outer_message,"%belly",lowertext(name))
 
 	struggle_user_message = bayreplacetext(struggle_user_message,"%pred",owner)
 	struggle_user_message = bayreplacetext(struggle_user_message,"%prey",user)
-	struggle_user_message = bayreplacetext(struggle_user_message,"%belly",name)
+	struggle_user_message = bayreplacetext(struggle_user_message,"%belly",lowertext(name))
 
 	struggle_outer_message = "<span class='alert'>" + struggle_outer_message + "</span>"
 	struggle_user_message = "<span class='alert'>" + struggle_user_message + "</span>"

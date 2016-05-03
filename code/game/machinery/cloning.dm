@@ -149,6 +149,14 @@
 
 	H.set_cloned_appearance()
 
+	if(H.client.prefs)
+		H.vore_organs = H.client.prefs.belly_prefs.Copy()
+		for(var/I in H.vore_organs)
+			var/datum/belly/B = H.vore_organs[I]
+			B.owner = H
+			B.internal_contents = list()
+			B.digest_mode = DM_HOLD
+
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
 	H.flavor_texts = R.flavor.Copy()

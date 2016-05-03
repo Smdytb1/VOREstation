@@ -234,14 +234,14 @@
 						return 1
 
 					var/datum/belly/TB = user.vore_organs[user.vore_selected]
-					user << "<span class='warning'>You begin to [TB.vore_verb] [M] into your [TB]!</span>"
-					M << "<span class='warning'>[user] begins to [TB.vore_verb] you into their [TB]!</span>"
+					user << "<span class='warning'>You begin to [lowertext(TB.vore_verb)] [M] into your [lowertext(TB.name)]!</span>"
+					M << "<span class='warning'>[user] begins to [lowertext(TB.vore_verb)] you into their [lowertext(TB.name)]!</span>"
 					M.loc << "<span class='warning'>Someone inside you is eating someone else!</span>"
 
 					sleep(TB.nonhuman_prey_swallow_time)
 					if((user in OB.internal_contents) && (M in OB.internal_contents))
-						user << "<span class='warning'>You manage to [TB.vore_verb] [M] into your [TB]!</span>"
-						M << "<span class='warning'>[user] manages to [TB.vore_verb] you into their [TB]!</span>"
+						user << "<span class='warning'>You manage to [lowertext(TB.vore_verb)] [M] into your [lowertext(TB.name)]!</span>"
+						M << "<span class='warning'>[user] manages to [lowertext(TB.vore_verb)] you into their [lowertext(TB.name)]!</span>"
 						M.loc << "<span class='warning'>Someone inside you has eaten someone else!</span>"
 						M.loc = user
 						TB.nom_mob(M)
@@ -331,7 +331,7 @@
 					selected.internal_contents -= tgt
 					B.internal_contents += tgt
 
-					tgt << "<span class='warning'>You're squished from [user]'s [selected] to their [B]!</span>"
+					tgt << "<span class='warning'>You're squished from [user]'s [lowertext(selected.name)] to their [lowertext(B.name)]!</span>"
 					for(var/mob/hearer in range(1,user))
 						hearer << sound('sound/vore/squish2.ogg',volume=80)
 
@@ -374,7 +374,6 @@
 	if(href_list["b_mode"])
 		var/list/menu_list = selected.digest_modes
 		if(istype(usr,/mob/living/carbon/human))
-			world << "I think you're human"
 			menu_list += selected.transform_modes
 
 		if(selected.digest_modes.len == 1) // Don't do anything
@@ -466,13 +465,13 @@
 		user << selected.vore_sound
 
 	if(href_list["b_del"])
-		if(selected.internal_contents.len > 0)
+		if(selected.internal_contents.len)
 			usr << "<span class='warning'>Can't delete bellies with contents!</span>"
 		else if(selected.immutable)
 			usr << "<span class='warning'>This belly is marked as undeletable.</span>"
 		else
 			var/alert = alert("Are you sure you want to delete [selected]?","Confirmation","Delete","Cancel")
-			if(alert == "Delete")
+			if(alert == "Delete" && !selected.internal_contents.len)
 				user.vore_organs -= selected.name
 				user.vore_organs.Remove(selected)
 				selected = null

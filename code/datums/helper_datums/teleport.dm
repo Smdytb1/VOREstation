@@ -109,20 +109,27 @@
 
 		playSpecials(curturf,effectin,soundin)
 
-		//Try to teleport into someone on the beacon
-		for(var/mob/living/targetmob in aimturf.contents)
-			var/datum/belly/B = targetmob.vore_organs[1]
+		//Teleporting into a mob
+		if(isliving(destination.loc))
+			var/mob/living/targetmob = destination.loc
+			var/bellytarget = targetmob.vore_organs[1]
+			for(var/I in targetmob.vore_organs)
+				var/datum/belly/BC = targetmob.vore_organs[I]
+				for(var/O in BC.internal_contents)
+					if(istype(O,/obj/item/device/radio/beacon))
+						bellytarget = I
+			var/datum/belly/B = targetmob.vore_organs[bellytarget]
 			teleatom.loc = targetmob
 			B.internal_contents += teleatom
 			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
-			targetmob.visible_message("<span class='warning'>[targetmob]'s belly swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
+			targetmob.visible_message("<span class='warning'>[targetmob] swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
 			message_admins("[key_name(teleatom)] has been telenommed by [key_name(targetmob)]. ([targetmob ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[targetmob.x];Y=[targetmob.y];Z=[targetmob.z]'>JMP</a>" : "null"])")
 			return 1
 
-		//Teleporting into a mob
-		if(ishuman(destination.loc))
-			var/mob/living/carbon/human/targetmob = destination.loc
-			var/datum/belly/B = targetmob.vore_organs[1]
+		//Try to teleport into someone on the beacon
+		for(var/mob/living/targetmob in aimturf.contents)
+			var/Bname = targetmob.vore_organs[1]
+			var/datum/belly/B = targetmob.vore_organs[Bname]
 			teleatom.loc = targetmob
 			B.internal_contents += teleatom
 			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
@@ -131,22 +138,21 @@
 			return 1
 
 		//Normal old teleport
+		var/obj/structure/bed/chair/C = null
+		if(isliving(teleatom))
+			var/mob/living/L = teleatom
+			if(L.buckled)
+				C = L.buckled
+		if(force_teleport)
+			teleatom.forceMove(destturf)
+			playSpecials(destturf,effectout,soundout)
 		else
-			var/obj/structure/bed/chair/C = null
-			if(isliving(teleatom))
-				var/mob/living/L = teleatom
-				if(L.buckled)
-					C = L.buckled
-			if(force_teleport)
-				teleatom.forceMove(destturf)
+			if(teleatom.Move(destturf))
 				playSpecials(destturf,effectout,soundout)
-			else
-				if(teleatom.Move(destturf))
-					playSpecials(destturf,effectout,soundout)
-			if(C)
-				C.forceMove(destturf)
+		if(C)
+			C.forceMove(destturf)
 
-			destarea.Entered(teleatom)
+		destarea.Entered(teleatom)
 
 		return 1
 

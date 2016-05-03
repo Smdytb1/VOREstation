@@ -22,7 +22,8 @@
 				/obj/item/weapon/storage/fancy/shotgun_ammo,
 				/obj/item/weapon/melee/baton,
 				/obj/item/weapon/melee/energy/sword,
-				/obj/item/weapon/handcuffs)
+				/obj/item/weapon/handcuffs,
+				/obj/item/weapon/storage/backpack)
 
 	initial_modules = list(
 		/obj/item/rig_module/mounted,
