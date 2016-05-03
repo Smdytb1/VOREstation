@@ -136,6 +136,8 @@ obj/machinery/gateway/centerstation/process()
 			M.loc = dest.loc
 			M.set_dir(SOUTH)
 			use_power(5000)
+			M << 'sound/effects/phasein.ogg'
+			playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 		return
 
 
@@ -241,6 +243,8 @@ obj/machinery/gateway/centerstation/process()
 				return
 	M.loc = get_step(stationgate.loc, SOUTH)
 	M.set_dir(SOUTH)
+	M << 'sound/effects/phasein.ogg'
+	playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)
