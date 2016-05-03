@@ -207,7 +207,7 @@
 //			A) Anything that can be grabbed
 //			B) Anything contained within a micro holder.
 //
-/obj/item/weapon/grab/attack(mob/M, mob/user)
+/obj/item/weapon/grab/attack(mob/M, mob/living/user)
 	if(!affecting)
 		return
 
@@ -218,14 +218,13 @@
 			// Alright, let's see if we can get this to work for feeding others as well as yourself - NW
 			// Refactored to use centralized vore code system - Leshana
 
-			var/mob/living/carbon/human/attacker = user  // Typecast to human
+			var/mob/living/attacker = user  // Typecast to human
 
 			// If you click yourself...
 			if(M == assailant)
 				if (is_vore_predator(user))
 					// Feed what you're holding (affecting) to yourself (user)
-					var/datum/voretype/vore_type = attacker.vorifice
-					if (vore_type.feed_grabbed_to_self(user, affecting)) del(src)
+					if (user.feed_grabbed_to_self(user, affecting)) del(src)
 				else
 					log_debug("[attacker] attempted to feed [affecting] to [user] ([user.type]) but it is not predator-capable")
 
@@ -233,8 +232,7 @@
 			if(M == affecting)
 				if (is_vore_predator(affecting))
 					// Feed yourself (user) to what you're holding (affecting)!
-					var/datum/voretype/vore_type = attacker.vorifice  // Attacker's choice of what vorifice
-					if (vore_type.feed_self_to_grabbed(user, affecting)) del(src)
+					if (user.feed_self_to_grabbed(user, affecting)) del(src)
 				else
 					log_debug("[attacker] attempted to feed [user] to [affecting] ([affecting.type]) but it is not predator-capable")
 
@@ -242,8 +240,7 @@
 			else
 				// Feed what you're holding (affecting) to what you clicked (M)
 				if (is_vore_predator(M))
-					var/datum/voretype/vore_type = M:vorifice
-					if (vore_type.feed_grabbed_to_other(user, affecting, M)) del(src)
+					if (user.feed_grabbed_to_other(user, affecting, M)) del(src)
 				else
 					log_debug("[attacker] attempted to feed [affecting] to [M] ([M.type]) but it is not predator-capable")
 	//End vore code.

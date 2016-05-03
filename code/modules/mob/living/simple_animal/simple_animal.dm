@@ -54,16 +54,12 @@
 	var/friendly = "nuzzles"
 	var/wall_smash = 0
 
+	var/list/prey_exclusions = list()
+
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
-	// Vore Code Start
-	// Setup the types of bellies present
-
-	insides = new /datum/belly/simple(src)
-	internal_contents["Stomach"] = insides
-	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
-	// Vore Code End
+	verbs += /mob/living/proc/animal_nom
 
 /mob/living/simple_animal/Login()
 	if(src && src.client)
@@ -107,8 +103,8 @@
 
 	// Start vore code. Digestion code is handled here.
 	// For each belly type
-	for (var/bellytype in internal_contents)
-		var/datum/belly/B = internal_contents[bellytype]
+	for (var/bellytype in vore_organs)
+		var/datum/belly/B = vore_organs[bellytype]
 		for(var/mob/living/M in B.internal_contents)
 			if(M.loc != src)
 				B.internal_contents -= M
@@ -250,6 +246,10 @@
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
 
+	if(!isturf(M.loc))
+		M << "\red You can't do that from here!"
+		return
+
 	switch(M.a_intent)
 
 		if("help")
@@ -283,6 +283,9 @@
 	return
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
+	if(!isturf(user.loc))
+		user << "\red You can't do that from here!"
+		return
 
 	if(istype(O, /obj/item/stack/medical))
 

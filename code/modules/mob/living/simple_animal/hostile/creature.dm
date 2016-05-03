@@ -1,3 +1,5 @@
+// Legacy mob. Please use the new vore version.
+
 /mob/living/simple_animal/hostile/creature
 	name = "creature"
 	desc = "A sanity-destroying otherthing."

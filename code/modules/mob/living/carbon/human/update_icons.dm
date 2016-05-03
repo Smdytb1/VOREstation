@@ -927,7 +927,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 				//Note, this could be moved to the switch above if needed, but currently every taur uses _MULTIPLY
 				taur_s.Blend(rgb(r_taur, g_taur, b_taur), ICON_MULTIPLY)
 				 //Apply taur to overlays, with required pixel offset applied.
-				overlays_standing[TAIL_LAYER] = image(taur_s, "pixel_x" = (-16*playerscale))
+				//overlays_standing[TAIL_LAYER] = image(taur_s, "pixel_x" = (-16*playerscale))
+				overlays_standing[TAIL_LAYER] = image(taur_s, "pixel_x" = -16)
 
 	else if(src.tail_style)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDETAIL) && !istype(wear_suit, /obj/item/clothing/suit/space))

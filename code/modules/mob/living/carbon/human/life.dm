@@ -93,9 +93,6 @@
 		//Random events (vomiting etc)
 		handle_random_events()
 
-		//stuff in the internal contents
-		handle_internal_contents()
-
 		handle_shock()
 
 		handle_pain()
@@ -1405,6 +1402,10 @@
 
 			if(config.welder_vision)
 				var/found_welder
+
+				if(absorbed) //Okay I'm cheating, so what
+					found_welder = 1
+
 				if(istype(glasses, /obj/item/clothing/glasses/welding))
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
@@ -1468,18 +1469,6 @@
 			if(!currentTurf.lighting_lumcount)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 */
-
-	// Start vore code. Digestion code is handled here.
-	proc/handle_internal_contents()
-		// For each belly type
-		for (var/bellytype in internal_contents)
-			var/datum/belly/B = internal_contents[bellytype]
-			for(var/atom/movable/M in B.internal_contents)
-				if(M.loc != src)
-					B.internal_contents -= M
-					log_debug("Had to remove [M] from belly [B] in [src]")
-			B.process_Life()
-	//End vore code.
 
 	proc/handle_changeling()
 		if(mind && mind.changeling)

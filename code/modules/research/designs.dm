@@ -303,6 +303,12 @@ datum/design/circuit/comm_server
 	req_tech = list("programming" = 3)
 	build_path = /obj/item/weapon/circuitboard/comm_server
 
+datum/design/circuit/comm_monitor
+	name = "telecommunications traffic control console"
+	id = "comm_traffic"
+	req_tech = list("programming" = 3)
+	build_path = /obj/item/weapon/circuitboard/comm_traffic
+
 datum/design/circuit/message_monitor
 	name = "messaging monitor console"
 	id = "message_monitor"

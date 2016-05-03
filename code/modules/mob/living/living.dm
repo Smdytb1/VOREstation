@@ -1,3 +1,41 @@
+/mob/living/New()
+	..()
+	verbs += /mob/living/proc/set_size
+	verbs += /mob/living/proc/insidePanel
+	verbs += /mob/living/proc/escapeOOC
+
+	//Creates at least the typical 'stomach' on every mob.
+	spawn(20) //Wait a couple of seconds to make sure copy_to or whatever has gone
+		if(!vore_organs.len)
+			var/datum/belly/B = new /datum/belly(src)
+			B.immutable = 1
+			B.name = "Stomach"
+			B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
+			vore_organs[B.name] = B
+			vore_selected = B.name
+
+			if(istype(src,/mob/living/simple_animal))
+				B.emote_lists[DM_HOLD] = list(
+					"The insides knead at you gently for a moment.",
+					"The guts glorp wetly around you as some air shifts.",
+					"Your predator takes a deep breath and sighs, shifting you somewhat.",
+					"The stomach squeezes you tight for a moment, then relaxes.",
+					"During a moment of quiet, breathing becomes the most audible thing.",
+					"The warm slickness surrounds and kneads on you.")
+
+				B.emote_lists[DM_DIGEST] = list(
+					"The caustic acids eat away at your form.",
+					"The acrid air burns at your lungs.",
+					"Without a thought for you, the stomach grinds inwards painfully.",
+					"The guts treat you like food, squeezing to press more acids against you.",
+					"The onslaught against your body doesn't seem to be letting up; you're food now.",
+					"The insides work on you like they would any other food.")
+
+/mob/living/Life()
+	..()
+	//stuff in the internal contents
+	handle_internal_contents()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -263,8 +301,6 @@
 /mob/living/proc/restore_all_organs()
 	return
 
-
-
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
@@ -337,7 +373,6 @@
 
 /mob/living/proc/UpdateDamageIcon()
 	return
-
 
 /mob/living/proc/Examine_OOC()
 	set name = "Examine Meta-Info (OOC)"
