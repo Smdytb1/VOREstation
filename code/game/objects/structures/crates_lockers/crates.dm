@@ -233,7 +233,6 @@
 		return
 
 	health -= Proj.damage
-	..()
 	if(locked && tamper_proof && health <= 0)
 		if(tamper_proof == 2) // Mainly used for events to prevent any chance of opening the box improperly.
 			visible_message("<font color='red'><b>The anti-tamper mechanism of [src] triggers an explosion!</b></font>")
