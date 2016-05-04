@@ -885,12 +885,22 @@
 /datum/sprite_accessory/ears/foxears
 	name = "fox ears"
 	desc = ""
-	icon_state = "bear"
+	icon_state = "foxears"
 
 /datum/sprite_accessory/ears/fenears
 	name = "fennec ears"
 	desc = ""
-	icon_state = "bear"
+	icon_state = "fenears"
+
+/datum/sprite_accessory/ears/foxears
+	name = "fox ears, hair colored"
+	desc = ""
+	icon_state = "foxearshc"
+
+/datum/sprite_accessory/ears/fenears
+	name = "fennec ears, hair colored"
+	desc = ""
+	icon_state = "fenearshc"
 
 /datum/sprite_accessory/ears/foxearshc
 	name = "fox ears, hair colored"
