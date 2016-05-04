@@ -172,7 +172,6 @@ belly_prefs["immutable"] = BOOLEAN
 
 			OR.trans_to(ML,OR.total_volume / absorbed_count)
 
-
 	var/datum/belly/B = check_belly(M.loc)
 	if(B)
 		B.internal_contents += M
@@ -207,7 +206,7 @@ belly_prefs["immutable"] = BOOLEAN
 
 		formatted_message = bayreplacetext(raw_message,"%belly",lowertext(name))
 
-		return(formatted_message+"<BR>")
+		return("<span class='warning'>[formatted_message]</span><BR>")
 
 // The next function gets the messages set on the belly, in human-readable format.
 // This is useful in customization boxes and such. The delimiter right now is \n\n so
