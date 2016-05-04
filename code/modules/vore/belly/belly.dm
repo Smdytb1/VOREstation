@@ -90,6 +90,10 @@ belly_prefs["immutable"] = BOOLEAN
 		"%pred's %belly kneads on every fiber of your body, softening you down into mush to fuel their next hunt.",
 		"%pred's %belly churns you down into a hot slush. Your nutrient-rich remains course through their digestive track with a series of long, wet glorps.")
 
+	var/list/examine_messages = list(
+		"They have something solid in their %belly!",
+		"It looks like they have something in their %belly!")
+
 	var/list/vore_sounds = list(
 		"Gulp" = 'sound/vore/gulp.ogg',
 		"Insert" = 'sound/vore/insert.ogg',
@@ -168,7 +172,6 @@ belly_prefs["immutable"] = BOOLEAN
 
 			OR.trans_to(ML,OR.total_volume / absorbed_count)
 
-
 	var/datum/belly/B = check_belly(M.loc)
 	if(B)
 		B.internal_contents += M
@@ -196,14 +199,20 @@ belly_prefs["immutable"] = BOOLEAN
 // is examined.   By making this a proc, we not only take advantage of polymorphism,
 // but can easily make the message vary based on how many people are inside, etc.
 // Returns a string which shoul be appended to the Examine output.
-/datum/belly/proc/get_examine_msg(t_He, t_his, t_him, t_has, t_is)
-	return
+/datum/belly/proc/get_examine_msg()
+	if(internal_contents.len && examine_messages.len)
+		var/formatted_message
+		var/raw_message = pick(examine_messages)
+
+		formatted_message = bayreplacetext(raw_message,"%belly",lowertext(name))
+
+		return("<span class='warning'>[formatted_message]</span><BR>")
 
 // The next function gets the messages set on the belly, in human-readable format.
 // This is useful in customization boxes and such. The delimiter right now is \n\n so
 // in message boxes, this looks nice and is easily delimited.
 /datum/belly/proc/get_messages(var/type, var/delim = "\n\n")
-	ASSERT(type == "smo" || "smi" || "dmo" || "dmp")
+	ASSERT(type == "smo" || type == "smi" || type == "dmo" || type == "dmp" || type == "em")
 	var/list/raw_messages
 
 	switch(type)
@@ -215,6 +224,8 @@ belly_prefs["immutable"] = BOOLEAN
 			raw_messages = digest_messages_owner
 		if("dmp")
 			raw_messages = digest_messages_prey
+		if("em")
+			raw_messages = examine_messages
 
 	var/messages = list2text(raw_messages,delim)
 	return messages
@@ -223,7 +234,7 @@ belly_prefs["immutable"] = BOOLEAN
 // replacement strings and linebreaks as delimiters (two \n\n by default).
 // They also sanitize the messages.
 /datum/belly/proc/set_messages(var/raw_text, var/type, var/delim = "\n\n")
-	ASSERT(type == "smo" || type == "smi" || type == "dmo" || type == "dmp")
+	ASSERT(type == "smo" || type == "smi" || type == "dmo" || type == "dmp" || type == "em")
 
 	var/list/raw_list = text2list(html_encode(raw_text),delim)
 	if(raw_list.len > 10)
@@ -250,6 +261,8 @@ belly_prefs["immutable"] = BOOLEAN
 			digest_messages_owner = raw_list
 		if("dmp")
 			digest_messages_prey = raw_list
+		if("em")
+			examine_messages = raw_list
 
 	return
 
