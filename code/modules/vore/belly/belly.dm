@@ -246,11 +246,6 @@ belly_prefs["immutable"] = BOOLEAN
 
 	return
 
-// Relay the sounds of someone struggling in a belly to those outside!
-// Called from /mob/living/carbon/relaymove()
-/datum/belly/proc/relay_struggle(var/mob/user, var/direction)
-	return
-
 // Handle the death of a mob via digestion.
 // Called from the process_Life() methods of bellies that digest prey.
 // Default implementation calls M.death() and removes from internal contents.
@@ -331,3 +326,42 @@ belly_prefs["immutable"] = BOOLEAN
 				internal_contents += Mm
 				B.internal_contents -= Mm
 				absorb_living(Mm)
+
+//Handle a mob struggling
+// Called from /mob/living/carbon/relaymove()
+/datum/belly/proc/relay_struggle(var/mob/living/user, var/direction)
+	if (!(user in internal_contents) || recent_struggle)
+		return  // User is not in this belly, or struggle too soon.
+
+	recent_struggle = 1
+	spawn(25)
+		recent_struggle = 0
+
+	//if(prob(80)) //Using the cooldown above to prevent spam instead
+	var/struggle_outer_message = pick(struggle_messages_outside)
+	var/struggle_user_message = pick(struggle_messages_inside)
+
+	struggle_outer_message = bayreplacetext(struggle_outer_message,"%pred",owner)
+	struggle_outer_message = bayreplacetext(struggle_outer_message,"%prey",user)
+	struggle_outer_message = bayreplacetext(struggle_outer_message,"%belly",lowertext(name))
+
+	struggle_user_message = bayreplacetext(struggle_user_message,"%pred",owner)
+	struggle_user_message = bayreplacetext(struggle_user_message,"%prey",user)
+	struggle_user_message = bayreplacetext(struggle_user_message,"%belly",lowertext(name))
+
+	struggle_outer_message = "<span class='alert'>" + struggle_outer_message + "</span>"
+	struggle_user_message = "<span class='alert'>" + struggle_user_message + "</span>"
+
+	for(var/mob/M in hearers(4, owner))
+		M.show_message(struggle_outer_message, 2) // hearable
+	user << struggle_user_message
+
+	switch(rand(1,4))
+		if(1)
+			playsound(user.loc, 'sound/vore/squish1.ogg', 50, 1)
+		if(2)
+			playsound(user.loc, 'sound/vore/squish2.ogg', 50, 1)
+		if(3)
+			playsound(user.loc, 'sound/vore/squish3.ogg', 50, 1)
+		if(4)
+			playsound(user.loc, 'sound/vore/squish4.ogg', 50, 1)
