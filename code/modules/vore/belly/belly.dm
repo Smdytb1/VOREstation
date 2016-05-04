@@ -45,7 +45,6 @@ belly_prefs["immutable"] = BOOLEAN
 	var/tmp/recent_struggle = 0					// Flag to prevent struggle emote spam
 	var/tmp/emotePend = 0						// If there's already a spawned thing counting for the next emote
 
-
 	// Don't forget to watch your commas at the end of each line if you change these.
 	var/list/struggle_messages_outside = list(
 		"%pred's %belly wobbles with a squirming meal.",
@@ -152,19 +151,27 @@ belly_prefs["immutable"] = BOOLEAN
 /datum/belly/proc/release_specific_contents(var/atom/movable/M)
 	if (!(M in internal_contents))
 		return 0 // They weren't in this belly anyway
+
 	M.loc = owner.loc  // Move the belly contents into the same location as belly's owner.
 	src.internal_contents -= M  // Remove from the belly contents
 
 	if(istype(M,/mob/living))
 		var/mob/living/ML = M
-		ML.absorbed = 0
+		if(ML.absorbed)
+			ML.absorbed = 0
+			ML.reagents = new/datum/reagents(1000,M) //Human reagent datums hold 1000
+			var/datum/reagents/OR = owner.reagents
+			var/absorbed_count = 2 //Prey that we were, plus the pred gets a portion
+			for(var/mob/living/P in internal_contents)
+				if(P.absorbed)
+					absorbed_count++
 
-	if (isliving(owner.loc)) // This makes sure that the mob behaves properly if released into another mob
-		var/mob/living/loc_mob = owner.loc
-		for (var/bellytype in loc_mob.vore_organs)
-			var/datum/belly/belly = loc_mob.vore_organs[bellytype]
-			if (owner in belly.internal_contents)
-				belly.internal_contents += M
+			OR.trans_to(ML,OR.total_volume / absorbed_count)
+
+
+	var/datum/belly/B = check_belly(M.loc)
+	if(B)
+		B.internal_contents += M
 
 	owner.visible_message("<font color='green'><b>[owner] expels [M] from their [lowertext(name)]!</b></font>")
 	owner.update_icons()
@@ -271,6 +278,11 @@ belly_prefs["immutable"] = BOOLEAN
 		for (var/obj/item/W in M)
 			_handle_digested_item(W)
 
+	//Reagent transfer
+	if(M.reagents && istype(M.reagents,/datum/reagents))
+		var/datum/reagents/RL = M.reagents
+		RL.trans_to(owner,RL.total_volume*0.5)
+
 	// Delete the digested mob
 	del(M)
 
@@ -311,6 +323,14 @@ belly_prefs["immutable"] = BOOLEAN
 	M.absorbed = 1
 	M << "<span class='notice'>[owner]'s [name] absorbs your body, making you part of them.</span>"
 	owner << "<span class='notice'>Your [name] absorbs [M]'s body, making them part of you.</span>"
+
+	//Reagent sharing for absorbed with pred
+	var/datum/reagents/OR = owner.reagents
+	var/datum/reagents/PR = M.reagents
+
+	PR.trans_to(owner,PR.total_volume)
+	M.reagents = OR
+	del(PR)
 
 	//This is probably already the case, but for sub-prey, it won't be.
 	M.loc = owner
