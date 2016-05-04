@@ -882,6 +882,28 @@
 	icon_state = "demon-horns1"
 	do_colouration = 0
 
+/datum/sprite_accessory/ears/foxears
+	name = "fox ears"
+	desc = ""
+	icon_state = "bear"
+
+/datum/sprite_accessory/ears/fenears
+	name = "fennec ears"
+	desc = ""
+	icon_state = "bear"
+
+/datum/sprite_accessory/ears/foxearshc
+	name = "fox ears, hair colored"
+	desc = ""
+	icon_state = "bear"
+	do_colouration = 1
+
+/datum/sprite_accessory/ears/fenearshc
+	name = "fennec ears, hair colored"
+	desc = ""
+	icon_state = "bear"
+	do_colouration = 1
+
 
 // Special snowflake ears go below here.
 
@@ -1098,6 +1120,28 @@
 	name = "xenomorph tail"
 	desc = ""
 	icon_state = "xenotail"
+
+/datum/sprite_accessory/tail/fentail
+	name = "fennec tail"
+	desc = ""
+	icon_state = "fentail"
+
+/datum/sprite_accessory/tail/foxtail
+	name = "fox tail"
+	desc = ""
+	icon_state = "foxtail"
+
+/datum/sprite_accessory/tail/fentailhc
+	name = "fennec tail, hair colored"
+	desc = ""
+	icon_state = "fentail"
+	do_colouration = 1
+
+/datum/sprite_accessory/tail/foxtailhc
+	name = "fox tail, hair colored"
+	desc = ""
+	icon_state = "foxtail"
+	do_colouration = 1
 
 /datum/sprite_accessory/tail/molenar_kitsune
 	name = "quintail kitsune tails (Molenar)"

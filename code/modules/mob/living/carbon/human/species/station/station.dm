@@ -418,3 +418,73 @@
 		"Your feathers prickle in the heat.",
 		"You feel uncomfortably warm."
 		)
+
+
+
+/datum/species/fox
+	name = "Fox"
+	name_plural = "Foxes"
+	icobase = 'icons/mob/human_races/r_fox.dmi'
+	deform = 'icons/mob/human_races/r_def_fox.dmi'
+	language = "Siik'tajr" //Placeholder language.
+	tail = "foxtail"
+	// primitive = /mob/living/carbon/monkey/fox //We don't have fox-monkey sprites.
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+
+	blurb = "Placeholder" //I'm not a good lore writer. Fill this in with something else. ~CK
+
+	cold_level_1 = 200 //Default 260
+	cold_level_2 = 140 //Default 200
+	cold_level_3 = 80 //Default 120
+
+	heat_level_1 = 330 //Default 360
+	heat_level_2 = 380 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
+
+	heat_discomfort_level = 312
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+	cold_discomfort_level = 225
+
+
+
+/datum/species/fennec
+	name = "Fennec" //Placeholder name
+	name_plural = "Fennecs" //Placeholder name
+	icobase = 'icons/mob/human_races/r_fennec.dmi'
+	deform = 'icons/mob/human_races/r_def_fennec.dmi'
+	language = "Siik'tajr" //Placeholder language.
+	tail = "fentail"
+	//primitive = /mob/living/carbon/monkey/tajara //We don't have fennec-monkey sprites.
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+
+	blurb = "Fennecs are the native species of Virgo Prime." //I'm not a good lore writer.
+
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 430 //Default 360 - Higher is better
+	heat_level_2 = 500 //Default 400
+	heat_level_3 = 1100 //Default 1000
+
+	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR
+	flesh_color = "#AFA59E"
+	base_color = "#333333"
+	equip_problems = BOOT_PROBLEMS | GLOVE_PROBLEMS
+
+	heat_discomfort_level = 312
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+	cold_discomfort_level = 225
