@@ -280,9 +280,9 @@
 
 
 	// For each belly type, print description if someone is inside!
-	for (var/bellytype in src.vore_organs)
-		var/datum/belly/B = vore_organs[bellytype]
-		msg += B.get_examine_msg(t_He, t_his, t_him, t_has, t_is)
+	for (var/I in src.vore_organs)
+		var/datum/belly/B = vore_organs[]
+		msg += B.get_examine_msg()
 
 	msg += "</span>"
 
