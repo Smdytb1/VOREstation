@@ -892,26 +892,16 @@
 	desc = ""
 	icon_state = "fenears"
 
-/datum/sprite_accessory/ears/foxears
-	name = "fox ears, hair colored"
-	desc = ""
-	icon_state = "foxearshc"
-
-/datum/sprite_accessory/ears/fenears
-	name = "fennec ears, hair colored"
-	desc = ""
-	icon_state = "fenearshc"
-
 /datum/sprite_accessory/ears/foxearshc
 	name = "fox ears, hair colored"
 	desc = ""
-	icon_state = "bear"
+	icon_state = "foxearshc"
 	do_colouration = 1
 
 /datum/sprite_accessory/ears/fenearshc
 	name = "fennec ears, hair colored"
 	desc = ""
-	icon_state = "bear"
+	icon_state = "fenearshc"
 	do_colouration = 1
 
 
