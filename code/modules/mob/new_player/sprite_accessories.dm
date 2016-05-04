@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal") //Add species here if you want them to be able to use hair.
+	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal", "Fox", "Fennec") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -1134,13 +1134,13 @@
 /datum/sprite_accessory/tail/fentailhc
 	name = "fennec tail, hair colored"
 	desc = ""
-	icon_state = "fentail"
+	icon_state = "fentailhc"
 	do_colouration = 1
 
 /datum/sprite_accessory/tail/foxtailhc
 	name = "fox tail, hair colored"
 	desc = ""
-	icon_state = "foxtail"
+	icon_state = "foxtailhc"
 	do_colouration = 1
 
 /datum/sprite_accessory/tail/molenar_kitsune
