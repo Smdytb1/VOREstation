@@ -471,6 +471,7 @@
 	if(hasHUD(usr,"medical"))
 		var/perpname = "wot"
 		var/medical = "None"
+		var/scanned = 0
 
 		if(wear_id)
 			if(istype(wear_id,/obj/item/weapon/card/id))
@@ -489,6 +490,13 @@
 
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a> <a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>\n"
+
+		for(var/O in contents)
+			if(istype(O,/obj/item/weapon/implant/health))
+				scanned = 1
+				break
+
+		msg += "<span class = 'deptradio'>Scan status: [scanned ? "\blue Scanned" : "\red Not Scanned"]</span> \n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
