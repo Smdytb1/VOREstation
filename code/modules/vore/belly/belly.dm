@@ -44,7 +44,6 @@ belly_prefs["immutable"] = BOOLEAN
 	var/tmp/is_full								// Flag for if digested remeans are present. (for disposal messages)
 	var/tmp/recent_struggle = 0					// Flag to prevent struggle emote spam
 	var/tmp/emotePend = 0						// If there's already a spawned thing counting for the next emote
-	var/tmp/has_absorbed = 1
 
 	// Don't forget to watch your commas at the end of each line if you change these.
 	var/list/struggle_messages_outside = list(
