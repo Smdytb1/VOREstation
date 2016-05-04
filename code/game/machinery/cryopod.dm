@@ -194,23 +194,6 @@
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
 
-	// These items are preserved when the process() despawn proc occurs.
-	var/list/preserve_items = list(
-		/obj/item/weapon/hand_tele,
-		/obj/item/weapon/card/id, //this will make all id's do be stored. Orbis
-		/obj/item/weapon/card/id/captains_spare,
-		/obj/item/device/aicard,
-		/obj/item/device/mmi,
-		/obj/item/device/paicard,
-		/obj/item/weapon/gun,
-		/obj/item/weapon/pinpointer,
-		/obj/item/clothing/suit,
-		/obj/item/clothing/shoes/magboots,
-		/obj/item/blueprints,
-		/obj/item/clothing/head/helmet/space,
-		/obj/item/weapon/storage/internal
-	)
-
 /obj/machinery/cryopod/right
 	orient_right = 1
 	icon_state = "body_scanner_0-r"
@@ -329,20 +312,23 @@
 
 	for(var/obj/item/W in items)
 
-		var/preserve = null
-		for(var/T in preserve_items)
-			if(istype(W,T))
-				preserve = 1
-				break
+		if(istype(W,/obj/item/weapon/implant/health))
+			for(var/obj/machinery/computer/cloning/com in world)
+				for(var/datum/dna2/record/R in com.records)
+					if(R.implant == W)
+						del(R)
+						del(W)
+						//break //Might be heplful? What if they have more than one?
 
-		if(!preserve)
-			del(W)
-		else
+		if(W.type in important_items)
 			if(control_computer && control_computer.allow_items)
 				control_computer.frozen_items += W
 				W.loc = null
 			else
 				W.loc = src.loc
+
+		else
+			del(W)
 
 	//Update any existing objectives involving this mob.
 	for(var/datum/objective/O in all_objectives)
