@@ -2421,3 +2421,23 @@
 	desc = " This is Lethe's Hat! A little tag attached inside reads: 'If found please return to Lethe! Or else!' It looks rather worn in. It also lacks armor."
 	icon_state = "hoscap"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+
+//BeyondMyLife:Kilano Soryu
+/obj/item/clothing/under/dress/fluff/kilano
+	name = "Bleached Dress"
+	desc = "It appears that this was once a captain's dress, it's blueish color has been turned white by bleach, only the gold markings remain to slightly signify what it once was."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanodress"
+	item_state = "kilanodress"
+	item_color = "kilanodress"
+	species_restricted = null
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/gloves/fluff/kilano
+	name = "Bleached Gloves"
+	desc = "Some old captain's gloves, bleached white, almost unrecognizable from the color change besides the gold trim."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanogloves"
+	item_state = "kilanogloves"
+	item_color = "kilanogloves"
+	species_restricted = null
