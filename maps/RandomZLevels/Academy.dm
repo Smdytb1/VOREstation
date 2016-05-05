@@ -81,7 +81,7 @@
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 	speak = list("Avada Kedavra!", "Hocus Pocus!", "Welcome to Spacewarts School of Witchcraft and Wizardry!",
-	"I'm going to be a great wizard one day!", "Harry Pothead must be in trouble again.", "Restoration IS a valid school of magic!!")
+	"I'm going to be a great wizard one day!", "Restoration IS a valid school of magic!!")
 	speak_chance = 1
 	a_intent = "harm"
 	stop_automated_movement_when_pulled = 0
@@ -114,7 +114,7 @@
 	cold_damage_per_tick = 10
 	unsuitable_atoms_damage = 10
 
-/mob/living/simple_animal/hostile/wizard/Die()
+/mob/living/simple_animal/hostile/wizard/death()
 	..()
 	if(corpse)
 		new corpse (src.loc)

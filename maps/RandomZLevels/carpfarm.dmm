@@ -27,7 +27,7 @@
 "aA" = (/obj/structure/lattice,/turf/space,/area/awaymission/space)
 "aB" = (/obj/item/weapon/storage/toolbox/electrical,/obj/structure/cable,/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
 "aC" = (/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
-"aD" = (/obj/effect/landmark/corpse/miner,/obj/item/weapon/gun/projectile/pipegun,/obj/item/weapon/paper/awaygate/carpfarm/suicide,/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
+"aD" = (/obj/effect/landmark/corpse/miner{corpseid = 0},/obj/item/weapon/gun/projectile/pipegun,/obj/item/weapon/paper/awaygate/carpfarm/suicide,/turf/unsimulated/floor,/area/awaymission/carpfarm/base)
 "aE" = (/obj/machinery/gateway{dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/awaymission/carpfarm/base)
 "aF" = (/obj/machinery/gateway/centeraway,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/awaymission/carpfarm/base)
 "aG" = (/obj/machinery/gateway{dir = 4},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/awaymission/carpfarm/base)
