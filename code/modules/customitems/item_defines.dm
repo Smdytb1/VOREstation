@@ -2198,11 +2198,11 @@
 /obj/item/weapon/storage/box/fluff/serkii
 	name = "Serkii's personal effects."
 	desc = "A box with Serkii's personal belongings."
-	New()
-		new /obj/item/fluff/permit/serkiimiishy(src)
-		new /obj/item/weapon/gun/energy/stunrevolver(src)
-		..()
-		return
+/obj/item/weapon/storage/box/fluff/serkii/New()
+	new /obj/item/fluff/permit/serkiimiishy(src)
+	new /obj/item/weapon/gun/energy/stunrevolver(src)
+	..()
+	return
 
 
 // SASoperative : Joseph Skinner
