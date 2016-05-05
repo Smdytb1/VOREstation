@@ -883,7 +883,7 @@
 	do_colouration = 0
 
 /datum/sprite_accessory/ears/foxears
-	name = "fox ears"
+	name = "orange fox ears"
 	desc = ""
 	icon_state = "foxears"
 
