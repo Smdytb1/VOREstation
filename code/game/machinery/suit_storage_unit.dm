@@ -595,7 +595,7 @@
 	//Departments that the cycler can paint suits to look like.
 	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos")
 	//Species that the suits can be configured to fit.
-	var/list/species = list("Human","Skrell","Unathi","Tajara", "Akula", "Sergal", "Nevrean")
+	var/list/species = list("Human","Skrell","Unathi","Tajara", "Akula", "Sergal", "Nevrean", "Fox", "Fennec")
 
 	var/target_department
 	var/target_species
@@ -624,35 +624,35 @@
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	departments = list("Engineering","Atmos")
-	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean") //Add Unathi when sprites exist for their suits.
+	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean", "Fox", "Fennec) //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
 	req_access = list(access_mining)
 	departments = list("Mining")
-	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean")
+	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean", "Fox", "Fennec")
 
 /obj/machinery/suit_cycler/security
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
 	departments = list("Security")
-	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean")
+	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean", "Fox", "Fennec")
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
 	req_access = list(access_medical)
 	departments = list("Medical")
-	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean")
+	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean", "Fox", "Fennec")
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
 	req_access = list(access_syndicate)
 	departments = list("Mercenary")
-	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean")
+	species = list("Human","Tajara","Skrell","Unathi", "Akula", "Sergal", "Nevrean", "Fox", "Fennec")
 	can_repair = 1
 
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
