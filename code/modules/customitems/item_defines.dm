@@ -2162,7 +2162,7 @@
 //eekasqueak: Serkii Miishy
 /obj/item/fluff/permit/serkiimiishy
 	name = "Serkii Miishy's Stun Revolver Permit"
-	desc = {"There is a bright red <b><font color=red>SAMPLE PERMIT</font></b> stamped across the stock photo displayed on the card. Obviously this is only an example to educate security.
+	desc = {"
 	<b>NAME:</b> Serkii Miishy | <b>RACE:</b> Mousemorph | <b>HOMEWORLD:</b> Mars, Sol
 	<b>DOB:</b> 10/9/2441 | <b>HEIGHT:</b> 122cm | <b>SEX:</b> Male
 
