@@ -1,13 +1,11 @@
-// Legacy mob. Use the vore version.
-
 //Space bears!
-/mob/living/simple_animal/hostile/bear
+/mob/living/simple_animal/hostile/vore/bear
 	name = "space bear"
 	desc = "RawrRawr!!"
-	icon_state = "bear"
-	icon_living = "bear"
-	icon_dead = "bear_dead"
-	icon_gib = "bear_gib"
+	icon_state = "spacebear"
+	icon_living = "spacebear"
+	icon_dead = "spacebear-dead"
+	icon_gib = "bear-gib"
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	speak_emote = list("growls", "roars")
 	emote_hear = list("rawrs","grumbles","grawls")
@@ -39,24 +37,32 @@
 
 	faction = "russian"
 
+/mob/living/simple_animal/hostile/vore/bear/brown
+	name = "space bear"
+	desc = "RawrRawr!!"
+	icon_state = "brownbear"
+	icon_living = "brownbear"
+	icon_dead = "brownbear-dead"
+	icon_gib = "bear-gib"
+
 //SPACE BEARS! SQUEEEEEEEE~     OW! FUCK! IT BIT MY HAND OFF!!
-/mob/living/simple_animal/hostile/bear/Hudson
+/mob/living/simple_animal/hostile/vore/bear/Hudson
 	name = "Hudson"
 	desc = ""
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 
-/mob/living/simple_animal/hostile/bear/Life()
+/mob/living/simple_animal/hostile/vore/bear/Life()
 	. =..()
 	if(!.)
 		return
-
+/*
 	if(loc && istype(loc,/turf/space))
 		icon_state = "bear"
 	else
 		icon_state = "bearfloor"
-
+*/
 	switch(stance)
 
 		if(HOSTILE_STANCE_TIRED)
@@ -100,33 +106,56 @@
 
 
 
-/mob/living/simple_animal/hostile/bear/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/hostile/vore/bear/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(stance != HOSTILE_STANCE_ATTACK && stance != HOSTILE_STANCE_ATTACKING)
 		stance = HOSTILE_STANCE_ALERT
 		stance_step = 6
 		target_mob = user
 	..()
 
-/mob/living/simple_animal/hostile/bear/attack_hand(mob/living/carbon/human/M as mob)
+/mob/living/simple_animal/hostile/vore/bear/attack_hand(mob/living/carbon/human/M as mob)
 	if(stance != HOSTILE_STANCE_ATTACK && stance != HOSTILE_STANCE_ATTACKING)
 		stance = HOSTILE_STANCE_ALERT
 		stance_step = 6
 		target_mob = M
 	..()
-
-/mob/living/simple_animal/hostile/bear/Process_Spacemove(var/check_drift = 0)
+/*
+/mob/living/simple_animal/hostile/vore/bear/Process_Spacemove(var/check_drift = 0)
 	return	//No drifting in space for space bears!
-
-/mob/living/simple_animal/hostile/bear/FindTarget()
+*/
+/mob/living/simple_animal/hostile/vore/bear/FindTarget() // TODO: Make it so if the target is laying down, the bear actually won't bother them.
 	. = ..()
 	if(.)
 		custom_emote(1,"stares alertly at [.]")
 		stance = HOSTILE_STANCE_ALERT
 
-/mob/living/simple_animal/hostile/bear/LoseTarget()
+/mob/living/simple_animal/hostile/vore/bear/LoseTarget()
 	..(5)
 
-/mob/living/simple_animal/hostile/bear/AttackingTarget()
+/mob/living/simple_animal/hostile/vore/bear/AttackingTarget()
+
+	// Normally done as part of the vore mob attack proc, but since bears are special snowflake bastards, I have to copy it in here for now. -Spades
+	// Bear vore code.
+	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
+		return
+
+	if(!isliving(target_mob)) //Can't eat 'em if they ain't alive. Prevents eating borgs/bots.
+		..()
+		return
+
+	if(picky && !target_mob.digestable) //Don't eat people with nogurgle prefs
+		..()
+		return
+
+	if(target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
+		if(capacity)
+			var/check_size = target_mob.playerscale + fullness
+			if(check_size <= capacity)
+				animal_nom(target_mob)
+		else
+			animal_nom(target_mob)
+
+	// Original bear attack code.
 	if(!Adjacent(target_mob))
 		return
 	custom_emote(1, pick( list("slashes at [target_mob]", "bites [target_mob]") ) )
@@ -143,32 +172,3 @@
 		var/mob/living/L = target_mob
 		L.adjustBruteLoss(damage)
 		return L
-	//else if(istype(target_mob,/obj/mecha))
-		//var/obj/mecha/M = target_mob
-		//M.attack_animal(src)
-		//return M
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

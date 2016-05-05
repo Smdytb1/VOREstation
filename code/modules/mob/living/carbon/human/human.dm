@@ -22,9 +22,8 @@
 		else
 			set_species()
 
-	var/datum/reagents/R = new/datum/reagents(1000)
+	var/datum/reagents/R = new/datum/reagents(1000,src)
 	reagents = R
-	R.my_atom = src
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -84,7 +83,7 @@
 
 	//Non-default verbs go here
 
-	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
+	//verbs += /mob/proc/fixtaur //Leaving this so I can remember what it looks like -Aro
 	// Vore Code End
 
 /mob/living/carbon/human/Stat()

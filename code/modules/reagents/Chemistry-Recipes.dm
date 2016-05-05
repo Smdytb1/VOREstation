@@ -108,7 +108,23 @@ datum
 				holder.clear_reagents()
 
 ///////////////////////////////////////////////////////////////////////////////////
+/// Vore Drugs
 
+		ickypak
+			name = "Ickypak"
+			id = "ickypak"
+			result = "ickypak"
+			required_reagents = list("hyperzine" = 4, "fluorosurfactant" = 1)
+			result_amount = 5
+
+		unsorbitol
+			name = "Unsorbitol"
+			id = "unsorbitol"
+			result = "unsorbitol"
+			required_reagents = list("mutagen" = 3, "lipozine" = 2)
+			result_amount = 5
+
+///////////////////////////////////////////////////////////////////////////////////
 		silicate
 			name = "Silicate"
 			id = "silicate"
@@ -1102,7 +1118,7 @@ datum
 
 //Gold
 		slimecrit
-			name = "Slime Crit"
+			name = "Slime Crit" // Hostile mobs
 			id = "m_tele"
 			result = null
 			required_reagents = list("phoron" = 5)
@@ -1124,16 +1140,14 @@ datum
 					/mob/living/simple_animal/hostile/syndicate/ranged/space,
 					/mob/living/simple_animal/hostile/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
+					/mob/living/simple_animal/hostile/carp, // old
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
-					/mob/living/simple_animal/hostile/bear, // bugged
-					/mob/living/simple_animal/hostile/bear/Hudson, // bugged
-					/mob/living/simple_animal/hostile/hivebot/tele, // bugged
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
-					/*/mob/living/simple_animal/hostile/wizard, // None of these are re-added yet.
+					/*/mob/living/simple_animal/hostile/wizard,
 					/mob/living/simple_animal/hostile/wizard/red,
 					/mob/living/simple_animal/hostile/wizard/marisa,
 					/mob/living/simple_animal/hostile/tribesman, // bugged
@@ -1146,11 +1160,18 @@ datum
 					/mob/living/simple_animal/hostile/nazi/stormtrooper,
 					/mob/living/simple_animal/hostile/nazi/stormtrooper/heavy,
 					/mob/living/simple_animal/hostile/nazi/melee,*/
-					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
+					/mob/living/simple_animal/hostile/giant_spider/nurse, // fuck that
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
-					/mob/living/simple_animal/hostile/mimic,
-					/mob/living/simple_animal/hostile/mimic/copy,
-					/mob/living/simple_animal/hostile/mimic/crate
+					/mob/living/simple_animal/hostile/vore/mimic,
+					/mob/living/simple_animal/hostile/vore/mimic/copy,
+					/mob/living/simple_animal/hostile/vore/mimic/crate,
+					/mob/living/simple_animal/hostile/mimic, // old
+					/mob/living/simple_animal/hostile/mimic/copy, // old
+					/mob/living/simple_animal/hostile/mimic/crate, // old
+					/mob/living/simple_animal/hostile/bear,  // old
+					/mob/living/simple_animal/hostile/bear/Hudson,  // old
+					/mob/living/simple_animal/hostile/hivebot/tele,  // old
+					/mob/living/simple_animal/hostile/creature // old
 					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
 
@@ -1201,16 +1222,19 @@ datum
 					/mob/living/simple_animal/hostile/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp,
+					/mob/living/simple_animal/hostile/vore/carp,
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
-					/mob/living/simple_animal/hostile/bear, // bugged
-					/mob/living/simple_animal/hostile/bear/Hudson, // bugged
+					/mob/living/simple_animal/hostile/bear,
+					/mob/living/simple_animal/hostile/bear/Hudson,
+					/mob/living/simple_animal/hostile/vore/bear,
+					/mob/living/simple_animal/hostile/vore/bear/Hudson,
 					/mob/living/simple_animal/hostile/hivebot/tele, // bugged
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
-					/*/mob/living/simple_animal/hostile/wizard, // None of these are re-added yet.
+					/*/mob/living/simple_animal/hostile/wizard,
 					/mob/living/simple_animal/hostile/wizard/red,
 					/mob/living/simple_animal/hostile/wizard/marisa,
 					/mob/living/simple_animal/hostile/tribesman, // bugged
@@ -1225,9 +1249,13 @@ datum
 					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
 					/mob/living/simple_animal/hostile/tree,
-					/mob/living/simple_animal/hostile/mimic,
-					/mob/living/simple_animal/hostile/mimic/copy,
-					/mob/living/simple_animal/hostile/mimic/crate,
+					/mob/living/simple_animal/hostile/vore/mimic,
+					/mob/living/simple_animal/hostile/vore/mimic/copy,
+					/mob/living/simple_animal/hostile/vore/mimic/crate,
+					/mob/living/simple_animal/hostile/mimic, // old
+					/mob/living/simple_animal/hostile/mimic/copy, // old
+					/mob/living/simple_animal/hostile/mimic/crate, // old
+					/mob/living/simple_animal/hostile/creature, // old
 					/mob/living/simple_animal/bee,
 					/mob/living/simple_animal/borer,
 					/mob/living/simple_animal/borer/roundstart,
@@ -1246,8 +1274,8 @@ datum
 					/mob/living/simple_animal/mouse/brown/Tom,
 					/mob/living/simple_animal/snake/Noodle,
 					/mob/living/simple_animal/shade,
-					/mob/living/simple_animal/space_worm,
-					/mob/living/simple_animal/space_worm/head,
+					/mob/living/simple_animal/space_worm, // broken
+					/mob/living/simple_animal/space_worm/head, // broken
 					/mob/living/simple_animal/spiderbot
 					)
 				var/list/critters = typesof(/mob/living/simple_animal) - blocked // list of possible hostile mobs

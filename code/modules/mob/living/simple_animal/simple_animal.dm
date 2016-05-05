@@ -54,6 +54,8 @@
 	var/friendly = "nuzzles"
 	var/wall_smash = 0
 
+	var/list/prey_exclusions = list()
+
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
@@ -244,6 +246,10 @@
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
 
+	if(!isturf(M.loc))
+		M << "\red You can't do that from here!"
+		return
+
 	switch(M.a_intent)
 
 		if("help")
@@ -277,6 +283,9 @@
 	return
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
+	if(!isturf(user.loc))
+		user << "\red You can't do that from here!"
+		return
 
 	if(istype(O, /obj/item/stack/medical))
 

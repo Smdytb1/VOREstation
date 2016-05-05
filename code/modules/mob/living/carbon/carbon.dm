@@ -61,25 +61,6 @@
 	..()
  */
 
-/mob/living/carbon
-	var/recent_struggle = 0 // To prevent spammage
-
-//Vore code, struggle stuff
-/mob/living/carbon/relaymove(var/mob/user, var/direction)
-
-/* This stuff is on bellies. 'recent_struggle' is not defined on carbons.
-	if(recent_struggle) return
-
-	recent_struggle = 1
-	spawn(20)
-		recent_struggle = 0
-*/
-
-	for (var/bellytype in src.vore_organs)
-		var/datum/belly/belly = src.vore_organs[bellytype]
-		if (user in belly.internal_contents)
-			belly.relay_struggle(user, direction)
-
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
 		M.loc = src.loc

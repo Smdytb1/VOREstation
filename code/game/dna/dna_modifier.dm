@@ -13,7 +13,7 @@
 
 	// Stuff for cloners
 	var/id=null
-	var/implant=null
+	var/obj/item/weapon/implant/health/implant=null
 	var/ckey=null
 	var/mind=null
 	var/languages=null

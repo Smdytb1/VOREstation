@@ -294,7 +294,8 @@
 		"lung_ruptured" = H.is_lung_ruptured(),
 		"external_organs" = H.organs.Copy(),
 		"internal_organs" = H.internal_organs.Copy(),
-		"species_organs" = H.species.has_organ //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
+		"species_organs" = H.species.has_organ, //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
+		"vore_organs" = H.vore_organs.Copy()
 		)
 	return occupant_data
 
@@ -325,6 +326,21 @@
 	dat += text("Body Temperature: [occ["bodytemp"]-T0C]&deg;C ([occ["bodytemp"]*1.8-459.67]&deg;F)<br><HR>")
 	dat += text("Relative Body Weight: [occ["weight"]]lb / [occ["weight"] / 2.20463]kg<br><HR>")
 
+	//Vore code
+	var/bellies = occ["vore_organs"]
+	var/humancount = 0
+	var/livingcount = 0
+	for(var/I in bellies)
+		var/datum/belly/B = bellies[I]
+		for(var/O in B.internal_contents)
+			if(ishuman(O))
+				humancount++
+			else if(isliving(O))
+				livingcount++
+
+	if(humancount || livingcount)
+		dat += text("<font color='red'>Additional life-signs detected:[livingcount ? "<BR>- [livingcount] non-human(s)" : ""][humancount ? "<BR>- [humancount] humanoid(s)" : ""]</font><HR>")
+
 	if(occ["borer_present"])
 		dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<br>"
 
@@ -335,6 +351,8 @@
 	dat += text("[]\tDermaline: [] units</FONT><BR>", (occ["dermaline_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dermaline_amount"])
 	dat += text("[]\tBicaridine: [] units<BR>", (occ["bicaridine_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["bicaridine_amount"])
 	dat += text("[]\tDexalin: [] units<BR>", (occ["dexalin_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dexalin_amount"])
+
+
 
 	for(var/datum/disease/D in occ["tg_diseases_list"])
 		if(!D.hidden[SCANNER])
@@ -448,4 +466,6 @@
 		dat += text("<font color='red'>Cataracts detected.</font><BR>")
 	if(occ["sdisabilities"] & NEARSIGHTED)
 		dat += text("<font color='red'>Retinal misalignment detected.</font><BR>")
+
+
 	return dat

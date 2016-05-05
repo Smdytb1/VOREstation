@@ -12,8 +12,10 @@ datum
 		var/maximum_volume = 100
 		var/atom/my_atom = null
 
-		New(maximum=100)
+		New(maximum=100,atom/owner=null)
 			maximum_volume = maximum
+			if(owner)
+				my_atom = owner
 
 			//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 			if(!chemical_reagents_list)

@@ -29,26 +29,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 /mob/living/simple_animal
 	var/isPredator = 0 					//Are they capable of performing and pre-defined vore actions for their species?
 	var/swallowTime = 30 				//How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
-	var/backoffTime = 50 				//How long to exclude an escaped mob from being re-eaten.
-	var/gurgleTime = 600				//How long between stomach emotes at prey
 	var/list/prey_excludes = list()		//For excluding people from being eaten.
-
-	//We have some default emotes for mobs to do to their prey.
-	var/list/stomach_emotes = list(
-									"The insides knead at you gently for a moment.",
-									"The guts glorp wetly around you as some air shifts.",
-									"Your predator takes a deep breath and sighs, shifting you somewhat.",
-									"The stomach squeezes you tight for a moment, then relaxes.",
-									"During a moment of quiet, breathing becomes the most audible thing.",
-									"The warm slickness surrounds and kneads on you.")
-	var/list/stomach_emotes_d = list(
-									"The caustic acids eat away at your form.",
-									"The acrid air burns at your lungs.",
-									"Without a thought for you, the stomach grinds inwards painfully.",
-									"The guts treat you like food, squeezing to press more acids against you.",
-									"The onslaught against your body doesn't seem to be letting up; you're food now.",
-									"The insides work on you like they would any other food.")
-	var/list/digest_emotes = list()		//To send when digestion finishes
 
 /mob/living/simple_animal/verb/toggle_digestion()
 	set name = "Toggle Animal's Digestion"
@@ -57,7 +38,9 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 	set src in oview(1)
 
 	var/datum/belly/B = vore_organs[vore_selected]
-
+	if(faction != usr.faction)
+		usr << "\red This predator isn't friendly, and doesn't give a shit about your opinions of it digesting you."
+		return
 	if(B.digest_mode == "Hold")
 		var/confirm = alert(usr, "Enabling digestion on [name] will cause it to digest all stomach contents. Using this to break OOC prefs is against the rules. Digestion will disable itself after 20 minutes.", "Enabling [name]'s Digestion", "Enable", "Cancel")
 		if(confirm == "Enable")
@@ -105,13 +88,26 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 	src << "<span class='notice'>[vore_selected] selected.</span>"
 
 //
+//	Belly searching for simplifying other procs
+//
+/proc/check_belly(atom/movable/A)
+	if(istype(A.loc,/mob/living))
+		var/mob/living/M = A.loc
+		for(var/I in M.vore_organs)
+			var/datum/belly/B = M.vore_organs[I]
+			if(A in B.internal_contents)
+				return(B)
+
+	return 0
+
+//
 //	Verb for saving vore preferences to save file
 //
 /mob/living/proc/save_vore_prefs()
 	set name = "Save Vore Prefs"
 	set category = "Vore"
 
-	var/result
+	var/result = 0
 
 	if(client.prefs)
 		result = client.prefs.save_vore_preferences()
@@ -175,12 +171,18 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 		var/mob/living/simple_animal/pred = src.loc
 		var/confirm = alert(src, "You're in a mob. Don't use this as a trick to get out of hostile animals. This is for escaping from preference-breaking and if you're otherwise unable to escape from endo. If you are in more than one pred, use this more than once.", "Confirmation", "Okay", "Cancel")
 		if(confirm == "Okay")
-			pred.prey_excludes += src
-			spawn(pred.backoffTime)
-				if(pred)	pred.prey_excludes -= src
-			var/datum/belly/B = vore_organs[vore_selected]
-			B.release_specific_contents(src)
+			for(var/I in pred.vore_organs)
+				var/datum/belly/B = pred.vore_organs[I]
+				B.release_specific_contents(src)
+
+			for(var/mob/living/simple_animal/SA in range(10))
+				SA.prey_exclusions += src
+				spawn(18000)
+					if(src && SA)
+						SA.prey_exclusions -= src
+
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (MOB) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+			pred.update_icons()
 
 	//You're in a PC!
 	else if(istype(src.loc,/mob/living))
@@ -251,11 +253,11 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 
 	// Prepare messages
 	if(user == pred) //Feeding someone to yourself
-		attempt_msg = text("<span class='warning'>[] is attemping to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
-		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		attempt_msg = text("<span class='warning'>[] is attemping to [] [] into their []!</span>",pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
+		success_msg = text("<span class='warning'>[] manages to [] [] into their []!</span>",pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
 	else //Feeding someone to another person
-		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
-		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,belly_target.vore_verb,prey,lowertext(belly_target))
+		attempt_msg = text("<span class='warning'>[] is attempting to make [] [] [] into their []!</span>",user,pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
+		success_msg = text("<span class='warning'>[] manages to make [] [] [] into their []!</span>",user,pred,lowertext(belly_target.vore_verb),prey,lowertext(belly_target.name))
 
 	// Announce that we start the attempt!
 	for (var/mob/O in get_mobs_in_view(world.view,user))
@@ -276,6 +278,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 
 	// Actually shove prey into the belly.
 	belly_target.nom_mob(prey, user)
+	user.update_icons()
 
 	// Inform Admins
 	if (pred == user)

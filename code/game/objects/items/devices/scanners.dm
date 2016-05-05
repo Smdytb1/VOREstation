@@ -209,6 +209,15 @@ REAGENT SCANNER
 			else
 				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]")
 		user.show_message("\blue Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font>")
+		//Vore code
+		for(var/I in M.vore_organs)
+			var/datum/belly/B = M.vore_organs[I]
+			for(var/O in B.internal_contents)
+				if(isliving(O))
+					user.show_message("\red Additional life-signs detected inside subject.")
+					break
+			break
+
 	src.add_fingerprint(user)
 	return
 

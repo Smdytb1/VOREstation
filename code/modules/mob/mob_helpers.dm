@@ -61,12 +61,12 @@
 	return 0
 
 /proc/isbear(A)
-	if(istype(A, /mob/living/simple_animal/hostile/bear))
+	if(istype(A, /mob/living/simple_animal/hostile/bear) || istype(A, /mob/living/simple_animal/hostile/vore/bear))
 		return 1
 	return 0
 
 /proc/iscarp(A)
-	if(istype(A, /mob/living/simple_animal/hostile/carp))
+	if(istype(A, /mob/living/simple_animal/hostile/carp) || istype(A, /mob/living/simple_animal/hostile/vore/carp))
 		return 1
 	return 0
 

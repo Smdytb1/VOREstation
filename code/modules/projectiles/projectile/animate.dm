@@ -9,5 +9,7 @@
 /obj/item/projectile/animate/Bump(var/atom/change)
 	if((istype(change, /obj/item) || istype(change, /obj/structure)) && !is_type_in_list(change, protected_objects))
 		var/obj/O = change
-		new /mob/living/simple_animal/hostile/mimic/copy(O.loc, O, firer)
+		new /mob/living/simple_animal/hostile/vore/mimic/copy(O.loc, O, firer)
 	..()
+
+var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)

@@ -1764,6 +1764,13 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
+/obj/item/clothing/shoes/cuffs/octavious //Octavious Ward, tasald's char
+	desc = "Dark leather leg wraps with sliver clasps on the sides. Stylish and functional."
+	name = "silvered leg wraps"
+	icon_state = "silvergildedcuffs"
+	item_color = "silvergildedcuffs"
+	body_parts_covered = 0
+	species_restricted = null
 
 /obj/item/clothing/head/squirrel/joan //Because I hate the ears matching hair color -Joan
 	name = "squirrel ears"
@@ -2301,13 +2308,15 @@
 /obj/item/weapon/storage/box/fluff/tasaldkit // bwoincognito:Tasald Corlethian
 	name = "Tasald's Kit"
 	desc = "A kit containing Talsald's clothes."
-	storage_slots = 2
+	storage_slots = 7
 
 /obj/item/weapon/storage/box/fluff/tasaldkit/New()
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tasald(src)
-	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/clothing/suit/storage/det_suit/fluff/tas_coat(src)
+	new /obj/item/clothing/under/det/fluff/tasald(src)
 	new /obj/item/fluff/permit/tasald_corlethian(src)
+	new /obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian(src)
+	new /obj/item/weapon/implanter/loyalty
 	..()
 	return
 
@@ -2412,3 +2421,23 @@
 	desc = " This is Lethe's Hat! A little tag attached inside reads: 'If found please return to Lethe! Or else!' It looks rather worn in. It also lacks armor."
 	icon_state = "hoscap"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+
+//BeyondMyLife:Kilano Soryu
+/obj/item/clothing/under/dress/fluff/kilano
+	name = "Bleached Dress"
+	desc = "It appears that this was once a captain's dress, it's blueish color has been turned white by bleach, only the gold markings remain to slightly signify what it once was."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanodress"
+	item_state = "kilanodress"
+	item_color = "kilanodress"
+	species_restricted = null
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/gloves/fluff/kilano
+	name = "Bleached Gloves"
+	desc = "Some old captain's gloves, bleached white, almost unrecognizable from the color change besides the gold trim."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanogloves"
+	item_state = "kilanogloves"
+	item_color = "kilanogloves"
+	species_restricted = null
