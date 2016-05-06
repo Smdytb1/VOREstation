@@ -451,7 +451,7 @@
 	else if (alert_level==0)
 		alert_signal.data["alert"] = "clear"
 
-	if(!src.z >= 7)
+	if(src.z < 7)
 		frequency.post_signal(src, alert_signal)
 
 /obj/machinery/alarm/attack_ai(mob/user)
@@ -1145,7 +1145,7 @@ FIRE ALARM
 	if (!( src.working))
 		return
 	var/area/area = get_area(src)
-	if(!src.z >= 7)
+	if(src.z < 7)
 		for(var/area/A in area.related)
 			for(var/obj/machinery/firealarm/FA in A)
 				fire_alarm.triggerAlarm(loc, FA, duration)
