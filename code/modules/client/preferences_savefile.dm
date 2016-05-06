@@ -395,7 +395,7 @@
 	S.cd = "/character[slot]"
 
 	S["belly_prefs"]	>> belly_prefs
-	S["digestable"]	<< digestable
+	S["digestable"]	>> digestable
 
 	if(!belly_prefs)
 		belly_prefs = list()
