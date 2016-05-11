@@ -112,12 +112,12 @@
 	icon_state = "Hunter Front Half"
 	spawn_nothing_percentage = 40
 	item_to_spawn()
-		return pick(/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien,\
-					/mob/living/simple_animal/hostile/alien,\
-					/mob/living/simple_animal/hostile/alien/sentinel,\
+		return pick(/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien,\
+					/mob/living/simple_animal/hostile/vore/alien,\
+					/mob/living/simple_animal/hostile/vore/alien/sentinel,\
 					/obj/item/clothing/mask/facehugger/xenostation)
 
 /obj/item/clothing/mask/facehugger/xenostation/New() // To prevent deleting it if aliens are disabled globally.
