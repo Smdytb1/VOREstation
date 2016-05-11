@@ -303,6 +303,12 @@ datum/design/circuit/comm_server
 	req_tech = list("programming" = 3)
 	build_path = /obj/item/weapon/circuitboard/comm_server
 
+datum/design/circuit/comm_monitor
+	name = "telecommunications traffic control console"
+	id = "comm_traffic"
+	req_tech = list("programming" = 3)
+	build_path = /obj/item/weapon/circuitboard/comm_traffic
+
 datum/design/circuit/message_monitor
 	name = "messaging monitor console"
 	id = "message_monitor"
@@ -743,6 +749,15 @@ datum/design/tech_disk
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 30, "$glass" = 10)
 	build_path = /obj/item/weapon/disk/tech_disk
+	
+datum/design/flora_disk
+	name = "Flora Data Disk"
+	desc = "Produce additional disks for storing plant genetic data."
+	id = "flora_disk"
+	req_tech = list("programming" = 1)
+	build_type = PROTOLATHE | AUTOLATHE
+	materials = list("$metal" = 30, "$glass" = 10)
+	build_path = /obj/item/weapon/disk/botany
 
 ///////////////////////////////////
 /////Non-Board Computer Stuff//////

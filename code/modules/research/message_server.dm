@@ -48,8 +48,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 				priority = "Undetermined"
 
 /obj/machinery/message_server
-	icon = 'icons/obj/machines/research.dmi'
-	icon_state = "server"
+	icon = 'icons/obj/computer3.dmi'
+	icon_state = "frame-rack"
 	name = "Messaging Server"
 	density = 1
 	anchored = 1.0
@@ -69,6 +69,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
 /obj/machinery/message_server/New()
+	overlays += "rack-on"
+	overlays += "rack-working"
 	message_servers += src
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
@@ -129,12 +131,13 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/update_icon()
 	if((stat & (BROKEN|NOPOWER)))
-		icon_state = "server-nopower"
+		overlays.Cut()
 	else if (!active)
-		icon_state = "server-off"
+		overlays.Cut()
+		overlays += "rack-on"
 	else
-		icon_state = "server-on"
-
+		overlays.Cut()
+		overlays += "rack-working"
 	return
 
 
@@ -317,9 +320,9 @@ var/obj/machinery/blackbox_recorder/blackbox
 
 // Sanitize inputs to avoid SQL injection attacks
 proc/sql_sanitize_text(var/text)
-	text = replacetext(text, "'", "''")
-	text = replacetext(text, ";", "")
-	text = replacetext(text, "&", "")
+	text = bayreplacetext(text, "'", "''")
+	text = bayreplacetext(text, ";", "")
+	text = bayreplacetext(text, "&", "")
 	return text
 
 proc/feedback_set(var/variable,var/value)

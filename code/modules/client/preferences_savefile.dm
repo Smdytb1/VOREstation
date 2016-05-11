@@ -106,6 +106,9 @@
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
 	S["age"]				>> age
+	S["weight"]				>> weight
+	S["weight_gain"]		>> weight_gain
+	S["weight_loss"]		>> weight_loss
 	S["species"]			>> species
 	S["custom_species"]		>> custom_species
 	S["language"]			>> language
@@ -153,6 +156,7 @@
 	S["job_engsec_low"]		>> job_engsec_low
 
 	//Flavour Text
+	S["flavor_texts_preferences"]	>> flavor_texts["preferences"]
 	S["flavor_texts_general"]	>> flavor_texts["general"]
 	S["flavor_texts_head"]		>> flavor_texts["head"]
 	S["flavor_texts_face"]		>> flavor_texts["face"]
@@ -162,13 +166,6 @@
 	S["flavor_texts_hands"]		>> flavor_texts["hands"]
 	S["flavor_texts_legs"]		>> flavor_texts["legs"]
 	S["flavor_texts_feet"]		>> flavor_texts["feet"]
-
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	>> inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		>> inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		>> inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		>> inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		>> inside_flavour_texts["Tail"]
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
@@ -225,6 +222,9 @@
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
 	gender			= sanitize_gender(gender)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
+	weight				= sanitize_integer(weight, WEIGHT_MIN, WEIGHT_MAX, initial(weight))
+	weight_gain			= sanitize_integer(weight_gain, WEIGHT_CHANGE_MIN, WEIGHT_CHANGE_MAX, initial(weight_gain))
+	weight_loss			= sanitize_integer(weight_loss, WEIGHT_CHANGE_MIN, WEIGHT_CHANGE_MAX, initial(weight_loss))
 	taur			= sanitize_integer(taur, 0, taur_styles_list.len, initial(taur))
 	playerscale		= sanitize_inlist(playerscale, list(RESIZE_HUGE, RESIZE_BIG, RESIZE_NORMAL, RESIZE_SMALL, RESIZE_TINY), initial(playerscale))
 	r_hair			= sanitize_integer(r_hair, 0, 255, initial(r_hair))
@@ -289,6 +289,9 @@
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender
 	S["age"]				<< age
+	S["weight"]				<< weight
+	S["weight_gain"]		<< weight_gain
+	S["weight_loss"]		<< weight_loss
 	S["species"]			<< species
 	S["custom_species"]		<< custom_species
 	S["language"]			<< language
@@ -334,6 +337,7 @@
 	S["job_engsec_low"]		<< job_engsec_low
 
 	//Flavour Text
+	S["flavor_texts_preferences"]	<< flavor_texts["preferences"]
 	S["flavor_texts_general"]	<< flavor_texts["general"]
 	S["flavor_texts_head"]		<< flavor_texts["head"]
 	S["flavor_texts_face"]		<< flavor_texts["face"]
@@ -343,13 +347,6 @@
 	S["flavor_texts_hands"]		<< flavor_texts["hands"]
 	S["flavor_texts_legs"]		<< flavor_texts["legs"]
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
-
-	//Inside flavour text
-	S["inside_flavour_texts_stomach"]	<< inside_flavour_texts["Stomach"]
-	S["inside_flavour_texts_balls"]		<< inside_flavour_texts["Cock"]
-	S["inside_flavour_texts_womb"]		<< inside_flavour_texts["Womb"]
-	S["inside_flavour_texts_boobs"]		<< inside_flavour_texts["Boob"]
-	S["inside_flavour_texts_tail"]		<< inside_flavour_texts["Tail"]
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
@@ -384,6 +381,37 @@
 
 	return 1
 
+/datum/preferences/proc/load_vore_preferences(slot)
+	if(!path)				return 0
+	if(!fexists(path))		return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/"
+	if(!slot)	slot = default_slot
+	slot = sanitize_integer(slot, 1, config.character_slots, initial(default_slot))
+	if(slot != default_slot)
+		default_slot = slot
+		S["default_slot"] << slot
+	S.cd = "/character[slot]"
+
+	S["belly_prefs"]	>> belly_prefs
+	S["digestable"]	>> digestable
+
+	if(!belly_prefs)
+		belly_prefs = list()
+
+	return 1
+
+/datum/preferences/proc/save_vore_preferences()
+	if(!path)				return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/character[default_slot]"
+
+	S["belly_prefs"]	<< belly_prefs
+	S["digestable"]	<< digestable
+
+	return 1
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN

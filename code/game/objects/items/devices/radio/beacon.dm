@@ -6,6 +6,10 @@
 	var/code = "electronic"
 	origin_tech = "bluespace=1"
 
+/obj/item/device/radio/beacon/New()
+	..()
+	flags |= NOBLUDGEON
+
 /obj/item/device/radio/beacon/hear_talk()
 	return
 
@@ -26,12 +30,23 @@
 	src.add_fingerprint(usr)
 	return
 
+/obj/item/device/radio/beacon/afterattack(var/mob/living/carbon/target, var/mob/living/user, var/proximity)
+	if (!isliving(target) || !proximity) return
+
+	var/confirm = alert(usr, "Feed the [src] to [target]?", "Confirmation", "Yes!", "Cancel")
+	if(confirm == "Yes!")
+		var/bellyname = input("Which belly?","Select A Belly") in target.vore_organs
+		var/datum/belly/B = target.vore_organs[bellyname]
+		user.drop_item()
+		src.loc = target
+		B.internal_contents += src
+		target.visible_message("<span class='warning'>[target] is fed the [src]!</span>")
+		playsound(target, 'sound/vore/gulp.ogg', 100, 1)
 
 /obj/item/device/radio/beacon/bacon //Probably a better way of doing this, I'm lazy.
 	proc/digest_delay()
 		spawn(600)
 			del(src)
-
 
 // SINGULO BEACON SPAWNER
 

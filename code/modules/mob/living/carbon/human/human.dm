@@ -22,9 +22,8 @@
 		else
 			set_species()
 
-	var/datum/reagents/R = new/datum/reagents(1000)
+	var/datum/reagents/R = new/datum/reagents(1000,src)
 	reagents = R
-	R.my_atom = src
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -44,24 +43,48 @@
 
 	// Vore Code Start
 	// Setup the types of bellies present.
-	internal_contents["Stomach"] = new /datum/belly/stomach(src)
-	internal_contents["Cock"] = new /datum/belly/cock(src)
-	internal_contents["Womb"] = new /datum/belly/womb(src)
-	internal_contents["Boob"] = new /datum/belly/boob(src)
-	internal_contents["Tail"] = new /datum/belly/tail(src)
+
+	// VTODO: If someone has ZERO bellies, give them the default.
+/*
+	if(length(vore_organs) == 0)
+		//Give them a stomach as default so they aren't helpless.
+		vore_organs["Stomach"] = new /datum/belly(src)
+		if(vore_organs["Stomach"])
+			var/datum/belly/setup = vore_organs["Stomach"]
+			setup.name = "Stomach"
+			setup.inside_flavor = "The slimy inside of [setup.owner]'s stomach!"
+			setup.vore_sound = 'sound/vore/gulp.ogg'
+			setup.vore_verb = "swallow"
+			setup.immutable = 1
+
+		vore_organs["Tail"] = new /datum/belly(src)
+		if(vore_organs["Tail"])
+			var/datum/belly/setup = vore_organs["Tail"]
+			setup.name = "Tail"
+			setup.inside_flavor = "The slippery insides of [setup.owner]'s tail!"
+			setup.vore_sound = 'sound/vore/gulp.ogg'
+			setup.vore_verb = "snap up"
+
+			//Set the stomach as the selected one since it's the ONLY one
+			src.vore_selected = "Stomach"
+*/
+
+	/* Old, when predefined datums were real.
+	vore_organs["Stomach"] = new /datum/belly/stomach(src)
+	vore_organs["Cock"] = new /datum/belly/cock(src)
+	vore_organs["Womb"] = new /datum/belly/womb(src)
+	vore_organs["Boob"] = new /datum/belly/boob(src)
+	vore_organs["Tail"] = new /datum/belly/tail(src)
+	vore_organs["Absorbed"] = new /datum/belly/absorbed(src)
 	vorifice = SINGLETON_VORETYPE_INSTANCES["Oral Vore"]
+	*/
+
+
+
+	//Non-default verbs go here
+
+	//verbs += /mob/proc/fixtaur //Leaving this so I can remember what it looks like -Aro
 	// Vore Code End
-
-	//Non-default verbs go here.
-	verbs += /mob/living/proc/set_size
-	verbs += /mob/living/carbon/human/proc/orifice_toggle
-	verbs += /mob/living/carbon/human/proc/vore_release
-	verbs += /mob/living/proc/escapeOOC //NW WOZ ERE 2. OOC escape verb.
-	verbs += /mob/proc/fixtaur // Temporary fix until we unfuck taurs. -Ace
-	verbs += /mob/living/carbon/human/proc/insidePanel
-	verbs += /mob/living/carbon/human/proc/I_am_not_mad // I SWEAR I'M NOT. This bit does the prey-side digestable toggle.
-
-
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -678,16 +701,24 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
+				var/msg = input(usr,"Update the general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["flavor_change"]] = msg
+				return
+
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
 				var/msg = input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
@@ -783,7 +814,7 @@
 				src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 
 				// Vore Code Begin
-				var/datum/belly/B = internal_contents["Stomach"]
+				var/datum/belly/B = vore_organs["Stomach"]
 				if (B.release_all_contents())
 					visible_message("<font color='green'><b>[src] also hurls out the contents of their stomach!</b></font>")
 				// Vore Code End
@@ -1305,6 +1336,9 @@
 			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
+	flavor_text += "---- OOC Preferences ---- \n"
+	flavor_text += flavor_texts["preferences"]
+
 	if(!shrink)
 		return flavor_text
 	else

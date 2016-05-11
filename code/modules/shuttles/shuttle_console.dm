@@ -1,8 +1,10 @@
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_state = "frame"
 	circuit = null
+
+	screenicon = "shuttle"
+	keyboardicon = "kb3"
 
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
@@ -15,7 +17,7 @@
 	if(!allowed(user))
 		user << "\red Access Denied."
 		return 1
-	
+
 	ui_interact(user)
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)

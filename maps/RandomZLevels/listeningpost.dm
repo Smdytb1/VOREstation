@@ -191,9 +191,28 @@
 			and see if he wants a job. Ask our contacts on station. Surely one of them knows who's behind
 			the heist."}
 
-/*
-/obj/item/weapon/paper/listneningpost/year2559/may
-	name = "\improper May 2559 Report"
+/obj/item/weapon/paper/listneningpost/year2560/january
+	name = "\improper January 2560 Report"
+	info = {"A group of Akula pirates tried to kidnap Kisuke Gema. They succeded, but their leader died of
+			his injuries soon after. The other pirates defected. I wonder why?"}
+
+/obj/item/weapon/paper/listneningpost/year2560/february
+	name = "\improper February 2560 Report"
+	info = {"There were a few incidents regarding a redspace anomaly in the chapel but the effects have long
+			since subsided. Nothing of major interest otherwise."}
+
+/obj/item/weapon/paper/listneningpost/year2560/march
+	name = "\improper March 2560 Report"
+	info = {"Very quiet month. Nothing of interest to report. Perhaps the calm before the storm?"}
+
+/obj/item/weapon/paper/listneningpost/year2560/april
+	name = "\improper March 2560 Report"
+	info = {"A loud, painfully high pitched SSTV signal came across global comms. It seems to be a distress signal
+			of some kind. To what, I have no idea. Efforts to trace the signal's origin have fallen inconclusive."}
+
+/* // Template
+/obj/item/weapon/paper/listneningpost/year2560/january
+	name = "\improper January 2560 Report"
 	info = {""}
 */
 

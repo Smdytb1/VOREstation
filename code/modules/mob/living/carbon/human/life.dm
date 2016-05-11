@@ -93,9 +93,6 @@
 		//Random events (vomiting etc)
 		handle_random_events()
 
-		//stuff in the internal contents
-		handle_internal_contents()
-
 		handle_shock()
 
 		handle_pain()
@@ -333,6 +330,8 @@
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 		if(istype(loc, /obj/item/weapon/holder/micro)) return
 		if(ismob(loc))	return //otherwise return_air will return nothing and therefore immediately suffocate them
+		if(istype(loc,/obj/item/clothing)) return //FUN POLICE, here to enforce fun for once
+		if(istype(src.loc, /obj/item/device/dogborg/sleeper)) return //If they're in a dog stomach, they don't need to breathe, as the stomach does it for them.
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
@@ -663,6 +662,8 @@
 		if(!environment)
 			return
 
+		if(istype(src.loc, /obj/item/device/dogborg/sleeper)) return //Dog stomachs are space proof, due to request.
+
 		//Stuff like the xenomorph's plasma regen happens here.
 		species.handle_environment_special(src)
 
@@ -979,9 +980,16 @@
 			else //heal in the dark
 				heal_overall_damage(1,1)
 
-		// nutrition decrease
+		// VOREstation weight code.
+		// Weight should be limited between 70 and 500 pounds min and max. Beyond that gets not believable because the person would more likely keel over and die or be immobile.
 		if (nutrition > 0 && stat != 2)
-			nutrition = max (0, nutrition - HUNGER_FACTOR)
+			nutrition = max (0, nutrition - HUNGER_FACTOR) // nutrition decrease
+			if (nutrition > 450 && weight < 500 && weight_gain)
+				weight += metabolism*(0.01*weight_gain)  // weight increase. WARNING: REALLY FUCKING HACKY.
+			//	If someone can come back to this later and un-fuck this, the goal is for each 1 nutriment removed to be worth 0.03 pounds added. This was a hacky fix.
+
+		else if (nutrition <= 50 && stat != 2 && weight > 70 && weight_loss)
+			weight -= metabolism*(0.01*weight_loss) // starvation weight loss
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
@@ -1395,6 +1403,10 @@
 
 			if(config.welder_vision)
 				var/found_welder
+
+				if(absorbed) //Okay I'm cheating, so what
+					found_welder = 1
+
 				if(istype(glasses, /obj/item/clothing/glasses/welding))
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
@@ -1459,18 +1471,6 @@
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 */
 
-	// Start vore code. Digestion code is handled here.
-	proc/handle_internal_contents()
-		// For each belly type
-		for (var/bellytype in internal_contents)
-			var/datum/belly/B = internal_contents[bellytype]
-			for(var/atom/movable/M in B.internal_contents)
-				if(M.loc != src)
-					B.internal_contents -= M
-					log_debug("Had to remove [M] from belly [B] in [src]")
-			B.process_Life()
-	//End vore code.
-
 	proc/handle_changeling()
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
@@ -1496,7 +1496,7 @@
 			src << "<font color='red'><b>"+pick("It hurts so much!", "You really need some painkillers..", "Dear god, the pain!")
 
 		if(shock_stage >= 30)
-			if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
+			if(shock_stage == 30) visible_message("\red [src] is having trouble keeping their eyes open.")
 			eye_blurry = max(2, eye_blurry)
 			stuttering = max(stuttering, 5)
 
@@ -1504,7 +1504,7 @@
 			src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
 
 		if (shock_stage >= 60)
-			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
+			if(shock_stage == 60) visible_message("\red [src]'s body becomes limp.")
 			if (prob(2))
 				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
 				Weaken(20)
@@ -1520,7 +1520,7 @@
 				Paralyse(5)
 
 		if(shock_stage == 150)
-			emote("me",1,"can no longer stand, collapsing!")
+			visible_message("\red [src] collapses!")
 			Weaken(20)
 
 		if(shock_stage >= 150)

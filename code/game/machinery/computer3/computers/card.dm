@@ -46,7 +46,7 @@
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"
 				counter = 0
-			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[bayreplacetext(job, " ", "&nbsp")]</a></td>"
 
 		counter = 0
 		jobs_all += "</tr><tr><td><font color='#FFA500'><b>Engineering</b></font></td>"//Orange
@@ -55,7 +55,7 @@
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"
 				counter = 0
-			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[bayreplacetext(job, " ", "&nbsp")]</a></td>"
 
 		counter = 0
 		jobs_all += "</tr><tr height='20'><td><font color='#008000'><b>Medical</b></font></td>"//Green
@@ -64,7 +64,7 @@
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"
 				counter = 0
-			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[bayreplacetext(job, " ", "&nbsp")]</a></td>"
 
 		counter = 0
 		jobs_all += "</tr><tr height='20'><td><font color='#800080'><b>Science</b></font></td>"//Purple
@@ -73,7 +73,7 @@
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"
 				counter = 0
-			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[bayreplacetext(job, " ", "&nbsp")]</a></td>"
 
 		counter = 0
 		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Civilian</b></font></td>"//Grey
@@ -82,7 +82,7 @@
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"
 				counter = 0
-			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[bayreplacetext(job, " ", "&nbsp")]</a></td>"
 
 			dat = {"<script type="text/javascript">
 								function markRed(){
@@ -124,9 +124,9 @@
 			accesses += "<td style='width:14%' valign='top'>"
 			for(var/A in get_region_accesses(i))
 				if(A in writer.access)
-					accesses += topic_link(src,"access=[A]","<font color='red'>[replacetext(get_access_desc(A), " ", "&nbsp")]</font>") + " "
+					accesses += topic_link(src,"access=[A]","<font color='red'>[bayreplacetext(get_access_desc(A), " ", "&nbsp")]</font>") + " "
 				else
-					accesses += topic_link(src,"access=[A]",replacetext(get_access_desc(A), " ", "&nbsp")) + " "
+					accesses += topic_link(src,"access=[A]",bayreplacetext(get_access_desc(A), " ", "&nbsp")) + " "
 				accesses += "<br>"
 			accesses += "</td>"
 		accesses += "</tr></table>"
@@ -336,9 +336,9 @@
 		var/accesses = "<h5>Central Command:</h5>"
 		for(var/A in get_all_centcom_access())
 			if(A in writer.access)
-				accesses += topic_link(src,"access=[A]","<font color='red'>[replacetext(get_centcom_access_desc(A), " ", "&nbsp")]</font>") + " "
+				accesses += topic_link(src,"access=[A]","<font color='red'>[bayreplacetext(get_centcom_access_desc(A), " ", "&nbsp")]</font>") + " "
 			else
-				accesses += topic_link(src,"access=[A]",replacetext(get_centcom_access_desc(A), " ", "&nbsp")) + " "
+				accesses += topic_link(src,"access=[A]",bayreplacetext(get_centcom_access_desc(A), " ", "&nbsp")) + " "
 		return accesses
 
 	authenticate()

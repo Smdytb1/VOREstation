@@ -25,6 +25,12 @@
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = 5
 
+
+/mob/living/simple_animal/cat/New()
+	..()
+
+// I can't think of cat messages. I am a fox. Please put some in and remove this comment. :( -Aro
+
 /mob/living/simple_animal/cat/Life()
 	//MICE!
 	if((loc) && isturf(loc))
@@ -33,11 +39,8 @@
 				if(isPredator) //If the cat is a predator,
 					movement_target = null
 					custom_emote(1, "greedily stuffs [M] into their gaping maw!")
-					sleep(30)
 					if(M in oview(1, src))
-						custom_emote(1, "swallows down [M] into their hungry gut!")
-						src.insides.nom_mob(M)
-						playsound(src, 'sound/vore/gulp.ogg', 100, 1)
+						animal_nom(M)
 					else
 						M << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
 					break
@@ -77,12 +80,8 @@
 				custom_emote(1, pick("slurps [bellyfiller] with their sandpapery tongue.","looms over [bellyfiller] with their maw agape.","sniffs at [bellyfiller], their belly grumbling hungrily."))
 				sleep(10)
 				custom_emote(1, "starts to scoop [bellyfiller] into their maw!")
-				sleep(swallowTime)
 				if(bellyfiller in oview(1, src))
-					custom_emote(1, "swallows down [bellyfiller] with a happy purr!")
-					src.insides.nom_mob(bellyfiller)
-					msg_admin_attack("[key_name(bellyfiller)] got eaten by [src]!")
-					playsound(src, 'sound/vore/gulp.ogg', 100, 1)
+					animal_nom(bellyfiller)
 				else
 					bellyfiller << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
 				break
@@ -257,6 +256,36 @@
 	befriend_job = "Chief Medical Officer"
 	isPredator = 1
 
+/mob/living/simple_animal/cat/fluff/Runtime/New()
+
+	if(!vore_organs.len)
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "The slimy wet insides of Runtime! Not quite as clean as the cat on the outside."
+		B.human_prey_swallow_time = swallowTime
+		B.nonhuman_prey_swallow_time = swallowTime
+		vore_organs[B.name] = B
+		vore_selected = B.name
+
+		B.emote_lists[DM_HOLD] = list(
+			"Runtime's stomach kneads gently on you and you're fairly sure you can hear her start purring.",
+			"Most of what you can hear are slick noises, Runtime breathing, and distant purring.",
+			"Runtime seems perfectly happy to have you in there. She lays down for a moment to groom and squishes you against the walls.",
+			"The CMO's pet seems to have found a patient of her own, and is treating them with warm, wet kneading walls.",
+			"Runtime mostly just lazes about, and you're left to simmer in the hot, slick guts unharmed.",
+			"Runtime's master might let you out of this fleshy prison, eventually. Maybe.")
+
+		B.emote_lists[DM_DIGEST] = list(
+			"Runtime's stomach is treating you rather like a mouse, kneading acids into you with vigor.",
+			"A thick dollop of bellyslime drips from above while the CMO's pet's gut works on churning you up.",
+			"Runtime seems to have decided you're food, based on the acrid air in her guts and the pooling fluids.",
+			"Runtime's stomach tries to claim you, kneading and pressing inwards again and again against your form.",
+			"Runtime flops onto their side for a minute, spilling acids over your form as you remain trapped in them.",
+			"The CMO's pet doesn't seem to think you're any different from any other meal. At least, their stomach doesn't.")
+
+	..()
+
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
 	desc = "D'aaawwww"
@@ -269,41 +298,3 @@
 	gender = pick(MALE, FEMALE)
 	..()
 
-//////
-// Vorestuff that has to be here because constructors are the only place they can be.
-//////
-
-/* I can't think of cat messages. I am a fox. Please put some in and remove this comment. :( -Aro
-/mob/living/simple_animal/cat/stomach_emotes = list(
-							"",
-							"",
-							"",
-							"",
-							"",
-							"")
-
-/mob/living/simple_animal/cat/stomach_emotes_d = list(
-							"",
-							"",
-							"",
-							"",
-							"",
-							"")
-
-*/
-
-/mob/living/simple_animal/cat/fluff/Runtime/stomach_emotes = list(
-							"Runtime's stomach kneads gently on you and you're fairly sure you can hear her start purring.",
-							"Most of what you can hear are slick noises, Runtime breathing, and distant purring.",
-							"Runtime seems perfectly happy to have you in there. She lays down for a moment to groom and squishes you against the walls.",
-							"The CMO's pet seems to have found a patient of her own, and is treating them with warm, wet kneading walls.",
-							"Runtime mostly just lazes about, and you're left to simmer in the hot, slick guts unharmed.",
-							"Runtime's master might let you out of this fleshy prison, eventually. Maybe.")
-
-/mob/living/simple_animal/cat/fluff/Runtime/stomach_emotes_d = list(
-							"Runtime's stomach is treating you rather like a mouse, kneading acids into you with vigor.",
-							"A thick dollop of bellyslime drips from above while the CMO's pet's gut works on churning you up.",
-							"Runtime seems to have decided you're food, based on the acrid air in her guts and the pooling fluids.",
-							"Runtime's stomach tries to claim you, kneading and pressing inwards again and again against your form.",
-							"Runtime flops onto their side for a minute, spilling acids over your form as you remain trapped in them.",
-							"The CMO's pet doesn't seem to think you're any different from any other meal. At least, their stomach doesn't.")

@@ -95,6 +95,7 @@
 	proc/doTeleport()
 
 		var/turf/destturf
+		var/turf/aimturf = get_turf(destination)
 		var/turf/curturf = get_turf(teleatom)
 		var/area/destarea = get_area(destination)
 		if(precision)
@@ -108,6 +109,35 @@
 
 		playSpecials(curturf,effectin,soundin)
 
+		//Teleporting into a mob
+		if(isliving(destination.loc))
+			var/mob/living/targetmob = destination.loc
+			var/bellytarget = targetmob.vore_organs[1]
+			for(var/I in targetmob.vore_organs)
+				var/datum/belly/BC = targetmob.vore_organs[I]
+				for(var/O in BC.internal_contents)
+					if(istype(O,/obj/item/device/radio/beacon))
+						bellytarget = I
+			var/datum/belly/B = targetmob.vore_organs[bellytarget]
+			teleatom.loc = targetmob
+			B.internal_contents += teleatom
+			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
+			targetmob.visible_message("<span class='warning'>[targetmob] swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
+			message_admins("[key_name(teleatom)] has been telenommed by [key_name(targetmob)]. ([targetmob ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[targetmob.x];Y=[targetmob.y];Z=[targetmob.z]'>JMP</a>" : "null"])")
+			return 1
+
+		//Try to teleport into someone on the beacon
+		for(var/mob/living/targetmob in aimturf.contents)
+			var/Bname = targetmob.vore_organs[1]
+			var/datum/belly/B = targetmob.vore_organs[Bname]
+			teleatom.loc = targetmob
+			B.internal_contents += teleatom
+			playsound(targetmob, 'sound/vore/gulp.ogg', 100, 1)
+			targetmob.visible_message("<span class='warning'>[targetmob]'s belly swells for seemingly no reason!</span>", "<span class='warning'>You suddenly feel more full...</span>")
+			message_admins("[key_name(teleatom)] has been telenommed by [key_name(targetmob)]. ([targetmob ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[targetmob.x];Y=[targetmob.y];Z=[targetmob.z]'>JMP</a>" : "null"])")
+			return 1
+
+		//Normal old teleport
 		var/obj/structure/bed/chair/C = null
 		if(isliving(teleatom))
 			var/mob/living/L = teleatom

@@ -1959,6 +1959,18 @@ area/space/atmosalert()
 	name = "\improper Strange Location"
 	icon_state = "away"
 
+// Hacky fix attempt for lighting issue in maps generated at runtime. -Ace
+/area/awaymission/space
+	name = "\improper Space"
+	icon_state = "blank"
+	requires_power = 1
+	always_unpowered = 1
+	lighting_use_dynamic = 0 // This is the hacky bit.
+	power_light = 0
+	power_equip = 0
+	power_environ = 0
+	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg','sound/music/Minor_Turbulence.ogg')
+
 /area/awaymission/example
 	name = "\improper Strange Station"
 	icon_state = "away"
@@ -2052,7 +2064,7 @@ area/space/atmosalert()
 	lighting_use_dynamic = 0
 	requires_power = 0
 
-// Disabled because infinite loop bug.
+// Disabled because infinite sound loop bug.
 /*	var/sound/mysound = null
 
 	New()

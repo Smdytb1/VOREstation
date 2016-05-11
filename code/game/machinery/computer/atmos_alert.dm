@@ -8,12 +8,15 @@ var/global/list/minor_air_alarms = list()
 	name = "atmospheric alert computer"
 	desc = "Used to access the station's atmospheric sensors."
 	circuit = "/obj/item/weapon/circuitboard/atmos_alert"
-	icon_state = "alert:0"
+	icon_state = "frame-eng"
+
+	screenicon = "alert:0" //Atmos alerts have animations if there is/isn't one.
+	keyboardicon = "kb4"
 
 /obj/machinery/computer/atmos_alert/New()
 	..()
 	atmosphere_alarm.register(src, /obj/machinery/computer/station_alert/update_icon)
-    
+
 /obj/machinery/computer/atmos_alert/Del()
     atmosphere_alarm.unregister(src)
     ..()
@@ -48,13 +51,19 @@ var/global/list/minor_air_alarms = list()
 		return
 	var/list/alarms = atmosphere_alarm.major_alarms()
 	if(alarms.len)
-		icon_state = "alert:2"
+		overlays.Cut()
+		overlays += keyboardicon
+		overlays += "alert:2"
 	else
 		alarms = atmosphere_alarm.minor_alarms()
 		if(alarms.len)
-			icon_state = "alert:1"
+			overlays.Cut()
+			overlays += keyboardicon
+			overlays += "alert:1"
 		else
-			icon_state = initial(icon_state)
+			overlays.Cut()
+			overlays += screenicon
+			overlays += keyboardicon
 	return
 
 /obj/machinery/computer/atmos_alert/Topic(href, href_list)

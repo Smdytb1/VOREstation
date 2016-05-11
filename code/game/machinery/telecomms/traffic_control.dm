@@ -6,7 +6,10 @@
 
 /obj/machinery/computer/telecomms/traffic
 	name = "Telecommunications Traffic Control"
-	icon_state = "computer_generic"
+	icon_state = "frame-eng"
+
+	screenicon = "command"
+	keyboardicon = "kb1"
 
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer
@@ -47,8 +50,8 @@
 
 			if(length(viewingcode))
 				// This piece of code is very important - it escapes quotation marks so string aren't cut off by the input element
-				var/showcode = replacetext(storedcode, "\\\"", "\\\\\"")
-				showcode = replacetext(storedcode, "\"", "\\\"")
+				var/showcode = bayreplacetext(storedcode, "\\\"", "\\\\\"")
+				showcode = bayreplacetext(storedcode, "\"", "\\\"")
 
 				for(var/mob/M in viewingcode)
 
@@ -171,8 +174,8 @@
 						winshow(editingcode, "Telecomms IDE", 1) // show the IDE
 						winset(editingcode, "tcscode", "is-disabled=false")
 						winset(editingcode, "tcscode", "text=\"\"")
-						var/showcode = replacetext(storedcode, "\\\"", "\\\\\"")
-						showcode = replacetext(storedcode, "\"", "\\\"")
+						var/showcode = bayreplacetext(storedcode, "\\\"", "\\\\\"")
+						showcode = bayreplacetext(storedcode, "\"", "\\\"")
 						winset(editingcode, "tcscode", "text=\"[showcode]\"")
 						spawn()
 							update_ide()
@@ -182,7 +185,7 @@
 						winshow(usr, "Telecomms IDE", 1) // show the IDE
 						winset(usr, "tcscode", "is-disabled=true")
 						winset(editingcode, "tcscode", "text=\"\"")
-						var/showcode = replacetext(storedcode, "\"", "\\\"")
+						var/showcode = bayreplacetext(storedcode, "\"", "\\\"")
 						winset(usr, "tcscode", "text=\"[showcode]\"")
 
 				if("togglerun")

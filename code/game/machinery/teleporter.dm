@@ -1,13 +1,17 @@
 /obj/machinery/computer/teleporter
 	name = "Teleporter Control Console"
 	desc = "Used to control a linked teleportation Hub and Station."
-	icon_state = "teleport"
+	icon_state = "frame"
 	circuit = "/obj/item/weapon/circuitboard/teleporter"
 	dir = 4
 	var/obj/item/locked = null
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
+	var/accurate = 0
+
+	screenicon = "teleport"
+	keyboardicon = "kb9"
 
 /* Ghosts can't use this */
 /obj/machinery/computer/teleporter/attack_ghost(user as mob)
@@ -67,7 +71,7 @@
 				for(var/obj/machinery/teleport/hub/H in range(1))
 					var/amount = rand(2,5)
 					for(var/i=0;i<amount;i++)
-						new /mob/living/simple_animal/hostile/carp(get_turf(H))
+						new /mob/living/simple_animal/hostile/vore/carp(get_turf(H))
 				//
 			else
 				for(var/mob/O in hearers(src, null))
@@ -132,7 +136,7 @@
 
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
-		O.show_message("\blue Locked In", 2)
+		O.show_message("\blue Locked In. Remember to Test Fire.", 2)
 	src.add_fingerprint(usr)
 	return
 
@@ -209,7 +213,10 @@
 		s.set_up(5, 1, src)
 		s.start()
 		accurate = 1
-		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
+		com.accurate = 1
+		spawn(6000)
+			accurate = 0 //Accurate teleporting for 10 minutes
+			com.accurate = 0
 		for(var/mob/B in hearers(src, null))
 			B.show_message("\blue Test fire completed.")
 	return

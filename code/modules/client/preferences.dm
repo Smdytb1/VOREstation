@@ -82,12 +82,17 @@ datum/preferences
 	var/b_eyes = 0						//Eye color
 	var/ear_style = null				//Ear style
 	var/tail_style = null				//Tail style
-	var/playerscale = RESIZE_NORMAL					//Custom playerscale
+	var/playerscale = RESIZE_NORMAL		//Custom playerscale
 	var/species = "Human"               //Species datum to use.
 	var/custom_species = null			//Custom species text
 	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
+
+	// Body weight stuff.
+	var/weight = 137					//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_gain = 100				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
+	var/weight_loss = 50				//bodyweight of character (pounds, because I'm not doing the math again -Spades)
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -113,6 +118,10 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
+	var/job_unique_high = 0
+	var/job_unique_med = 0
+	var/job_unique_low = 0
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
@@ -128,8 +137,6 @@ datum/preferences
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
 
-	var/list/inside_flavour_texts = list()
-
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -144,6 +151,9 @@ datum/preferences
 	var/metadata = ""
 	var/slot_name = ""
 
+	var/list/belly_prefs = list()
+	var/digestable = 1
+
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
@@ -151,7 +161,8 @@ datum/preferences
 			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
-					return
+					if(load_vore_preferences())
+						return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 
@@ -205,9 +216,9 @@ datum/preferences
 		if(15 to 18)
 			return "Exceptional"
 		if(19 to 24)
-			return "Genius"
+			return "Overpowered"
 		if(24 to 1000)
-			return "God"
+			return "Bullshit"
 
 /datum/preferences/proc/SetSkills(mob/user)
 	if(SKILLS == null)
@@ -273,11 +284,19 @@ datum/preferences
 
 	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
+	dat += "<b>Relative Weight:</b> <a href='?_src_=prefs;preference=weight;task=input'>[weight]</a><br>"
+
 	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
 	dat += "<br>"
 	dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
+
+	dat += "<br>"
+	dat += "<b>Weight Gain Rate:</b> <a href='?_src_=prefs;preference=weight_gain;task=input'>[weight_gain]</a><br>"
+	dat += "<b>Weight Loss Rate:</b> <a href='?_src_=prefs;preference=weight_loss;task=input'>[weight_loss]</a><br>"
+
+	dat += "<br>"
 	dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 	dat += "-Alpha(transparency): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 	dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -422,8 +441,6 @@ datum/preferences
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
 
-	dat += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=open'><b>Set Inside Flavour Texts</b></a><br>"
-
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
 
@@ -472,7 +489,7 @@ datum/preferences
 
 	user << browse(dat, "window=preferences;size=560x736")
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
+/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 600, height = 660)
 	if(!job_master)
 		return
 
@@ -514,6 +531,9 @@ datum/preferences
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			continue
+		if(job.job_whitelisted && !is_job_whitelisted(user, rank))
+			HTML += "<del>[rank]</del></td><td> \[WHITELIST]</td></tr>"
 			continue
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
@@ -707,6 +727,9 @@ datum/preferences
 	HTML += "<tt><center>"
 	HTML += "<b>Set Flavour Text</b> <hr />"
 	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=preferences'>Preferences:</a> "
+	HTML += TextPreview(flavor_texts["preferences"])
+	HTML += "<br>"
 	HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=general'>General:</a> "
 	HTML += TextPreview(flavor_texts["general"])
 	HTML += "<br>"
@@ -739,33 +762,6 @@ datum/preferences
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=flavor_text;size=430x300")
-	return
-
-/datum/preferences/proc/SetInsideFlavourText(mob/user)
-	var/HTML = "<body>"
-	HTML += "<tt><center>"
-	HTML += "<b>Set Inside Flavour Text</b> <hr />"
-	HTML += "<br></center>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Stomach'>Stomach:</a> "
-	HTML += TextPreview(inside_flavour_texts["Stomach"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Cock'>Balls:</a> "
-	HTML += TextPreview(inside_flavour_texts["Cock"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Womb'>Womb:</a> "
-	HTML += TextPreview(inside_flavour_texts["Womb"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Boob'>Boobs:</a> "
-	HTML += TextPreview(inside_flavour_texts["Boob"])
-	HTML += "<br>"
-	HTML += "<a href='byond://?src=\ref[user];preference=inside_flavour_text;task=Tail'>Tail:</a> "
-	HTML += TextPreview(inside_flavour_texts["Tail"])
-	HTML += "<br>"
-	HTML += "<hr />"
-	HTML +="<a href='?src=\ref[user];preference=inside_flavour_text;task=done'>\[Done\]</a>"
-	HTML += "<tt>"
-	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=inside_flavour_text;size=430x300")
 	return
 
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
@@ -840,6 +836,10 @@ datum/preferences
 	job_engsec_med = 0
 	job_engsec_low = 0
 
+	job_unique_high = 0
+	job_unique_med = 0
+	job_unique_low = 0
+
 
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
@@ -868,6 +868,14 @@ datum/preferences
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+		if(UNIQUE)
+			switch(level)
+				if(1)
+					return job_unique_high
+				if(2)
+					return job_unique_med
+				if(3)
+					return job_unique_low
 	return 0
 
 /datum/preferences/proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -877,14 +885,17 @@ datum/preferences
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
 			job_civilian_med |= job_civilian_high
 			job_medsci_med |= job_medsci_high
 			job_engsec_med |= job_engsec_high
+			job_unique_med |= job_unique_high
 			job_civilian_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
+			job_unique_high = 0
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -917,6 +928,16 @@ datum/preferences
 					job_engsec_low &= ~job.flag
 				else
 					job_engsec_low |= job.flag
+		if(UNIQUE)
+			switch(level)
+				if(2)
+					job_unique_high = job.flag
+					job_unique_med &= ~job.flag
+				if(3)
+					job_unique_med |= job.flag
+					job_unique_low &= ~job.flag
+				else
+					job_unique_low |= job.flag
 	return 1
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
@@ -1047,38 +1068,26 @@ datum/preferences
 				ShowChoices(user)
 				return
 			if("general")
-				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
+			if("preferences")
+				var/msg = input(usr,"Set your preferences here, such as your favorite fetishes, or things that you really dislike!","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
+					msg = html_encode(msg)
+				flavor_texts[href_list["task"]] = msg
+				return
 			else
 				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
-
-	else if(href_list["preference"] == "inside_flavour_text")
-		switch(href_list["task"])
-			if("open")
-				SetInsideFlavourText(user)
-				return
-			if("done")
-				user << browse(null, "window=inside_flavour_text")
-				ShowChoices(user)
-				return
-			else
-				var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Inside Flavour Text",html_decode(inside_flavour_texts[href_list["task"]])) as message
-				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-					msg = html_encode(msg)
-				inside_flavour_texts[href_list["task"]] = msg
-		SetInsideFlavourText(user)
-		return
-
 
 	else if(href_list["preference"] == "flavour_text_robot")
 		switch(href_list["task"])
@@ -1092,13 +1101,13 @@ datum/preferences
 			if("Default")
 				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavour_texts_robot[href_list["task"]] = msg
 			else
 				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
 				if(msg != null)
-					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = copytext(msg, 1, MAX_PREF_LEN)
 					msg = html_encode(msg)
 				flavour_texts_robot[href_list["task"]] = msg
 		SetFlavourTextRobot(user)
@@ -1235,6 +1244,8 @@ datum/preferences
 					real_name = random_name(gender,species)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
+				if("weight")
+					weight = rand(90,330)
 				if("hair")
 					r_hair = rand(0,255)
 					g_hair = rand(0,255)
@@ -1294,6 +1305,35 @@ datum/preferences
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				if("weight")
+					var/new_weight = input(user, "Choose your character's relative body weight.\nThis measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\nIf you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\nswear to god I will find you and I will punch you for not reading these directions!\n([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference") as num|null
+					if(new_weight)
+						var/unit_of_measurement = alert(user, "Is that number in pounds (lb) or kilograms (kg)?", "Confirmation", "Pounds", "Kilograms")
+						if(unit_of_measurement == "Pounds")
+							weight = round(text2num(new_weight),4)
+						if(unit_of_measurement == "Kilograms")
+							weight = round(2.20462*text2num(new_weight),4)
+						if(weight > WEIGHT_MAX)
+							weight = WEIGHT_MAX
+						if(weight < WEIGHT_MIN)
+							weight = WEIGHT_MIN
+				if("weight_gain")
+					var/weight_gain_rate = input(user, "Choose your character's rate of weight gain between 100% (full realism body fat gain) and 0% (no body fat gain).\n(Due to a small bug, if you want to disable weight gain, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_gain_rate)
+						if(weight_gain_rate > WEIGHT_CHANGE_MAX)
+							weight_gain_rate = WEIGHT_CHANGE_MAX
+						if(weight_gain_rate < WEIGHT_CHANGE_MIN)
+							weight_gain_rate = WEIGHT_CHANGE_MIN
+						weight_gain = round(text2num(weight_gain_rate),1)
+				if("weight_loss")
+					var/weight_loss_rate = input(user, "Choose your character's rate of weight loss between 100% (full realism body fat loss) and 0% (no body fat loss).\n(Due to a small bug, if you want to disable weight loss, set this to 0.01 for now.)([WEIGHT_CHANGE_MIN]-[WEIGHT_CHANGE_MAX])", "Character Preference") as num|null
+					if(weight_loss_rate)
+						if(weight_loss_rate > WEIGHT_CHANGE_MAX)
+							weight_loss_rate = WEIGHT_CHANGE_MAX
+						if(weight_loss_rate < WEIGHT_CHANGE_MIN)
+							weight_loss_rate = WEIGHT_CHANGE_MIN
+						weight_loss = round(text2num(weight_loss_rate),1)
 
 				if("species")
 					user << browse(null, "window=species")
@@ -1747,6 +1787,7 @@ datum/preferences
 				if("reload")
 					load_preferences()
 					load_character()
+					load_vore_preferences()
 
 				if("open_load_dialog")
 					if(!IsGuestKey(user.key))
@@ -1757,6 +1798,7 @@ datum/preferences
 
 				if("changeslot")
 					load_character(text2num(href_list["num"]))
+					load_vore_preferences(text2num(href_list["num"]))
 					close_load_dialog(user)
 
 	ShowChoices(user)
@@ -1779,6 +1821,7 @@ datum/preferences
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
+	character.flavor_texts["preferences"] = flavor_texts["preferences"]
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
 	character.flavor_texts["face"] = flavor_texts["face"]
@@ -1789,11 +1832,6 @@ datum/preferences
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
 
-	// This is gonna be interesting. Let's see if I can figure out inside flavour texts -Nightwing
-	for (var/bellytype in character.internal_contents)
-		var/datum/belly/belly = character.internal_contents[bellytype]
-		belly.inside_flavor = inside_flavour_texts[belly.belly_type]
-
 	character.med_record = med_record
 	character.sec_record = sec_record
 	character.gen_record = gen_record
@@ -1803,6 +1841,10 @@ datum/preferences
 	character.age = age
 	character.b_type = b_type
 	character.custom_species = custom_species
+
+	character.weight = weight
+	character.weight_gain = weight_gain
+	character.weight_loss = weight_loss
 
 	character.r_eyes = r_eyes
 	character.g_eyes = g_eyes
@@ -1863,6 +1905,23 @@ datum/preferences
 					I.mechassist()
 				else if(status == "mechanical")
 					I.mechanize()
+
+	if(!length(belly_prefs))
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [character]."
+		belly_prefs[B.name] = B
+
+	character.vore_organs = belly_prefs
+
+	character.vore_selected = character.vore_organs[1]
+
+	for(var/I in character.vore_organs)
+		var/datum/belly/B = character.vore_organs[I]
+		B.owner = character
+
+	character.digestable = digestable
 
 	character.underwear = underwear
 

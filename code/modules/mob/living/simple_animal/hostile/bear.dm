@@ -1,3 +1,5 @@
+// Legacy mob. Use the vore version.
+
 //Space bears!
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"

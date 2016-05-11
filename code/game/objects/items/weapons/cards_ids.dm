@@ -153,6 +153,19 @@
 		dna_hash = loc:dna:unique_enzymes
 		fingerprint_hash = md5(loc:dna:uni_identity)
 
+/obj/item/weapon/card/id/proc/digest()
+	var/obj/item/weapon/card/id/digested/N = new()
+	N.name = src.name
+	N.registered_name = src.registered_name
+	N.blood_type = src.blood_type
+	N.dna_hash = src.dna_hash
+	N.fingerprint_hash = src.fingerprint_hash
+	N.assignment = src.assignment
+	N.dorm = src.dorm
+	N.loc = src.loc
+	src.Del()
+	return N
+
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))
 		O.show_message(text("[] shows you: \icon[] []: assignment: []", user, src, src.name, src.assignment), 1)
@@ -258,11 +271,25 @@
 
 /obj/item/weapon/card/id/syndicate_command
 	name = "syndicate ID card"
+	item_state = "syndie"
 	desc = "An ID straight from the Syndicate."
 	registered_name = "Syndicate"
-	assignment = "Syndicate Overlord"
+	assignment = "Syndicate Agent"
 	access = list(access_syndicate, access_external_airlocks)
 
+/obj/item/weapon/card/id/digested
+	name = "digested ID card"
+	desc = "A partially digested card that has seen better days.  Much of it's data has been destroyed."
+	icon_state = "digested"
+	access = list() // No access
+
+/obj/item/weapon/card/id/digested/digest()
+	//Don't double-digest things. Just prevents spending time for anything that might try this.
+	return
+
+/obj/item/weapon/card/id/digested/New()
+	//Just overriding to prevent the normal ID New() from running
+	return
 
 /*==========================
 ====ID department Colors====

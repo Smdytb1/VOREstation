@@ -23,6 +23,34 @@
 	maxbodytemp = 323		//Above 50 Degrees Celcius
 	mob_size = 5
 
+/mob/living/simple_animal/fox/New()
+	if(!vore_organs.len)
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "Slick foxguts. Cute on the outside, slimy on the inside!"
+		B.human_prey_swallow_time = swallowTime
+		B.nonhuman_prey_swallow_time = swallowTime
+		vore_organs[B.name] = B
+		vore_selected = B.name
+
+		B.emote_lists[DM_HOLD] = list(
+			"The foxguts knead and churn around you harmlessly.",
+			"With a loud glorp, some air shifts inside the belly.",
+			"A thick drop of warm bellyslime drips onto you from above.",
+			"The fox turns suddenly, causing you to shift a little.",
+			"During a moment of relative silence, you can hear the fox breathing.",
+			"The slimey stomach walls squeeze you lightly, then relax.")
+
+		B.emote_lists[DM_DIGEST] = list(
+			"The guts knead at you, trying to work you into thick soup.",
+			"You're ground on by the slimey walls, treated like a mouse.",
+			"The acrid air is hard to breathe, and stings at your lungs.",
+			"You can feel the acids coating you, ground in by the slick walls.",
+			"The fox's stomach churns hungrily over your form, trying to take you.",
+			"With a loud glorp, the stomach spills more acids onto you.")
+	..()
+
 // All them complicated fox procedures.
 /mob/living/simple_animal/fox/Life()
 	//MICE!
@@ -32,11 +60,8 @@
 				if(isPredator) //If the fox is a predator,
 					movement_target = null
 					custom_emote(1, "greedily stuffs [M] into their gaping maw!")
-					sleep(30)
 					if(M in oview(1, src))
-						custom_emote(1, "swallows down [M] into their hungry gut!")
-						src.insides.nom_mob(M)
-						playsound(src, 'sound/vore/gulp.ogg', 100, 1)
+						animal_nom(M)
 					else
 						M << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
 					break
@@ -76,12 +101,8 @@
 				custom_emote(1, pick("slurps [bellyfiller] with their slimey tongue.","looms over [bellyfiller] with their maw agape.","sniffs at [bellyfiller], their belly grumbling hungrily."))
 				sleep(10)
 				custom_emote(1, "starts to scoop [bellyfiller] into their maw!")
-				sleep(swallowTime)
 				if(bellyfiller in oview(1, src))
-					custom_emote(1, "swallows down [bellyfiller] with a happy yap!")
-					src.insides.nom_mob(bellyfiller)
-					msg_admin_attack("[key_name(bellyfiller)] got eaten by [src]!")
-					playsound(src, 'sound/vore/gulp.ogg', 100, 1)
+					animal_nom(bellyfiller)
 				else
 					bellyfiller << "You just manage to slip away from [src]'s jaws before you can be sent to a fleshy prison!"
 				break
@@ -257,40 +278,31 @@
 	isPredator = 1
 	befriend_job = "Captain"
 
+/mob/living/simple_animal/fox/fluff/Renault/New()
+	if(!vore_organs.len)
+		var/datum/belly/B = new /datum/belly(src)
+		B.immutable = 1
+		B.name = "Stomach"
+		B.inside_flavor = "Slick foxguts. They seem somehow more regal than perhaps other foxes!"
+		B.human_prey_swallow_time = swallowTime
+		B.nonhuman_prey_swallow_time = swallowTime
+		vore_organs[B.name] = B
+		vore_selected = B.name
 
-//////
-// Vorestuff that has to be here because constructors are the only place they can be.
-//////
+		B.emote_lists[DM_HOLD] = list(
+			"Renault's stomach walls squeeze around you more tightly for a moment, before relaxing, as if testing you a bit.",
+			"There's a sudden squeezing as Renault presses a forepaw against his gut over you, squeezng you against the slick walls.",
+			"The 'head fox' has a stomach that seems to think you belong to it. It might be hard to argue, as it kneads at your form.",
+			"If being in the captain's fox is a promotion, it might not feel like one. The belly just coats you with more thick foxslime.",
+			"It doesn't seem like Renault wants to let you out. The stomach and owner possessively squeeze around you.",
+			"Renault's stomach walls squeeze closer, as he belches quietly, before swallowing more air. Does he do that on purpose?")
 
-/mob/living/simple_animal/fox/stomach_emotes = list(
-							"The foxguts knead and churn around you harmlessly.",
-							"With a loud glorp, some air shifts inside the belly.",
-							"A thick drop of warm bellyslime drips onto you from above.",
-							"The fox turns suddenly, causing you to shift a little.",
-							"During a moment of relative silence, you can hear the fox breathing.",
-							"The slimey stomach walls squeeze you lightly, then relax.")
+		B.emote_lists[DM_DIGEST] = list(
+			"Renault's stomach walls grind hungrily inwards, kneading acids against your form, and treating you like any other food.",
+			"The captain's fox impatiently kneads and works acids against you, trying to claim your body for fuel.",
+			"The walls knead in firmly, squeezing and tossing you around briefly in disorienting aggression.",
+			"Renault belches, letting the remaining air grow more acrid. It burns your lungs with each breath.",
+			"A thick glob of acids drip down from above, adding to the pool of caustic fluids in Renault's belly.",
+			"There's a loud gurgle as the stomach declares the intent to make you a part of Renault.")
 
-/mob/living/simple_animal/fox/stomach_emotes_d = list(
-							"The guts knead at you, trying to work you into thick soup.",
-							"You're ground on by the slimey walls, treated like a mouse.",
-							"The acrid air is hard to breathe, and stings at your lungs.",
-							"You can feel the acids coating you, ground in by the slick walls.",
-							"The fox's stomach churns hungrily over your form, trying to take you.",
-							"With a loud glorp, the stomach spills more acids onto you.")
-
-
-/mob/living/simple_animal/fox/fluff/Renault/stomach_emotes = list(
-							"Renault's stomach walls squeeze around you more tightly for a moment, before relaxing, as if testing you a bit.",
-							"There's a sudden squeezing as Renault presses a forepaw against his gut over you, squeezng you against the slick walls.",
-							"The 'head fox' has a stomach that seems to think you belong to it. It might be hard to argue, as it kneads at your form.",
-							"If being in the captain's fox is a promotion, it might not feel like one. The belly just coats you with more thick foxslime.",
-							"It doesn't seem like Renault wants to let you out. The stomach and owner possessively squeeze around you.",
-							"Renault's stomach walls squeeze closer, as he belches quietly, before swallowing more air. Does he do that on purpose?")
-
-/mob/living/simple_animal/fox/fluff/Renault/stomach_emotes_d = list(
-							"Renault's stomach walls grind hungrily inwards, kneading acids against your form, and treating you like any other food.",
-							"The captain's fox impatiently kneads and works acids against you, trying to claim your body for fuel.",
-							"The walls knead in firmly, squeezing and tossing you around briefly in disorienting aggression.",
-							"Renault belches, letting the remaining air grow more acrid. It burns your lungs with each breath.",
-							"A thick glob of acids drip down from above, adding to the pool of caustic fluids in Renault's belly.",
-							"There's a loud gurgle as the stomach declares the intent to make you a part of Renault.")
+	..()

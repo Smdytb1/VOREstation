@@ -36,11 +36,11 @@
 //Removes a few problematic characters
 /proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
 	for(var/char in repl_chars)
-		t = replacetext(t, char, repl_chars[char])
+		t = bayreplacetext(t, char, repl_chars[char])
 	return t
 
 /proc/readd_quotes(var/t)
-	var/list/repl_chars = list("&#34;" = "\"")
+	var/list/repl_chars = list("&#34;" = "\"","&#39;" = "'")
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -203,10 +203,11 @@ proc/checkhtml(var/t)
 /*
  * Text modification
  */
-/proc/replacetext(text, find, replacement)
+
+/proc/bayreplacetext(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
 
-/proc/replacetextEx(text, find, replacement)
+/proc/bayreplacetextEx(text, find, replacement)
 	return list2text(text2listEx(text, find), replacement)
 
 //Adds 'u' number of zeros ahead of the text 't'

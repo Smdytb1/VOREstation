@@ -593,6 +593,9 @@
 	HTML += "<tt><center>"
 	HTML += "<b>Update Flavour Text</b> <hr />"
 	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=preferences'>OOC Preferences:</a> "
+	HTML += TextPreview(flavor_texts["preferences"])
+	HTML += "<br>"
 	HTML += "<a href='byond://?src=\ref[src];flavor_change=general'>General:</a> "
 	HTML += TextPreview(flavor_texts["general"])
 	HTML += "<br>"

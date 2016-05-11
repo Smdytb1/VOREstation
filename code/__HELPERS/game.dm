@@ -496,3 +496,11 @@ datum/projectile_data
 
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
+
+//Spills the contents of a target up one level.
+/proc/Spill(var/atom/target)
+	var/howmany = length(target.contents)
+	for(var/C in target.contents)
+		var/obj/T = C
+		T.loc = target.loc
+	return howmany

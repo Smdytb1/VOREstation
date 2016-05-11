@@ -99,6 +99,28 @@
 		reagents.add_reagent("stoxin", 60)
 		update_icon()
 
+/obj/item/weapon/reagent_containers/glass/bottle/ickypak
+	name = "ickypak bottle"
+	desc = "A small bottle of ickypak. The smell alone makes you gag."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+
+	New()
+		..()
+		reagents.add_reagent("ickypak", 60)
+		update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/unsorbitol
+	name = "unsorbitol bottle"
+	desc = "A small bottle of unsorbitol. Sickeningly sweet."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+
+	New()
+		..()
+		reagents.add_reagent("unsorbitol", 60)
+		update_icon()
+
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate
 	name = "Chloral Hydrate Bottle"
 	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"

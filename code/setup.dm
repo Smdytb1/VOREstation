@@ -580,7 +580,13 @@ var/list/be_special_flags = list(
 
 // Age limits on a character.
 #define AGE_MIN 17
-#define AGE_MAX 85
+#define AGE_MAX 200
+
+// Body weight limits on a character.
+#define WEIGHT_MIN 70
+#define WEIGHT_MAX 500
+#define WEIGHT_CHANGE_MIN 0
+#define WEIGHT_CHANGE_MAX 100
 
 // Languages.
 #define LANGUAGE_HUMAN  1
@@ -757,6 +763,7 @@ var/list/be_special_flags = list(
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
 #define MAX_MESSAGE_LEN       1024
+#define MAX_PREF_LEN          3072 //As much as paper.
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
 #define MAX_NAME_LEN          26
@@ -786,3 +793,19 @@ var/list/be_special_flags = list(
 #define ROBOT_NOTIFICATION_NEW_NAME 2
 #define ROBOT_NOTIFICATION_NEW_MODULE 3
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
+
+// So sick of these not being used in other files
+#define DM_HOLD								"Hold"
+#define DM_DIGEST							"Digest"
+#define DM_HEAL								"Heal"
+#define DM_ABSORB							"Absorb"
+#define DM_TRANSFORM_MALE                   "Transform (Male)" //I totally don't have a thing for TF. Nope! ~CK
+#define DM_TRANSFORM_FEMALE                 "Transform (Female)"
+#define DM_TRANSFORM_KEEP_GENDER            "Transform (Keep Gender)"
+#define DM_TRANSFORM_CHANGE_SPECIES         "Transform (Change Species)"
+#define DM_TRANSFORM_CHANGE_SPECIES_EGG     "Transform (Change Species) (EGG)"
+#define DM_TRANSFORM_KEEP_GENDER_EGG        "Transform (Keep Gender) (EGG)"
+#define DM_TRANSFORM_MALE_EGG               "Transform (Male) (EGG)"
+#define DM_TRANSFORM_FEMALE_EGG             "Transform (Female) (EGG)"
+
+#define VORE_STRUGGLE_EMOTE_CHANCE 40

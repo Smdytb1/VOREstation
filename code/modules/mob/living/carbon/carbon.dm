@@ -22,7 +22,7 @@
 			germ_level++
 
 /*
- * Commented in favor of full Vore code
+ * Derelict in favor of Vorestation code. Left for only reference.
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
 	if((user in src.stomach_contents) && istype(user))
 		if(user.last_special <= world.time)
@@ -60,22 +60,6 @@
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
 	..()
  */
-
-/mob/living/carbon
-	var/recent_struggle = 0 // To prevent spammage
-
-//Vore code, struggle stuff
-/mob/living/carbon/relaymove(var/mob/user, var/direction)
-	if(recent_struggle) return
-
-	recent_struggle = 1
-	spawn(20)
-		recent_struggle = 0
-
-	for (var/bellytype in src.internal_contents)
-		var/datum/belly/belly = src.internal_contents[bellytype]
-		if (user in belly.internal_contents)
-			belly.relay_struggle(user, direction)
 
 /mob/living/carbon/gib()
 	for(var/mob/M in src)

@@ -9,8 +9,10 @@
 /obj/machinery/computer/power_monitor
 	name = "Power Monitoring Console"
 	desc = "Computer designed to remotely monitor power levels around the station"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "power"
+	icon_state = "frame-eng"
+
+	screenicon = "power"
+	keyboardicon = "kb9"
 
 	//computer stuff
 	density = 1
@@ -31,20 +33,27 @@
 		alerting = !alerting
 		update_icon()
 
+/* Don't override parent. No C3 icon for this.
 // Proc: update_icon()
 // Parameters: None
 // Description: Updates icon of this computer according to current status.
 /obj/machinery/computer/power_monitor/update_icon()
 	if(stat & BROKEN)
-		icon_state = "powerb"
+		overlays.Cut()
 		return
 	if(stat & NOPOWER)
-		icon_state = "power0"
+		overlays.Cut()
 		return
 	if(alerting)
-		icon_state = "power_alert"
+		overlays.Cut()
+		overlays += keyboardicon
+		overlays +=
 		return
-	icon_state = "power"
+
+	overlays.Cut()
+	overlays += screenicon
+	overlays += keyboardicon
+*/
 
 // Proc: New()
 // Parameters: None
@@ -75,6 +84,7 @@
 // Parameters: None
 // Description: Verifies if any warnings were registered by connected sensors.
 /obj/machinery/computer/power_monitor/proc/check_warnings()
+	if(!power_monitor) return 0; // If power_monitor is not initialized yet...
 	for(var/obj/machinery/power/sensor/S in power_monitor.grid_sensors)
 		if(S.check_grid_warning())
 			return 1

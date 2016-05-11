@@ -106,11 +106,11 @@
 				mode_nice = design
 				return
 			mode_nice = design
-			mode = "[replacetext(design, "-", "")]full"
+			mode = "[bayreplacetext(design, "-", "")]full"
 		if("corner")
 			var/design = input("Which design?", "Floor painter") in list("black", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
 			mode_nice = "[design] corner"
-			mode = "[replacetext(design, "-", "")]corner"
+			mode = "[bayreplacetext(design, "-", "")]corner"
 			tile_dir_mode = 2
 		if("opposite corners")
 			var/design = input("Which design?", "Floor painter") in list("bar", "cmo", "yellowpatch", "cafeteria", "red-yellow", "red-blue", "red-green", "green-yellow", "green-blue", "blue-yellow")
@@ -118,7 +118,7 @@
 			if(design == "bar" || design == "cmo" || design == "yellowpatch" || design == "cafeteria")
 				mode = design
 			else
-				mode = "[replacetext(design, "-", "")]full"
+				mode = "[bayreplacetext(design, "-", "")]full"
 			if(design == "yellowpatch")
 				tile_dir_mode = 5
 			else
@@ -133,7 +133,7 @@
 				mode_nice = design
 			else
 				mode_nice = design
-				mode = replacetext(design, "-", "")
+				mode = bayreplacetext(design, "-", "")
 			tile_dir_mode = 1
 		if("special")
 			var/design = input("Which design?", "Floor painter") in list("arrival", "escape", "caution", "warning", "white-warning", "white-blue-green", "loadingarea", "delivery", "bot", "white-delivery", "white-bot")
@@ -143,7 +143,7 @@
 				tile_dir_mode = 2
 			else if(design == "delivery" || design == "bot" || design == "white-delivery" || design == "white-bot")
 				mode_nice = design
-				mode = replacetext(design, "-", "")
+				mode = bayreplacetext(design, "-", "")
 				tile_dir_mode = 0
 			else if(design == "loadingarea")
 				mode_nice = design

@@ -1,6 +1,6 @@
 # VOREStation
 
-[Website](Coming eventually) - [Code](http://github.com/SpadesNeil/VOREStation/) - [IRC](Coming eventually)
+[Website](http://vore-station.net/) - [Code](http://github.com/SpadesNeil/VOREStation/) - [Chat](http://chat.vore-station.net/)
 
 ---
 

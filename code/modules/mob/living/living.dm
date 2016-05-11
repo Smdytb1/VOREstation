@@ -1,3 +1,41 @@
+/mob/living/New()
+	..()
+	verbs += /mob/living/proc/set_size
+	verbs += /mob/living/proc/insidePanel
+	verbs += /mob/living/proc/escapeOOC
+
+	//Creates at least the typical 'stomach' on every mob.
+	spawn(20) //Wait a couple of seconds to make sure copy_to or whatever has gone
+		if(!vore_organs.len)
+			var/datum/belly/B = new /datum/belly(src)
+			B.immutable = 1
+			B.name = "Stomach"
+			B.inside_flavor = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
+			vore_organs[B.name] = B
+			vore_selected = B.name
+
+			if(istype(src,/mob/living/simple_animal))
+				B.emote_lists[DM_HOLD] = list(
+					"The insides knead at you gently for a moment.",
+					"The guts glorp wetly around you as some air shifts.",
+					"Your predator takes a deep breath and sighs, shifting you somewhat.",
+					"The stomach squeezes you tight for a moment, then relaxes.",
+					"During a moment of quiet, breathing becomes the most audible thing.",
+					"The warm slickness surrounds and kneads on you.")
+
+				B.emote_lists[DM_DIGEST] = list(
+					"The caustic acids eat away at your form.",
+					"The acrid air burns at your lungs.",
+					"Without a thought for you, the stomach grinds inwards painfully.",
+					"The guts treat you like food, squeezing to press more acids against you.",
+					"The onslaught against your body doesn't seem to be letting up; you're food now.",
+					"The insides work on you like they would any other food.")
+
+/mob/living/Life()
+	..()
+	//stuff in the internal contents
+	handle_internal_contents()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -263,8 +301,6 @@
 /mob/living/proc/restore_all_organs()
 	return
 
-
-
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
@@ -337,7 +373,6 @@
 
 /mob/living/proc/UpdateDamageIcon()
 	return
-
 
 /mob/living/proc/Examine_OOC()
 	set name = "Examine Meta-Info (OOC)"
@@ -488,9 +523,96 @@
 		spawn() escape_buckle()
 
 	//Breaking out of a locker?
-	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
+	if(istype(src.loc, /obj/structure/closet))
 		var/obj/structure/closet/C = loc
 		spawn() C.mob_breakout(src)
+
+	if(istype(loc,/mob/living))
+		spawn() escape_mob(loc)
+
+	if(istype(loc,/obj/item/clothing))
+		spawn() escape_clothes(loc)
+
+/mob/living/proc/escape_mob(mob/living/M)
+	ASSERT(src.loc == M)
+
+	if(!M.stat)
+		src << "\red [M]'s flesh around you is too active to get a grip on to escape!"
+		return
+
+	if(absorbed)
+		src << "\red You try to will yourself out of [M]'s insides! This might take a while..."
+		sleep(600)
+	else
+		src << "\red You begin to struggle against [M]'s insides to escape!"
+		sleep(150)
+
+	//Still in them? Still KO/dead? Both still EXIST?
+	if(M && src && M.stat && src.loc == M)
+		src.loc = M.loc
+		var/datum/belly/B = check_belly(M)
+		if(B)
+			B.internal_contents += src
+			src << "\red You end up inside [B.owner]'s [B.name]!"
+		else
+			src << "\blue You escape! Freedom!"
+
+/mob/living/proc/escape_clothes(obj/item/clothing/C)
+	ASSERT(src.loc == C)
+
+	if(ishuman(C.loc)) //In a /mob/living/carbon/human
+		var/mob/living/carbon/human/H = C.loc
+		if(H.shoes == C) //Being worn
+			src << "\blue You start to climb around the larger creature's feet and ankles!"
+			H << "\red Something is trying to climb out of your [C]!"
+			var/original_loc = H.loc
+			for(var/escape_time = 100,escape_time > 0,escape_time--)
+				if(H.loc != original_loc)
+					src << "\red You're pinned back underfoot!"
+					H << "\blue You pin the escapee back underfoot!"
+					return
+				if(src.loc != C)
+					return
+				sleep(1)
+
+			src << "\blue You manage to escape \the [C]!"
+			H << "\red Somone has climbed out of your [C]!"
+			src.loc = H.loc
+			var/datum/belly/B = check_belly(H)
+			if(B)
+				B.internal_contents += src
+			return
+		else //Being held by a human
+			src << "\blue You start to climb out of \the [C]!"
+			H << "\red Something is trying to climb out of your [C]!"
+			for(var/escape_time = 60,escape_time > 0,escape_time--)
+				if(H.shoes == C)
+					src << "\red You're pinned underfoot!"
+					H << "\blue You pin the escapee underfoot!"
+					return
+				if(src.loc != C)
+					return
+				sleep(1)
+			src << "\blue You manage to escape \the [C]!"
+			H << "\red Somone has climbed out of your [C]!"
+			src.loc = H.loc
+			var/datum/belly/B = check_belly(H)
+			if(B)
+				B.internal_contents += src
+			return
+
+	src << "\blue You start to climb out of \the [C]!"
+	sleep(50)
+	if(src.loc == C)
+		src << "\blue You climb out of \the [C]!"
+		src.loc = C.loc
+		var/datum/belly/B
+		if(check_belly(C)) B = check_belly(C)
+		if(check_belly(C.loc)) B = check_belly(C.loc)
+		if(B)
+			B.internal_contents += src
+		return
+	return
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
@@ -674,3 +796,9 @@
 			set_dir(D)
 			spintime -= speed
 	return
+
+//Vore code, struggle stuff
+/mob/living/relaymove(var/mob/living/user, var/direction)
+	var/datum/belly/B = check_belly(user)
+	if(B)
+		B.relay_struggle(user,direction)

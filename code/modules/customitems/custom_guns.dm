@@ -61,11 +61,40 @@
 // bwoincognito:Tasald Corlethian
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian
 	name = "Big Iron revolver"
-	desc = "A .357 single action revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .357 flash. According to the Security Chief, this revolver was more controversial than it needed to be."
+	desc = "A .38 revolver for veteran rangers on the planet Orta. The right side of the handle has a logo for Quarion industries, and the left is the Rangers. The primary ammo for this gun is .38 rubber. According to the CentCom Chief of Security, this revolver was more controversial than it needed to be."
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "tasaldrevolver"
 	item_state = "revolver"
 	fire_sound = 'sound/weapons/pistol.ogg'
-	ammo_type = /obj/item/ammo_magazine/c38/rubber
+	ammo_type = /obj/item/ammo_casing/c38r // Nerfed until I fix the above version.
+	var/recentpump = 0
+	var/cocksound = 'sound/weapons/revolvercock.ogg'
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/consume_next_projectile()
+	if(chambered)
+		return chambered.BB
+	usr << "\red It's a single action revolver, pull the hammer back!"
+	return null
+
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/attack_self(mob/living/user as mob)
+	if(world.time >= recentpump + 10)
+		pump(user)
+		recentpump = world.time
+
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/tasald_corlethian/proc/pump(mob/M as mob)
+	playsound(M, cocksound, 60, 1)
+
+	if(chambered)//We have a shell in the chamber
+		chambered.loc = get_turf(src)//Eject casing
+		chambered = null
+
+	if(loaded.len)
+		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
+		loaded -= AC //Remove casing from loaded list.
+		chambered = AC
+
+	update_icon()
 
 // roaper : Callum Leamas
 /obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas

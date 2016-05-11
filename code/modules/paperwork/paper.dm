@@ -47,7 +47,7 @@
 
 	if(info != initial(info))
 		info = html_encode(info)
-		info = replacetext(info, "\n", "<BR>")
+		info = bayreplacetext(info, "\n", "<BR>")
 		info = parsepencode(info)
 
 	spawn(2)
@@ -210,59 +210,59 @@
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
 
-	t = replacetext(t, "\[center\]", "<center>")
-	t = replacetext(t, "\[/center\]", "</center>")
-	t = replacetext(t, "\[br\]", "<BR>")
-	t = replacetext(t, "\[b\]", "<B>")
-	t = replacetext(t, "\[/b\]", "</B>")
-	t = replacetext(t, "\[i\]", "<I>")
-	t = replacetext(t, "\[/i\]", "</I>")
-	t = replacetext(t, "\[u\]", "<U>")
-	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[large\]", "<font size=\"4\">")
-	t = replacetext(t, "\[/large\]", "</font>")
-	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
-	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
+	t = bayreplacetext(t, "\[center\]", "<center>")
+	t = bayreplacetext(t, "\[/center\]", "</center>")
+	t = bayreplacetext(t, "\[br\]", "<BR>")
+	t = bayreplacetext(t, "\[b\]", "<B>")
+	t = bayreplacetext(t, "\[/b\]", "</B>")
+	t = bayreplacetext(t, "\[i\]", "<I>")
+	t = bayreplacetext(t, "\[/i\]", "</I>")
+	t = bayreplacetext(t, "\[u\]", "<U>")
+	t = bayreplacetext(t, "\[/u\]", "</U>")
+	t = bayreplacetext(t, "\[large\]", "<font size=\"4\">")
+	t = bayreplacetext(t, "\[/large\]", "</font>")
+	t = bayreplacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
+	t = bayreplacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
 
-	t = replacetext(t, "\[h1\]", "<H1>")
-	t = replacetext(t, "\[/h1\]", "</H1>")
-	t = replacetext(t, "\[h2\]", "<H2>")
-	t = replacetext(t, "\[/h2\]", "</H2>")
-	t = replacetext(t, "\[h3\]", "<H3>")
-	t = replacetext(t, "\[/h3\]", "</H3>")
+	t = bayreplacetext(t, "\[h1\]", "<H1>")
+	t = bayreplacetext(t, "\[/h1\]", "</H1>")
+	t = bayreplacetext(t, "\[h2\]", "<H2>")
+	t = bayreplacetext(t, "\[/h2\]", "</H2>")
+	t = bayreplacetext(t, "\[h3\]", "<H3>")
+	t = bayreplacetext(t, "\[/h3\]", "</H3>")
 
 	if(!iscrayon)
-		t = replacetext(t, "\[*\]", "<li>")
-		t = replacetext(t, "\[hr\]", "<HR>")
-		t = replacetext(t, "\[small\]", "<font size = \"1\">")
-		t = replacetext(t, "\[/small\]", "</font>")
-		t = replacetext(t, "\[list\]", "<ul>")
-		t = replacetext(t, "\[/list\]", "</ul>")
-		t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
-		t = replacetext(t, "\[/table\]", "</td></tr></table>")
-		t = replacetext(t, "\[grid\]", "<table>")
-		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
-		t = replacetext(t, "\[row\]", "</td><tr>")
-		t = replacetext(t, "\[cell\]", "<td>")
-		t = replacetext(t, "\[logo\]", "<img src = ntlogo.png>")
+		t = bayreplacetext(t, "\[*\]", "<li>")
+		t = bayreplacetext(t, "\[hr\]", "<HR>")
+		t = bayreplacetext(t, "\[small\]", "<font size = \"1\">")
+		t = bayreplacetext(t, "\[/small\]", "</font>")
+		t = bayreplacetext(t, "\[list\]", "<ul>")
+		t = bayreplacetext(t, "\[/list\]", "</ul>")
+		t = bayreplacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+		t = bayreplacetext(t, "\[/table\]", "</td></tr></table>")
+		t = bayreplacetext(t, "\[grid\]", "<table>")
+		t = bayreplacetext(t, "\[/grid\]", "</td></tr></table>")
+		t = bayreplacetext(t, "\[row\]", "</td><tr>")
+		t = bayreplacetext(t, "\[cell\]", "<td>")
+		t = bayreplacetext(t, "\[logo\]", "<img src = ntlogo.png>")
 
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else // If it is a crayon, and he still tries to use these, make them empty!
-		t = replacetext(t, "\[*\]", "")
-		t = replacetext(t, "\[hr\]", "")
-		t = replacetext(t, "\[small\]", "")
-		t = replacetext(t, "\[/small\]", "")
-		t = replacetext(t, "\[list\]", "")
-		t = replacetext(t, "\[/list\]", "")
-		t = replacetext(t, "\[table\]", "")
-		t = replacetext(t, "\[/table\]", "")
-		t = replacetext(t, "\[row\]", "")
-		t = replacetext(t, "\[cell\]", "")
-		t = replacetext(t, "\[logo\]", "")
+		t = bayreplacetext(t, "\[*\]", "")
+		t = bayreplacetext(t, "\[hr\]", "")
+		t = bayreplacetext(t, "\[small\]", "")
+		t = bayreplacetext(t, "\[/small\]", "")
+		t = bayreplacetext(t, "\[list\]", "")
+		t = bayreplacetext(t, "\[/list\]", "")
+		t = bayreplacetext(t, "\[table\]", "")
+		t = bayreplacetext(t, "\[/table\]", "")
+		t = bayreplacetext(t, "\[row\]", "")
+		t = bayreplacetext(t, "\[cell\]", "")
+		t = bayreplacetext(t, "\[logo\]", "")
 
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 
-//	t = replacetext(t, "#", "") // Junk converted to nothing!
+//	t = bayreplacetext(t, "#", "") // Junk converted to nothing!
 
 //Count the fields
 	var/laststart = 1
@@ -368,7 +368,7 @@
 		var last_fields_value = fields
 
 		t = html_encode(t)
-		t = replacetext(t, "\n", "<BR>")
+		t = bayreplacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
 

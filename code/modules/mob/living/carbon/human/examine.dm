@@ -27,14 +27,17 @@
 	// crappy hacks because you can't do \his[src] etc. I'm sorry this proc is so unreadable, blame the text macros :<
 	var/t_He = "It" //capitalised for use at the start of each line.
 	var/t_his = "its"
+	var/t_His = "Its"
 	var/t_him = "it"
 	var/t_has = "has"
 	var/t_is = "is"
+	var/t_heavy = "heavy"
 
 	var/msg = "<span class='info'>*---------*\nThis is "
 
 	if( skipjumpsuit && skipface ) //big suits/masks/helmets make it hard to tell their gender
 		t_He = "They"
+		t_His = "Their"
 		t_his = "their"
 		t_him = "them"
 		t_has = "have"
@@ -45,12 +48,16 @@
 		switch(gender)
 			if(MALE)
 				t_He = "He"
+				t_His = "His"
 				t_his = "his"
 				t_him = "him"
+				t_heavy = "bulky"
 			if(FEMALE)
 				t_He = "She"
+				t_His = "Her"
 				t_his = "her"
 				t_him = "her"
+				t_heavy = "curvy"
 
 	msg += "<EM>[src.name]</EM>"
 	if(species.name != "Human" || src.custom_species)
@@ -230,33 +237,51 @@
 		msg += "[t_He] [t_is] covered in some liquid.\n"
 	if(on_fire)
 		msg += "<span class='warning'>[t_He] [t_is] on fire!.</span>\n"
-	msg += "<span class='warning'>"
 
-	//Ace WAS HERE. Modified fatness to add new levels of fat. Vore code stuff is here.
-	// 1 same size person is worth ~1070 nutriment.
-	// Starting nutriment is 330.
-	if(nutrition < 50) // used to be 100, changed this
-		msg += "[t_He] [t_is] starving! You can hear [t_his] stomach snarling from across the room!\n"
+	// VOREstation code. Weight gain/loss.
+	if(weight < 75)
+		msg += "\red [t_He] [t_is] terribly lithe and frail!\n"
+	else if(weight >= 75 && weight < 100)
+		msg += "[t_He] has a very slender frame.\n"
+	else if(weight >= 100 && weight < 125)
+		msg += "[t_He] has a lightweight, athletic build.\n"
+	else if(weight >= 125 && weight < 175)
+		msg += "[t_He] has a healthy, average body.\n"
+	else if(weight >= 175 && weight < 225)
+		msg += "[t_He] has a thick, [t_heavy] physique.\n"
+	else if(weight >= 225 && weight < 275)
+		msg += "[t_He] has a plush, chubby figure.\n"
+	else if(weight >= 275 && weight < 325)
+		msg += "[t_He] has an especially plump body with a round potbelly and large hips.\n"
+	else if(weight >= 325 && weight < 375)
+		msg += "[t_He] has a very fat frame with a bulging potbelly, squishy rolls of pudge, very wide hips, and plump set of jiggling thighs.\n"
+	else if(weight >= 375 && weight < 475)
+		msg += "\red [t_He] [t_is] incredibly obese. [t_His] massive potbelly sags over [t_his] waistline while [t_his] fat ass would probably require two chairs to sit down comfortably!\n"
+	else if(weight >= 475)
+		msg += "\red [t_He] [t_is] so morbidly obese, you wonder how they can even stand, let alone waddle around the station. [t_He] can't get any fatter without being immobilized.\n"
+
+	// Vorestation code.
+	// 1 same size person is worth ~1070 nutriment. Starting nutriment is 400.
+	if(nutrition < 50)
+		msg += "\red [t_He] [t_is] starving! You can hear [t_his] stomach snarling from across the room!\n"
 	else if(nutrition >= 50 && nutrition < 100)
-		msg += "[t_He] [t_is] extremely hungry. A deep growl occasionally rumbles from [t_his] empty stomach.\n"
+		msg += "\red [t_He] [t_is] extremely hungry. A deep growl occasionally rumbles from [t_his] empty stomach.\n"
 	else if(nutrition >= 500 && nutrition < 865) // Fat.
 		msg += "[t_He] has a stuffed belly, bloated fat and round from eating too much.\n"
 	else if(nutrition >= 1200 && nutrition < 1935) // One person fully digested.
-		msg += "[t_He] [t_is] sporting a large, round, sagging stomach. It's contains at least their body weight worth of glorping slush.\n"
+		msg += "\red [t_He] [t_is] sporting a large, round, sagging stomach. It's contains at least their body weight worth of glorping slush.\n"
 	else if(nutrition >= 1935 && nutrition < 3005) // Two people.
-		msg += "[t_He] [t_is] engorged with a huge stomach that sags and wobbles as they move. They must have consumed at least twice their body weight. It looks incredibly soft.\n"
+		msg += "\red [t_He] [t_is] engorged with a huge stomach that sags and wobbles as they move. They must have consumed at least twice their body weight. It looks incredibly soft.\n"
 	else if(nutrition >= 3005 && nutrition < 4075) // Three people.
-		msg += "[t_He] stomach is firmly packed with digesting slop. They must have eaten at least a few times worth their body weight! It looks hard for them to stand, and [t_his] gut jiggles when they move.\n"
+		msg += "\red [t_He] stomach is firmly packed with digesting slop. They must have eaten at least a few times worth their body weight! It looks hard for them to stand, and [t_his] gut jiggles when they move.\n"
 	else if(nutrition >= 4075) // Four or more people.
-		msg += "[t_He] [t_is] so absolutely stuffed that you aren't sure how it's possible to move. [t_He] can't seem to get any bigger. The surface of [t_his] belly looks sorely strained!\n"
-//		else
+		msg += "\red [t_He] [t_is] so absolutely stuffed that you aren't sure how it's possible to move. [t_He] can't seem to swell any bigger. The surface of [t_his] belly looks sorely strained!\n"
+
 
 	// For each belly type, print description if someone is inside!
-	for (var/bellytype in src.internal_contents)
-		var/datum/belly/B = internal_contents[bellytype]
-		msg += B.get_examine_msg(t_He, t_his, t_him, t_has, t_is)
-
-	msg += "</span>"
+	for (var/I in src.vore_organs)
+		var/datum/belly/B = vore_organs[I]
+		msg += B.get_examine_msg()
 
 	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
@@ -443,6 +468,7 @@
 	if(hasHUD(usr,"medical"))
 		var/perpname = "wot"
 		var/medical = "None"
+		var/scanned = 0
 
 		if(wear_id)
 			if(istype(wear_id,/obj/item/weapon/card/id))
@@ -461,6 +487,13 @@
 
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a> <a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>\n"
+
+		for(var/O in contents)
+			if(istype(O,/obj/item/weapon/implant/health))
+				scanned = 1
+				break
+
+		msg += "<span class = 'deptradio'>Scan status: [scanned ? "\blue Scanned" : "\red Not Scanned"]</span> \n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"

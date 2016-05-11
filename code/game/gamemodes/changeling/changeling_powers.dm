@@ -149,11 +149,11 @@
 		src << "<span class='warning'>We do not know how to parse this creature's DNA!</span>"
 		return
 
-	if(HUSK in T.mutations)
+	if(HUSK in T.mutations) //If there is somehow a husk, you can't absorb it. Downside to this, is that you can absorb the same person over, and over, and over, AND OVER again.
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
-	if(!G.state == GRAB_KILL)
+	if(!G.state == GRAB_NECK) //You don't want to choke people to death!
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"
 		return
 
@@ -172,10 +172,12 @@
 			if(3)
 				src << "<span class='notice'>We stab [T] with the proboscis.</span>"
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
-				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
+				T << "<span class='danger'>You feel a sharp stabbing pain!</span>" //Changed because
 				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
-				if(affecting.take_damage(39,0,1,0,"large organic needle"))
+				if(affecting.take_damage(10,0,1,0,"large organic needle")) //YOW that stings. It doesn't kill (unless person is already hurt badly) , but it sure as hell hurts!
+					T.apply_effect(60,AGONY,0)
 					T:UpdateDamageIcon()
+
 
 		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
@@ -234,8 +236,8 @@
 	changeling.absorbedcount++
 	changeling.isabsorbing = 0
 
-	T.death(0)
-	T.Drain()
+	//T.death(0) //Enable this if you want it to kill them.
+	//T.Drain()  //Enable this if you want it to husk them.
 	return 1
 
 

@@ -31,14 +31,14 @@
 		dat = "[src.temp]<BR><BR><A href='byond://?src=\ref[src];temp=1'>Clear</A>"
 	else
 		dat = {"
-<B>Persistent Signal Locator</B><HR>
-Frequency:
-<A href='byond://?src=\ref[src];freq=-10'>-</A>
-<A href='byond://?src=\ref[src];freq=-2'>-</A> [format_frequency(src.frequency)]
-<A href='byond://?src=\ref[src];freq=2'>+</A>
-<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
+			<B>Persistent Signal Locator</B><HR>
+			Frequency:
+			<A href='byond://?src=\ref[src];freq=-10'>-</A>
+			<A href='byond://?src=\ref[src];freq=-2'>-</A> [format_frequency(src.frequency)]
+			<A href='byond://?src=\ref[src];freq=2'>+</A>
+			<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 
-<A href='?src=\ref[src];refresh=1'>Refresh</A>"}
+			<A href='?src=\ref[src];refresh=1'>Refresh</A>"}
 	user << browse(dat, "window=radio")
 	onclose(user, "radio")
 	return
@@ -135,19 +135,19 @@ Frequency:
 	matter = list("metal" = 10000)
 	origin_tech = "magnets=1;bluespace=3"
 
-/obj/item/weapon/hand_tele/attack_self(mob/user as mob)
+/obj/item/weapon/hand_tele/attack_self(mob/living/user as mob)
 	var/turf/current_location = get_turf(user)//What turf is the user on?
 	if(!current_location||current_location.z==2||current_location.z>=7)//If turf was not found or they're on z level 2 or >7 which does not currently exist.
 		user << "<span class='notice'>\The [src] is malfunctioning.</span>"
 		return
-	var/list/L = list(  )
+	var/list/L = list()
 	for(var/obj/machinery/teleport/hub/R in world)
-		var/obj/machinery/computer/teleporter/com = locate(/obj/machinery/computer/teleporter, locate(R.x - 2, R.y, R.z))
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use)
+		var/obj/machinery/computer/teleporter/com = R.com
+		if (com && com.locked && !com.one_time_use)
 			if(R.icon_state == "tele1")
-				L["[com.id] (Active)"] = com.locked
+				L["[com.id] (Active[com.accurate ? ", Accurate" : ""])"] = com
 			else
-				L["[com.id] (Inactive)"] = com.locked
+				L["[com.id] (Inactive[com.accurate ? ", Accurate" : ""])"] = com
 	var/list/turfs = list(	)
 	for(var/turf/T in orange(10))
 		if(T.x>world.maxx-8 || T.x<8)	continue	//putting them at the edge is dumb
@@ -164,11 +164,35 @@ Frequency:
 	if(count >= 3)
 		user.show_message("<span class='notice'>\The [src] is recharging!</span>")
 		return
-	var/T = L[t1]
+	var/obj/machinery/computer/teleporter/C = L[t1]
+	var/T = C.locked
 	for(var/mob/O in hearers(user, null))
 		O.show_message("<span class='notice'>Locked In.</span>", 2)
-	var/obj/effect/portal/P = new /obj/effect/portal( get_turf(src) )
-	P.target = T
-	P.creator = src
+
+	//Inside-a-thing teleport
+	if(!isfloor(user.loc))
+		if(user.absorbed)
+			user << "<span class='notice'>\The [src] cannot lock onto you.</span>"
+			return
+
+		//Scrape you out of vars if you were ated
+		if(hasvar(user.loc,"vore_organs"))
+			var/mob/living/M = user.loc
+			for(var/datum/belly/B in M.vore_organs)
+				B.internal_contents -= user
+
+		if(prob(5) && !C.accurate) //oh dear a problem, put em in deep space
+			do_teleport(user, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), 3), 0)
+		else
+			do_teleport(user, T, 1) ///You will appear adjacent to the beacon
+
+	//Normal portal creation instead
+	else
+		var/obj/effect/portal/P = new /obj/effect/portal( get_turf(src) )
+		P.target = T
+		P.creator = src
+		if(C.accurate)
+			P.failchance = 0
+
 	src.add_fingerprint(user)
 	return

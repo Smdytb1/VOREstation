@@ -12,14 +12,16 @@ var/prison_shuttle_timeleft = 0
 
 /obj/machinery/computer/prison_shuttle
 	name = "prison shuttle control console"
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "shuttle"
+	icon_state = "frame-sec"
 	req_access = list(access_security)
 	circuit = "/obj/item/weapon/circuitboard/prison_shuttle"
 	var/temp = null
 	var/hacked = 0
 	var/allowedtocall = 0
 	var/prison_break = 0
+
+	screenicon = "shuttle"
+	keyboardicon = "kb3"
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)

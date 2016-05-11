@@ -2,6 +2,8 @@
 // Abstract Class
 //
 
+// Legacy mimic. Use the new vore/mimic please. Keeping this only so certain code doesn't break.
+
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
 	desc = "A rectangular steel crate."
@@ -124,7 +126,7 @@
 // Copy Mimic
 //
 
-var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)
+// var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)
 
 /mob/living/simple_animal/hostile/mimic/copy
 

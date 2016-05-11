@@ -23,6 +23,9 @@
 		if(A == src)
 			continue
 
+		if(!isturf(A.loc)) // Inside of something?
+			continue
+
 		var/atom/F = Found(A)
 		if(F)
 			T = F
@@ -42,14 +45,15 @@
 
 		else if(istype(A, /obj/mecha)) // Our line of sight stuff was already done in ListTargets().
 			var/obj/mecha/M = A
-			if (M.occupant)
+			var/mob/pilot = M.occupant
+			if (pilot && pilot.faction != src.faction)
 				stance = HOSTILE_STANCE_ATTACK
 				T = M
 				break
 
 		if(istype(A, /obj/machinery/bot))
 			var/obj/machinery/bot/B = A
-			if (B.health > 0)
+			if (B.health > 0 && B.on)
 				stance = HOSTILE_STANCE_ATTACK
 				T = B
 				break

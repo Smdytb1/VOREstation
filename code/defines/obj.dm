@@ -160,8 +160,8 @@
 			even = !even
 
 	dat += "</table>"
-	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
-	dat = replacetext(dat, "\t", "")
+	dat = bayreplacetext(dat, "\n", "") // so it can be placed on paper correctly
+	dat = bayreplacetext(dat, "\t", "")
 	return dat
 
 
