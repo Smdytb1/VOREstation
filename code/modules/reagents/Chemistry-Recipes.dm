@@ -1141,6 +1141,7 @@ datum
 					/mob/living/simple_animal/hostile/vore/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp, // old
+					/mob/living/simple_animal/hostile/vore/large/carp,
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
@@ -1223,6 +1224,7 @@ datum
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp,
 					/mob/living/simple_animal/hostile/vore/carp,
+					/mob/living/simple_animal/hostile/vore/large/carp,
 					/mob/living/simple_animal/hostile/retaliate,
 					/mob/living/simple_animal/hostile/retaliate/clown,
 					/mob/living/simple_animal/hostile/retaliate/malf_drone,
