@@ -1171,6 +1171,7 @@ datum
 					/mob/living/simple_animal/hostile/mimic/crate, // old
 					/mob/living/simple_animal/hostile/bear,  // old
 					/mob/living/simple_animal/hostile/bear/Hudson,  // old
+					/mob/living/simple_animal/hostile/bear/vore/Hudson,
 					/mob/living/simple_animal/hostile/hivebot/tele,  // old
 					/mob/living/simple_animal/hostile/creature // old
 					)//exclusion list for things you don't want the reaction to create.

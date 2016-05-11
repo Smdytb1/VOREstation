@@ -134,7 +134,6 @@
 
 /mob/living/simple_animal/hostile/vore/bear/AttackingTarget()
 
-	// Normally done as part of the vore mob attack proc, but since bears are special snowflake bastards, I have to copy it in here for now. -Spades
 	// Bear vore code.
 	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
 		return
@@ -143,20 +142,18 @@
 		..()
 		return
 
-	if(picky && !target_mob.digestable) //Don't eat people with nogurgle prefs
-		..()
-		return
-
-	if(target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
+	// Need to snowflake in the bear code here.
+	if(picky && target_mob.digestable && target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
 		if(capacity)
 			var/check_size = target_mob.playerscale + fullness
 			if(check_size <= capacity)
 				animal_nom(target_mob)
 		else
 			animal_nom(target_mob)
+		return
 
 	// Original bear attack code.
-	if(!Adjacent(target_mob))
+	if(!Adjacent(target_mob) && !target_mob.lying)
 		return
 	custom_emote(1, pick( list("slashes at [target_mob]", "bites [target_mob]") ) )
 
