@@ -2316,7 +2316,7 @@
 /obj/item/weapon/storage/box/fluff/joanrisu/New()
 	new /obj/item/clothing/gloves/white(src)
 	new /obj/item/device/radio/headset/heads/captain(src)
-	new /obj/item/clothing/suit/storage/fluff/fedcapt(src)
+	new /obj/item/clothing/suit/storage/fluff/fedcoat/fedcapt(src)
 	new /obj/item/weapon/card/id/gold/fluff/badge(src)
 	new /obj/item/weapon/card/id/captains_spare(src)
 	new /obj/item/weapon/gun/energy/gun/fluff/dominator(src)
