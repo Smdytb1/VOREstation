@@ -1300,6 +1300,43 @@ datum
 				/*for(var/mob/O in viewers(get_turf(holder.my_atom), null))
 					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)*/
 
+		slimevore
+			name = "Slime Vore" // Hostile vore mobs
+			id = "m_tele"
+			result = null
+			required_reagents = list("nutriment" = 5)
+			result_amount = 1
+			required_container = /obj/item/slime_extract/gold
+			required_other = 1
+			on_reaction(var/datum/reagents/holder)
+
+				var/blocked = list(
+					/mob/living/simple_animal/hostile/vore/alien/queen/large,
+					/mob/living/simple_animal/hostile/vore/alien/queen,
+					/mob/living/simple_animal/hostile/vore/large/carp,
+					/mob/living/simple_animal/hostile/vore/mimic,
+					/mob/living/simple_animal/hostile/vore/mimic/copy,
+					/mob/living/simple_animal/hostile/vore/mimic/crate)//exclusion list for things you don't want the reaction to create.
+				var/list/critters = typesof(/mob/living/simple_animal/hostile/vore) - blocked // list of possible hostile mobs
+
+				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+
+				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+					if(M:eyecheck() <= 0)
+						flick("e_flash", M.flash)
+
+				var/spawn_count = rand(1,3)
+				for(var/i = 1, i <= spawn_count, i++)
+					var/chosen = pick(critters)
+					var/mob/living/simple_animal/hostile/C = new chosen
+					C.faction = "slimesummon"
+					C.loc = get_turf(holder.my_atom)
+					if(prob(50))
+						for(var/j = 1, j <= rand(1, 3), j++)
+							step(C, pick(NORTH,SOUTH,EAST,WEST))
+				/*for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)*/
+
 //Silver
 		slimebork
 			name = "Slime Bork"
