@@ -73,3 +73,14 @@
 	faction = "carp"
 	capacity = 2
 	max_size = 2
+	//Space carp aren't affected by atmos.
+	min_oxy = 0
+	max_oxy = 0
+	min_tox = 0
+	max_tox = 0
+	min_co2 = 0
+	max_co2 = 0
+	min_n2 = 0
+	max_n2 = 0
+	minbodytemp = 0
+	break_stuff_probability = 15

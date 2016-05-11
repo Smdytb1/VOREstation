@@ -22,7 +22,7 @@
 
 	var/const/default_mob_size = 15
 
-/obj/structure/closet/initialize()
+/obj/structure/closet/New()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		for(var/obj/item/I in src.loc)
 			if(I.density || I.anchored || I == src) continue
@@ -322,25 +322,25 @@
 	escapee.next_move = world.time + 100
 	escapee.last_special = world.time + 100
 	escapee << "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>"
-	
+
 	visible_message("<span class='danger'>The [src] begins to shake violently!</span>")
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 		animate_shake()
-		
+
 		if(!do_after(escapee, 50)) //5 seconds
 			breakout = 0
 			return
-		if(!escapee || escapee.stat || escapee.loc != src) 
+		if(!escapee || escapee.stat || escapee.loc != src)
 			breakout = 0
 			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
 		if(!req_breakout())
 			breakout = 0
 			return
-	
+
 	//Well then break it!
 	breakout = 0
 	escapee << "<span class='warning'>You successfully break out!</span>"

@@ -7,9 +7,9 @@
 	var/list/digsite_spawning_turfs = list()
 
 	var/list/spawn_types_animal = list("/mob/living/carbon/slime",\
-	"/mob/living/simple_animal/hostile/alien",\
-	"/mob/living/simple_animal/hostile/alien/drone",\
-	"/mob/living/simple_animal/hostile/alien/sentinel",\
+	"/mob/living/simple_animal/hostile/vore/alien",\
+	"/mob/living/simple_animal/hostile/vore/alien/drone",\
+	"/mob/living/simple_animal/hostile/vore/alien/sentinel",\
 	"/mob/living/simple_animal/hostile/giant_spider",\
 	"/mob/living/simple_animal/hostile/giant_spider/hunter",\
 	"/mob/living/simple_animal/hostile/giant_spider/nurse",\

@@ -301,7 +301,7 @@
 						new /obj/item/clothing/head/collectable/slime(C)
 				else if(prob(50))
 					if(live_cargo) // Something else very much alive and angry.
-						var/spawn_type = pick(/mob/living/simple_animal/hostile/alien, /mob/living/simple_animal/hostile/alien/drone, /mob/living/simple_animal/hostile/alien/sentinel)
+						var/spawn_type = pick(/mob/living/simple_animal/hostile/vore/alien, /mob/living/simple_animal/hostile/vore/alien/drone, /mob/living/simple_animal/hostile/vore/alien/sentinel)
 						new spawn_type(C)
 					else // Just a costume.
 						new /obj/item/clothing/head/xenos(C)
