@@ -1629,5 +1629,4 @@
 #include "maps\RandomZLevels\carpfarm.dm"
 #include "maps\RandomZLevels\labyrinth.dm"
 #include "maps\RandomZLevels\listeningpost.dm"
-#include "maps\RandomZLevels\xenostation.dm"
 // END_INCLUDE
