@@ -63,7 +63,10 @@ Don't use ranged mobs for vore mobs.
 				fullness += M.playerscale
 				fullness = round(fullness, 1) // Because intervals of 0.25 are going to make sprite artists cry.
 		if(fullness)
-			icon_state = "[initial(icon_state)]-[fullness]"
+			if (fullness > capacity) // Player controlled.
+				icon_state = "[initial(icon_state)]-[capacity]"
+			else
+				icon_state = "[initial(icon_state)]-[fullness]"
 		else
 			icon_state = initial(icon_state)
 	..()
