@@ -134,7 +134,7 @@
 
 /mob/living/simple_animal/hostile/vore/bear/AttackingTarget()
 
-	// Bear vore code.
+	// Need to snowflake the vode in the bear code here because of the snowflakey way bears work.
 	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
 		return
 
@@ -142,7 +142,6 @@
 		..()
 		return
 
-	// Need to snowflake in the bear code here.
 	if(picky && target_mob.digestable && target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
 		if(capacity)
 			var/check_size = target_mob.playerscale + fullness
