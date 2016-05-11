@@ -959,7 +959,7 @@ datum
 					/mob/living/simple_animal/hostile/syndicate/melee/space,
 					/mob/living/simple_animal/hostile/syndicate/ranged,
 					/mob/living/simple_animal/hostile/syndicate/ranged/space,
-					/mob/living/simple_animal/hostile/alien/queen/large,
+					/mob/living/simple_animal/hostile/vore/alien/queen/large,
 					/mob/living/simple_animal/clown
 					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
@@ -1138,7 +1138,7 @@ datum
 					/mob/living/simple_animal/hostile/syndicate/melee/space,
 					/mob/living/simple_animal/hostile/syndicate/ranged,
 					/mob/living/simple_animal/hostile/syndicate/ranged/space,
-					/mob/living/simple_animal/hostile/alien/queen/large,
+					/mob/living/simple_animal/hostile/vore/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp, // old
 					/mob/living/simple_animal/hostile/retaliate,
@@ -1215,11 +1215,11 @@ datum
 					/mob/living/simple_animal/hostile/syndicate/melee/space,
 					/mob/living/simple_animal/hostile/syndicate/ranged,
 					/mob/living/simple_animal/hostile/syndicate/ranged/space,
-					/mob/living/simple_animal/hostile/alien,
-					/mob/living/simple_animal/hostile/alien/drone,
-					/mob/living/simple_animal/hostile/alien/sentinel,
-					/mob/living/simple_animal/hostile/alien/queen,
-					/mob/living/simple_animal/hostile/alien/queen/large,
+					/mob/living/simple_animal/hostile/vore/alien,
+					/mob/living/simple_animal/hostile/vore/alien/drone,
+					/mob/living/simple_animal/hostile/vore/alien/sentinel,
+					/mob/living/simple_animal/hostile/vore/alien/queen,
+					/mob/living/simple_animal/hostile/vore/alien/queen/large,
 					/mob/living/simple_animal/hostile/carp/holodeck,
 					/mob/living/simple_animal/hostile/carp,
 					/mob/living/simple_animal/hostile/vore/carp,
