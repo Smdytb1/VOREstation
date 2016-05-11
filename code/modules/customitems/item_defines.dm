@@ -2159,6 +2159,16 @@
 	The individual named above is licensed by the Nanotrasen Department of Civil Protection to carry one Clockwork Rifle (bolt-action variant).
 	This license expires on 14/Dec/2560 and must be renewed by CentCom prior to this date."}
 
+//eekasqueak: Serkii Miishy
+/obj/item/fluff/permit/serkiimiishy
+	name = "Serkii Miishy's Stun Revolver Permit"
+	desc = {"
+	<b>NAME:</b> Serkii Miishy | <b>RACE:</b> Mousemorph | <b>HOMEWORLD:</b> Mars, Sol
+	<b>DOB:</b> 10/9/2441 | <b>HEIGHT:</b> 122cm | <b>SEX:</b> Male
+
+	The individual named above is licensed by the Nanotrasen Department of Civil Protection to carry one stun revolver.
+	This license expires on 30/March/2561 and must be renewed by CentCom prior to this date."}
+
 /*
 // ?????:Greyson Maximus
 /obj/item/fluff/permit/demi
@@ -2184,6 +2194,15 @@
 		return
 */
 
+//eekasqueak: Serkii Miishy
+/obj/item/weapon/storage/box/fluff/serkii
+	name = "Serkii's personal effects."
+	desc = "A box with Serkii's personal belongings."
+/obj/item/weapon/storage/box/fluff/serkii/New()
+	new /obj/item/fluff/permit/serkiimiishy(src)
+	new /obj/item/weapon/gun/energy/stunrevolver(src)
+	..()
+	return
 
 
 // SASoperative : Joseph Skinner
@@ -2297,10 +2316,11 @@
 /obj/item/weapon/storage/box/fluff/joanrisu/New()
 	new /obj/item/clothing/gloves/white(src)
 	new /obj/item/device/radio/headset/heads/captain(src)
-	new /obj/item/weapon/storage/backpack/satchel(src)
-	new /obj/item/clothing/suit/storage/fluff/fedcoat(src)
-	new /obj/item/weapon/card/id/gold/fluff/badge/(src)
+	new /obj/item/clothing/suit/storage/fluff/fedcapt(src)
+	new /obj/item/weapon/card/id/gold/fluff/badge(src)
 	new /obj/item/weapon/card/id/captains_spare(src)
+	new /obj/item/weapon/gun/energy/gun/fluff/dominator(src)
+	new /obj/item/fluff/permit/joanrisu(src)
 	..()
 	return
 
