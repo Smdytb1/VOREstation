@@ -42,7 +42,7 @@
 	..(new_loc, "Nevrean")
 
 /mob/living/carbon/human/fox/New(var/new_loc)
-	..(new_loc, "Fox")
+	..(new_loc, "Highlander Voxxen")
 
 /mob/living/carbon/human/fennec/New(var/new_loc)
-	..(new_loc, "Fennec")
+	..(new_loc, "Flatland Voxxen")

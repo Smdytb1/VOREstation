@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal", "Fox", "Fennec") //Add species here if you want them to be able to use hair.
+	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal", "Highlander Voxxen", "Flatland Voxxen") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -883,23 +883,23 @@
 	do_colouration = 0
 
 /datum/sprite_accessory/ears/foxears
-	name = "orange fox ears"
+	name = "highlander voxxen ears"
 	desc = ""
 	icon_state = "foxears"
 
 /datum/sprite_accessory/ears/fenears
-	name = "fennec ears"
+	name = "flatland voxxen ears"
 	desc = ""
 	icon_state = "fenears"
 
 /datum/sprite_accessory/ears/foxearshc
-	name = "fox ears, hair colored"
+	name = "highlander voxxen ears, hair colored"
 	desc = ""
 	icon_state = "foxearshc"
 	do_colouration = 1
 
 /datum/sprite_accessory/ears/fenearshc
-	name = "fennec ears, hair colored"
+	name = "flatland voxxen ears, hair colored"
 	desc = ""
 	icon_state = "fenearshc"
 	do_colouration = 1
@@ -1122,12 +1122,12 @@
 	icon_state = "xenotail"
 
 /datum/sprite_accessory/tail/fentail
-	name = "fennec tail"
+	name = "Flatland Voxxen tail"
 	desc = ""
 	icon_state = "fentail"
 
 /datum/sprite_accessory/tail/foxtail
-	name = "fox tail"
+	name = "highlander voxxen tail"
 	desc = ""
 	icon_state = "foxtail"
 
@@ -1138,7 +1138,7 @@
 	do_colouration = 1
 
 /datum/sprite_accessory/tail/foxtailhc
-	name = "fox tail, hair colored"
+	name = "highlander voxxen tail, hair colored"
 	desc = ""
 	icon_state = "foxtailhc"
 	do_colouration = 1
