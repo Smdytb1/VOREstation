@@ -71,3 +71,5 @@
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
 	meat_amount = 10
 	faction = "carp"
+	capacity = 2
+	max_size = 2

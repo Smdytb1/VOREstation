@@ -88,6 +88,19 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 	src << "<span class='notice'>[vore_selected] selected.</span>"
 
 //
+//	Belly searching for simplifying other procs
+//
+/proc/check_belly(atom/movable/A)
+	if(istype(A.loc,/mob/living))
+		var/mob/living/M = A.loc
+		for(var/I in M.vore_organs)
+			var/datum/belly/B = M.vore_organs[I]
+			if(A in B.internal_contents)
+				return(B)
+
+	return 0
+
+//
 //	Verb for saving vore preferences to save file
 //
 /mob/living/proc/save_vore_prefs()

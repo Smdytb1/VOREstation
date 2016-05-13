@@ -147,9 +147,10 @@
 			else
 				dat += {"<br><font size=1><a href='byond://?src=\ref[src];del_rec=1'>Delete Record</a></font><br>
 					<b>Name:</b> [src.active_record.dna.real_name]<br>"}
+
 				var/obj/item/weapon/implant/health/H = null
 				if(src.active_record.implant)
-					H=locate(src.active_record.implant)
+					H = src.active_record.implant
 
 				if ((H) && (istype(H)))
 					dat += "<b>Health:</b> [H.sensehealth()] | OXY-BURN-TOX-BRUTE<br>"
@@ -378,10 +379,10 @@
 	if (isnull(imp))
 		imp = new /obj/item/weapon/implant/health(subject)
 		imp.implanted = subject
-		R.implant = "\ref[imp]"
+		R.implant = imp
 	//Update it if needed
 	else
-		R.implant = "\ref[imp]"
+		R.implant = imp
 
 	if (!isnull(subject.mind)) //Save that mind so traitors can continue traitoring after cloning.
 		R.mind = "\ref[subject.mind]"
