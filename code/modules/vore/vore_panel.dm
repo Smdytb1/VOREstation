@@ -177,7 +177,7 @@
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a>"
 
 	//Just pretend it's a late sanitize
-	if((user.digestable != 1) || (user.digestable != 0))
+	if((user.digestable != 1) && (user.digestable != 0))
 		user.digestable = 1
 
 	switch(user.digestable)
