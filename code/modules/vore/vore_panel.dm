@@ -176,6 +176,10 @@
 	dat += "<a href='?src=\ref[src];saveprefs=1'>Save Prefs</a>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a>"
 
+	//Just pretend it's a late sanitize
+	if((user.digestable != 1) && (user.digestable != 0))
+		user.digestable = 1
+
 	switch(user.digestable)
 		if(1)
 			dat += "<a href='?src=\ref[src];toggledg=1'>Toggle Digestable</a>"

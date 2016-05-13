@@ -1249,7 +1249,6 @@
 #include "code\modules\mob\living\simple_animal\friendly\snake.dm"
 #include "code\modules\mob\living\simple_animal\friendly\spiderbot.dm"
 #include "code\modules\mob\living\simple_animal\friendly\tomato.dm"
-#include "code\modules\mob\living\simple_animal\hostile\alien.dm"
 #include "code\modules\mob\living\simple_animal\hostile\bear.dm"
 #include "code\modules\mob\living\simple_animal\hostile\carp.dm"
 #include "code\modules\mob\living\simple_animal\hostile\creature.dm"
@@ -1265,6 +1264,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\clown.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\drone.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\retaliate.dm"
+#include "code\modules\mob\living\simple_animal\hostile\vore\alien.dm"
 #include "code\modules\mob\living\simple_animal\hostile\vore\bear.dm"
 #include "code\modules\mob\living\simple_animal\hostile\vore\carp.dm"
 #include "code\modules\mob\living\simple_animal\hostile\vore\creature.dm"
@@ -1629,5 +1629,4 @@
 #include "maps\RandomZLevels\carpfarm.dm"
 #include "maps\RandomZLevels\labyrinth.dm"
 #include "maps\RandomZLevels\listeningpost.dm"
-#include "maps\RandomZLevels\xenostation.dm"
 // END_INCLUDE
