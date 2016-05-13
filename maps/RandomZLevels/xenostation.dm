@@ -112,12 +112,12 @@
 	icon_state = "Hunter Front Half"
 	spawn_nothing_percentage = 40
 	item_to_spawn()
-		return pick(/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien/drone,\
-					/mob/living/simple_animal/hostile/alien,\
-					/mob/living/simple_animal/hostile/alien,\
-					/mob/living/simple_animal/hostile/alien/sentinel,\
+		return pick(/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien/drone,\
+					/mob/living/simple_animal/hostile/vore/alien,\
+					/mob/living/simple_animal/hostile/vore/alien,\
+					/mob/living/simple_animal/hostile/vore/alien/sentinel,\
 					/obj/item/clothing/mask/facehugger/xenostation)
 
 /obj/item/clothing/mask/facehugger/xenostation/New() // To prevent deleting it if aliens are disabled globally.
@@ -164,6 +164,31 @@
 	name = "Unfortunate Test Subject"
 	corpsehelmet = /obj/item/clothing/head/fluff/xeno
 
+/*
+/obj/effect/landmark/corpse/overseer
+	name = "Overseer"
+	corpseuniform = /obj/item/clothing/under/rank/navyhead_of_security
+	corpsesuit = /obj/item/clothing/suit/armor/hosnavycoat
+	corpseradio = /obj/item/device/radio/headset/heads/captain
+	corpsegloves = /obj/item/clothing/gloves/black/hos
+	corpseshoes = /obj/item/clothing/shoes/swat
+	corpsehelmet = /obj/item/clothing/head/beret/navyhos
+	corpseglasses = /obj/item/clothing/glasses/eyepatch
+	corpseid = 1
+	corpseidjob = "Facility Overseer"
+	corpseidaccess = "Captain"
+
+/obj/effect/landmark/corpse/officer
+	name = "Security Officer"
+	corpseuniform = /obj/item/clothing/under/rank/navysecurity
+	corpsesuit = /obj/item/clothing/suit/armor/navysecvest
+	corpseradio = /obj/item/device/radio/headset/headset_sec
+	corpseshoes = /obj/item/clothing/shoes/swat
+	corpsehelmet = /obj/item/clothing/head/beret/navysec
+	corpseid = 1
+	corpseidjob = "Security Officer"
+	corpseidaccess = "Security Officer"
+*/
 
 // Items and objects for Xenostation
 

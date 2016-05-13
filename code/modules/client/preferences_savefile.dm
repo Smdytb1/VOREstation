@@ -395,6 +395,9 @@
 	S.cd = "/character[slot]"
 
 	S["belly_prefs"]	>> belly_prefs
+	S["digestable"]	>> digestable
+
+	digestable = sanitize_integer(digestable, 0, 1, initial(digestable))
 
 	if(!belly_prefs)
 		belly_prefs = list()

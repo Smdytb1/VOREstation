@@ -5,7 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
-	var/mob/living/carbon/human/holden_mob
+	var/mob/living/holden_mob
 
 /obj/item/weapon/holder/New()
 	item_state = icon_state
@@ -25,11 +25,12 @@
 		M.loc = get_turf(src)
 		needs_resprite = 1
 
-	if(needs_resprite)
+	if(needs_resprite && istype(holden_mob,/mob/living/carbon/human))
+		var/mob/living/carbon/human/M = holden_mob
 		overlays.Cut()
-		icon = holden_mob.icon
-		icon_state = holden_mob.icon_state
-		for(var/I in holden_mob.overlays_standing)
+		icon = M.icon
+		icon_state = M.icon_state
+		for(var/I in M.overlays_standing)
 			overlays += I
 
 	if(istype(loc,/turf) || !(contents.len))
@@ -129,9 +130,14 @@
 		O.show_inv(usr)
 
 /obj/item/weapon/holder/GetAccess()
+	if(!istype(holden_mob,/mob/living/carbon/human))
+		return //Foxes don't have access you silly doof.
+
+	var/mob/living/carbon/human/M = holden_mob
+
 	var/list/access_sum = list()
-	var/obj/item/M_hand = holden_mob.get_active_hand()
-	var/obj/item/M_id = holden_mob.wear_id
+	var/obj/item/M_hand = M.get_active_hand()
+	var/obj/item/M_id = M.wear_id
 
 	if(M_hand)
 		access_sum += M_hand.GetAccess()
