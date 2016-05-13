@@ -10,7 +10,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	//Species-specific stuff.
-	species_restricted = list("exclude","Unathi","Tajara","Akula","Sergal","Nevrean", "Highlander Voxxen", "Flatland Voxxen","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+	species_restricted = list("exclude","Unathi","Tajara","Akula","Sergal","Nevrean", "Highlander Zorren", "Flatland Zorren","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 	sprite_sheets_refit = list(
 		"Unathi"  			= 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" 			= 'icons/mob/species/tajaran/helmet.dmi',
@@ -18,8 +18,8 @@
 		"Akula"   			= 'icons/mob/species/akula/helmet.dmi',
 		"Sergal"  			= 'icons/mob/species/sergal/helmet.dmi',
 		"Nevrean" 			= 'icons/mob/species/nevrean/helmet.dmi',
-		"Highlander Voxxen" = 'icons/mob/species/fox/helmet.dmi',
-		"Flatland Voxxen"  	= 'icons/mob/species/fennec/helmet.dmi'
+		"Highlander Zorren" = 'icons/mob/species/fox/helmet.dmi',
+		"Flatland Zorren"  	= 'icons/mob/species/fennec/helmet.dmi'
 		)
 	sprite_sheets_obj = list(
 		"Unathi"  			= 'icons/obj/clothing/species/unathi/hats.dmi',
@@ -28,8 +28,8 @@
 		"Akula"   			= 'icons/obj/clothing/species/akula/hats.dmi',
 		"Sergal"  			= 'icons/obj/clothing/species/sergal/hats.dmi',
 		"Nevrean" 			= 'icons/obj/clothing/species/nevrean/hats.dmi',
-		"Highlander Voxxen"	= 'icons/obj/clothing/species/fox/hats.dmi',
-		"Flatland Voxxen"  	= 'icons/obj/clothing/species/fennec/hats.dmi',
+		"Highlander Zorren"	= 'icons/obj/clothing/species/fox/hats.dmi',
+		"Flatland Zorren"  	= 'icons/obj/clothing/species/fennec/hats.dmi',
 		)
 
 	light_overlay = "helmet_light"
@@ -45,7 +45,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	species_restricted = list("exclude","Unathi","Tajara","Akula","Sergal","Diona", "Highlander Voxxen", "Flatland Voxxen", "Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+	species_restricted = list("exclude","Unathi","Tajara","Akula","Sergal","Diona", "Highlander Zorren", "Flatland Zorren", "Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 	sprite_sheets_refit = list(
 		"Unathi" 			= 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" 			= 'icons/mob/species/tajaran/suit.dmi',
@@ -53,8 +53,8 @@
 		"Akula"  			= 'icons/mob/species/akula/suit.dmi',
 		"Sergal"  			= 'icons/mob/species/sergal/suit.dmi',
 		"Nevrean" 			= 'icons/mob/species/nevrean/suit.dmi',
-		"Highlander Voxxen"	= 'icons/mob/species/fox/suit.dmi',
-		"Flatland Voxxen"  	= 'icons/mob/species/fennec/suit.dmi',
+		"Highlander Zorren"	= 'icons/mob/species/fox/suit.dmi',
+		"Flatland Zorren"  	= 'icons/mob/species/fennec/suit.dmi',
 		)
 	sprite_sheets_obj = list(
 		"Unathi" 			= 'icons/obj/clothing/species/unathi/suits.dmi',
@@ -63,8 +63,8 @@
 		"Akula"   			= 'icons/obj/clothing/species/akula/suits.dmi',
 		"Sergal"  			= 'icons/obj/clothing/species/sergal/suits.dmi',
 		"Nevrean" 			= 'icons/obj/clothing/species/nevrean/suits.dmi',
-		"Highlander Voxxen"	= 'icons/obj/clothing/species/fox/suits.dmi',
-		"Flatland Voxxen" 	= 'icons/obj/clothing/species/fennec/suits.dmi',
+		"Highlander Zorren"	= 'icons/obj/clothing/species/fox/suits.dmi',
+		"Flatland Zorren" 	= 'icons/obj/clothing/species/fennec/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.

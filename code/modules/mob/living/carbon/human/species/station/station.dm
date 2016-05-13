@@ -421,9 +421,9 @@
 
 
 
-/datum/species/hi_voxxe
-	name = "Highlander Voxxen"
-	name_plural = "Foxes"
+/datum/species/hi_zoxxen
+	name = "Highlander Zorren"
+	name_plural = "Zorren"
 	icobase = 'icons/mob/human_races/r_fox.dmi'
 	deform = 'icons/mob/human_races/r_def_fox.dmi'
 	language = "Siik'tajr" //Placeholder language.
@@ -431,7 +431,7 @@
 	// primitive = /mob/living/carbon/monkey/fox //We don't have fox-monkey sprites.
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 
-	blurb = "Highlander Voxxen are a native species of Virgo Prime." //I'm not a good lore writer. Fill this in with something else. ~CK
+	blurb = "Highlander Zorren are a native species of Virgo Prime." //I'm not a good lore writer. Fill this in with something else. ~CK
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -456,9 +456,9 @@
 
 
 
-/datum/species/fl_voxxen
-	name = "Flatland Voxxen"
-	name_plural = "Voxxen"
+/datum/species/fl_zorren
+	name = "Flatland Zorren"
+	name_plural = "Zorren"
 	icobase = 'icons/mob/human_races/r_fennec.dmi'
 	deform = 'icons/mob/human_races/r_def_fennec.dmi'
 	language = "Siik'tajr" //Placeholder language.
@@ -466,7 +466,7 @@
 	//primitive = /mob/living/carbon/monkey/tajara //We don't have fennec-monkey sprites.
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 
-	blurb = "Flatland Voxxen are a native species of Virgo Prime." //I'm not a good lore writer.
+	blurb = "Flatland Zorren are a native species of Virgo Prime." //I'm not a good lore writer.
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
