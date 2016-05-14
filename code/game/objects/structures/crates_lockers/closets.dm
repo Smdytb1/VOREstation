@@ -22,11 +22,14 @@
 
 	var/const/default_mob_size = 15
 
-/obj/structure/closet/New()
+/obj/structure/closet/initialize()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		for(var/obj/item/I in src.loc)
 			if(I.density || I.anchored || I == src) continue
 			I.loc = src
+
+/obj/structure/closet/New()
+	initialize() // Trying to make these work on Gateway map Z-levels loaded at runtime.
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)

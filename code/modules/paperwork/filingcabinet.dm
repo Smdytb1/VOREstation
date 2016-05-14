@@ -27,10 +27,13 @@
 	icon_state = "tallcabinet"
 
 
-/obj/structure/filingcabinet/New()
+/obj/structure/filingcabinet/initialize()
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/weapon/paper) || istype(I, /obj/item/weapon/folder) || istype(I, /obj/item/weapon/photo) || istype(I, /obj/item/weapon/paper_bundle))
 			I.loc = src
+
+/obj/structure/filingcabinet/New()
+	initialize() // Trying to make these work on Gateway map Z-levels loaded at runtime.
 
 
 /obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
