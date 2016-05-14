@@ -33,6 +33,7 @@
 	status_flags = CANPUSH
 	minbodytemp = 0
 	heat_damage_per_tick = 20
+	capacity = 1
 
 
 /mob/living/simple_animal/hostile/vore/alien/drone
@@ -57,7 +58,7 @@
 	projectilesound = 'sound/weapons/pierce.ogg'
 
 
-/mob/living/simple_animal/hostile/vore/alien/queen // Broken icon, do not spawn!!
+/mob/living/simple_animal/hostile/vore/alien/queen
 	name = "alien queen"
 	icon_state = "xenoqueen"
 	icon_living = "xenoqueen"
@@ -72,16 +73,17 @@
 	rapid = 1
 	status_flags = 0
 
- /mob/living/simple_animal/hostile/vore/alien/queen/large // Broken icon, do not spawn!!
+ /mob/living/simple_animal/hostile/vore/alien/queen/large
 	name = "alien empress"
 	icon = 'icons/mob/alienqueen.dmi'
-	icon_state = "xenoempress"
-	icon_living = "xenoempress"
-	icon_dead = "xenoempress-dead"
+	icon_state = "queen_s"
+	icon_living = "queen_s"
+	icon_dead = "queen_dead"
 	move_to_delay = 4
 	maxHealth = 400
 	health = 400
 	pixel_x = -16
+	capacity = 3
 
 /obj/item/projectile/neurotox
 	damage = 30

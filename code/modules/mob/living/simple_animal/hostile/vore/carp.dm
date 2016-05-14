@@ -22,7 +22,7 @@
 	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
-	capacity = 0
+	capacity = 1
 	max_size = 0.5
 
 	//Space carp aren't affected by atmos.
