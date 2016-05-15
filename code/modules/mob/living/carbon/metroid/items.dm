@@ -121,7 +121,7 @@
 ////Pet Slime Creation///
 
 /obj/item/weapon/slimepotion
-	name = "docility potion"
+	name = "slime docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle19"
@@ -155,7 +155,7 @@
 		del(src)
 
 /obj/item/weapon/slimepotion2
-	name = "advanced docility potion"
+	name = "advanced slime docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle19"

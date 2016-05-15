@@ -1126,7 +1126,10 @@ datum
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-
+				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+					O.show_message(text("\red The slime extract begins to pulsate ferociously!"), 1)
+				sleep(50)
+				message_admins("[key_name(usr)] triggered a hostile gold slime reaction ([usr ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>" : "null"])") // In case of slime griff. Should check if it happened outside Xenobio. I'll do that later maybe.
 				var/blocked = list(
 					/mob/living/simple_animal/hostile,
 					/mob/living/simple_animal/hostile/pirate,
@@ -1163,12 +1166,13 @@ datum
 					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // fuck that
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
+					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
 					/mob/living/simple_animal/hostile/vore/mimic/crate,
-					/mob/living/simple_animal/hostile/mimic, // old
-					/mob/living/simple_animal/hostile/mimic/copy, // old
-					/mob/living/simple_animal/hostile/mimic/crate, // old
+					/mob/living/simple_animal/hostile/mimic,
+					/mob/living/simple_animal/hostile/mimic/copy,
+					/mob/living/simple_animal/hostile/mimic/crate,
 					/mob/living/simple_animal/hostile/bear,  // old
 					/mob/living/simple_animal/hostile/bear/Hudson,  // old
 					/mob/living/simple_animal/hostile/vore/bear/Hudson,
@@ -1193,7 +1197,7 @@ datum
 						for(var/j = 1, j <= rand(1, 3), j++)
 							step(C, pick(NORTH,SOUTH,EAST,WEST))
 				/*for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)*/
+					O.show_message(text("\red The slime core fizzles disappointingly."), 1)*/
 
 		slimenoncrit
 			name = "Slime Non-Crit"
@@ -1299,10 +1303,10 @@ datum
 						for(var/j = 1, j <= rand(1, 3), j++)
 							step(C, pick(NORTH,SOUTH,EAST,WEST))
 				/*for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)*/
+					O.show_message(text("\red The slime core fizzles disappointingly."), 1)*/
 
 		slimevore
-			name = "Slime Vore" // Hostile vore mobs
+			name = "Slime Vore" // Hostile vore mobs only
 			id = "m_tele"
 			result = null
 			required_reagents = list("nutriment" = 5)
@@ -1312,12 +1316,12 @@ datum
 			on_reaction(var/datum/reagents/holder)
 
 				var/blocked = list(
-					/mob/living/simple_animal/hostile/vore/alien/queen/large,
-					/mob/living/simple_animal/hostile/vore/alien/queen,
-					/mob/living/simple_animal/hostile/vore/large/carp,
+					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
-					/mob/living/simple_animal/hostile/vore/mimic/crate)//exclusion list for things you don't want the reaction to create.
+					/mob/living/simple_animal/hostile/vore/mimic/crate,
+					/mob/living/simple_animal/hostile/vore/alien/queen/large
+					)//exclusion list for things you don't want the reaction to create.
 				var/list/critters = typesof(/mob/living/simple_animal/hostile/vore) - blocked // list of possible hostile mobs
 
 				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
@@ -1336,7 +1340,7 @@ datum
 						for(var/j = 1, j <= rand(1, 3), j++)
 							step(C, pick(NORTH,SOUTH,EAST,WEST))
 				/*for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)*/
+					O.show_message(text("\red The slime core fizzles disappointingly."), 1)*/
 
 //Silver
 		slimebork
@@ -1388,7 +1392,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime extract begins to vibrate violently !"), 1)
+					O.show_message(text("\red The slime extract begins to vibrate violently!"), 1)
 				sleep(50)
 				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 				for(var/mob/living/M in range (get_turf(holder.my_atom), 7))
@@ -1415,7 +1419,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime extract begins to vibrate violently !"), 1)
+					O.show_message(text("\red The slime extract begins to vibrate violently!"), 1)
 				sleep(50)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
@@ -1541,20 +1545,48 @@ datum
 
 
 //Black
-		slimemutate2
-			name = "Advanced Mutation Toxin"
-			id = "mutationtoxin2"
-			result = "amutationtoxin"
+		slimemineral
+			name = "Slime Minerals"
+			id = "slimemineral"
+			result = null
 			required_reagents = list("phoron" = 5)
 			result_amount = 1
 			required_other = 1
 			required_container = /obj/item/slime_extract/black
-
-			// ----- Temporary until we decide what to do with black slimes. ----- //
 			on_reaction(var/datum/reagents/holder)
-				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
-			// ------------------------------------------------------------------- //
+				var/fail_chance = rand(1,1000)
+				if(fail_chance = 1)) // 0.1% chance of exploding, so scientists don't exclusively abuse this to obtain minerals.
+					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+						O.show_message(text("\red The slime extract begins to vibrate violently!"), 1) // It was at this moment, the Xenobiologist knew... he fucked up.
+					sleep(30)
+					playsound(get_turf(holder.my_atom), 'sound/items/Welder2.ogg', 100, 1)
+					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+						O.show_message(text("\red <b>The slime extract begins to rapidly sizzle and swell!</b>"), 1)
+					sleep(20)
+					explosion(get_turf(holder.my_atom), 1 ,3, 6)
+					return
+
+				if(fail_chance < 101) // 10% chance of it not working at all but you're bound to have a shitload of slimes.
+					playsound(get_turf(holder.my_atom), 'sound/items/Welder.ogg', 100, 1)
+					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+						O.show_message(text("\red The slime core fizzles disappointingly."), 1)
+					return
+
+				var/blocked = list(/obj/item/stack/sheet/mineral/plastic/cyborg, /obj/item/stack/sheet/mineral)
+				var/list/mineral = typesof(/obj/item/stack/sheet/mineral) - blocked
+
+				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+
+				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+					if(M:eyecheck() <= 0)
+						flick("e_flash", M.flash)
+
+				var/spawn_amount = rand(1,50)
+				var/chosen = pick(mineral)
+				var/obj/item/stack/sheet/mineral/C = new chosen
+				C.amount = spawn_amount
+				C.loc = get_turf(holder.my_atom)
+
 
 //Oil
 		slimeexplosion
@@ -1567,8 +1599,12 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime extract begins to vibrate violently !"), 1)
-				sleep(50)
+					O.show_message(text("\red The slime extract begins to vibrate violently!"), 1)
+				sleep(30)
+				playsound(get_turf(holder.my_atom), 'sound/items/Welder2.ogg', 100, 1)
+				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+					O.show_message(text("\red <b>The slime extract begins to rapidly sizzle and swell!</b>"), 1)
+				sleep(20)
 				explosion(get_turf(holder.my_atom), 1 ,3, 6)
 //Light Pink
 		slimepotion2
