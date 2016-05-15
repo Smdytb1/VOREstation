@@ -1555,7 +1555,7 @@ datum
 			required_container = /obj/item/slime_extract/black
 			on_reaction(var/datum/reagents/holder)
 				var/fail_chance = rand(1,1000)
-				if(fail_chance = 1)) // 0.1% chance of exploding, so scientists don't exclusively abuse this to obtain minerals.
+				if(fail_chance = 1) // 0.1% chance of exploding, so scientists don't exclusively abuse this to obtain minerals.
 					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
 						O.show_message(text("\red The slime extract begins to vibrate violently!"), 1) // It was at this moment, the Xenobiologist knew... he fucked up.
 					sleep(30)
