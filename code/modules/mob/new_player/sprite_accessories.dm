@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal") //Add species here if you want them to be able to use hair.
+	var/list/species_allowed = list("Human", "Unathi", "Akula", "Slime Person", "Nevrean", "Tajara", "Sergal", "Highlander Zorren", "Flatland Zorren") //Add species here if you want them to be able to use hair.
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -882,6 +882,28 @@
 	icon_state = "demon-horns1"
 	do_colouration = 0
 
+/datum/sprite_accessory/ears/foxears
+	name = "highlander zorren ears"
+	desc = ""
+	icon_state = "foxears"
+
+/datum/sprite_accessory/ears/fenears
+	name = "flatland zorren ears"
+	desc = ""
+	icon_state = "fenears"
+
+/datum/sprite_accessory/ears/foxearshc
+	name = "highlander zorren ears, hair colored"
+	desc = ""
+	icon_state = "foxearshc"
+	do_colouration = 1
+
+/datum/sprite_accessory/ears/fenearshc
+	name = "flatland zorren ears, hair colored"
+	desc = ""
+	icon_state = "fenearshc"
+	do_colouration = 1
+
 
 // Special snowflake ears go below here.
 
@@ -1098,6 +1120,28 @@
 	name = "xenomorph tail"
 	desc = ""
 	icon_state = "xenotail"
+
+/datum/sprite_accessory/tail/fentail
+	name = "flatland zorren tail"
+	desc = ""
+	icon_state = "fentail"
+
+/datum/sprite_accessory/tail/foxtail
+	name = "highlander zorren tail"
+	desc = ""
+	icon_state = "foxtail"
+
+/datum/sprite_accessory/tail/fentailhc
+	name = "flatland zorren tail, hair colored"
+	desc = ""
+	icon_state = "fentailhc"
+	do_colouration = 1
+
+/datum/sprite_accessory/tail/foxtailhc
+	name = "highlander zorren tail, hair colored"
+	desc = ""
+	icon_state = "foxtailhc"
+	do_colouration = 1
 
 /datum/sprite_accessory/tail/molenar_kitsune
 	name = "quintail kitsune tails (Molenar)"
