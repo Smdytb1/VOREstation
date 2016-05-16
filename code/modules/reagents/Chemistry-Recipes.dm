@@ -1153,7 +1153,6 @@ datum
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // fuck that
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
-					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
 					/mob/living/simple_animal/hostile/vore/mimic/crate,
@@ -1291,7 +1290,6 @@ datum
 			on_reaction(var/datum/reagents/holder)
 
 				var/blocked = list(
-					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
 					/mob/living/simple_animal/hostile/vore/mimic/crate,
