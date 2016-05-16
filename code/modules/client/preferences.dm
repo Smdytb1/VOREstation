@@ -1917,8 +1917,8 @@ datum/preferences
 
 	character.vore_selected = character.vore_organs[1]
 
-	for(var/O in character.vore_organs)
-		var/datum/belly/B = character.vore_organs[O]
+	for(var/I in character.vore_organs)
+		var/datum/belly/B = character.vore_organs[I]
 		B.owner = character
 
 	character.digestable = digestable

@@ -330,6 +330,7 @@
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 		if(istype(loc, /obj/item/weapon/holder/micro)) return
 		if(ismob(loc))	return //otherwise return_air will return nothing and therefore immediately suffocate them
+		if(istype(loc,/obj/item/clothing)) return //FUN POLICE, here to enforce fun for once
 		if(istype(src.loc, /obj/item/device/dogborg/sleeper)) return //If they're in a dog stomach, they don't need to breathe, as the stomach does it for them.
 
 		var/datum/gas_mixture/environment = loc.return_air()
@@ -1495,7 +1496,7 @@
 			src << "<font color='red'><b>"+pick("It hurts so much!", "You really need some painkillers..", "Dear god, the pain!")
 
 		if(shock_stage >= 30)
-			if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
+			if(shock_stage == 30) visible_message("\red [src] is having trouble keeping their eyes open.")
 			eye_blurry = max(2, eye_blurry)
 			stuttering = max(stuttering, 5)
 
@@ -1503,7 +1504,7 @@
 			src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
 
 		if (shock_stage >= 60)
-			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
+			if(shock_stage == 60) visible_message("\red [src]'s body becomes limp.")
 			if (prob(2))
 				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
 				Weaken(20)
@@ -1519,7 +1520,7 @@
 				Paralyse(5)
 
 		if(shock_stage == 150)
-			emote("me",1,"can no longer stand, collapsing!")
+			visible_message("\red [src] collapses!")
 			Weaken(20)
 
 		if(shock_stage >= 150)

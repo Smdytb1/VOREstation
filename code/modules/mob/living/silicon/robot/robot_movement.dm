@@ -29,4 +29,5 @@
 
 	var/datum/robot_component/actuator/A = get_component("actuator")
 	if (cell_use_power(A.active_usage))
+		updateicon()
 		return ..()

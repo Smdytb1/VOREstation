@@ -88,8 +88,7 @@
 	name = "infinite-capacity power cell"
 	icon_state = "icell"
 	desc = "UNLIMITED POWAAAAAAHHHH! Appears to be made out of a Bananium alloy."
-	origin_tech =  null
-	maxcharge = 30000 //determines how badly mobs get shocked
+	maxcharge = 50000 //determines how badly mobs get shocked
 	origin_tech = "powerstorage=10"
 	matter = list("metal"=500,"glass"=150,"gold"=500,"silver"=500)
 
@@ -102,8 +101,8 @@
 	name = "potato battery"
 	desc = "A rechargable starch based power cell."
 	origin_tech = "powerstorage=1"
-	icon = 'icons/obj/power.dmi' //'icons/obj/harvest.dmi'
-	icon_state = "potato_cell" //"potato_battery"
+	icon = 'icons/obj/power.dmi'
+	icon_state = "potato_cell"
 	charge = 100
 	maxcharge = 300
 	minor_fault = 1
@@ -112,8 +111,14 @@
 /obj/item/weapon/cell/slime
 	name = "charged slime core"
 	desc = "A yellow slime core infused with phoron. It crackles with power."
-	origin_tech = "powerstorage=2;biotech=4"
-	icon = 'icons/mob/slimes.dmi' //'icons/obj/harvest.dmi'
-	icon_state = "yellow slime extract" //"potato_battery"
-	maxcharge = 10000
+	origin_tech = "powerstorage=7;biotech=4"
+	icon = 'icons/mob/slimes.dmi'
+	icon_state = "yellow slime extract"
 	matter = null
+	maxcharge = 100000 // Shitload of power.
+	minor_fault = 1 // One-time use.
+
+	check_charge()
+		if(charge >= 1000) // Nearly dead.
+			desc = "A yellow slime core infused with phoron. It looks dull and lethargic."
+		..()

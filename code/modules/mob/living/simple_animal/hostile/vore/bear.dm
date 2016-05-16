@@ -123,7 +123,7 @@
 /mob/living/simple_animal/hostile/vore/bear/Process_Spacemove(var/check_drift = 0)
 	return	//No drifting in space for space bears!
 */
-/mob/living/simple_animal/hostile/vore/bear/FindTarget()
+/mob/living/simple_animal/hostile/vore/bear/FindTarget() // TODO: Make it so if the target is laying down, the bear actually won't bother them.
 	. = ..()
 	if(.)
 		custom_emote(1,"stares alertly at [.]")
@@ -133,7 +133,26 @@
 	..(5)
 
 /mob/living/simple_animal/hostile/vore/bear/AttackingTarget()
-	if(!Adjacent(target_mob))
+
+	// Need to snowflake the vode in the bear code here because of the snowflakey way bears work.
+	if(isliving(target_mob.loc)) //They're inside a mob, maybe us, ignore!
+		return
+
+	if(!isliving(target_mob)) //Can't eat 'em if they ain't alive. Prevents eating borgs/bots.
+		..()
+		return
+
+	if(picky && target_mob.digestable && target_mob.lying && target_mob.playerscale >= min_size && target_mob.playerscale <= max_size && !(target_mob in prey_exclusions))
+		if(capacity)
+			var/check_size = target_mob.playerscale + fullness
+			if(check_size <= capacity)
+				animal_nom(target_mob)
+		else
+			animal_nom(target_mob)
+		return
+
+	// Original bear attack code.
+	if(!Adjacent(target_mob) && !target_mob.lying)
 		return
 	custom_emote(1, pick( list("slashes at [target_mob]", "bites [target_mob]") ) )
 
@@ -149,7 +168,3 @@
 		var/mob/living/L = target_mob
 		L.adjustBruteLoss(damage)
 		return L
-	//else if(istype(target_mob,/obj/mecha))
-		//var/obj/mecha/M = target_mob
-		//M.attack_animal(src)
-		//return M*/

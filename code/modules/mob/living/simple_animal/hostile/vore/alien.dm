@@ -1,10 +1,10 @@
-/mob/living/simple_animal/hostile/alien
+/mob/living/simple_animal/hostile/vore/alien
 	name = "alien hunter"
 	desc = "Hiss!"
 	icon = 'icons/mob/alien.dmi'
-	icon_state = "alienh_running"
-	icon_living = "alienh_running"
-	icon_dead = "alienh_dead"
+	icon_state = "xenohunter"
+	icon_living = "xenohunter"
+	icon_dead = "xenohunter-dead"
 	icon_gib = "gibbed-a"
 	response_help = "pokes"
 	response_disarm = "shoves"
@@ -33,22 +33,23 @@
 	status_flags = CANPUSH
 	minbodytemp = 0
 	heat_damage_per_tick = 20
+	capacity = 1
 
 
-/mob/living/simple_animal/hostile/alien/drone
+/mob/living/simple_animal/hostile/vore/alien/drone
 	name = "alien drone"
-	icon_state = "aliend_running"
-	icon_living = "aliend_running"
-	icon_dead = "aliend_dead"
+	icon_state = "xenodrone"
+	icon_living = "xenodrone"
+	icon_dead = "xenodrone-dead"
 	health = 60
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 
-/mob/living/simple_animal/hostile/alien/sentinel
+/mob/living/simple_animal/hostile/vore/alien/sentinel
 	name = "alien sentinel"
-	icon_state = "aliens_running"
-	icon_living = "aliens_running"
-	icon_dead = "aliens_dead"
+	icon_state = "xenosentinel"
+	icon_living = "xenosentinel"
+	icon_dead = "xenosentinel-dead"
 	health = 120
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -57,12 +58,11 @@
 	projectilesound = 'sound/weapons/pierce.ogg'
 
 
-/mob/living/simple_animal/hostile/alien/queen
+/mob/living/simple_animal/hostile/vore/alien/queen
 	name = "alien queen"
-	icon_state = "alienq_running"
-	icon_living = "alienq_running"
-	icon_dead = "alienq_dead"
-	health = 250
+	icon_state = "xenoqueen"
+	icon_living = "xenoqueen"
+	icon_dead = "xenoqueen-dead"
 	maxHealth = 250
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -73,7 +73,7 @@
 	rapid = 1
 	status_flags = 0
 
-/mob/living/simple_animal/hostile/alien/queen/large
+ /mob/living/simple_animal/hostile/vore/alien/queen/large
 	name = "alien empress"
 	icon = 'icons/mob/alienqueen.dmi'
 	icon_state = "queen_s"
@@ -83,12 +83,13 @@
 	maxHealth = 400
 	health = 400
 	pixel_x = -16
+	capacity = 3
 
 /obj/item/projectile/neurotox
 	damage = 30
 	icon_state = "toxin"
 
-/mob/living/simple_animal/hostile/alien/death()
+/mob/living/simple_animal/hostile/vore/alien/death()
 	..()
 	visible_message("[src] lets out a waning guttural screech, green blood bubbling from its maw...")
 	playsound(src, 'sound/voice/hiss6.ogg', 100, 1)

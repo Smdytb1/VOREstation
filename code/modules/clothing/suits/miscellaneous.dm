@@ -218,7 +218,7 @@
 			else
 				usr << "There's no buttons on this."
 				return
-		usr.update_clothing_icon()	//so our overlays update
+		usr.update_inv_wear_suit()	//so our overlays update
 
 
 /obj/item/clothing/suit/storage/nazi/officer

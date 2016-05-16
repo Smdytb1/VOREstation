@@ -1598,7 +1598,7 @@
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
 				return
-		usr.update_clothing_icon()	//so our overlays update
+		usr.update_inv_wear_suit()	//so our overlays update
 
 /obj/item/clothing/suit/storage/fluff/fedcoat/fedblue
 	name = "Federation Uniform Jacket"
@@ -2159,6 +2159,16 @@
 	The individual named above is licensed by the Nanotrasen Department of Civil Protection to carry one Clockwork Rifle (bolt-action variant).
 	This license expires on 14/Dec/2560 and must be renewed by CentCom prior to this date."}
 
+//eekasqueak: Serkii Miishy
+/obj/item/fluff/permit/serkiimiishy
+	name = "Serkii Miishy's Stun Revolver Permit"
+	desc = {"
+	<b>NAME:</b> Serkii Miishy | <b>RACE:</b> Mousemorph | <b>HOMEWORLD:</b> Mars, Sol
+	<b>DOB:</b> 10/9/2441 | <b>HEIGHT:</b> 122cm | <b>SEX:</b> Male
+
+	The individual named above is licensed by the Nanotrasen Department of Civil Protection to carry one stun revolver.
+	This license expires on 30/March/2561 and must be renewed by CentCom prior to this date."}
+
 /*
 // ?????:Greyson Maximus
 /obj/item/fluff/permit/demi
@@ -2184,6 +2194,15 @@
 		return
 */
 
+//eekasqueak: Serkii Miishy
+/obj/item/weapon/storage/box/fluff/serkii
+	name = "Serkii's personal effects."
+	desc = "A box with Serkii's personal belongings."
+/obj/item/weapon/storage/box/fluff/serkii/New()
+	new /obj/item/fluff/permit/serkiimiishy(src)
+	new /obj/item/weapon/gun/energy/stunrevolver(src)
+	..()
+	return
 
 
 // SASoperative : Joseph Skinner
@@ -2297,10 +2316,11 @@
 /obj/item/weapon/storage/box/fluff/joanrisu/New()
 	new /obj/item/clothing/gloves/white(src)
 	new /obj/item/device/radio/headset/heads/captain(src)
-	new /obj/item/weapon/storage/backpack/satchel(src)
-	new /obj/item/clothing/suit/storage/fluff/fedcoat(src)
-	new /obj/item/weapon/card/id/gold/fluff/badge/(src)
+	new /obj/item/clothing/suit/storage/fluff/fedcoat/fedcapt(src)
+	new /obj/item/weapon/card/id/gold/fluff/badge(src)
 	new /obj/item/weapon/card/id/captains_spare(src)
+	new /obj/item/weapon/gun/energy/gun/fluff/dominator(src)
+	new /obj/item/fluff/permit/joanrisu(src)
 	..()
 	return
 
@@ -2421,3 +2441,23 @@
 	desc = " This is Lethe's Hat! A little tag attached inside reads: 'If found please return to Lethe! Or else!' It looks rather worn in. It also lacks armor."
 	icon_state = "hoscap"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+
+//BeyondMyLife:Kilano Soryu
+/obj/item/clothing/under/dress/fluff/kilano
+	name = "Bleached Dress"
+	desc = "It appears that this was once a captain's dress, it's blueish color has been turned white by bleach, only the gold markings remain to slightly signify what it once was."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanodress"
+	item_state = "kilanodress"
+	item_color = "kilanodress"
+	species_restricted = null
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/gloves/fluff/kilano
+	name = "Bleached Gloves"
+	desc = "Some old captain's gloves, bleached white, almost unrecognizable from the color change besides the gold trim."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "kilanogloves"
+	item_state = "kilanogloves"
+	item_color = "kilanogloves"
+	species_restricted = null
