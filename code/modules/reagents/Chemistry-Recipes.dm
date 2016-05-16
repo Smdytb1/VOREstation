@@ -1151,22 +1151,8 @@ datum
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
-					/*/mob/living/simple_animal/hostile/wizard,
-					/mob/living/simple_animal/hostile/wizard/red,
-					/mob/living/simple_animal/hostile/wizard/marisa,
-					/mob/living/simple_animal/hostile/tribesman, // bugged
-					/mob/living/simple_animal/hostile/retaliate/defense_drone,
-					/mob/living/simple_animal/hostile/nazi,
-					/mob/living/simple_animal/hostile/nazi/ranged,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier/eluger,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier/rifle,
-					/mob/living/simple_animal/hostile/nazi/stormtrooper,
-					/mob/living/simple_animal/hostile/nazi/stormtrooper/heavy,
-					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // fuck that
 					/mob/living/simple_animal/hostile/tree, // Holiday events only.
-					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
 					/mob/living/simple_animal/hostile/vore/mimic/crate,
@@ -1241,19 +1227,6 @@ datum
 					/mob/living/simple_animal/hostile/viscerator,
 					/mob/living/simple_animal/hostile/tunnelclown,
 					/mob/living/simple_animal/hostile/tunnelclown/sentinel,
-					/*/mob/living/simple_animal/hostile/wizard,
-					/mob/living/simple_animal/hostile/wizard/red,
-					/mob/living/simple_animal/hostile/wizard/marisa,
-					/mob/living/simple_animal/hostile/tribesman, // bugged
-					/mob/living/simple_animal/hostile/retaliate/defense_drone,
-					/mob/living/simple_animal/hostile/nazi,
-					/mob/living/simple_animal/hostile/nazi/ranged,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier/eluger,
-					/mob/living/simple_animal/hostile/nazi/ranged/soldier/rifle,
-					/mob/living/simple_animal/hostile/nazi/stormtrooper,
-					/mob/living/simple_animal/hostile/nazi/stormtrooper/heavy,
-					/mob/living/simple_animal/hostile/nazi/melee,*/
 					/mob/living/simple_animal/hostile/giant_spider/nurse, // because fuck that shit
 					/mob/living/simple_animal/hostile/tree,
 					/mob/living/simple_animal/hostile/vore/mimic,
@@ -1316,7 +1289,6 @@ datum
 			on_reaction(var/datum/reagents/holder)
 
 				var/blocked = list(
-					/mob/living/simple_animal/hostile/vore, // Not a true mob.
 					/mob/living/simple_animal/hostile/vore/mimic,
 					/mob/living/simple_animal/hostile/vore/mimic/copy,
 					/mob/living/simple_animal/hostile/vore/mimic/crate,
