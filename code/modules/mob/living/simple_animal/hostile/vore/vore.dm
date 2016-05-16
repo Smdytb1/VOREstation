@@ -1,8 +1,25 @@
+/*
+--------------
+NOTES FOR DEVS
+--------------
+
+If your predator has a limited capacity, it should have sprites for every interval of its size, rounded to the nearest whole number.
+Example: If I have a snake predator who has a capacity of 3, I need sprites for snake-1, snake-2, and snake-3.
+
+Capacity should always be a whole number.
+
+Also max_size and min_size should never exceed capacity or the icon will break.
+
+Don't use ranged mobs for vore mobs.
+*/
+
+
 /mob/living/simple_animal/hostile/vore
-//	name = ""
-//	icon_dead = "snake-dead"
-//	icon_living = "snake"
-//	icon_state = "snake"
+	name = "voracious lizard"
+	desc = "These gluttonous little bastards used to be regular lizards that were mutated by long-term exposure to phoron!"
+	icon_dead = "dino-dead"
+	icon_living = "dino"
+	icon_state = "dino"
 	icon = 'icons/mob/vore.dmi'
 	var/capacity = 1 // Zero is infinite. Do not set higher than you have icons to update.
 	var/max_size = 1 // Max: 2
@@ -35,21 +52,6 @@
 	heat_damage_per_tick = 15
 	cold_damage_per_tick = 10
 	unsuitable_atoms_damage = 10
-
-/*
---------------
-NOTES FOR DEVS
---------------
-
-If your predator has a limited capacity, it should have sprites for every interval of its size, rounded to the nearest whole number.
-Example: If I have a snake predator who has a capacity of 3, I need sprites for snake-1, snake-2, and snake-3.
-
-Capacity should always be a whole number.
-
-Also max_size and min_size should never exceed capacity or the icon will break.
-
-Don't use ranged mobs for vore mobs.
-*/
 
 /mob/living/simple_animal/hostile/vore/update_icons()
 	if(stat == DEAD)
